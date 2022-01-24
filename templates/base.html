@@ -54,7 +54,7 @@
         <!--Header-->
         <header>
             <!-- Navigation created as per Code Institute 'I Think Therefore I Blog' and fully customised for site -->
-            <nav class="navbar navbar-light nav-back sticky-top">
+            <nav class="navbar navbar-light sticky-top">
                 <div class="container-fluid">
                     <h2 class="hidden">Belle Musique Studio</h2>
                     <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i
@@ -74,13 +74,13 @@
                             </div>
                         </a>
                     </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text"
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text"
                         aria-controls="navbar-text" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbar-text">
+                    <div class="collapse navbar-collapse text-sm-right mr-3" id="navbar-text">
                         <h2 class="hidden">Belle Musique Studio</h2>
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                             </li>

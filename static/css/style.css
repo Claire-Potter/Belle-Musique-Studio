@@ -26,8 +26,12 @@ body {
 	margin-left: 10px;
 }
 
-.nav-back {
+.navbar {
 	background-color: #fcf7bf;
+}
+
+.navbar-collapse {
+	width: 50%;
 }
 
 
@@ -49,6 +53,10 @@ body {
 .icon {
 	color: rgba(0,0,0,.75);
 	text-align: center;
+}
+
+.nav-drop-back {
+	background-color: transparent;
 }
 
 ul {
