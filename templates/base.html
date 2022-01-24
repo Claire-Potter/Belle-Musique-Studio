@@ -16,9 +16,15 @@
     {% block corecss %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
 
     {% block extra_css %}
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
     {% endblock %}
 
 
@@ -40,11 +46,67 @@
 </head>
 
 <body>
-    <header></header>
+    <header class="container-fluid fixed-top">
+        <nav class="navbar navbar-light sticky-top">
+            <div class="container-fluid">
+                <h2 class="hidden">Belle Musique Studio</h2>
+                <a class="navbar-brand" href="{% url 'home' %}"><span><i class="fas fa-music"></i></span><span
+                        class="logo">   Belle Musique</span>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text"
+                        aria-controls="navbar-text" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar-text">
+                        <h2 class="hidden">Xperience DezignWiz</h2>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Contact Us</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                            </li>
+                            {% endif %}
+                            {% if user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <!--
+                     Search form created to enable a user to search by Design Thinking step title. Javascript
+                     autoscript included to provide search prompts therefore default autocomplete deactivated
+                     -->
+                        <form class="d-flex collapse-search" autocomplete="off" method=POST action="#">
+                            {% csrf_token %}
+                            <div class="autocomplete">
+                                <input id="my-input" class="form-control me-2 search enter-search collapse-search"
+                                    type="search" placeholder="Search Steps by name"
+                                    aria-label="Search Design Thinking Steps" name="searched">
+                            </div>
+                            <input id="submit-button" class="btn btn-outline search collapse-search" type="submit"
+                                value="Search">
+                        </form>
+                    </div>
+            </div>
+        </nav>
+    </header>
 
     {% if messages %}
-        <div class="message-container"></div>
+    <div class="message-container"></div>
     {% endif %}
+
+
 
     {% block page_header %}
     {% endblock %}
