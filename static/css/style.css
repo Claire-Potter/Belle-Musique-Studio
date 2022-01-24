@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=The+Nautigal:wght@700&display=swap');
+
+/* Styling used across the site */
+
+body {
+	max-width: 100%;
+	height: 95vh;
+	background-color: #ffffff;
+	font-family: 'EB Garamond', sans-serif;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Navbar*/
+
+.logo {
+	font-family: 'The Nautigal', sans-serif;
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: black;
+}
+
+.logo-small {
+	font-size: 2rem;
+	color: black;
+}
+
+.nav-background {
+	background-color: #e2f0f9;
+}
+
+.scarlett-x {
+	color: #df4c73;
+	font-size: 2.5rem;
+}
+
+ul {
+	list-style-type: none;
+}
+
+
+/* Navbar for small screens*/
+
+.navbar-toggler:focus {
+	border-color: #286fb4;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem #286fb4;
+}
