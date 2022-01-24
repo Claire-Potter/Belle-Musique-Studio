@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=The+Nautigal:wght@700&display=swap');
 
 /* Styling used across the site */
+html {
+    height: 100%;
+}
 
 body {
 	max-width: 100%;
