@@ -20,34 +20,70 @@ body {
 
 .logo {
 	font-family: 'The Nautigal', sans-serif;
-	font-size: 1.4rem;
-	font-weight: 700;
-	color: black;
-}
-
-.logo-small {
-	font-size: 2rem;
-	color: black;
-}
-
-.nav-background {
-	background-color: #e2f0f9;
-}
-
-.scarlett-x {
-	color: #df4c73;
 	font-size: 2.5rem;
+	font-weight: 700;
+	color: rgba(0,0,0,.75);
+	margin-left: 10px;
+}
+
+.nav-back {
+	background-color: #fcf7bf;
+}
+
+
+.music-note {
+	color: rgba(0,0,0,.75);
+	font-size: 1.5rem;
+}
+
+.store-logo {
+	display: flex;
+	align-items:flex-end;
+	justify-content: right;
+	align-content: flex-end;
+    vertical-align: middle;
+	font-size: 1.5rem;
+	width: 80%
+}
+
+.icon {
+	color: rgba(0,0,0,.75);
+	text-align: center;
 }
 
 ul {
 	list-style-type: none;
 }
 
+.nav-item {
+font-size: 1.5rem;
+}
+
 
 /* Navbar for small screens*/
 
 .navbar-toggler:focus {
-	border-color: #286fb4;
+	border-color: #fbd23d;
 	outline: 0;
-	box-shadow: 0 0 0 0.25rem #286fb4;
+	box-shadow: 0 0 0 0.25rem #fbd23d;
+}
+
+/* Media query to center logo for small screens */
+
+@media (max-width: 1500px) {
+
+.navbar-brand {
+ width: 100%;
+ text-align: center;
+}
+
+.store-logo {
+	display: flex;
+	align-items:flex-start;
+	justify-content: left;
+	align-content: flex-start;
+    vertical-align: middle;
+	font-size: 1.5rem;
+}
+
 }
