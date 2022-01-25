@@ -10,6 +10,9 @@ body {
 	height: 95vh;
 	background-color: #ffffff;
 	font-family: 'EB Garamond', sans-serif;
+	margin: 0;
+	border: 0;
+	padding: 0;
 }
 
 .hidden {
@@ -159,7 +162,7 @@ font-size: 1.5rem;
 
 /* Advert Banner */
 
-.advert-background {
+.advert-banner-background {
 	background-color: #100704;
 }
 
@@ -175,6 +178,35 @@ font-size: 1.5rem;
 .about {
 font-size: 1.2rem;
 }
+
+/* Adverts */
+
+.advert-background {
+	background-color: #d58914;
+}
+
+.advert-topper {
+	background-color: #fcf7bf;
+}
+
+.advert-image {
+	border: #100704 2px solid;
+	width: 50%;
+	height: 50%;
+}
+
+.advert-button {
+	background-color: #fbd23d;
+	border: #fbd23d;
+	color: #100704;
+	font-weight: 800;
+}
+
+.advert-button:hover {
+	border: #100704;
+	box-shadow:  5px 10px #100704;
+}
+
 
 /* Media query to center logo for small screens */
 

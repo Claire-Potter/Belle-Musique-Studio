@@ -1,28 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_header %}
-<div id="delivery-banner" class="row text-center">
-    <div class="col advert-background text-white">
-        <h4 class="logo-font my-1">Free song writing lesson for monthly subscribers!</h4>
-    </div>
-    {% endblock %}
-    {% block content %}
-    <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6">
-            <div class="row spacer"></div>
-            <div class="width-define">
-                <div class="row background-overlay">
-                    <h1 class="cover-heading inline mt-5 mr-5 text-right">Belle Musique Studio</h1>
-                    <p class="lead mb-5 mr-5 text-right">Everyone Deserves Music</p>
-                </div>
-            </div>
-            <div class="row spacer"></div>
+    <div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
+        <div class="col advert-banner-background text-white">
+            <h4 class="logo-font my-1">Free song writing lesson for monthly subscribers!</h4>
         </div>
     </div>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-6"></div>
+    <div class="col-6">
+        <div class="row spacer"></div>
+        <div class="width-define">
+            <div class="row background-overlay">
+                <h1 class="cover-heading inline mt-5 mr-5 text-right">Belle Musique Studio</h1>
+                <p class="lead mb-5 mr-5 text-right">Everyone Deserves Music</p>
+            </div>
+        </div>
+        <div class="row spacer"></div>
+    </div>
+</div>
 </div>
 <section>
-    <div class="row bg-white">
+    <div class="row bg-white d-flex w-100 mx-auto">
         <div class="col-sm-6 col-12">
             <div class="d-flex justify-content-center ">
                 <img class="img-fluid owner-image mx-5 my-5 p-2" alt="An image of a woman smiling and playing the piano"
@@ -32,34 +33,42 @@
         <div class="col-sm-6 col-12">
             <h2 class="cover-heading inline mt-3 text-center">Get to know Jo-Anna Hope</h2>
             <div class="about mx-3 my-3">
-            <p>
-                Jo-Anna Hope established the studio in January 1990 and has enjoyed success across the UK.
-                She teaches piano classes and vocal training to adults and school-going children in various
-                contemporary
-                styles, including praise and worship.</p>
-            <p>
-                Jo-Anna not only coaches beginners of all ages, but encourages and promotes those who have a natural
-                flair for song writing, music production and performance, as well as those who suffer with remedial
-                learning disabilities. The syllabus, tailor-made for each student, does not include exams and each
-                student progresses at their own pace. Vocal coaching is encouraged on an individual basis. Vocal
-                classes are given as well as foundational 6 week classes. </p>
-            <p>
-                The studio has enjoyed great success and expansion through the use of online classes. These have been
-                made available to students both locally and
-                internationally via Skype and Zoom. </p>
-            <p>
-                Jo-Anna began singing and performing at the age of 3 and playing the piano at the age of 4. She was
-                singing and writing original songs in her teens, performed locally and
-                abroad, has appeared on television shows, collaborated on 6 CD productions, and has won
-                various awards over the years.</p>
-            <p>
-                Jo-Anna has a passion to motivate, teach and impart through music
-                lessons on an individual basis, but is also actively involved in training musicians within local
-                churches and providing insight and input into worship teams inter-denominationally.
-            </p>
-        </div>
+                <p>
+                    Jo-Anna Hope established the studio in January 1990 and has enjoyed success across the UK.
+                    She teaches piano classes and vocal training to adults and school-going children in various
+                    contemporary
+                    styles, including praise and worship.</p>
+                <p>
+                    Jo-Anna not only coaches beginners of all ages, but encourages and promotes those who have a natural
+                    flair for song writing, music production and performance, as well as those who suffer with remedial
+                    learning disabilities. The syllabus, tailor-made for each student, does not include exams and each
+                    student progresses at their own pace. Vocal coaching is encouraged on an individual basis. Vocal
+                    classes are given as well as foundational 6 week classes. </p>
+                <p>
+                    The studio has enjoyed great success and expansion through the use of online classes. These have
+                    been
+                    made available to students both locally and
+                    internationally via Skype and Zoom. </p>
+                <p>
+                    Jo-Anna began singing and performing at the age of 3 and playing the piano at the age of 4. She was
+                    singing and writing original songs in her teens, performed locally and
+                    abroad, has appeared on television shows, collaborated on 6 CD productions, and has won
+                    various awards over the years.</p>
+                <p>
+                    Jo-Anna has a passion to motivate, teach and impart through music
+                    lessons on an individual basis, but is also actively involved in training musicians within local
+                    churches and providing insight and input into worship teams inter-denominationally.
+                </p>
+            </div>
         </div>
     </div>
+</section>
+<section>
+        <div class="row advert-background d-flex w-100 mx-auto">
+            {% include 'includes/lessons_advert.html' %}
+            {% include 'includes/workshops_advert.html' %}
+        </div>
+        {% include 'includes/store_advert.html' %}
 </section>
 <div class="footer-background-color">
     {% endblock %}
