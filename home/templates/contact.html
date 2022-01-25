@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_header %}
+<div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
+    <div class="col advert-banner-background text-white">
+        <h4 class="logo-font my-1">Receive a discount when registering a group for a workshop!</h4>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row">
+    <div class="col-6"></div>
+    <div class="col-6">
+        <div class="row spacer"></div>
+        <div class="width-define">
+            <div class="row background-overlay">
+                <h1 class="cover-heading inline mt-5 mr-5 text-right">Belle Musique Studio</h1>
+                <p class="lead mb-5 mr-5 text-right">No matter where we find ourselves, let's always keep in touch</p>
+            </div>
+        </div>
+        <div class="row spacer"></div>
+    </div>
+</div>
+</div>
+<section>
+    <div class="row bg-white d-flex w-100 mx-auto">
+        <!--The if statement checks if the email message has already been sent, if it has the below message will display-->
+        {% if message_sent %}
+        <div class="row align-items-center">
+            <div class="col-md-12 mt-5">
+                <div class="col-md-6 mx-auto advert-background mb-5 px-5 pt-5">
+                    <h2 class="bolder">Email successfully sent</h2>
+                    <h2>Your request was successfully sent to us!</h2>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!--If it has not the form will be displayed for the user to complete and submit-->
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h2 class="font-weight-bold text-center mt-5">Require assistance?</h2>
+                <h2 class="lead text-center">Please get in touch!</h2>
+                <div class="col-md-6 mx-auto advert-background mb-5 px-sm-5">
+                    <form method="post" class="mt-5">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-0 text-form">
+                                <!--if the user is logged in the name will be auto-completed from the username-->
+                                {{ contact_form.name|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-0 text-form">
+                                <!--if the user is logged in the email will be auto-completed from the user email-->
+                                {{ contact_form.email|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="text-form">
+                            <!--The user will complete their message in the body field-->
+                            {{ contact_form.body|as_crispy_field }}
+                        </div>
+                        <button type="submit" class="btn advert-button mt-3 mb-3">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+<div class="footer-background-color">
+    {% endblock %}
