@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-<main role="main" class="inner cover">
   <div class="row">
     <div class="col-6"></div>
     <div class="col-6">
@@ -12,7 +11,7 @@
           <h1 class="cover-heading inline mt-2 mr-5 text-right">Belle Musique Studio</h1>
           <p class="lead mr-5 text-right">Everyone Deserves Music</p>
           <div class="lead mr-5 text-right">
-            <a href="#" class="btn index-button">About</a>
+            <a href="{% url 'about' %}" class="btn index-button">About</a>
           </div>
           <div class="lead mr-5 text-right">
             <a href="#" class="btn index-button">Lessons</a>
@@ -27,5 +26,4 @@
       </div>
     </div>
   </div>
-</main>
 {% endblock %}

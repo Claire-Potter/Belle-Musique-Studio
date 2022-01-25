@@ -49,7 +49,6 @@
 
     <title>Belle Musique Studio {% block extra_title %}{% endblock %}</title>
 </head>
-
 <body class="d-flex flex-column h-100 main fs-2">
         <!--Header-->
         <header>
@@ -85,7 +84,7 @@
                                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">About</a>
+                                <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
                             </li>
                             {% if user.is_authenticated %}
                             <li class="nav-item">
@@ -123,19 +122,35 @@
                     </div>
                 </div>
             </nav>
+        {% block page_header %}
+        {% endblock %}
         </header>
 
         {% if messages %}
-        <div class="message-container"></div>
+        <div class="message-container">
+            {% for message in messages %}
+                {% with message.level as level %}
+                    {% if level == 40 %}
+                        {% include 'includes/toasts/toast_error.html' %}
+                    {% elif level == 30 %}
+                        {% include 'includes/toasts/toast_warning.html' %}
+                    {% elif level == 25 %}
+                        {% include 'includes/toasts/toast_success.html' %}
+                    {% else %}
+                        {% include 'includes/toasts/toast_info.html' %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        </div>
         {% endif %}
 
 
-
-        {% block page_header %}
-        {% endblock %}
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        {% block content %}
-        {% endblock %}
+        <main role="main" class="inner cover">
+            {% block content %}
+            {% endblock %}
+        </main>
+        
         <!-- Footer -->
         <footer class="footer mt-auto py-3 footer-background">
             <!-- Social Media Links -->
