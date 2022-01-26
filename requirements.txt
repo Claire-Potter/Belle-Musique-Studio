@@ -1,9 +1,11 @@
 asgiref==3.5.0
+Babel==2.9.1
 cycler==0.11.0
 dj-database-url==0.5.0
 Django==3.2
 django-allauth==0.41.0
 django-crispy-forms==1.13.0
+django-money==2.1.1
 fabio==0.13.0
 fonttools==4.28.5
 h5py==3.6.0
@@ -12,6 +14,7 @@ matplotlib==3.5.1
 numpy==1.22.1
 oauthlib==3.1.1
 Pillow==9.0.0
+py-moneyed==1.2
 PyQt5==5.15.6
 PyQt5-Qt5==5.15.2
 PyQt5-sip==12.9.0

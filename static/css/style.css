@@ -138,8 +138,8 @@ body {
 }
 
 .background-overlay {
-    background-color: rgba(109, 152, 171, 0.9); 
-    border: 5px solid rgba(109, 152, 171, 0.5); 
+    background-color: rgba(109, 152, 171, 0.9);
+    border: 5px solid rgba(109, 152, 171, 0.5);
     border-radius: 15px;
 }
 
@@ -229,6 +229,9 @@ body {
     font-weight: bolder;
     margin-top: 10px;
 }
+
+/* Product Page */
+
 
 
 /* Media query to center logo for small screens */
