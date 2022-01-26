@@ -1,0 +1,15 @@
+[{
+    "pk": 1,
+    "model": "store.category",
+    "fields": {
+        "name": "musical_tools",
+        "call_name": "Musical Tools"
+    }
+}, {
+    "pk": 2,
+    "model": "store.category",
+    "fields": {
+        "name": "instruments_equipment",
+        "call_name": "Instruments & Equipment"
+    }
+}]

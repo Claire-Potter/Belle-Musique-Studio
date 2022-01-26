@@ -1,0 +1,144 @@
+[{
+    "pk": 1,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5001340155",
+        "name": "Digital Recorder",
+        "description": "Mono Digital Voice Recorder with Built-In USB, 4 GB Memory, SD Memory Slot, 55 Hours Recording.",
+        "price": 45.99,
+        "category": 1,
+        "rating": 4.6,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194102/Belle%20Musique/products/digital-recorder_pcnhx3.jpg",
+        "image": "digital-recorder.jpg"
+    }
+}, {
+    "pk": 2,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5001600425",
+        "name": "RockJam Electronic Keyboard",
+        "description": "The RockJam 661 keyboard piano super kit includes an electronic keyboard with 61 full-size keys that provides you with a traditional piano feel whilst maintaining a portable and compact design that can be powered by either mains power (power supply included) or batteries.",
+        "price": 97.99,
+        "category": 2,
+        "rating": 4.8,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/keyboard_dimqzr.jpg",
+        "image": "keyboard.jpg"
+    }
+}, {
+    "pk": 3,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5001730010",
+        "name": "Ricola Soothe and Clear Lozenges",
+        "description": "Ricola Soothe and Clear Honey Lemon and Echinacea Bag, Naturally Soothing Throat Lozenges, 75 g Pack of 12 Bags",
+        "price": 18.99,
+        "category": 1,
+        "rating": 4.7,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/lozenges_nbdfcn.jpg",
+        "image": "lozenges.jpg"
+    }
+}, {
+    "pk": 4,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5001890157",
+        "name": "AKAI Professional LPK25 MIDI Keyboard",
+        "description": "AKAI Professional LPK25 - Portable USB-powered MIDI Keyboard with 25 Velocity-Sensitive Keys with Synth Action for Laptops (Mac & PC), Editing Software Included.",
+        "price": 38.99,
+        "category": 2,
+        "rating": 4.25,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643195755/Belle%20Musique/products/mini-keyboard_ah1gof.jpg",
+        "image": "mini-keyboard.jpg"
+    }
+}, {
+    "pk": 5,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002111605",
+        "name": "Digital Metronome - White & Silver",
+        "description": "Multi-function compact metronome. Enhanced display makes it easier to practice your rhythm and phrasing. Choose from two types of tempo steps: pendulum steps or full steps. Up to approximately 290 hours of continuous operation.",
+        "price": 25.99,
+        "category": 1,
+        "rating": 5.0,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/metronome_z9ftrk.jpg",
+        "image": "metronome.jpg"
+    }
+}, {
+    "pk": 6,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002260206",
+        "name": "Shure SM58-LCE Cardioid Dynamic Vocal Microphone",
+        "description": "Shure SM58-LCE Cardioid Dynamic Vocal Microphone with Pneumatic Shock Mount, Spherical Mesh Grille with Built-in Pop Filter, A25D Mic Clip, Storage Bag, 3-pin XLR Connector - (No Cable Included)",
+        "price": 86.99,
+        "category": 2,
+        "rating": 5.0,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/microphone_ilvsvn.jpg",
+        "image": "microphone.jpg"
+    }
+}, {
+    "pk": 7,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002440521",
+        "name": "Blank Sheet Music ",
+        "description": "Blank Sheet Music, 12 stave staff paper, 100 pages, A4 8.5x11 inch Music Manuscript Paper Musicians Notebook for composing music & writing music notation",
+        "price": 4.50,
+        "category": 1,
+        "rating": 4.4,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-sheets_koklyr.jpg",
+        "image": "music-sheets.jpg"
+    }
+}, {
+    "pk": 8,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002601115",
+        "name": "Windsor Music Stand",
+        "description": "Windsor 050151-BK Adjustable Folding Sheet Music Stand with Carry Case Black. Constructed of steel this music stand is made to be both portable music stand and comes with a travel bag to help you transport for performances or lessons.",
+        "price": 14.99,
+        "category": 1,
+        "rating": 4.5,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-stand_q4fzj5.jpg",
+        "image": "music-stand"
+    }
+}, {
+    "pk": 9,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002690715",
+        "name": "Music Theory: From Beginner to Expert",
+        "description": "Music Theory: From Beginner to Expert - The Ultimate Step-By-Step Guide to Understanding and Learning Music Theory Effortlessly: 1 (Essential Learning Tools for Musicians) ",
+        "price": 169.99,
+        "category": 1,
+        "rating": 4.7,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-theory-book_iclwg6.jpg",
+        "image": "music-theory-book.jpg"
+    }
+}, {
+    "pk": 10,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002701115",
+        "name": "30 Piano Sheet Music for Beginners",
+        "description": "Famous & Easy Pieces of Classical & Folk Music, Organized from the Easiest to the most Difficult!",
+        "price": 9.99,
+        "category": 1,
+        "rating": 4.4,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194104/Belle%20Musique/products/piano-music_yvre48.jpg",
+        "image": "piano-music.jpg"
+    }
+}, {
+    "pk": 11,
+    "model": "store.product",
+    "fields": {
+        "sku": "pp5002761055",
+        "name": "Sound Recording Equipment",
+        "description": "Audio Interface with DJ Mixer Sound Card, Portable Podcast Equipment Bundle XLR to 3.5mm Microphone Studio Board Voice Changer for youtube/tiktok PC/Phone Live Streaming/Recording/Gaming",
+        "price": 109.99,
+        "category": 2,
+        "rating": 4.0,
+        "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194104/Belle%20Musique/products/sound-equipment_c3in3r.jpg",
+        "image": "sound-equipment.jpg"
+    }
+}]
