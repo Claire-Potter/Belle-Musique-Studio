@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_header %}
+<div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
+    <div class="col advert-banner-background text-white">
+        <h4 class="logo-font my-1">Free song writing lesson for monthly subscribers!</h4>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-6"></div>
+    <div class="col-6">
+        <div class="row spacer"></div>
+        <div class="width-define">
+            <div class="row background-overlay">
+                <h1 class="cover-heading inline mt-5 mr-5 text-right">Belle Musique Studio</h1>
+                <p class="lead mb-5 mr-5 text-right">All Products</p>
+            </div>
+        </div>
+        <div class="row spacer"></div>
+    </div>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {{ products }}
+        </div>
+    </div>
+</div>
+<div class="footer-background-color">
+    {% endblock %}
