@@ -230,8 +230,7 @@ body {
     margin-top: 10px;
 }
 
-/* Product Page */
-
+/* Product Detail Page */
 
 
 /* Media query to center logo for small screens */
@@ -270,5 +269,80 @@ body {
     .text-form textarea {
         font-size: 1.2rem;
         max-width: 250px;
+    }
+}
+
+/* Media query to center logo for small screens */
+
+@media (max-width: 800px) {
+
+    .smaller-font {
+        font-size: calc(1rem + .9vw) !important;
+
+    }
+
+    .detail-image {
+        width: 70%;
+        height: 70%;
+    }
+
+    .overflow-allowed {
+        overflow: scroll;
+    }
+}
+
+
+@media (max-height: 700px) {
+
+    .smaller-font {
+        font-size: calc(1rem + .9vw) !important;
+
+    }
+
+    .detail-image {
+        width: 65%;
+        height: 65%;
+    }
+
+}
+
+
+@media (max-width: 285px) {
+
+    .smaller-font {
+        font-size: calc(0.8rem + .9vw) !important;
+
+    }
+
+    .detail-image {
+        width: 60%;
+        height: 60%;
+    }
+
+    .overflow-allowed {
+        overflow: scroll;
+    }
+}
+
+@media (max-height: 370px) {
+
+
+    .image-short-height {
+        padding: 0;
+        margin: 0;
+    }
+
+    .smaller-font {
+        font-size: calc(0.6rem + .9vw) !important;
+
+    }
+
+    .detail-image {
+        width: 40%;
+        height: 40%;
+    }
+
+    .overflow-allowed {
+        overflow: scroll;
     }
 }
