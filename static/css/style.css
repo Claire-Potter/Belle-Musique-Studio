@@ -232,6 +232,9 @@ body {
 
 /* Product Detail Page */
 
+.return {
+    margin-left: 15px;
+}
 
 /* Media query to center logo for small screens */
 

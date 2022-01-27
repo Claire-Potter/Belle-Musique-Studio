@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_header %}
+<div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
+    <div class="col advert-banner-background text-white">
+        <h4 class="logo-font my-1">Free shipping on purchases over xxx</h4>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row w-100">
+    <div class="col-6"></div>
+    <div class="col-6">
+        <div class="row spacer"></div>
+        <div class="width-define">
+            <div class="row background-overlay w-90 mr-5">
+                <h1 class="cover-heading inline mt-5 mr-5 text-right">Music Store</h1>
+                <p class="lead mb-5 mr-5 text-right">Keep calm and make music</p>
+            </div>
+        </div>
+        <div class="row spacer"></div>
+    </div>
+</div>
+</div>
+<section>
+    {% include 'includes/store_advert.html' %}
+</section>
+<section>
+    <div class="row advert-background d-flex w-100 mx-auto">
+        {% include 'includes/lessons_advert.html' %}
+        {% include 'includes/workshops_advert.html' %}
+    </div>
+
+</section>
+<div class="footer-background-color">
+    {% endblock %}

@@ -59,6 +59,7 @@
                                             {% else %}
                                             <small class="text-muted">No Rating</small>
                                             {% endif %}
+
                                         </div>
                                     </div>
                                 </div>
@@ -86,6 +87,11 @@
                         {% endif %}
                         {% endfor %}
                     </div>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-md-12 text-center my-3">
+                    <a class="btn advert-button return" href="{{ request.META.HTTP_REFERER }}">Return</a>
                 </div>
             </div>
         </div>

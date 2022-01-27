@@ -2,6 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 
 
+def music_store(request):
+    """ A view to show the music store """
+    
+    return render(request, 'music_store.html')
+
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
