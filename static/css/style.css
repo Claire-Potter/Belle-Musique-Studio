@@ -230,10 +230,15 @@ body {
     margin-top: 10px;
 }
 
-/* Product Detail Page */
+/* Music Store Adverts and Pages */
 
 .return {
     margin-left: 15px;
+}
+
+.smaller-text {
+    font-size: calc(0.6rem + .9vw) !important;
+
 }
 
 /* Media query to center logo for small screens */

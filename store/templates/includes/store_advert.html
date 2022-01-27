@@ -9,7 +9,7 @@
             <div class="about mx-sm-5 mx-2 my-sm-5 my-2">
                 <h3 class="cover-heading inline pt-5 text-center">All Products</h3>
                 <div class="lead mx-3 my-3 p-3 text-center">
-                    <a href="{% url 'products' %}" class="btn advert-button"><i class="fas fa-chevron-down"></i></a>
+                    <a href="{% url 'products' %}?sort=category&direction=asc" class="btn advert-button"><i class="fas fa-chevron-down"></i></a>
                 </div>
 
             </div>
@@ -39,7 +39,7 @@
                 <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image" alt="a keyboard" aria-label="a keyboard" src="/media/instruments-equipment.jpg">
             </div>
             <div class="about mx-sm-5 mx-2 my-sm-5 my-2">
-                <h3 class="cover-heading inline pt-5 text-center">Instruments & Equipment</h3>
+                <h3 class="cover-heading inline pt-5 text-center smaller-text">Instruments & Equipment</h3>
                 <div class="lead mx-3 my-3 p-3 text-center">
                     <a href="{% url 'products' %}?category=instruments_equipment" class="btn advert-button"><i class="fas fa-chevron-down"></i></a>
                 </div>
