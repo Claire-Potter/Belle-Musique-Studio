@@ -70,8 +70,15 @@ ul {
     font-size: 1.5rem;
 }
 
+a {
+    color: #04142f;
+    text-decoration: none;
+}
+
 a:hover {
     background-color: #fbac2c;
+    color: #04142f;
+    text-decoration: none;
 }
 
 /* Navbar for small screens*/
@@ -240,6 +247,7 @@ body {
     font-size: calc(0.6rem + .9vw) !important;
 
 }
+
 
 /* Media query to center logo for small screens */
 
