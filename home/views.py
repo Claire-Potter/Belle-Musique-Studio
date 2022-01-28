@@ -19,9 +19,9 @@ the model tables
 """
 
 from django.shortcuts import render, get_object_or_404
-from django.core.mail import EmailMultiAlternatives
-from django.conf import settings
+from django.core.mail import send_mail
 from django.views import View
+from belle_musique_studio.settings import EMAIL_HOST_USER
 from .forms import ContactForm
 from .models import Home, User
 
@@ -104,29 +104,13 @@ class Contact(View):
                 contact.save()
                 c_d = contact_form.cleaned_data
                 subject = 'A new Request has been submitted'
-                text_content = c_d['body']
-                client_name = c_d['name']
-                client_email = c_d['email']
+                message = c_d['body'] + c_d['name'] + c_d['email']
+                recipient = 'bellemusiquestudio@gmail.com'
 
-                # send the email to the recipent using the Sendgrid template
-                # set up for xperiencedezignwiz
-                email_message = EmailMultiAlternatives(from_email=settings
-                                                       .DEFAULT_FROM_EMAIL,
-                                                       to=['xperience'
-                                                           'dezignwiz'
-                                                           '@gmail.com'],
-                                                       cc=['clairepotter'
-                                                           '019@gmail.com'],
-                                                       body=text_content,
-                                                       subject=subject)
-                email_message.template_id = ('d-9430602ecd'
-                                             '0f411f8caa22367da72cbd')
-                email_message.dynamic_template_data = {"body": text_content,
-                                                       "body_two": client_name,
-                                                       "body_three":
-                                                       client_email,
-                                                       "subject": subject}
-                email_message.send(fail_silently=False)
+                # send the email to the recipient
+                send_mail(subject,
+                          message,
+                          EMAIL_HOST_USER, [recipient], fail_silently = False)
 
                 # set the variable initially created to True
                 message_sent = True
