@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_header %}
+<div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
+    <div class="col advert-banner-background text-white">
+        <h4 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h4>    
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row w-100">
+    <div class="col-6"></div>
+    <div class="col-6">
+        <div class="row spacer"></div>
+        <div class="width-define">
+            <div class="row background-overlay w-90 mr-5">
+                <h1 class="cover-heading inline mt-5 mr-5 text-right">Music Store</h1>
+                <p class="lead mb-5 mr-5 text-right">Keep calm and make music</p>
+            </div>
+        </div>
+        <div class="row spacer"></div>
+    </div>
+</div>
+</div>
+<section>
+    {% include 'includes/store_advert.html' %}
+</section>
+<section>
+        {% include 'includes/lessons_advert_two.html' %}
+        {% include 'includes/workshops_advert_two.html' %}
+        <div class="btt-button shadow-sm rounded-0 border border-black">
+            <a class="btt-link d-flex h-100">
+                <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+            </a>	
+        </div>
+</section>
+<div class="footer-background-color">
+    {% endblock %}
+    {% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+{% endblock %}

@@ -43,11 +43,11 @@
     <title>Belle Musique Studio {% block extra_title %}{% endblock %}</title>
 </head>
 
-<body class="d-flex flex-column h-100 main fs-2">
+<body class="d-flex flex-column h-100 w-100 main fs-2">
     <!--Header-->
     <header>
         <!-- Navigation created as per Code Institute 'I Think Therefore I Blog' and fully customised for site -->
-        <nav class="navbar navbar-light sticky-top">
+        <nav class="navbar navbar-light sticky-top w-100">
             <div class="container-fluid">
                 <h2 class="hidden">Belle Musique Studio</h2>
                 <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
@@ -99,7 +99,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Workshops</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Music Store</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'music_store' %}">Music Store</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact Us</a>
@@ -118,7 +118,7 @@
     </header>
 
     {% if messages %}
-    <div class="message-container">
+    <div class="message-container w-100">
         {% for message in messages %}
         {% with message.level as level %}
         {% if level == 40 %}
@@ -143,7 +143,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="footer mt-auto py-3 footer-background">
+        <footer class="footer mt-auto py-3 footer-background w-100">
             <!-- Social Media Links -->
             <p class="m-0 text-center">Follow us:
                 <a class="social-links" href="https://www.facebook.com" target="_blank" aria-label="Link to Facebook"><i class="fab fa-facebook-square ms-3"></i></a>

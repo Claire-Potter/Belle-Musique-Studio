@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_header %}
-    <div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
-        <div class="col advert-banner-background text-white">
-            <h4 class="logo-font my-1">Free song writing lesson for monthly subscribers!</h4>
-        </div>
+<div id="delivery-banner" class="row text-center d-flex mx-auto">
+    <div class="col advert-banner-background text-white">
+        <h4 class="logo-font my-1">Free song writing lesson for monthly subscribers!</h4>
     </div>
+</div>
 {% endblock %}
 {% block content %}
-<div class="row">
+<div class="row w-100">
     <div class="col-6"></div>
     <div class="col-6">
         <div class="row spacer"></div>
         <div class="width-define">
-            <div class="row background-overlay">
-                <h1 class="cover-heading inline mt-5 mr-5 text-right">Belle Musique Studio</h1>
+            <div class="row background-overlay w-90 mr-5">
+                <h1 class="cover-heading inline mt-5 mr-5 text-right">About Us</h1>
                 <p class="lead mb-5 mr-5 text-right">Everyone Deserves Music</p>
             </div>
         </div>
@@ -25,13 +25,12 @@
 <section>
     <div class="row bg-white d-flex w-100 mx-auto">
         <div class="col-sm-6 col-12">
-            <div class="d-flex justify-content-center ">
-                <img class="img-fluid owner-image mx-5 my-5 p-2" alt="An image of a woman smiling and playing the piano"
-                    aria-label="An image of a woman smiling and playing the piano" src="/media/jo-anna-hope.jpg">
+            <div class="d-flex justify-content-center pt-5">
+                <img class="img-fluid owner-image mx-5 my-5 p-2" alt="An image of a woman smiling and playing the piano" aria-label="An image of a woman smiling and playing the piano" src="/media/jo-anna-hope.jpg">
             </div>
         </div>
         <div class="col-sm-6 col-12">
-            <h2 class="cover-heading inline mt-3 text-center">Get to know Jo-Anna Hope</h2>
+            <h2 class="cover-heading inline mt-3 text-center pt-5">Get to know Jo-Anna Hope</h2>
             <div class="about mx-3 my-3">
                 <p>
                     Jo-Anna Hope established the studio in January 1990 and has enjoyed success across the UK.
@@ -64,11 +63,24 @@
     </div>
 </section>
 <section>
-        <div class="row advert-background d-flex w-100 mx-auto">
-            {% include 'includes/lessons_advert.html' %}
-            {% include 'includes/workshops_advert.html' %}
-        </div>
-        {% include 'includes/store_advert.html' %}
+    <div class="row advert-background d-flex w-100 mx-auto">
+        {% include 'includes/lessons_advert.html' %}
+        {% include 'includes/workshops_advert.html' %}
+    </div>
+    {% include 'includes/store_advert.html' %}
+    <div class="btt-button shadow-sm rounded-0 border border-black">
+        <a class="btt-link d-flex h-100">
+            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+        </a>	
+    </div>
 </section>
 <div class="footer-background-color">
+    {% endblock %}
+    {% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
     {% endblock %}
