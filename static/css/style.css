@@ -234,20 +234,19 @@ body {
 
 /* Contact Us */
 
-
 .text-form {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: "EB Garamond", sans-serif;
 }
 
 .text-form input,
 .text-form textarea {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: "EB Garamond", sans-serif;
 }
 
 [type="file"] {
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: bolder;
     margin-top: 10px;
 }
@@ -300,12 +299,12 @@ body {
     }
 
     .text-form {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
     }
 
     .text-form input,
     .text-form textarea {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
         max-width: 250px;
     }
 }

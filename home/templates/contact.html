@@ -41,10 +41,10 @@
             <div class="col-md-12">
                 <h2 class="font-weight-bold text-center mt-5">Require assistance?</h2>
                 <h2 class="lead text-center">Please get in touch!</h2>
-                <div class="col-md-6 mx-auto advert-background mb-5 px-sm-5">
+                <div class="col-md-6 mx-auto advert-background px-sm-5 pb-2">
                     <form method="post" class="mt-5">
                         {% csrf_token %}
-                        <div class="form-row">
+                        <div class="form-row px-3 py-3">
                             <div class="form-group col-md-6 mb-0 text-form">
                                 <!--if the user is logged in the name will be auto-completed from the username-->
                                 {{ contact_form.name|as_crispy_field }}
@@ -62,6 +62,10 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="row">
+        {% include 'includes/lessons_advert_three.html' %}
+        {% include 'includes/workshops_advert_three.html' %}
         </div>
     </div>
     {% endif %}
