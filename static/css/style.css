@@ -263,6 +263,13 @@ body {
 
 }
 
+.advert-image-two {
+    border: #04142f 2px solid;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+
 
 /* Media query to center logo for small screens */
 
@@ -319,6 +326,10 @@ body {
 
     .overflow-allowed {
         overflow: scroll;
+    }
+
+    .smaller-text {
+        font-size: calc(1rem + .9vw) !important;
     }
 }
 

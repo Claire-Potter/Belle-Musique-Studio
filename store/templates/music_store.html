@@ -3,7 +3,7 @@
 {% block page_header %}
 <div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
     <div class="col advert-banner-background text-white">
-        <h4 class="logo-font my-1">Free shipping on purchases over xxx</h4>
+        <h4 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h4>    
     </div>
 </div>
 {% endblock %}
@@ -26,10 +26,8 @@
     {% include 'includes/store_advert.html' %}
 </section>
 <section>
-    <div class="row advert-background d-flex w-100 mx-auto">
-        {% include 'includes/lessons_advert.html' %}
-        {% include 'includes/workshops_advert.html' %}
-    </div>
+        {% include 'includes/lessons_advert_two.html' %}
+        {% include 'includes/workshops_advert_two.html' %}
 </section>
 <div class="footer-background-color">
     {% endblock %}
