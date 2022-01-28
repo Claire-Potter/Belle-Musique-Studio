@@ -1,0 +1,1 @@
+web: gunicorn belle_musique_studio.wsgi:application
