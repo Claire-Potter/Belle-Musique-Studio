@@ -104,7 +104,7 @@ class Contact(View):
                 contact.save()
                 c_d = contact_form.cleaned_data
                 subject = 'A new Request has been submitted'
-                message = c_d['body'] + c_d['name'] + c_d['email']
+                message = c_d
                 recipient = 'bellemusiquestudio@gmail.com'
 
                 # send the email to the recipient
