@@ -125,6 +125,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
         'instagram': {
         'SCOPE': [
+            'profile',
             'email',
         ],
         'AUTH_PARAMS': {
