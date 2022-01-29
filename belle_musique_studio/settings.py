@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['belle-musique-studio.herokuapp.com', 'localhost']
 
@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
     'crispy_forms',
     'storages',
     'djmoney',
@@ -104,6 +107,41 @@ AUTHENTICATION_BACKENDS = [
 
 
 SITE_ID = 1
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_ON_GET = True
+
+# Social account set up
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
+
+        'instagram': {
+        'SCOPE': [
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
+
+    'facebook': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
