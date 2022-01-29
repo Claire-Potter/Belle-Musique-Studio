@@ -118,7 +118,7 @@
     </header>
 
     {% if messages %}
-    <div class="message-container w-100">
+    <div class="message-container w-100 bg-white">
         {% for message in messages %}
         {% with message.level as level %}
         {% if level == 40 %}
@@ -160,8 +160,6 @@
     <!-- Javascript custom file -->
     <script src="{% static 'javascript/script.js' %}"></script>
     {% endblock %}
-
-
 
 </body>
 

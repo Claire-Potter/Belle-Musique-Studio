@@ -5,22 +5,22 @@ const openDropdown = dropdowns[i];
 
 /**
  * @function dropdownMenu When the user clicks on the button,
-* toggle between hiding and showing the dropdown content.
+ * toggle between hiding and showing the dropdown content.
  */
 
 function dropdownMenu() {
-  dropDown.classList.toggle("show");
+    dropDown.classList.toggle("show");
 }
 
 // Close the dropdown menu if the user clicks outside of it
-navBar.onclick = function (event) {
-  if (!event.target.matches(".steps-button")) {
-      for (i = 0; i < dropdowns.length; i++) {
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
+navBar.onclick = function(event) {
+    if (!event.target.matches(".steps-button")) {
+        for (i = 0; i < dropdowns.length; i++) {
+            if (openDropdown.classList.contains("show")) {
+                openDropdown.classList.remove("show");
+            }
+        }
     }
-  }
 };
 
 dropButton.addEventListener("click", dropdownMenu);
@@ -30,8 +30,10 @@ dropButton.addEventListener("click", dropdownMenu);
 // tooltips
 
 const tooltipTriggerList = [].slice.call(document
-                                         .querySelectorAll(
-                                         "[data-bs-toggle='tooltip']"));
-const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl);
+    .querySelectorAll(
+        "[data-bs-toggle='tooltip']"));
+const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
 });
+
+$('.toast').toast('show');
