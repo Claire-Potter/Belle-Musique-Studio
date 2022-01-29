@@ -13,29 +13,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Home(models.Model):
-    """
-    Model created to store homepage data.
-    Utilised to store the home image and create
-    the Home page view using the template index.html.
-    """
-    name = models.CharField(max_length=80)
-    home_image = models.ImageField('image')
-    created_on = models.DateTimeField(auto_now_add=True)
-    deletable = models.BooleanField(default=False, editable=False)
-
-    class Meta:
-        """
-        Meta created to order the Home Model according
-        to the created on date.
-        """
-        ordering = ['-created_on']
-        verbose_name_plural = "Home"
-
-    def __str__(self):
-        return '%s' % (self.name)
-
-
 class Contact(models.Model):
     """
     Model created to render the contact page

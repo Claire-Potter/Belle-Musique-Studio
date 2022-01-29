@@ -23,19 +23,13 @@ from django.core.mail import send_mail
 from django.views import View
 from belle_musique_studio.settings import EMAIL_HOST_USER
 from .forms import ContactForm
-from .models import Home, User
+from .models import User
 
 
 def index(request):
     """ A view to return the index page """
-    queryset = Home.objects.all()
-    home = get_object_or_404(queryset)
 
-    context = {
-        'home': home,
-    }
-
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 
 def about(request):
