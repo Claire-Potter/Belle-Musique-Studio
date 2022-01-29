@@ -1,1 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="row bg-white d-flex w-100 mx-auto">
+    <div class="col-sm-6 col-12 p-3">
+            {% block content_two %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
