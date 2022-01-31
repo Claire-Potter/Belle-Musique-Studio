@@ -62,6 +62,15 @@ body {
     background-color: transparent;
 }
 
+.dropdown-menu {
+    background-color: transparent;
+    border: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #fbac2c;
+}
+
 ul {
     list-style-type: none;
 }
@@ -80,6 +89,7 @@ a:hover {
     color: #04142f;
     text-decoration: none;
 }
+
 
 .btt-button {
     height: 42px;
@@ -276,7 +286,8 @@ body {
 
 .btn-outline-black {
     background: white;
-    color: black !important; /* use important to override link colors for <a> elements */
+    color: black !important;
+    /* use important to override link colors for <a> elements */
     border: 1px solid black;
 }
 
