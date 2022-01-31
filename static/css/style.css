@@ -386,12 +386,13 @@ body {
         height: 70%;
     }
 
-    .overflow-allowed {
-        overflow: scroll;
-    }
 
     .smaller-text {
         font-size: calc(1rem + .9vw) !important;
+    }
+
+    .cover-container {
+        height: fit-content;
     }
 }
 
