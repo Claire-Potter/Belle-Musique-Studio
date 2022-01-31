@@ -245,18 +245,18 @@ body {
 /* Contact Us */
 
 .text-form {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "EB Garamond", sans-serif;
 }
 
 .text-form input,
 .text-form textarea {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "EB Garamond", sans-serif;
 }
 
 [type="file"] {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bolder;
     margin-top: 10px;
 }
@@ -285,6 +285,13 @@ body {
 }
 
 .btn-outline-black {
+    background: white;
+    color: black !important;
+    /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+}
+
+#new-image {
     background: white;
     color: black !important;
     /* use important to override link colors for <a> elements */

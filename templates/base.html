@@ -120,8 +120,8 @@
                                   <a class="dropdown-item nav-link" href="#">My Profile</a>
                                   <a class="dropdown-item nav-link" href="{% url 'account_logout' %}">Logout</a>
                                   {% else %}
-                                  <a href="{% url 'account_signup' %}" class="dropdown-item nav-link active">Register</a>
-                                  <a href="{% url 'account_login' %}" class="dropdown-item nav-link active">Login</a>
+                                  <a href="{% url 'account_signup' %}" class="dropdown-item nav-link">Register</a>
+                                  <a href="{% url 'account_login' %}" class="dropdown-item nav-link">Login</a>
                                   {% endif %}
                             </div>
                         </li>
