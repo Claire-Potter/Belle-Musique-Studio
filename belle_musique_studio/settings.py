@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['belle-musique-studio.herokuapp.com', 'localhost']
 
@@ -124,10 +124,7 @@ SOCIALACCOUNT_PROVIDERS = {
     },
 
         'instagram': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
+
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
@@ -261,6 +258,7 @@ if 'DEVELOPMENT' in os.environ:
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
     EMAIL_PORT = 587
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')

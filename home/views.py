@@ -18,10 +18,10 @@ and form in order to update the fields within
 the model tables
 """
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.conf import settings
 from django.views import View
-from belle_musique_studio.settings import EMAIL_HOST_USER
 from .forms import ContactForm
 from .models import User
 
@@ -86,8 +86,6 @@ class Contact(View):
         https://docs.djangoproject.com/en/4.0/topics/email/
         and include Sendgrid email template
         """
-        # create a variable to keep track of the form
-        message_sent = False
 
         # check if form has been submitted
         if request.method == 'POST':
@@ -97,26 +95,29 @@ class Contact(View):
                 contact = contact_form.save(commit=False)
                 contact.save()
                 c_d = contact_form.cleaned_data
+                text_content = c_d['body']
+                client_name = c_d['name']
+                client_email = c_d['email']
                 subject = 'A new Request has been submitted'
-                message = c_d
+                message = f'Contact request {text_content} by {client_name} @ {client_email}'
                 recipient = 'bellemusiquestudio@gmail.com'
+                email_from = settings.EMAIL_HOST_USER
 
                 # send the email to the recipient
                 send_mail(subject,
                           message,
-                          EMAIL_HOST_USER, [recipient], fail_silently = False)
+                          email_from, [recipient], fail_silently = False)
 
-                # set the variable initially created to True
-                message_sent = True
+                return redirect(request, 'contact_sent.html')
+
             else:
                 contact_form = ContactForm()
 
-        return render(
-            request,
-            'contact.html',
-            {
-                'contact_form': contact_form,
-                'message_sent': message_sent,
+            return render(
+                request,
+                'contact.html',
+                {
+                   'contact_form': contact_form,
 
-            },
-        )
+                },
+            )

@@ -25,18 +25,6 @@
 </div>
 <section>
     <div class="row bg-white d-flex w-100 mx-auto">
-        <!--The if statement checks if the email message has already been sent, if it has the below message will display-->
-        {% if message_sent %}
-        <div class="row align-items-center">
-            <div class="col-md-12 mt-5">
-                <div class="col-md-6 mx-auto advert-background mb-5 px-5 pt-5">
-                    <h2 class="bolder">Email successfully sent</h2>
-                    <h2>Your request was successfully sent to us!</h2>
-                </div>
-            </div>
-        </div>
-        {% else %}
-        <!--If it has not the form will be displayed for the user to complete and submit-->
         <div class="row align-items-center">
             <div class="col-md-12">
                 <h2 class="font-weight-bold text-center mt-5">Require assistance?</h2>
@@ -68,7 +56,6 @@
         {% include 'includes/workshops_advert_three.html' %}
         </div>
     </div>
-    {% endif %}
 </section>
 <div class="footer-background-color w-100">
     {% endblock %}
