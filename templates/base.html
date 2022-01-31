@@ -65,7 +65,7 @@
                 <h2 class="hidden">Belle Musique Studio</h2>
                 <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
                 <div class="store-logo">
-                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view-shopping-bag' %}">
+                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
                         <div>
                             <div class="icon"><i class="fas fa-shopping-bag fa-lg"></i></div>
                             <p class="my-0 icon">
