@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.instagram',
     'crispy_forms',
     'storages',
     'djmoney',
@@ -113,13 +112,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
  'facebook': {
-    'SCOPE': ['email',],
-    'METHOD': 'oauth2', #'js_sdk'  # instead of
-    'VERIFIED_EMAIL': False,
-},
-'instagram': {
-    'SCOPE':['public_content'],
-    'METHOD': 'oauth2', #'js_sdk'  # instead of
+    'SCOPE': ['email', 'public_profile'],
+    'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+    'INIT_PARAMS': {'cookie': True},
+    'METHOD': 'oauth2',
     'VERIFIED_EMAIL': False,
 },
 'google': {

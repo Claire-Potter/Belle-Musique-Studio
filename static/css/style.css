@@ -118,7 +118,7 @@ body {
 .cover-container {
     background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: 100%;
 }
 
 .cover-heading {
