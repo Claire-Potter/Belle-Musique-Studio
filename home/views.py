@@ -108,7 +108,7 @@ class Contact(View):
                           message,
                           email_from, [recipient], fail_silently = False)
 
-                return redirect(request, 'contact_sent.html')
+                return redirect('contact-sent')
 
             else:
                 contact_form = ContactForm()
@@ -121,3 +121,9 @@ class Contact(View):
 
                 },
             )
+
+
+def contact_sent(request):
+    """ A view to return the contact sent page """
+
+    return render(request, 'contact_sent.html')

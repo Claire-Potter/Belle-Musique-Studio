@@ -1,39 +1,24 @@
-const openDropdown = dropdowns[i];
+$('.btt-link').click(function(e) {
+    window.scrollTo(0, 0)
+})
 
-//https://www.w3schools.com/bootstrap/bootstrap_ref_js_dropdown.asp
-// referenced and edited for dropdownMenu
+$('#sort-selector').change(function() {
+    var selector = $(this);
+    var currentUrl = new URL(window.location);
 
-/**
- * @function dropdownMenu When the user clicks on the button,
- * toggle between hiding and showing the dropdown content.
- */
+    var selectedVal = selector.val();
+    if (selectedVal != "reset") {
+        var sort = selectedVal.split("_")[0];
+        var direction = selectedVal.split("_")[1];
 
-function dropdownMenu() {
-    dropDown.classList.toggle("show");
-}
+        currentUrl.searchParams.set("sort", sort);
+        currentUrl.searchParams.set("direction", direction);
 
-// Close the dropdown menu if the user clicks outside of it
-navBar.onclick = function(event) {
-    if (!event.target.matches(".steps-button")) {
-        for (i = 0; i < dropdowns.length; i++) {
-            if (openDropdown.classList.contains("show")) {
-                openDropdown.classList.remove("show");
-            }
-        }
+        window.location.replace(currentUrl);
+    } else {
+        currentUrl.searchParams.delete("sort");
+        currentUrl.searchParams.delete("direction");
+
+        window.location.replace(currentUrl);
     }
-};
-
-dropButton.addEventListener("click", dropdownMenu);
-
-// https://getbootstrap.com/docs/5.0/components/tooltips/
-// referenced and edited for
-// tooltips
-
-const tooltipTriggerList = [].slice.call(document
-    .querySelectorAll(
-        "[data-bs-toggle='tooltip']"));
-const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
-});
-
-$('.toast').toast('show');
+})

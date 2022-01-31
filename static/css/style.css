@@ -116,7 +116,7 @@ body {
 }
 
 .cover-container {
-    background: url("https://res.cloudinary.com/newxperience/image/upload/v1643625133/Belle%20Musique/products/home-background_lgldld.jpg") no-repeat;
+    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
     background-size: cover;
     height: calc(100vh - 164px);
 }

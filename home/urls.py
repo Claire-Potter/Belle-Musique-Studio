@@ -11,6 +11,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('about/', views.about, name='about'),
-    path('contact/', views. Contact.as_view(), name='contact'),
+    path('contact/', views.Contact.as_view(), name='contact'),
+    path('contact-sent/', views.contact_sent, name='contact-sent'),
 
 ]

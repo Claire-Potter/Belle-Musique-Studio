@@ -107,38 +107,29 @@ AUTHENTICATION_BACKENDS = [
 
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_ON_GET = True
-
-# Social account set up
-
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-
-        'instagram': {
-
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-
-    'facebook': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    }
+ 'facebook': {
+    'SCOPE': ['email',],
+    'METHOD': 'oauth2', #'js_sdk'  # instead of
+    'VERIFIED_EMAIL': False,
+},
+'instagram': {
+    'SCOPE':['public_content'],
+    'METHOD': 'oauth2', #'js_sdk'  # instead of
+    'VERIFIED_EMAIL': False,
+},
+'google': {
+    'SCOPE': [
+        'profile',
+        'email',
+    ],
+    'AUTH_PARAMS': {
+        'access_type': 'online',
+    }}
 }
 
 
