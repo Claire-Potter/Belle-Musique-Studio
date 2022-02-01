@@ -1,5 +1,5 @@
 <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
-  <main role="main" class="inner cover">
+  <section role="main" class="inner cover">
     <div class="row w-100">
       <div class="col-6"></div>
       <div class="col-sm-6 col-12">
@@ -11,9 +11,9 @@
             <h1
               class="cover-heading inline mt-5 mr-5 text-sm-right text-center"
             >
-              {{ cover.name }}
+             {% if 'placeholder' in name %}Belle Musique Studio {% else %}  {{ cover.name }} {% endif %}
             </h1>
-            <p class="lead mr-5 text-sm-right text-center">{{ cover.quote }}</p>
+            <p class="lead mr-5 text-sm-right text-center"> {% if 'placeholder' in quote %}Everyone deserves music{% else %}  {{ cover.quote}} {% endif %}</p>
             {% if "home" in cover.page %}
             <div class="lead mr-5 text-sm-right text-center">
               <a href="{% url 'about' %}" class="btn index-button">About</a>
@@ -34,4 +34,4 @@
         </div>
       </div>
     </div>
-  </main>
+  </section>
