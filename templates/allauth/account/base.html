@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% block page_header %}
+   {% include "includes/advert_header.html" with advert="Free song writing lesson for monthly subscribers!" %}
+{% endblock %}
 {% block content %}
+{% include "includes/cover.html" name="account-base" %}
 <div class="row bg-white d-flex w-100 mx-auto">
     <div class="col-sm-6 col-12 p-3 smaller-text">
             {% block content_two %}
