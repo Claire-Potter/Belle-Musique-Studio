@@ -84,6 +84,11 @@ a {
     text-decoration: none;
 }
 
+.emphasised-a {
+    font-weight: bolder;
+    color: rgba(109, 152, 171, 0.9);
+}
+
 a:hover {
     background-color: #fbac2c;
     color: #04142f;
