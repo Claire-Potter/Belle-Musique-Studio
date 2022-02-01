@@ -18,24 +18,32 @@ and form in order to update the fields within
 the model tables
 """
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views import View
 from .forms import ContactForm
-from .models import User
+from .models import User, Cover
 
 
 def index(request):
-    """ A view to return the index page """
+    """ A view to return the cover input as index.html """
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='home')
+    context = { 'covers': covers,
+                'cover': cover}
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', context)
 
 
 def about(request):
     """ A view to return the about page """
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='about')
+    context = { 'covers': covers,
+                'cover': cover}
 
-    return render(request, 'about.html')
+    return render(request, 'about.html', context)
 
 
 class Contact(View):
@@ -64,13 +72,14 @@ class Contact(View):
                                                 'email': request.user.email})
         else:
             contact_form = ContactForm()
+        covers = Cover.objects.all()
+        cover = get_object_or_404(covers, page='contact')
+        context = { 'covers': covers,
+                    'cover': cover,
+                    'contact_form': contact_form,}
         return render(
             request,
-            'contact.html',
-            {
-                'contact_form': contact_form,
-            },
-        )
+            'contact.html', context)
 
     def post(self, request):
         """
@@ -86,7 +95,6 @@ class Contact(View):
         https://docs.djangoproject.com/en/4.0/topics/email/
         and include Sendgrid email template
         """
-
         # check if form has been submitted
         if request.method == 'POST':
             # check if data from the form is clean
@@ -112,18 +120,21 @@ class Contact(View):
 
             else:
                 contact_form = ContactForm()
-
+            covers = Cover.objects.all()
+            cover = get_object_or_404(covers, page='contact')
+            context = { 'covers': covers,
+                        'cover': cover,
+                        'contact_form': contact_form,}
             return render(
                 request,
-                'contact.html',
-                {
-                   'contact_form': contact_form,
-
-                },
-            )
+                'contact.html', context )
 
 
 def contact_sent(request):
     """ A view to return the contact sent page """
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='contact')
+    context = { 'covers': covers,
+                'cover': cover}
 
-    return render(request, 'contact_sent.html')
+    return render(request, 'contact_sent.html', context)

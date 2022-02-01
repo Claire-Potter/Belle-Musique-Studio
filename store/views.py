@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
-
+from home.models import Cover
 from .models import Product, Category
 from .forms import ProductForm
 
@@ -10,8 +10,12 @@ from .forms import ProductForm
 
 def music_store(request):
     """ A view to show the music store """
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='music_store')
+    context = { 'covers': covers,
+                'cover': cover}
 
-    return render(request, 'music_store.html')
+    return render(request, 'music_store.html', context)
 
 
 def all_products(request):
@@ -44,11 +48,15 @@ def all_products(request):
             categories = Category.objects.filter(name__in=categories)
 
     current_sorting = f'{sort}_{direction}'
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='product')
 
     context = {
         'products': products,
         'current_categories': categories,
         'current_sorting': current_sorting,
+        'covers': covers,
+        'cover': cover,
     }
 
     return render(request, 'products.html', context)
@@ -86,10 +94,13 @@ def add_product(request):
                             'Please ensure the form is valid.'))
     else:
         form = ProductForm()
-
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='product_manage')
     template = 'add_product.html'
     context = {
         'form': form,
+        'covers': covers,
+        'cover': cover,
     }
 
     return render(request, template, context)
@@ -116,11 +127,14 @@ def edit_product(request, product_id):
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
-
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='product_manage')
     template = 'edit_product.html'
     context = {
         'form': form,
         'product': product,
+        'covers': covers,
+        'cover': cover,
     }
 
     return render(request, template, context)

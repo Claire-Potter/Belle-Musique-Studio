@@ -2,7 +2,7 @@
 Belle Musique Studio home app  adminconfiguration
 """
 from django.contrib import admin
-from .models import Contact
+from .models import Contact, Cover
 
 
 @admin.register(Contact)
@@ -17,3 +17,15 @@ class ContactAdmin(admin.ModelAdmin):
                     'deletable')
     list_filter = ('created_on', 'name', 'deletable')
     search_fields = ('name', 'email', 'deletable')
+
+
+@admin.register(Cover)
+class CoverAdmin(admin.ModelAdmin):
+    """
+    The Cover admin set up reads the Cover model and allows
+    the admin user to read and delete input for the cover name and cover quotes
+    used across the site.
+    """
+    list_display = ('name', 'quote', 'page')
+    list_filter = ('name', 'quote', 'page')
+    search_fields = ('name', 'quote', 'page')
