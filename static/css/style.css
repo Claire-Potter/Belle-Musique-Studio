@@ -438,6 +438,10 @@ body {
     .cover-container {
         height: initial;
     }
+
+    .small-width-heading {
+        width: 100% !important;
+    }
 }
 
 
