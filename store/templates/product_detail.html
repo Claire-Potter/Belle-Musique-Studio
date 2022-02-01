@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block page_header %}
+   {% include "includes/advert_header.html" with advert="Free delivery on orders over £" store="store" %}
+{% endblock %}
 {% block content %}
-<div class="container-fluid">
-    <div class="row mx-auto">
-        <div class="col-12 col-md-6 bg-white col-lg-4 offset-lg-2">
+{% include "includes/cover.html" %}
+</div>
+<section>
+ <div class="container-fluid p-0">
+    <div class="row bg-white w-100 m-0">
+        <div class="col-12 col-sm-6 col-lg-4 offset-lg-2">
             <div class="image-container my-3 my-sm-5 text-center image-short-height">
                 {% if product.image %}
                 <a href="{{ product.image.url }}" target="_blank">
@@ -78,13 +83,13 @@
                         </div>
 
                         <div class="col{% if s %}-12 mt-2{% endif %}">
-                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5">
+                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5 mb-5">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            <input type="submit" class="btn btn advert-button rounded-0 text-uppercase mt-5" value="Add to Bag">
+                            <input type="submit" class="btn btn advert-button rounded-0 text-uppercase mt-5 mb-5" value="Add to Bag">
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         {% endwith %}
@@ -93,8 +98,8 @@
             </div>
         </div>
     </div>
-</div>
-</div>
+  </div>
+</section>
 <div class="footer-background-color w-100">
     {% endblock %}
     {% block postloadjs %}
