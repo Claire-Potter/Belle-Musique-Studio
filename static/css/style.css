@@ -237,6 +237,13 @@ body {
     height: 250px;
 }
 
+.advert-image-small-round {
+    border: #04142f 2px solid;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
 .advert-button {
     background-color: #fbac2c;
     border: #fbac2c;
@@ -426,6 +433,23 @@ body {
     font-size: calc(1rem + .9vw) !important;
 }
 
+.bag-height {
+    height: 250px;
+}
+
+.content-height {
+    height: fit-content;
+}
+
+.bag-border {
+    border: 2px solid lightgray;
+    border-radius: 5px;
+}
+
+.mobile-only {
+    display: none;
+}
+
 /* Media query to center logo for small screens */
 
 @media (max-width: 800px) {
@@ -451,6 +475,19 @@ body {
 
     .small-width-heading {
         width: 100% !important;
+    }
+
+    .advert-image-two {
+        height: 150px;
+        width: 150px;
+    }
+
+    .bag-border {
+        border: none;
+    }
+
+    .mobile-only {
+        display: unset;
     }
 }
 

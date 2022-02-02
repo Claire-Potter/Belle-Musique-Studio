@@ -45,8 +45,8 @@
         "model": "store.product",
         "fields": {
             "sku": "pp5001890157",
-            "name": "AKAI Professional LPK25 MIDI Keyboard",
-            "description": "AKAI Professional LPK25 - Portable USB-powered MIDI Keyboard with 25 Velocity-Sensitive Keys with Synth Action for Laptops (Mac & PC), Editing Software Included.",
+            "name": "Professional LPK25 MIDI Keyboard",
+            "description": "Professional LPK25 - Portable USB-powered MIDI Keyboard with 25 Velocity-Sensitive Keys with Synth Action for Laptops (Mac & PC), Editing Software Included.",
             "has_sizes": "False",
             "price": 38.99,
             "category": 2,
@@ -73,7 +73,7 @@
         "model": "store.product",
         "fields": {
             "sku": "pp5002260206",
-            "name": "Shure SM58-LCE Cardioid Dynamic Vocal Microphone",
+            "name": "Shure Vocal Microphone",
             "description": "Shure SM58-LCE Cardioid Dynamic Vocal Microphone with Pneumatic Shock Mount, Spherical Mesh Grille with Built-in Pop Filter, A25D Mic Clip, Storage Bag, 3-pin XLR Connector - (No Cable Included)",
             "has_sizes": "False",
             "price": 86.99,
@@ -87,7 +87,7 @@
         "model": "store.product",
         "fields": {
             "sku": "pp5002440521",
-            "name": "Blank Sheet Music ",
+            "name": "Blank Sheet Music",
             "description": "Blank Sheet Music, 12 stave staff paper, 100 pages, A4 8.5x11 inch Music Manuscript Paper Musicians Notebook for composing music & writing music notation",
             "has_sizes": "False",
             "price": 4.50,
