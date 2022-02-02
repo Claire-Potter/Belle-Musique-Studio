@@ -1,35 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block page_header %}
-<div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
-    <div class="col advert-banner-background text-white">
-        <h4 class="logo-font my-1">Receive a discount when registering a group for a workshop!</h4>
-    </div>
-</div>
+{% include "includes/advert_header.html" with advert="Receive a discount when registering a group for a workshop!" %}
 {% endblock %}
 {% block content %}
+{% include "includes/cover.html" %}
 {% load crispy_forms_tags %}
-<div class="row w-100">
-    <div class="col-6"></div>
-    <div class="col-sm-6 col-12">
-        <div class="row spacer"></div>
-        <div class="width-define">
-            <div class="row background-overlay mx-3 my-3 ml-5">
-                <h1 class="cover-heading inline mt-5 mr-5 text-sm-right text-center">Belle Musique Studio</h1>
-                <p class="lead mb-5 mr-5 text-sm-right text-center">No matter where we find ourselves, let's always keep in touch</p>
-            </div>
-        </div>
-        <div class="row spacer"></div>
-    </div>
-</div>
 </div>
 <section>
     <div class="row bg-white d-flex w-100 mx-auto">
         <div class="row align-items-center">
             <div class="col-md-12">
-                <div class="mx-auto pl-3">
+                <div class="mx-auto pl-3 w-50 small-width-heading">
+                    <hr>
                     <h2 class="font-weight-bold text-center mt-5">Require assistance?</h2>
                     <h2 class="lead text-center">Please get in touch!</h2>
+                    <hr>
                 </div>
                 <div class="col-sm-6 advert-background px-sm-5 pb-2 mx-3 my-3 mx-sm-auto ">
                     <form method="post" class="mt-5">

@@ -5,8 +5,9 @@
 {% block head_title %}OpenID Sign In{% endblock %}
 
 {% block content_four %}
-
-<h2>{% trans 'OpenID Sign In' %}</h2>
+<hr>
+<h2 class="text-center mx-3 my-3">{% trans 'OpenID Sign In' %}</h2>
+<hr>
 
 
 <form id="openid_login_form" class="openid_login" method="post" action="{% url 'openid_login' %}">

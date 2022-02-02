@@ -1,0 +1,37 @@
+<div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
+  <section role="main" class="inner cover">
+    <div class="row w-100">
+      <div class="col-6"></div>
+      <div class="col-sm-6 col-12">
+        <div class="row spacer"></div>
+        <div class="width-define">
+          <div
+            class="row background-overlay mx-3 my-3 {% if 'product_manage' in cover.page %} ml-0 {% else %} ml-5 {% endif %}"
+          >
+            <h1
+              class="cover-heading inline mt-5 mr-5 text-sm-right text-center"
+            >
+             {% if 'placeholder' in name %}Belle Musique Studio {% else %}  {{ cover.name }} {% endif %}
+            </h1>
+            <p class="lead mr-5 text-sm-right text-center"> {% if 'placeholder' in quote %}Everyone deserves music{% else %}  {{ cover.quote}} {% endif %}</p>
+            {% if "home" in cover.page %}
+            <div class="lead mr-5 text-sm-right text-center">
+              <a href="{% url 'about' %}" class="btn index-button">About</a>
+            </div>
+            <div class="lead mr-5 text-sm-right text-center">
+              <a href="#" class="btn index-button">Lessons</a>
+            </div>
+            <div class="lead mr-5 text-sm-right text-center">
+              <a href="#" class="btn index-button">Workshops</a>
+            </div>
+            <div class="lead mb-2 mr-5 text-sm-right text-center">
+              <a href="{% url 'music_store' %}" class="btn index-button"
+                >Music Store</a
+              >
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

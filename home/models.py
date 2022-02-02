@@ -37,3 +37,23 @@ class Contact(models.Model):
 
     def __str__(self):
         return f'Contact request {self.body} by {self.name}'
+
+
+class Cover(models.Model):
+    """
+    Model created to render the cover input
+    and save the cover name and quote to reflect.
+    """
+    name = models.CharField(max_length=80)
+    quote = models.CharField(max_length=250)
+    page = models.CharField(max_length=15, default='home')
+
+    class Meta:
+        """
+        Meta created to order the Cover Model according
+        to the page.
+        """
+        ordering = ['page']
+
+    def __str__(self):
+        return f'Cover details: {self.name} and {self.quote}'

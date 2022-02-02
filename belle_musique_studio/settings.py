@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'djmoney',
     'home',
     'store',
+    'shopping_bag',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'belle_musique_studio.urls'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 TEMPLATES = [
@@ -83,10 +87,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'shopping_bag.contexts.bag_contents',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
                 'crispy_forms.templatetags.crispy_forms_field',
+                'shopping_bag.templatetags.bag_tools',
             ]
         },
     },
@@ -231,6 +237,15 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
+
+# Stripe
+FREE_DELIVERY_THRESHOLD = 50
+STANDARD_DELIVERY_PERCENTAGE = 10
+STRIPE_CURRENCY = 'gbp'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 
 # Default primary key field type

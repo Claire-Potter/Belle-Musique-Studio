@@ -1,34 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_header %}
-<div id="delivery-banner" class="row text-center d-flex w-100 mx-auto">
-    <div class="col advert-banner-background text-white">
-            <h4 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h4>       
-    </div>
-</div>
+   {% include "includes/advert_header.html" with advert="Free delivery on orders over £" store="store" %}
 {% endblock %}
 {% block content %}
-<div class="row w-100">
-    <div class="col-6"></div>
-    <div class="col-sm-6 col-12">
-        <div class="row spacer"></div>
-        <div class="width-define">
-            <div class="row background-overlay mx-3 my-3 ml-5">
-                <h1 class="cover-heading inline mt-5 mr-5 text-sm-right text-center">Music Store</h1>
-                <p class="lead mr-5 text-sm-right text-center">Products</p>
-            </div>
-        </div>
-        <div class="row spacer"></div>
-    </div>
-</div>
+{% include "includes/cover.html" %}
 </div>
 <section>
     <div class="row bg-white d-flex w-100 mx-auto">
         <div class="container-fluid">
             <div class="row">
                 <div class="col text-center mt-3">
-                    <h2 class="logo-font">Products</h2>
-                    <hr class="w-50 mx-auto">
+                    <hr class="w-50 mx-auto small-width-heading">
+                    <h2 class="logo-font mt-5 mb-5">Products</h2>
+                    <hr class="w-50 mx-auto small-width-heading">
                 </div>
             </div>
             <div class="row">
@@ -81,7 +66,7 @@
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">{{ product.price }}</p>
+                                            <p class="lead mb-0 text-left font-weight-bold">£{{ product.price }}</p>
                                             {% if product.category %}
                                             <p class="small mt-1 mb-0">
                                                 <a class="text-muted smaller-text" href="{% url 'products' %}?category={{ product.category.name }}">
@@ -94,6 +79,12 @@
                                             {% else %}
                                             <small class="text-muted smaller-text">No Rating</small>
                                             {% endif %}
+                                            {% if request.user.is_superuser %}
+                                            <small class="ml-3">
+                                                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
+                                                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                                            </small>
+                                        {% endif %}
 
                                         </div>
                                     </div>
@@ -125,7 +116,7 @@
                 </div>
             </div>
             <div class="row g-0">
-                <div class="col-md-12 text-center my-3">
+                <div class="col-md-12 text-center my-3 mb-5">
                     <a class="btn advert-button return" href="{{ request.META.HTTP_REFERER }}">Return</a>
                 </div>
             </div>

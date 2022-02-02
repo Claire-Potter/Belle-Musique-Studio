@@ -28,5 +28,8 @@
       "customise",
       "Musique",
       "utilised"
-   ]
+   ],
+   "[django-html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+   }
 }

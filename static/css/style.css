@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&family=The+Nautigal:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto+Condensed&family=The+Nautigal:wght@700&display=swap');
 
 /* Styling used across the site */
 html {
@@ -62,6 +62,15 @@ body {
     background-color: transparent;
 }
 
+.dropdown-menu {
+    background-color: transparent;
+    border: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #fbac2c;
+}
+
 ul {
     list-style-type: none;
 }
@@ -75,11 +84,17 @@ a {
     text-decoration: none;
 }
 
+.emphasised-a {
+    font-weight: bolder;
+    color: rgba(109, 152, 171, 0.9);
+}
+
 a:hover {
     background-color: #fbac2c;
     color: #04142f;
     text-decoration: none;
 }
+
 
 .btt-button {
     height: 42px;
@@ -91,7 +106,9 @@ a:hover {
     padding: 0;
 }
 
-.btt-link {
+.btt-link,
+.update-link,
+.remove-item {
     cursor: pointer;
 }
 
@@ -235,18 +252,18 @@ body {
 /* Contact Us */
 
 .text-form {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "EB Garamond", sans-serif;
 }
 
 .text-form input,
 .text-form textarea {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "EB Garamond", sans-serif;
 }
 
 [type="file"] {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bolder;
     margin-top: 10px;
 }
@@ -269,6 +286,35 @@ body {
     height: 250px;
 }
 
+.btn-black {
+    background: black;
+    color: white;
+}
+
+.btn-outline-black {
+    background: white;
+    color: black !important;
+    /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+}
+
+#new-image {
+    background: white;
+    color: black !important;
+    /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+}
+
+.btn-outline-black:hover,
+.btn-outline-black:active,
+.btn-outline-black:focus {
+    background: black;
+    color: white !important;
+}
+
+.text-white {
+    color: #ffffff;
+}
 
 /* Media query to center logo for small screens */
 
@@ -372,6 +418,14 @@ body {
     border-bottom-color: #343a40 !important;
 }
 
+/* Shopping Bag Styling */
+
+.table-font {
+    color: #04142f;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: calc(1rem + .9vw) !important;
+}
+
 /* Media query to center logo for small screens */
 
 @media (max-width: 800px) {
@@ -392,7 +446,11 @@ body {
     }
 
     .cover-container {
-        height: fit-content;
+        height: initial;
+    }
+
+    .small-width-heading {
+        width: 100% !important;
     }
 }
 
