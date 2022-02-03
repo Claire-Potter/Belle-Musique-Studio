@@ -14,7 +14,7 @@
             <hr class="w-50 mx-auto small-width-heading">
             <h2 class="logo-font mt-5 mb-5">Shopping Bag</h2>
             <hr class="w-50 mx-auto small-width-heading">
-         </div> 
+         </div>
          <div class="row">
             <div class="col ml-3 ml-sm-0">
                {% if bag_items %}
@@ -89,7 +89,7 @@
                   </table>
                </div>
                <div class="row">
-                  <div class="col-sm-6 col-12 bag-height mt-5 order-sm-12">
+                  <div class="col-sm-6 col-12 mt-5 order-sm-12">
                      <div class="col mb-5 mr-sm-5 text-center text-sm-right">
                         <h6 class="my-3"><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
                         <h6 class="my-3">Delivery: ${{ delivery|floatformat:2 }}</h6>
@@ -99,22 +99,23 @@
                            You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong> more!
                         </p>
                         {% endif %}
+                        <div class="col mr-sm-5 text-center text-sm-right">
+                           <a href="{% url 'checkout' %}" class="btn advert-button my-5">
+                           <span class="text-uppercase">Secure Checkout</span>
+                           <span class="icon">
+                           <i class="fas fa-lock"></i>
+                           </span>
+                           </a>
+                        </div>
                      </div>
-                     <div class="col mr-sm-5 text-center text-sm-right">
-                        <a href="{% url 'checkout' %}" class="btn advert-button my-5">
-                        <span class="text-uppercase">Secure Checkout</span>
-                        <span class="icon">
-                        <i class="fas fa-lock"></i>
-                        </span>
-                        </a>
-                     </div>
+                     
                   </div>
-                  <div class="col-sm-6 col-12 bag-sm-height mt-5 order-sm-1">
+                  <div class="col-sm-6 col-12 mt-5 order-sm-1">
                      <div class="col text-center">
                         <p class="smaller-text">Not yet finished?</p>
                         <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
                      </div>
-                     <div class="col mt-3 mt-sm-0 text-center">
+                     <div class="col mt-5 mt-sm-3 text-center">
                         <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
                         <span class="icon">
                         <i class="fas fa-chevron-left"></i>
@@ -124,7 +125,9 @@
                      </div>
                   </div>
                </div>
-               <div class="mobile-only"><hr></div>
+               <div class="mobile-only">
+                  <hr>
+               </div>
             </div>
             {% else %}
             <div class="col-12 text-center bag-sm-height mt-5">
@@ -140,7 +143,9 @@
                   <span class="text-uppercase">Keep Shopping</span>
                   </a>
                </div>
-               <div class="mobile-only"><hr></div>
+               <div class="mobile-only">
+                  <hr>
+               </div>
             </div>
             {% endif %}
          </div>
@@ -148,7 +153,7 @@
       <div class="row">
          {% include 'includes/lessons_advert_three.html' %}
          {% include 'includes/workshops_advert_three.html' %}
-       </div>
+      </div>
    </div>
 </section>
 <div class="footer-background-color">

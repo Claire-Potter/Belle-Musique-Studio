@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+{% block page_header %}
+{% include "includes/advert_header.html" with advert="Free delivery on orders over £" store="store" %}
+{% endblock %}
+{% block content %}
+{% load bag_tools %}
+{% include "includes/cover.html" %}
+</div>
+<section class="bg-white">
+   <div class="container mb-3 pb-5 content-height">
+      <div class="row pt-3 pb-3 mt-5">
+            <div class="col text-center mt-3">
+                  <hr class="w-50 mx-auto small-width-heading">
+                  <h2 class="logo-font mt-5 mb-5">Thank you</h2>
+                  <hr class="w-50 mx-auto small-width-heading">
+               <p class="text-black">Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+            </div>
+         <div class="row">
+            <div class="col text-center mt-3">
+               <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+               <p class="smaller-text">Now check out the latest deals that our Music Store has to offer!</p>
+               <div class="col mt-3 mt-sm-0 text-center">
+                  <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
+                  <span class="icon">
+                  <i class="fas fa-chevron-left"></i>
+                  </span>
+                  <span class="text-uppercase">Shop Now</span>
+                  </a>
+               </div>
+            </div>
+            {% include 'includes/lessons_advert_four.html' %}
+            {% include 'includes/workshops_advert_four.html' %}
+         </div>
+      </div>
+   </div>
+</section>
+<div class="footer-background-color">
+{% endblock %}
