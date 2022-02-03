@@ -9,7 +9,6 @@ Django==3.2
 django-allauth==0.41.0
 django-countries==6.0
 django-crispy-forms==1.13.0
-django-money==2.1.1
 django-storages==1.12.3
 docutils==0.15.2
 fabio==0.13.0

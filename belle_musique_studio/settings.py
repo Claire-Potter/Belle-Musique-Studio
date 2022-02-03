@@ -49,10 +49,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'crispy_forms',
     'storages',
-    'djmoney',
     'home',
     'store',
     'shopping_bag',
+    
 ]
 
 MIDDLEWARE = [
