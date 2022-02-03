@@ -433,9 +433,6 @@ body {
     font-size: calc(1rem + .9vw) !important;
 }
 
-.bag-height {
-    height: 250px;
-}
 
 .content-height {
     height: fit-content;
