@@ -36,6 +36,20 @@
     border: 1px solid #000;
 }
 
+select,
+select option {
+    color: #000000;
+}
+
+select:invalid,
+select option[value=""] {
+    color: #aab7c4 !important;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.7rem + 2px);
+}
+
 .smallest-text {
     font-size: calc(0.4rem + .9vw) !important;
 

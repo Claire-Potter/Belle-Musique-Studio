@@ -52,7 +52,7 @@
             </div>
             {% endfor %}
             <hr class="my-0">
-            <div class="row text-black text-right">
+            <div class="row  text-right">
                <div class="col-7 offset-2">
                   <p class="my-0">Order Total:</p>
                   <p class="my-0">Delivery:</p>
@@ -70,19 +70,19 @@
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                {% csrf_token %}
                <fieldset class="rounded px-3 mb-5">
-                  <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                  <legend class="fieldset-label small  px-2 w-auto">Details</legend>
                   {{ order_form.full_name | as_crispy_field }}
                   {{ order_form.email | as_crispy_field }}
                </fieldset>
                <fieldset class="rounded px-3 mb-5">
-                  <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
+                  <legend class="fieldset-label small  px-2 w-auto">Delivery</legend>
                   {{ order_form.phone_number | as_crispy_field }}
-                  {{ order_form.country | as_crispy_field }}
-                  {{ order_form.postcode | as_crispy_field }}
-                  {{ order_form.town_or_city | as_crispy_field }}
                   {{ order_form.street_address1 | as_crispy_field }}
                   {{ order_form.street_address2 | as_crispy_field }}
                   {{ order_form.county | as_crispy_field }}
+                  {{ order_form.town_or_city | as_crispy_field }}
+                  {{ order_form.postcode | as_crispy_field }}
+                  {{ order_form.country | as_crispy_field }}
                   <div class="form-check form-check-inline float-right mr-0">
                      {% if user.is_authenticated %}
                      <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
@@ -96,12 +96,14 @@
                   </div>
                </fieldset>
                <fieldset class="px-3">
-                  <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                  <legend class="fieldset-label small  px-2 w-auto">Payment</legend>
                   <!-- A Stripe card element will go here -->
                   <div class="mb-3" id="card-element"></div>
                   <!-- Used to display form errors -->
                   <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-               </fieldset>
+                  <!-- Pass the client secret to the view so we can get the payment intent id -->
+                  <input type="hidden" value="{{ client_secret }}" name="client_secret">
+              </fieldset>
                <div class="submit-button mt-5 mb-2">
                   <a href="{% url 'view_bag' %}" class="btn btn-outline-black text-uppercase">
                   <span class="icon">
@@ -142,8 +144,8 @@
 <div class="footer-background-color">
 {% endblock %}
 {% block postloadjs %}
-{{ block.super }}
-{{ stripe_public_key|json_script:"id_stripe_public_key" }}
-{{ client_secret|json_script:"id_client_secret" }}
-<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
