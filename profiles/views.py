@@ -36,6 +36,8 @@ def profile(request):
 def order_history(request, order_number):
     """.git/"""
     order = get_object_or_404(Order, order_number=order_number)
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='checkout')
 
     messages.info(request, (
         f'This is a past confirmation for order number {order_number}. '
@@ -46,6 +48,8 @@ def order_history(request, order_number):
     context = {
         'order': order,
         'from_profile': True,
+        'covers': covers,
+        'cover': cover,
     }
 
     return render(request, template, context)
