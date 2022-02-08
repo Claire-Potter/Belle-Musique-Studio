@@ -153,6 +153,11 @@ LOGIN_REDIRECT_URL = '/'
 WSGI_APPLICATION = 'belle_musique_studio.wsgi.application'
 
 
+ACCOUNT_FORMS = {
+'signup': 'belle_musique_studio.forms.CustomSignupForm',
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
