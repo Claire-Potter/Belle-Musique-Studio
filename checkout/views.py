@@ -1,10 +1,11 @@
+""".git/"""
 import json
+import stripe
 from django.shortcuts import (render, redirect, reverse, get_object_or_404,
                              HttpResponse)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
-import stripe
 from home.models import Cover
 from store.models import Product
 from shopping_bag.contexts import bag_contents
@@ -14,6 +15,7 @@ from .forms import OrderForm
 
 @require_POST
 def cache_checkout_data(request):
+    """.git/"""
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -30,6 +32,7 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """.git/"""
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 

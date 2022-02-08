@@ -90,7 +90,7 @@
     "pk": 12,
     "model": "home.cover",
     "fields": {
-        "name": "Account Profile",
+        "name": "My Profile",
         "quote": "Be so good they can't ignore you",
         "page": "account_profile"
     }
@@ -99,6 +99,15 @@
     "model": "home.cover",
     "fields": {
         "name": "Student Community",
+        "quote": "It's not only music. It's not only art. It's a community. A place to belong. ~ Jared Leto",
+        "page": "student_community"
+    }
+},
+{
+    "pk": 14,
+    "model": "home.cover",
+    "fields": {
+        "name": "Student Profile",
         "quote": "It's not only music. It's not only art. It's a community. A place to belong. ~ Jared Leto",
         "page": "student_community"
     }
