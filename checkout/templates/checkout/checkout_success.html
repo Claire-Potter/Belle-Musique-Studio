@@ -181,10 +181,23 @@
                            <div class="col-12 col-md-8 text-md-right">
                                <p class="mb-0">{{ order.grand_total }}</p>
                            </div>
+                           {% if from_profile %}
+                           <div class="row">
+                            <div class="col text-right">
+                              <a href="{% url 'profile' %}" class="btn advert-button my-3">
+                               <span class="icon mr-2">
+                                   <i class="fas fa-angle-left"></i>
+                               </span>
+                               <span class="text-uppercase">Back to Profile</span>
+                              </a>
+                            </div>
+                           </div>
+                           {% endif %}
                        </div>
                    </div>
                </div>
            </div>
+    </div>
          <div class="row">
             <div class="col text-center mt-3">
                <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
