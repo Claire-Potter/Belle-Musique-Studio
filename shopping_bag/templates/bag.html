@@ -9,14 +9,14 @@
 </div>
 <section class="bg-white">
    <div class="container mb-3 pb-5 content-height">
-      <div class="row bag-border pt-3 pb-3 mt-5">
+      <div class="row pt-3 pb-3 mt-5">
          <div class="col text-center mt-3">
             <hr class="w-50 mx-auto small-width-heading">
             <h2 class="logo-font mt-5 mb-5">Shopping Bag</h2>
             <hr class="w-50 mx-auto small-width-heading">
-         </div> 
+         </div>
          <div class="row">
-            <div class="col ml-3 ml-sm-0">
+            <div class="col ml-3 ml-sm-0 mt-3">
                {% if bag_items %}
                <div class="table-responsive rounded">
                   <table class="table table-sm table-borderless">
@@ -41,7 +41,7 @@
                               <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
                            </td>
                            <td class="py-3 py-sm-5">
-                              <p class="my-0">${{ item.product.price }}</p>
+                              <p class="my-0">£{{ item.product.price }}</p>
                            </td>
                            <td class="py-3 py-sm-5 w-25">
                               <p class="my-0 mx-3">{{ item.quantity }}</p>
@@ -81,7 +81,7 @@
                               <a class="remove-item text-danger float-sm-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
                            </td>
                            <td class="py-3">
-                              <p class="my-0">${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                              <p class="my-0">£{{ item.product.price | calc_subtotal:item.quantity }}</p>
                            </td>
                         </tr>
                         {% endfor %}
@@ -89,42 +89,31 @@
                   </table>
                </div>
                <div class="row">
-                  <div class="col-sm-6 col-12 bag-height mt-5 order-sm-12">
+                  <div class="col-12 mt-5">
                      <div class="col mb-5 mr-sm-5 text-center text-sm-right">
-                        <h6 class="my-3"><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
-                        <h6 class="my-3">Delivery: ${{ delivery|floatformat:2 }}</h6>
-                        <h4 class="my-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+                        <h6 class="my-3"><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
+                        <h6 class="my-3">Delivery: £{{ delivery|floatformat:2 }}</h6>
+                        <h4 class="my-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
                         {% if free_delivery_delta > 0 %}
                         <p class="my-3 text-danger">
-                           You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong> more!
+                           You could get free delivery by spending just <strong>£{{ free_delivery_delta }}</strong> more!
                         </p>
                         {% endif %}
+                        <div class="col text-sm-right text-center">
+                           <a href="{% url 'checkout' %}" class="btn advert-button my-5">
+                           <span class="text-uppercase">Secure Checkout</span>
+                           <span class="icon">
+                           <i class="fas fa-lock"></i>
+                           </span>
+                           </a>
+                        </div>
                      </div>
-                     <div class="col mr-sm-5 text-center text-sm-right">
-                        <a href="" class="btn advert-button my-5">
-                        <span class="text-uppercase">Secure Checkout</span>
-                        <span class="icon">
-                        <i class="fas fa-lock"></i>
-                        </span>
-                        </a>
-                     </div>
-                  </div>
-                  <div class="col-sm-6 col-12 bag-sm-height mt-5 order-sm-1">
-                     <div class="col text-center">
-                        <p class="smaller-text">Not yet finished?</p>
-                        <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-                     </div>
-                     <div class="col mt-3 mt-sm-0 text-center">
-                        <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-                        <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span class="text-uppercase">Keep Shopping</span>
-                        </a>
-                     </div>
+                     
                   </div>
                </div>
-               <div class="mobile-only"><hr></div>
+               <div class="mobile-only">
+                  <hr>
+               </div>
             </div>
             {% else %}
             <div class="col-12 text-center bag-sm-height mt-5">
@@ -140,15 +129,33 @@
                   <span class="text-uppercase">Keep Shopping</span>
                   </a>
                </div>
-               <div class="mobile-only"><hr></div>
+               <div class="mobile-only">
+                  <hr>
+               </div>
             </div>
             {% endif %}
          </div>
       </div>
       <div class="row">
-         {% include 'includes/lessons_advert_three.html' %}
-         {% include 'includes/workshops_advert_three.html' %}
-       </div>
+         <div class="col-sm-4 col-12 text-center mt-3">
+               <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+               <p class="smaller-text">Not yet finished? Head back to our store.</p>
+            <div class="col mt-5 mt-sm-3 text-center">
+               <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
+               <span class="icon">
+               <i class="fas fa-chevron-left"></i>
+               </span>
+               <span class="text-uppercase">Keep Shopping</span>
+               </a>
+            </div>
+         </div>
+         <div class="col-sm-4 col-12">
+           {% include 'includes/lessons_advert_four.html' %}
+         </div>
+         <div class="col-sm-4 col-12">
+           {% include 'includes/workshops_advert_four.html' %}
+         </div>
+      </div>
    </div>
 </section>
 <div class="footer-background-color">
