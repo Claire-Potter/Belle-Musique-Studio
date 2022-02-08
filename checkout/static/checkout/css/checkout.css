@@ -4,7 +4,7 @@
     height: 40px;
     padding: 10px 12px;
     border: 1px solid transparent;
-    border-radius: 0px;
+    border-radius: 5px;
     background-color: white;
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
@@ -32,13 +32,13 @@
 
 #payment-form .form-control,
 #card-element {
-    color: #000;
+    color: #04142f;
     border: 1px solid #000;
 }
 
 select,
 select option {
-    color: #000000;
+    color: #04142f;
 }
 
 select:invalid,

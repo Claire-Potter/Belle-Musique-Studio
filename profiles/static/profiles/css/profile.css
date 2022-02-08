@@ -1,0 +1,52 @@
+#profile-update-form .form-control {
+    color: #04142f;
+}
+
+#profile-update-form input::placeholder {
+    color: #aab7c4 !important;
+}
+
+#id_default_country,
+#id_default_country option:not(:first-child) {
+    color: #04142f;
+}
+
+#id_default_country option:first-child {
+    color: #aab7c4 !important;
+}
+
+.profile-form-input {
+    box-sizing: border-box;
+    height: 40px;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.profile-form-input:focus,
+.profile-form-input:active {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+
+/* Media queries */
+
+@media (max-width: 800px) {
+
+    .smallest-text {
+        font-size: calc(0.6rem + .9vw) !important;
+
+    }
+}
+
+@media (min-width: 801px) {
+
+    .smallest-text {
+        font-size: calc(0.1rem + .9vw) !important;
+
+    }
+}
