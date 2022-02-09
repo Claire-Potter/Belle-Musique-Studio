@@ -105,7 +105,7 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-  
+
         if request.user.is_authenticated:
             order_form = OrderForm(initial={'full_name': request.user.get_full_name(),
                                             'email': request.user.email})
