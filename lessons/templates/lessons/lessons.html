@@ -7,13 +7,93 @@
 {% include "includes/cover.html" %}
 </div>
 <section>
-        {% include 'includes/lessons_advert_two.html' %}
-        {% include 'includes/workshops_advert_two.html' %}
-        <div class="btt-button shadow-sm rounded-0 border border-black">
-            <a class="btt-link d-flex h-100">
-                <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-            </a>	
+    <div class="row advert-topper d-flex w-100 mx-auto">
+        <div class="col-12">
+            <div class="w-50 small-width-heading mx-auto">
+             <hr>
+             <h2 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Our Lessons</h2>
+              <hr>
+            </div>
         </div>
+        <div class="row">
+        <div class="col-sm-6 col-12 mx-auto mt-3">
+            <p class="mx-3 my-3 pt-2 text-center">
+                Individual piano, singing and songwriting lessons are given weekly. Take out a subscription to pay annually, monthly or weekly.
+            </p>
+            <hr>
+            <div class="row">
+             <div class="col-sm-6 col-12 d-flex justify-content-center mb-sm-3">
+             <img class="img-fluid lessons-image mt-sm-3" alt="{{ piano_lesson_image.image_description }}" aria-label="{{ piano_lesson_image.image_description }}" src="{{ piano_lesson_image.image_url }}">
+             </div>
+             <div class="col-sm-6 col-12 mt-5 mt-sm-0 mb-3">
+                <h3 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Piano Lessons</h3>
+             {% for lesson in piano_lessons%}
+                 <h3 class="cover-heading text-center">{{ lesson.name }}:</h3>
+                 {% if '30 minutes' in lesson.name %}
+                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_thirty.price }} per lesson</p>
+                 {% else %}
+                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_forty_five.price }} per lesson</p>
+                {% endif %}
+               {% endfor %}
+            </div>
+            <div class="text-center mb-3">
+                <a class="btn advert-button text-uppercase mt-3 mb-3">Subscribe now!</a>
+                </div>
+            <hr>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+         <div class="col-sm-6 col-12 mx-auto mt-3">
+            <div class="row">
+             <div class="col-sm-6 col-12 d-flex justify-content-center order-sm-last mb-sm-3">
+             <img class="img-fluid lessons-image mt-sm-3" alt="{{ singing_lesson_image.image_description }}" aria-label="{{ singing_lesson_image.image_description }}" src="{{ singing_lesson_image.image_url }}">
+             </div>
+             <div class="col-sm-6 col-12 mt-5 mt-sm-0 mb-3">
+                <h3 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Singing Lessons</h3>
+             {% for lesson in singing_lessons%}
+             <h3 class="cover-heading text-center">{{ lesson.name }}:</h3>
+             {% if '30 minutes' in lesson.name %}
+             <p class="mx-3 my-3 text-center smaller-text">{{ subscription_thirty.price }} per lesson</p>
+             {% else %}
+             <p class="mx-3 my-3 text-center smaller-text">{{ subscription_forty_five.price }} per lesson</p>
+            {% endif %}
+               {% endfor %}
+             </div>
+           </div>
+           <div class="text-center">
+            <a class="btn advert-button text-uppercase mt-3 mb-3">Subscribe now!</a>
+            </div>
+           <hr>
+         </div>
+        </div>
+        <div class="row">
+         <div class="col-sm-6 col-12 mx-auto mt-3 mb-3">
+            <div class="row">
+             <div class="col-sm-6 col-12 d-flex justify-content-center">
+             <img class="img-fluid lessons-image mt-sm-3" alt="{{ song_lesson_image.image_description }}" aria-label="{{ song_lesson_image.image_description }}" src="{{ song_lesson_image.image_url }}">
+             </div>
+             <div class="col-sm-6 col-12 mt-5 mt-sm-0">
+                 <h3 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Songwriting Lessons</h3>
+             {% for lesson in song_lessons%}
+                 <h3 class="cover-heading text-center">{{ lesson.name }}:</h3>
+                 {% if '30 minutes' in lesson.name %}
+                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_thirty.price }} per lesson</p>
+                 {% else %}
+                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_forty_five.price }} per lesson</p>
+                {% endif %}
+               {% endfor %}
+             </div>
+             </div>
+             <div class="text-center">
+                <a class="btn advert-button text-uppercase mt-3 mb-3">Subscribe now!</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+</section>
+<section>
+        {% include 'includes/store_advert.html' %}
 </section>
 <div class="footer-background-color">
 {% endblock %}

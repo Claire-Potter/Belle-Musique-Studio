@@ -447,6 +447,15 @@ body {
     display: none;
 }
 
+/* Lessons Page */
+
+.lessons-image {
+    border: #04142f 2px solid;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+
 /* Media query to center logo for small screens */
 
 @media (max-width: 800px) {
