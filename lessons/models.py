@@ -1,6 +1,6 @@
 """.git/"""
 from django.db import models
-# from djmoney.models.fields import MoneyField
+from django.contrib.auth.models import User
 
 
 class Type(models.Model):
@@ -34,6 +34,16 @@ class Lesson(models.Model):
 
     def __str__(self):
         return '%s' % (self.name)
+
+
+class StripeCustomer(models.Model):
+    """.git/"""
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    stripeCustomerId = models.CharField(max_length=255)
+    stripeSubscriptionId = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Subscription(models.Model):
