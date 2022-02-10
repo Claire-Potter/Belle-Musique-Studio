@@ -33,3 +33,13 @@ def lessons_details(request):
                 'subscription_forty_five': subscription_forty_five}
 
     return render(request, 'lessons/lessons.html', context)
+
+
+def subscriptions_details(request):
+    """ A view to show the lessons page """
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='subscriptions')
+    context = { 'covers': covers,
+                'cover': cover}
+
+    return render(request, 'lessons/subscriptions.html', context)

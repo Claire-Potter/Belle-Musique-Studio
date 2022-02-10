@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_header %}
+   {% include "includes/advert_header.html" with advert="Take a look at the various discount options available" %}
+{% endblock %}
+{% block content %}
+{% include "includes/cover.html" %}
+</div>
+<section>
+    <div class="row advert-topper d-flex w-100 mx-auto">
+        <div class="col-12">
+            <div class="w-50 small-width-heading mx-auto">
+             <hr>
+             <h2 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Lesson Subscriptions</h2>
+              <hr>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-12 mx-auto mt-3">
+            <p class="mx-3 my-3 pt-2 text-center">
+               Browse through our annual, monthly or weekly subscriptions below.
+            </p>
+            <hr>
+          </div>
+        </div>
+    </div>
+</section>
+<div class="footer-background-color">
+{% endblock %}
+    
