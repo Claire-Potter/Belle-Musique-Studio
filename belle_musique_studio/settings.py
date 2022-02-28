@@ -55,9 +55,8 @@ INSTALLED_APPS = [
     'shopping_bag',
     'checkout',
     'profiles',
-    'workshops',
-    'lessons'
-
+    'lessons',
+    'workshops'
 ]
 
 MIDDLEWARE = [
@@ -257,6 +256,15 @@ STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
+# price id for subscriptions
+
+STRIPE_PRICE_ID_WEEKLY_30 = os.getenv('STRIPE_PRICE_ID_WEEKLY_30', '')
+STRIPE_PRICE_ID_WEEKLY_45 = os.getenv('STRIPE_PRICE_ID_WEEKLY_45', '')
+STRIPE_PRICE_ID_MONTHLY_30 = os.getenv('STRIPE_PRICE_ID_MONTHLY_30', '')
+STRIPE_PRICE_ID_MONTHLY_45 = os.getenv('STRIPE_PRICE_ID_MONTHLY_45', '')
+STRIPE_PRICE_ID_ANNUAL_30 = os.getenv('STRIPE_PRICE_ID_ANNUAL_30', '')
+STRIPE_PRICE_ID_ANNUAL_45 = os.getenv('STRIPE_PRICE_ID_ANNUAL_45', '')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -264,15 +272,15 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_USE_TLS = True
-    EMAIL_USE_SSL = False
-    EMAIL_PORT = 587
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+# if 'DEVELOPMENT' in os.environ:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+# else:
+    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    # EMAIL_USE_TLS = True
+    # EMAIL_USE_SSL = False
+    # EMAIL_PORT = 587
+    # EMAIL_HOST = 'smtp.gmail.com'
+    # EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    # DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')

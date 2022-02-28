@@ -1,0 +1,58 @@
+[{
+        "pk": 1,
+        "model": "lessons.lesson",
+        "fields": {
+            "sku": "pp500136870234",
+            "name": "Piano Lesson 30 minutes",
+            "description": "A piano lesson which takes place once a week for 30 minutes",
+            "type": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "lessons.lesson",
+        "fields": {
+            "sku": "pp500136870235",
+            "name": "Piano Lesson 45 minutes",
+            "description": "A piano lesson which takes place once a week for 45 minutes",
+            "type": 1
+        }
+    }, {
+        "pk": 3,
+        "model": "lessons.lesson",
+        "fields": {
+            "sku": "pp500136870236",
+            "name": "Singing Lesson 30 minutes",
+            "description": "A singing lesson which takes place once a week for 30 minutes",
+            "type": 2
+        }
+    },
+    {
+        "pk": 4,
+        "model": "lessons.lesson",
+        "fields": {
+            "sku": "pp500136870237",
+            "name": "Singing Lesson 45 minutes",
+            "description": "A singing lesson which takes place once a week for 45 minutes",
+            "type": 2
+        }
+    }, {
+        "pk": 5,
+        "model": "lessons.lesson",
+        "fields": {
+            "sku": "pp500136870238",
+            "name": "Song Writing Lesson 30 minutes",
+            "description": "A song writing lesson which takes place once a week for 30 minutes",
+            "type": 3
+        }
+    }, {
+        "pk": 6,
+        "model": "lessons.lesson",
+        "fields": {
+            "sku": "pp500136870239",
+            "name": "Song Writing Lesson 45 minutes",
+            "description": "A song writing lesson which takes place once a week for 45 minutes",
+            "type": 3
+        }
+    }
+]
