@@ -1,0 +1,22 @@
+[{
+    "pk": 1,
+    "model": "lessons.type",
+    "fields": {
+        "type": "piano",
+        "call_type": "Piano"
+    }
+}, {
+    "pk": 2,
+    "model": "lessons.type",
+    "fields": {
+        "type": "singing",
+        "call_type": "Singing"
+    }
+}, {
+    "pk": 3,
+    "model": "lessons.type",
+    "fields": {
+        "type": "song_writing",
+        "call_type": "Song Writing"
+    }
+}]
