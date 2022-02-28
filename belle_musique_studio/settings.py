@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'store',
     'shopping_bag',
     'checkout',
+    'profiles',
     'workshops',
     'lessons'
 
@@ -154,6 +155,11 @@ LOGIN_REDIRECT_URL = '/'
 WSGI_APPLICATION = 'belle_musique_studio.wsgi.application'
 
 
+ACCOUNT_FORMS = {
+'signup': 'belle_musique_studio.forms.CustomSignupForm',
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -244,7 +250,7 @@ if 'USE_AWS' in os.environ:
 
 
 # Stripe
-FREE_DELIVERY_THRESHOLD = 50
+FREE_DELIVERY_THRESHOLD = 35.99
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
