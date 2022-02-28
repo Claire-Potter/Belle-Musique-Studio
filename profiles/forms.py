@@ -19,6 +19,7 @@ class UserProfileForm(forms.ModelForm):
         placeholders = {
             'default_full_name': 'Full Name',
             'default_email': 'Email Address',
+            'default_additional_email': 'Additional Email Address',
             'default_phone_number': 'Phone Number',
             'default_postcode': 'Postal Code',
             'default_town_or_city': 'Town or City',
@@ -28,6 +29,8 @@ class UserProfileForm(forms.ModelForm):
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
+        self.fields['default_full_name'].widget.attrs['readonly'] = True
+        self.fields['default_email'].widget.attrs['readonly'] = True
         for field in self.fields:
             if field != 'default_country':
                 if self.fields[field].required:

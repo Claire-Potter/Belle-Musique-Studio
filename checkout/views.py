@@ -106,7 +106,11 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        order_form = OrderForm()
+        if request.user.is_authenticated:
+            order_form = OrderForm(initial={'full_name': request.user.get_full_name(),
+                                            'email': request.user.email})
+        else:
+            order_form = OrderForm()
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='checkout')
 
@@ -144,8 +148,6 @@ def checkout_success(request, order_number):
         # Save the user's info
         if save_info:
             profile_data = {
-                'default_full_name': order.full_name,
-                'default_email': order.email,
                 'default_phone_number': order.phone_number,
                 'default_country': order.country,
                 'default_postcode': order.postcode,
