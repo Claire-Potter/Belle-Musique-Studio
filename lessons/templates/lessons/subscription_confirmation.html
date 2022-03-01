@@ -23,38 +23,24 @@
         <div class="row">
           <div class="col-sm-6 col-12 mx-auto mt-3">
             <p class="mx-3 my-3 pt-2 text-center">
-               Browse through our annual, monthly or weekly subscriptions below.
+               Confirm your Subscription
             </p>
             <hr>
-            {% for subscription in subscriptions %}
-            <div class="text-center">
-                <h2 class="cover-heading">{{ subscription.name}}</h2>
-                <ul>
-                    <li>Lesson duration: {{subscription.time_duration}} per week </li>
-                    <li>Payment term: {{subscription.subscription}}</li>
-                    <li>Price: {{subscription.price}}</li>
-                </ul>
+            <div class="col-12">
+                <p>Full Name: {{full_name}}</p>
+                <p>Email: {{email}}</p>
+                <p>Lesson: {{lesson}}</p>
+                <p>Subscription Type: {{subscription_types}}</p>
+                <p>Quantity of subscriptions: {{selected_quantity}}</p>
+                <p>Price per subscription: {{quoted_price}}</p>    
             </div>
-            {% endfor %}
-          </div>
-          <div class="col-12 col-lg-9">
-            <p class="text-muted">Please fill out the form below to complete your subscription</p>
-            <form action="{% url 'subscriptions' %}" method="POST">
-               {% csrf_token %}
-               <fieldset class="rounded px-3 mb-5">
-                  <legend class="fieldset-label small  px-2 w-auto">Details</legend>
-                  {{ subscription_form.full_name | as_crispy_field }}
-                  {{ subscription_form.email | as_crispy_field }}
-                  {{ subscription_form.lesson | as_crispy_field }}
-                  {{ subscription_form.subscription_type | as_crispy_field }}
-                  {{ subscription_form.quantity | as_crispy_field }}
-               </fieldset>
+          <div class="col-12">
+            <p class="text-muted">To proceed to payment select Subscribe</p>
                <div class="submit-button mt-5 mb-2">
-                  <button class="btn advert-button text-uppercase">
+                  <button id="submitBtn" class="btn advert-button text-uppercase">
                   <span class="font-weight-bold">Subscribe</span>
                   </button>
                </div>
-            </form>
          </div>
         </div>
     </div>
