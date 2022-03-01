@@ -29,8 +29,6 @@ class UserProfileForm(forms.ModelForm):
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
-        self.fields['default_full_name'].widget.attrs['readonly'] = True
-        self.fields['default_email'].widget.attrs['readonly'] = True
         for field in self.fields:
             if field != 'default_country':
                 if self.fields[field].required:
