@@ -22,28 +22,22 @@
         </div>
         <div class="row">
           <div class="col-sm-6 col-12 mx-auto mt-3">
-            <p class="mx-3 my-3 pt-2 text-center">
-               Confirm your Subscription
-            </p>
+            <p class="mx-3 my-3 pt-2 text-center">Confirm your Subscription</p>
             <hr>
-            <div class="col-12">
+              <div class="order-confirmation-wrapper p-2 border mb-3 mx-auto">
                 <p>Full Name: {{full_name}}</p>
                 <p>Email: {{email}}</p>
                 <p>Lesson: {{lesson}}</p>
                 <p>Subscription Type: {{subscription_types}}</p>
                 <p>Quantity of subscriptions: {{selected_quantity}}</p>
-                <p>Price per subscription: {{quoted_price}}</p>    
-            </div>
-          <div class="col-12">
-            <p class="text-muted">To proceed to payment select Subscribe</p>
-               <div class="submit-button mt-5 mb-2">
-                  <button id="submitBtn" class="btn advert-button text-uppercase">
-                  <span class="font-weight-bold">Subscribe</span>
-                  </button>
-               </div>
-         </div>
-        </div>
-    </div>
+                <p>Price per subscription: {{quoted_price}}</p> 
+                <p class="text-muted">To proceed to payment select Subscribe</p>
+                <button id="submitBtn" class="btn advert-button text-uppercase mb-3">
+                  <span class="font-weight-bold"><h3>Subscribe</h3></span></button>
+             </div>
+          </div>
+       </div>
+      </div>
 </section>
 <div class="footer-background-color">
 {% endblock %}

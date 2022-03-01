@@ -84,14 +84,6 @@ def subscriptions_details(request):
     return render(request, 'lessons/subscriptions.html', context)
 
 
-@csrf_exempt
-def stripe_configuration(request):
-    """.git/"""
-    if request.method == 'GET':
-        stripe_config = {'publicKey': settings.STRIPE_PUBLIC_KEY}
-        return JsonResponse(stripe_config, safe=False)
-
-
 def subscription_confirmation(request, p_k):
     """.git/"""
     covers = Cover.objects.all()
@@ -152,15 +144,56 @@ def subscription_confirmation(request, p_k):
     return render(request, 'lessons/subscription_confirmation.html', context)
 
 
-@csrf_exempt
-def create_checkout_session(request):
-    """.git/"""
-    selected_price = settings.STRIPE_PRICE_ID_WEEKLY_30
-    selected_quantity = 1
 
+@csrf_exempt
+def stripe_configuration(request, p_k):
+    """.git/"""
+    if request.method == 'GET':
+        stripe_config = {'publicKey': settings.STRIPE_PUBLIC_KEY}
+        return JsonResponse(stripe_config, safe=False)
+
+
+@csrf_exempt
+def create_checkout_session(request, p_k):
+    """.git/"""
+    subscriptions = Subscription.objects.all()
+    subscribed_users = SubscribedUser.objects.all()
+    subscription = get_object_or_404(subscribed_users, pk=p_k)
+    full_name = subscription.full_name
+    email = subscription.email
+    subscription_type = subscription.subscription_type
+    subscription_types = subscription_type
+    selected_quantity = subscription.quantity
+    selected_price = 0.00
+    subscription_thirty = get_object_or_404(subscriptions, name='Weekly Payment - 30 minute lesson')
+    subscription_forty_five = get_object_or_404(subscriptions,
+                                                 name='Weekly Payment - 45 minute lesson')
+    subscription_thirty_monthly = get_object_or_404(subscriptions,
+                                                 name='Monthly Payment - 30 minute lesson')
+    subscription_forty_five_monthly = get_object_or_404(subscriptions,
+                                                 name='Monthly Payment - 45 minute lesson')
+    subscription_thirty_annual = get_object_or_404(subscriptions,
+                                                 name='Annual Payment - 30 minute lesson')
+    subscription_forty_five_annual = get_object_or_404(subscriptions,
+                                                 name='Annual Payment - 45 minute lesson')
+    if subscription_types == subscription_thirty:
+        selected_price = settings.STRIPE_PRICE_ID_WEEKLY_30
+    elif subscription_types == subscription_forty_five:
+        selected_price = settings.STRIPE_PRICE_ID_WEEKLY_45
+    elif subscription_types == subscription_thirty_monthly:
+        selected_price = settings.STRIPE_PRICE_ID_MONTHLY_30
+    elif subscription_types == subscription_forty_five_monthly:
+        selected_price = settings.STRIPE_PRICE_ID_MONTHLY_45
+    elif subscription_types == subscription_thirty_annual:
+        selected_price = settings.STRIPE_PRICE_ID_ANNUAL_30
+    elif subscription_types == subscription_forty_five_annual:
+        selected_price = settings.STRIPE_PRICE_ID_ANNUAL_45
+    else:
+        messages.error(request, 'There was an error with your form. \
+                Please double check your information.')
 
     if request.method == 'GET':
-        domain_url = 'https://8000-clairepotter-bellemusiqu-nsq454enhwj.ws-eu31.gitpod.io/'
+        domain_url = 'https://8000-clairepotter-bellemusiqu-5d6cp7e00lc.ws-eu34.gitpod.io/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
             checkout_session = stripe.checkout.Session.create(
