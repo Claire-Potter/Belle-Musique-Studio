@@ -26,10 +26,36 @@
                Browse through our annual, monthly or weekly subscriptions below.
             </p>
             <hr>
+            {% for subscription in subscriptions %}
             <div class="text-center">
-                <button type="submit" class="btn advert-button text-uppercase mt-3 mb-3" id="submitBtn">Subscribe</button>
-                </div>
+                <h2 class="cover-heading">{{ subscription.name}}</h2>
+                <ul>
+                    <li>Lesson duration: {{subscription.time_duration}} per week </li>
+                    <li>Payment term: {{subscription.subscription}}</li>
+                    <li>Price: {{subscription.price}}</li>
+                </ul>
+            </div>
+            {% endfor %}
           </div>
+          <div class="col-12 col-lg-9">
+            <p class="text-muted">Please fill out the form below to complete your subscription</p>
+            <form action="{% url 'subscriptions' %}" method="POST">
+               {% csrf_token %}
+               <fieldset class="rounded px-3 mb-5">
+                  <legend class="fieldset-label small  px-2 w-auto">Details</legend>
+                  {{ subscription_form.full_name | as_crispy_field }}
+                  {{ subscription_form.email | as_crispy_field }}
+                  {{ subscription_form.lesson | as_crispy_field }}
+                  {{ subscription_form.subscription_type | as_crispy_field }}
+                  {{ subscription_form.quantity | as_crispy_field }}
+               </fieldset>
+               <div class="submit-button mt-5 mb-2">
+                  <button id="submitBtn" class="btn advert-button text-uppercase">
+                  <span class="font-weight-bold">Subscribe</span>
+                  </button>
+               </div>
+            </form>
+         </div>
         </div>
     </div>
 </section>

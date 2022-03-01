@@ -80,3 +80,24 @@ class Subscription(models.Model):
     price = models.CharField(max_length=15, choices=Pricing.choices,
                                 default=Pricing.TWENTY_FIVE,)
     lesson = models.ManyToManyField(Lesson, related_name='lesson', blank=True)
+
+    def __str__(self):
+        return '%s' % (self.name)
+
+
+class SubscribedUser(models.Model):
+    """.git/"""
+    username = models.ForeignKey(
+               User, on_delete=models.CASCADE, related_name='subscribed_user',
+               default='1', blank=False)
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    lesson = models.ForeignKey(Lesson, related_name='lesson_subscribed', blank=True,
+                               on_delete=models.CASCADE)
+    subscription_type = models.ForeignKey(Subscription, related_name='subscription_type',
+                                          blank=True,
+                                          on_delete=models.CASCADE, default=0)
+    quantity = models.IntegerField(null=False, blank=False, default=0)
+
+    def __str__(self):
+        return '%s' % (self.full_name)
