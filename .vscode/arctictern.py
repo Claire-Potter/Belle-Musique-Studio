@@ -5,11 +5,12 @@ A little script that does a big migration
 
 import json
 import os
-import requests
 import shutil
 import subprocess
 import sys
 from os.path import exists
+
+import requests
 
 BASE_URL = "https://raw.githubusercontent.com/Code-Institute-Org/gitpod-full-template/master/"
 

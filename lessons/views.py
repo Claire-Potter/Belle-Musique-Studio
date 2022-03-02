@@ -1,15 +1,18 @@
 """.git/"""
 import json
-import stripe
+
 import djstripe
+import stripe
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
-from django.http.response import JsonResponse
 from django.http import HttpResponse
+from django.http.response import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 from djstripe.models import Product
+
 from home.models import Cover
+
 from .models import Lesson
 
 
@@ -98,8 +101,8 @@ def create_sub(request):
             request.user.save()
 
             return JsonResponse(subscription)
-        except Exception as e:
-            return JsonResponse({'error': (e.args[0])}, status =403)
+        except Exception as e_rr:
+            return JsonResponse({'error': (e_rr.args[0])}, status =403)
     else:
         return HttpResponse('request method not allowed')
 
@@ -116,15 +119,16 @@ def complete(request):
 
 
 def cancel(request):
-  if request.user.is_authenticated:
-    sub_id = request.user.subscription.id
+    """.git/"""
+    if request.user.is_authenticated:
+        sub_id = request.user.subscription.id
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     try:
-      stripe.Subscription.delete(sub_id)
-    except Exception as e:
-      return JsonResponse({'error': (e.args[0])}, status =403)
+        stripe.Subscription.delete(sub_id)
+    except Exception as e_rr:
+        return JsonResponse({'error': (e_rr.args[0])}, status =403)
 
 
-  return redirect("home")
+    return redirect("home")

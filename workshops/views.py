@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from home.models import Cover
+from django.shortcuts import get_object_or_404, render
 
+from home.models import Cover
 
 
 def workshops(request):

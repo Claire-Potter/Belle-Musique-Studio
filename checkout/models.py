@@ -1,12 +1,13 @@
 """.git/"""
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.db.models import Sum
-from django.conf import settings
 from django_countries.fields import CountryField
-from store.models import Product
+
 from profiles.models import UserProfile
+from store.models import Product
 
 
 class Order(models.Model):

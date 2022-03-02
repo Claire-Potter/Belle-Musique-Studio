@@ -12,6 +12,7 @@ django-countries==7.2.1
 django-crispy-forms==1.13.0
 django-money==2.1.1
 django-storages==1.12.3
+django-upgrade==1.4.0
 docutils==0.15.2
 fabio==0.13.0
 fonttools==4.28.5
@@ -25,8 +26,10 @@ matplotlib==3.5.1
 numpy==1.22.1
 oauthlib==3.1.1
 Pillow==9.0.0
+pluggy==1.0.0
 plyer==1.4.3
 psycopg2-binary==2.9.3
+py==1.11.0
 py-moneyed==1.2
 pylint-django==2.5.0
 pylint-plugin-utils==0.7
@@ -41,4 +44,6 @@ s3transfer==0.5.0
 silx==1.0.0
 sqlparse==0.4.2
 stripe==2.67.0
+tokenize-rt==4.2.1
+tox==3.24.5
 urllib3==1.25.7

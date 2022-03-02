@@ -135,6 +135,10 @@ function createPaymentMethod({
                 }).then((response) => {
                     return response.json();
                 }).then((result) => {
+                    const subscription = result.subscription;
+                    const {
+                        latest_invoice
+                    } = subscription;
                     if (result.error) {
                         // The card had an error when trying to attach it to a customer
                         throw result;

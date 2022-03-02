@@ -7,6 +7,7 @@ be sent to the admin account and saved
 to the Contact model.
 """
 from django import forms
+
 from .models import Contact
 
 

@@ -2,6 +2,7 @@
 Belle Musique Studio home app  adminconfiguration
 """
 from django.contrib import admin
+
 from .models import Contact, Cover, User
 
 

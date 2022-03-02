@@ -4,9 +4,9 @@ Create or update the user profile
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from home.models import User
-
 from django_countries.fields import CountryField
+
+from home.models import User
 
 
 class UserProfile(models.Model):

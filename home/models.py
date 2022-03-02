@@ -9,12 +9,13 @@ and to store all contact requests submitted by users.
 Admin can access this via the admin pane.
 
 """
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 from djstripe.models import Customer, Subscription
 
 
 class User(AbstractUser):
+    """.git/"""
     customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
     subscription = models.ForeignKey(Subscription, null=True, blank=True,on_delete=models.SET_NULL)
 

@@ -1,5 +1,6 @@
 """.git/"""
 from django.contrib import admin
+
 from .models import Lesson, Type
 
 
