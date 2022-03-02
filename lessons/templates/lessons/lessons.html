@@ -29,11 +29,6 @@
                 <h3 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Piano Lessons</h3>
              {% for lesson in piano_lessons%}
                  <h3 class="cover-heading text-center">{{ lesson.name }}:</h3>
-                 {% if '30 minutes' in lesson.name %}
-                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_thirty.price }} per lesson</p>
-                 {% else %}
-                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_forty_five.price }} per lesson</p>
-                {% endif %}
                {% endfor %}
             </div>
             <hr>
@@ -50,10 +45,6 @@
                 <h3 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Singing Lessons</h3>
              {% for lesson in singing_lessons%}
              <h3 class="cover-heading text-center">{{ lesson.name }}:</h3>
-             {% if '30 minutes' in lesson.name %}
-             <p class="mx-3 my-3 text-center smaller-text">{{ subscription_thirty.price }} per lesson</p>
-             {% else %}
-             <p class="mx-3 my-3 text-center smaller-text">{{ subscription_forty_five.price }} per lesson</p>
             {% endif %}
                {% endfor %}
              </div>
@@ -71,15 +62,8 @@
                  <h3 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Songwriting Lessons</h3>
              {% for lesson in song_lessons%}
                  <h3 class="cover-heading text-center">{{ lesson.name }}:</h3>
-                 {% if '30 minutes' in lesson.name %}
-                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_thirty.price }} per lesson</p>
-                 {% else %}
-                 <p class="mx-3 my-3 text-center smaller-text">{{ subscription_forty_five.price }} per lesson</p>
-                {% endif %}
                {% endfor %}
              </div>
-             </div
-            </div>
             <div class="text-center">
                 <hr>
                 <a class="btn advert-button text-uppercase  mt-3 mb-3" aria-current="page" href="{% url 'subscriptions' %}"><h2>Subscribe!</h2></a>
