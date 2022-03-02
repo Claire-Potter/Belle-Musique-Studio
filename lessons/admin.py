@@ -24,4 +24,3 @@ class LessonTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Type, LessonTypeAdmin)
-

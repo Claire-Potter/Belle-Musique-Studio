@@ -2,8 +2,10 @@
 import json
 import stripe
 import djstripe
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.http import HttpResponse
 from djstripe.models import Product
@@ -50,13 +52,14 @@ def subscriptions_details(request):
 
 
 @login_required
+@csrf_exempt
 def create_sub(request):
     """.git/"""
     if request.method == 'POST':
         # Reads application/json and returns a response
         data = json.loads(request.body)
         payment_method = data['payment_method']
-        stripe.api_key = djstripe.settings.STRIPE_SECRET_KEY
+        stripe.api_key = settings.STRIPE_SECRET_KEY
 
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
@@ -103,4 +106,4 @@ def create_sub(request):
 
 def complete(request):
     """.git/"""
-    return render(request, "complete.html")
+    return render(request, "lessons/complete.html")

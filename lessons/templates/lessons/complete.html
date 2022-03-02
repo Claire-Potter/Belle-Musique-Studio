@@ -11,9 +11,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="container mt-5">
+    <div class="container mt-5 text-center">
       <p>You have successfully subscribed!</p>
-      <p><a href="{% url "subscriptions" %}">Return to the dashboard</a></p>
+      <br><br>
+      <p><a href="{% url "subscriptions" %}">Return Home</a></p>
+      <br><br>
+      <a class="btn btn-danger text-light" href="/cancel">Cancel Subscription</a>
     </div>
   </body>
 </html>
