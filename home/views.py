@@ -55,6 +55,7 @@ class Contact(View):
     the model tables
     """
 
+
     def get(self, request):
         """
         The get function retrieves the data
@@ -69,7 +70,7 @@ class Contact(View):
         address will be derived from their user profile.
         """
         if User.objects.filter(username=self.request.user.username).exists():
-            contact_form = ContactForm(initial={'name': request.user.username,
+            contact_form = ContactForm(initial={'name': request.user.get_full_name(),
                                                 'email': request.user.email})
         else:
             contact_form = ContactForm()
