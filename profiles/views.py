@@ -25,7 +25,7 @@ def profile(request):
     template = 'profiles/profile.html'
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='account_profile')
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover,
                 'form': form,
                 'orders': orders,

@@ -31,7 +31,7 @@ def index(request):
     """ A view to return the cover input as index.html """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='home')
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover}
 
     return render(request, 'index.html', context)
@@ -41,7 +41,7 @@ def about(request):
     """ A view to return the about page """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='about')
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover}
 
     return render(request, 'about.html', context)
@@ -75,7 +75,7 @@ class Contact(View):
             contact_form = ContactForm()
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='contact')
-        context = { 'covers': covers,
+        context = {'covers': covers,
                     'cover': cover,
                     'contact_form': contact_form,}
         return render(
@@ -123,19 +123,19 @@ class Contact(View):
                 contact_form = ContactForm()
             covers = Cover.objects.all()
             cover = get_object_or_404(covers, page='contact')
-            context = { 'covers': covers,
+            context = {'covers': covers,
                         'cover': cover,
                         'contact_form': contact_form,}
             return render(
                 request,
-                'contact.html', context )
+                'contact.html', context)
 
 
 def contact_sent(request):
     """ A view to return the contact sent page """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='contact')
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover}
 
     return render(request, 'contact_sent.html', context)

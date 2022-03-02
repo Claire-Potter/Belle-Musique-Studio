@@ -129,9 +129,8 @@ SOCIALACCOUNT_PROVIDERS = {
     'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
     'INIT_PARAMS': {'cookie': True},
     'METHOD': 'oauth2',
-    'VERIFIED_EMAIL': False,
-},
-'google': {
+    'VERIFIED_EMAIL': False,},
+ 'google': {
     'SCOPE': [
         'profile',
         'email',
@@ -158,7 +157,7 @@ WSGI_APPLICATION = 'belle_musique_studio.wsgi.application'
 
 
 ACCOUNT_FORMS = {
-'signup': 'belle_musique_studio.forms.CustomSignupForm',
+    'signup': 'belle_musique_studio.forms.CustomSignupForm',
 }
 
 

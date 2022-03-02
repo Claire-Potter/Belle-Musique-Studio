@@ -30,7 +30,7 @@ def lessons_details(request):
     song_lessons = Lesson.objects.filter(type=3)
     song_lesson_image = get_object_or_404(song_lessons,
                                           image_description='A woman playing the piano and singing')
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover,
                 'piano_lessons': piano_lessons,
                 'piano_lesson_image': piano_lesson_image,
@@ -48,7 +48,7 @@ def subscriptions_details(request):
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
     products = Product.objects.all()
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover,
                 'products': products,}
     return render(request, 'lessons/subscriptions.html', context)
@@ -73,8 +73,7 @@ def create_sub(request):
                 payment_method=payment_method,
                 email=request.user.email,
                 invoice_settings={
-                    'default_payment_method': payment_method
-                    }
+                    'default_payment_method': payment_method}
                     )
 
             djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
@@ -112,7 +111,7 @@ def complete(request):
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
     products = Product.objects.all()
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover,
                 'products': products,}
     return render(request, "lessons/complete.html", context)

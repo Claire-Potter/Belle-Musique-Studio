@@ -13,7 +13,7 @@ def music_store(request):
     """ A view to show the music store """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='music_store')
-    context = { 'covers': covers,
+    context = {'covers': covers,
                 'cover': cover}
 
     return render(request, 'music_store.html', context)
