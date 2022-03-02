@@ -3,7 +3,7 @@ import json
 import stripe
 import djstripe
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
@@ -106,4 +106,25 @@ def create_sub(request):
 
 def complete(request):
     """.git/"""
-    return render(request, "lessons/complete.html")
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='subscriptions')
+    products = Product.objects.all()
+    context = { 'covers': covers,
+                'cover': cover,
+                'products': products,}
+    return render(request, "lessons/complete.html", context)
+
+
+def cancel(request):
+  if request.user.is_authenticated:
+    sub_id = request.user.subscription.id
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    try:
+      stripe.Subscription.delete(sub_id)
+    except Exception as e:
+      return JsonResponse({'error': (e.args[0])}, status =403)
+
+
+  return redirect("home")
