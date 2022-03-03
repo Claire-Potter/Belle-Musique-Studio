@@ -24,7 +24,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 
 from .forms import ContactForm
-from .models import Cover
+from .models import Cover, User
 
 
 def index(request):

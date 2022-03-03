@@ -10,6 +10,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from djstripe.models import Product
+from profiles.models import UserProfile
 
 from home.models import Cover
 
@@ -58,6 +59,9 @@ def subscriptions_details(request):
 @csrf_exempt
 def create_sub(request):
     """.git/"""
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+
     if request.method == 'POST':
         # Reads application/json and returns a response
         data = json.loads(request.body)
@@ -72,6 +76,17 @@ def create_sub(request):
             customer = stripe.Customer.create(
                 payment_method=payment_method,
                 email=request.user.email,
+                name=request.user.get_full_name(),
+                phone=profile.default_phone_number,
+                shipping={
+                    "address": {
+                "city": profile.default_town_or_city,
+                "country": profile.default_country,
+                "line1": profile.default_street_address1,
+                "line2": profile.default_street_address2,
+                "postal_code": profile.default_postcode,
+                "state": profile.default_county
+              },},
                 invoice_settings={
                     'default_payment_method': payment_method}
                     )
