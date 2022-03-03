@@ -1,0 +1,21 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation of your subscription with Belle Musique Studio. Your subscription information is below:
+
+Subscription Number: {{ event.subscription}}
+Subscription Date: {{ event.billing_cycle_anchor }}
+
+Plan: {{ event.plan }}
+Price: {{ event.price }}
+Quantity: {{ event.quantity }}
+Schedule: {{ event.schedule }}
+Start Date: {{ event.start_date}}
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your support!
+
+Sincerely,
+
+Jo-Anna Hope
+Belle Musique Studio
