@@ -177,7 +177,7 @@ else:
     }
 
 
-AUTH_USER_MODEL = 'home.User'
+#AUTH_USER_MODEL = 'home.User'
 
 
 # Password validation
