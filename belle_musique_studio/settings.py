@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_countries',
-    'djstripe',
+     # 'djstripe',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -263,9 +263,9 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 STRIPE_LIVE_MODE = False # Change to True in production
 STRIPE_TEST_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_TEST_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
-DJSTRIPE_WEBHOOK_SECRET = os.getenv('DJSTRIPE_WEBHOOK_SECRET', '')
-DJSTRIPE_WEBHOOK_URL = r"^webhook/$"
-DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+# DJSTRIPE_WEBHOOK_SECRET = os.getenv('DJSTRIPE_WEBHOOK_SECRET', '')
+# DJSTRIPE_WEBHOOK_URL = r"^webhook/$"
+# DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 
 # Default primary key field type

@@ -11,13 +11,14 @@ Admin can access this via the admin pane.
 """
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from djstripe.models import Customer, Subscription
+# from djstripe.models import Customer, Subscription
 
 
 class User(AbstractUser):
-   """.git/"""
-   customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
-   subscription = models.ForeignKey(Subscription, null=True, blank=True,on_delete=models.SET_NULL)
+    """.git/"""
+    # customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
+    # subscription = models.ForeignKey(Subscription, null=True, blank=True,on_delete=models.SET_NULL)
+    name = models.CharField(max_length=80)
 
 
 class Contact(models.Model):
@@ -25,9 +26,9 @@ class Contact(models.Model):
     Model created to render the contact page
     and save the contact request data.
     """
-   # username = models.ForeignKey(
-               # User, on_delete=models.CASCADE, related_name='contact',
-               # default='1', blank=True)
+    username = models.ForeignKey(
+               User, on_delete=models.CASCADE, related_name='contact',
+               default='1', blank=True)
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

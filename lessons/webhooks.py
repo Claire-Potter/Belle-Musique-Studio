@@ -1,5 +1,5 @@
 # from django.db import transaction
-from djstripe import webhooks
+# from djstripe import webhooks
 
 #def do_something():
     #pass  # send a mail, invalidate a cache, fire off a Celery task, etc.

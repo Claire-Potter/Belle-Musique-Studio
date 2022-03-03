@@ -5,7 +5,7 @@ botocore==1.23.45
 chardet==3.0.4
 cycler==0.11.0
 dj-database-url==0.5.0
-dj-stripe==2.6.1
+# dj-stripe==2.6.1
 Django==3.2.5
 django-allauth==0.41.0
 django-countries==7.2.1
