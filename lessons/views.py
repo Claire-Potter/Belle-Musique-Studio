@@ -1,7 +1,7 @@
 """.git/"""
 import json
 
-# import djstripe
+import djstripe
 import stripe
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
-# from djstripe.models import Product
+from djstripe.models import Product
 
 from home.models import Cover
 
@@ -65,7 +65,7 @@ def create_sub(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
-        # djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
+        djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
 
         try:
             # This creates a new Customer and attaches the PaymentMethod in one API call.
@@ -76,8 +76,8 @@ def create_sub(request):
                     'default_payment_method': payment_method}
                     )
 
-            # djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
-            # request.user.customer = djstripe_customer
+            djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
+            request.user.customer = djstripe_customer
 
             # At this point, associate the ID of the Customer object with your
             # own internal representation of a customer, if you have one.
@@ -94,9 +94,9 @@ def create_sub(request):
                 expand=["latest_invoice.payment_intent"]
             )
 
-            # djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
+            djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
 
-            # request.user.subscription = djstripe_subscription
+            request.user.subscription = djstripe_subscription
             request.user.save()
 
             return JsonResponse(subscription)
