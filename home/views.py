@@ -24,7 +24,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 
 from .forms import ContactForm
-from .models import Cover, User
+from .models import Cover
 
 
 def index(request):
@@ -69,16 +69,17 @@ class Contact(View):
         is logged in or not, if they are logged in, their name and email
         address will be derived from their user profile.
         """
-        if User.objects.filter(username=self.request.user.username).exists():
-            contact_form = ContactForm(initial={'name': request.user.get_full_name(),
-                                                'email': request.user.email})
-        else:
-            contact_form = ContactForm()
+        #if User.objects.filter(username=self.request.user.username).exists():
+            #contact_form = ContactForm(initial={'name': request.user.get_full_name(),
+                                                #'email': request.user.email})
+        #else:
+            #contact_form = ContactForm()
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='contact')
         context = {'covers': covers,
                     'cover': cover,
-                    'contact_form': contact_form,}
+                    #'contact_form': contact_form,
+                    }
         return render(
             request,
             'contact.html', context)
