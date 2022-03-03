@@ -5,6 +5,8 @@
             "sku": "pp500136870234",
             "name": "Piano Lesson 30 minutes",
             "description": "A piano lesson which takes place once a week for 30 minutes",
+            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1644438140/Belle%20Musique/products/piano_lessons_sdnkka.jpg",
+            "image_description": "A piano lesson which takes place once a week for 30 minutes",
             "type": 1
         }
     },
@@ -24,6 +26,8 @@
             "sku": "pp500136870236",
             "name": "Singing Lesson 30 minutes",
             "description": "A singing lesson which takes place once a week for 30 minutes",
+            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1644443256/Belle%20Musique/products/singing_lessons_ryo0fn.jpg",
+            "image_description": "A young boy singing into a microphone",
             "type": 2
         }
     },
@@ -43,6 +47,8 @@
             "sku": "pp500136870238",
             "name": "Song Writing Lesson 30 minutes",
             "description": "A song writing lesson which takes place once a week for 30 minutes",
+            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1644443256/Belle%20Musique/products/song_writing_nst0ra.jpg",
+            "image_description": "A woman playing the piano and singing",
             "type": 3
         }
     }, {
