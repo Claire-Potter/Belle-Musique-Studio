@@ -68,13 +68,13 @@ def add_lesson(request, lesson_id):
     """.git/"""
     lesson = get_object_or_404(Lesson, pk=lesson_id)
     quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
+    redirect_lesson_url = request.POST.get('redirect_lesson_url')
     lesson_bag = request.session.get('lesson_bag', {})
     lesson_bag[lesson_id] = quantity
     messages.success(request, f'Added {lesson.name} to your lesson_bag')
 
     request.session['lesson_bag'] = lesson_bag
-    return redirect(redirect_url)
+    return redirect(redirect_lesson_url)
 
 
 def adjust_bag(request, item_id):

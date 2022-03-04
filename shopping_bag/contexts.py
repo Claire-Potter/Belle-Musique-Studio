@@ -89,22 +89,12 @@ def lesson_bag_contents(request):
                     'lesson': lesson,
                 })
 
-    if total < settings.FREE_DELIVERY_THRESHOLD:
-        delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
-        free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
-    else:
-        delivery = 0
-        free_delivery_delta = 0
-
-    lesson_total = delivery + total
+    lesson_total = total
 
     context = {
         'lesson_bag_items': lesson_bag_items,
         'total': total,
         'lesson_count': lesson_count,
-        'delivery': delivery,
-        'free_delivery_delta': free_delivery_delta,
-        'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
         'lesson_total': lesson_total,
     }
 

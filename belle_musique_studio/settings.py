@@ -95,6 +95,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'shopping_bag.contexts.bag_contents',
+                'shopping_bag.contexts.lesson_bag_contents',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -264,7 +265,6 @@ STRIPE_LIVE_MODE = False # Change to True in production
 STRIPE_TEST_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_TEST_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 DJSTRIPE_WEBHOOK_SECRET = os.getenv('DJSTRIPE_WEBHOOK_SECRET', '')
-DJSTRIPE_WEBHOOK_URL = r"^webhook/$"
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 
