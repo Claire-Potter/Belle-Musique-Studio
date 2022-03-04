@@ -12,7 +12,7 @@
       <div class="row pt-3 pb-3 mt-5">
          <div class="col text-center mt-3">
             <hr class="w-50 mx-auto small-width-heading">
-            <h2 class="logo-font mt-5 mb-5">Shopping Bag</h2>
+            <h2 class="logo-font mt-5 mb-5">Subscription Bag</h2>
             <hr class="w-50 mx-auto small-width-heading">
          </div>
          <div class="row">
@@ -22,69 +22,12 @@
                   <table class="table table-sm table-borderless">
                      <thead>
                         <tr>
-                           <th scope="col">Product Info</th>
+                           <th scope="col">Info</th>
                            <th scope="col"></th>
-                           <th scope="col">Price</th>
                            <th scope="col">Qty</th>
-                           <th scope="col">Subtotal</th>
                         </tr>
                      </thead>
                      <tbody>
-                        {% for item in bag_items %}
-                        <tr class="table-font">
-                           <td class="p-3 p-sm-5 w-25">
-                              <img class="img-fluid rounded" src="{{ item.product.image.url }}">
-                           </td>
-                           <td class="py-3 py-sm-5">
-                              <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                              <p class="my-0"><strong>Size: </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
-                              <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
-                           </td>
-                           <td class="py-3 py-sm-5">
-                              <p class="my-0">£{{ item.product.price }}</p>
-                           </td>
-                           <td class="py-3 py-sm-5 w-25">
-                              <p class="my-0 mx-3">{{ item.quantity }}</p>
-                           </td>
-                           <td class="py-3 py-sm-5 w-25">
-                              <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
-                                 {% csrf_token %}
-                                 <div class="form-group">
-                                    <div class="input-group">
-                                       <div class="input-group-prepend">
-                                          <button class="decrement-qty btn btn-sm btn-black rounded-0" 
-                                             data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
-                                          <span>
-                                          <i class="fas fa-minus fa-sm"></i>
-                                          </span>
-                                          </button>
-                                       </div>
-                                       <input class="form-control form-control-sm qty_input" type="number"
-                                          name="quantity" value="{{ item.quantity }}" min="1" max="99"
-                                          data-item_id="{{ item.item_id }}"
-                                          id="id_qty_{{ item.item_id }}">
-                                       <div class="input-group-append">
-                                          <button class="increment-qty btn btn-sm btn-black rounded-0"
-                                             data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
-                                          <span>
-                                          <i class="fas fa-plus fa-sm"></i>
-                                          </span>
-                                          </button>
-                                       </div>
-                                       {% if item.product.has_sizes %}
-                                       <input type="hidden" name="product_size" value="{{ item.size }}">
-                                       {% endif %}
-                                    </div>
-                                 </div>
-                              </form>
-                              <a class="update-link text-info"><small>Update</small></a>
-                              <a class="remove-item text-danger float-sm-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
-                           </td>
-                           <td class="py-3">
-                              <p class="my-0">£{{ item.product.price | calc_subtotal:item.quantity }}</p>
-                           </td>
-                        </tr>
-                        {% endfor %}
                         {% for item in bag_items %}
                         <tr class="table-font">
                            <td class="p-3 p-sm-5 w-25">
@@ -111,7 +54,7 @@
                                           </button>
                                        </div>
                                        <input class="form-control form-control-sm qty_input" type="number"
-                                          name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                          name="quantity" value="{{ item.quantity }}" min="1" max="10"
                                           data-lesson_id="{{ item.lesson_id }}"
                                           id="id_qty_{{ item.lesson_id }}">
                                        <div class="input-group-append">
@@ -209,7 +152,7 @@
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
-{% include 'includes/quantity_input_script.html' %}
+{% include 'includes/lesson_quantity_input_script.html' %}
 <script type="text/javascript">
    // Update quantity on click
    $('.update-link').click(function(e) {
@@ -221,9 +164,8 @@
    $('.remove-item').click(function(e) {
        var csrfToken = "{{ csrf_token }}";
        var itemId = $(this).attr('id').split('remove_')[1];
-       var size = $(this).data('product_size');
        var url = `remove/${itemId}/`;
-       var data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size};
+       var data = {'csrfmiddlewaretoken': csrfToken};
    
        $.post(url, data)
         .done(function() {

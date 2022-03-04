@@ -3,6 +3,7 @@ from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
                               render, reverse)
 
 from home.models import Cover
+from lessons.models import Lesson
 from store.models import Product
 
 
@@ -16,6 +17,17 @@ def view_bag(request):
     }
 
     return render(request, 'bag.html', context)
+
+def view_lesson_bag(request):
+    """ A view that renders the bag contents page """
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='bag')
+    context = {
+        'covers': covers,
+        'cover': cover
+    }
+
+    return render(request, 'lesson_bag.html', context)
 
 
 def add_to_bag(request, item_id):
@@ -51,6 +63,22 @@ def add_to_bag(request, item_id):
     request.session['bag'] = bag
     return redirect(redirect_url)
 
+def add_lesson(request, lesson_id):
+    """.git/"""
+    lesson = get_object_or_404(Lesson, pk=lesson_id)
+    quantity = int(request.POST.get('quantity'))
+    redirect_url = request.POST.get('redirect_url')
+    lesson_bag = request.session.get('lesson_bag', {})
+    if lesson_id in list(lesson_bag.keys()):
+        lesson_bag[lesson_id] += quantity
+        messages.success(request, f'Updated {lesson.name} quantity to {lesson_bag[lesson_id]}')
+    else:
+        lesson_bag[lesson_id] = quantity
+        messages.success(request, f'Added {lesson.name} to your lesson_bag')
+
+    request.session['lesson_bag'] = lesson_bag
+    return redirect(redirect_url)
+
 
 def adjust_bag(request, item_id):
     """Adjust the quantity of the specified product to the specified amount"""
@@ -83,6 +111,24 @@ def adjust_bag(request, item_id):
     return redirect(reverse('view_bag'))
 
 
+def adjust_lesson_bag(request, lesson_id):
+    """Adjust the quantity of the specified product to the specified amount"""
+
+    lesson = get_object_or_404(Lesson, pk=lesson_id)
+    quantity = int(request.POST.get('quantity'))
+    lesson_bag = request.session.get('lesson_bag', {})
+
+    if quantity > 0:
+        lesson_bag[lesson_id] = quantity
+        messages.success(request, f'Updated {lesson.name} quantity to {lesson_bag[lesson_id]}')
+    else:
+        lesson_bag.pop(lesson_id)
+        messages.success(request, f'Removed {lesson.name} from your lesson_bag')
+
+    request.session['lesson_bag'] = lesson_bag
+    return redirect(reverse('view_lesson_bag'))
+
+
 def remove_from_bag(request, item_id):
     """Remove the item from the shopping bag"""
 
@@ -103,6 +149,23 @@ def remove_from_bag(request, item_id):
             messages.success(request, f'Removed {product.name} from your bag')
 
         request.session['bag'] = bag
+        return HttpResponse(status=200)
+
+    except Exception as e_m:
+        messages.error(request, f'Error removing item: {e_m}')
+        return HttpResponse(status=500)
+
+
+def remove_lesson_from_bag(request, lesson_id):
+    """Remove the item from the shopping bag"""
+
+    try:
+        lesson = get_object_or_404(Lesson, pk=lesson_id)
+        lesson_bag = request.session.get('lesson_bag', {})
+        lesson_bag.pop(lesson_id)
+        messages.success(request, f'Removed {lesson.name} from your lesson_bag')
+
+        request.session['lesson_bag'] = lesson_bag
         return HttpResponse(status=200)
 
     except Exception as e_m:
