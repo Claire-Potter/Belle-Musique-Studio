@@ -72,7 +72,8 @@ def product_detail(request, product_id):
     context = {
         'product': product,
         'covers': covers,
-        'cover': cover
+        'cover': cover,
+        'is_shopping_bag': True
     }
 
     return render(request, 'product_detail.html', context)

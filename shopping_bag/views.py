@@ -21,7 +21,7 @@ def view_bag(request):
 def view_lesson_bag(request):
     """ A view that renders the bag contents page """
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='bag')
+    cover = get_object_or_404(covers, page='lessons')
     context = {
         'covers': covers,
         'cover': cover
@@ -71,7 +71,7 @@ def add_lesson(request, lesson_id):
     redirect_lesson_url = request.POST.get('redirect_lesson_url')
     lesson_bag = request.session.get('lesson_bag', {})
     lesson_bag[lesson_id] = quantity
-    messages.success(request, f'Added {lesson.name} to your lesson_bag')
+    messages.success(request, f'Added {lesson.name} to your bag')
 
     request.session['lesson_bag'] = lesson_bag
     return redirect(redirect_lesson_url)
@@ -142,7 +142,7 @@ def remove_lesson_from_bag(request, lesson_id):
         lesson = get_object_or_404(Lesson, pk=lesson_id)
         lesson_bag = request.session.get('lesson_bag', {})
         lesson_bag.pop(lesson_id)
-        messages.success(request, f'Removed {lesson.name} from your lesson_bag')
+        messages.success(request, f'Removed {lesson.name} from your bag')
 
         request.session['lesson_bag'] = lesson_bag
         return HttpResponse(status=200)

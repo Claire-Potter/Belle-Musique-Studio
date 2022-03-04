@@ -25,7 +25,7 @@ def lessons_details(request):
     context = {'covers': covers,
                 'cover': cover,
                 'lessons': lessons,
-                'on_lesson_page': True
+                'is_lesson_bag': True
               }
 
     return render(request, 'lessons/lessons.html', context)

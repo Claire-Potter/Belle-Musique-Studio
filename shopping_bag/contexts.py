@@ -9,7 +9,7 @@ from store.models import Product
 
 
 def bag_contents(request):
-    """.git/"""
+    """git"""
 
     bag_items = []
     total = 0
@@ -64,14 +64,14 @@ def lesson_bag_contents(request):
     """.git/"""
 
     lesson_bag_items = []
-    total = 0
+    less_total = 0
     lesson_count = 0
     lesson_bag = request.session.get('lesson_bag', {})
 
     for lesson_id, lesson_data in lesson_bag.items():
         if isinstance(lesson_data, int):
             lesson = get_object_or_404(Lesson, pk=lesson_id)
-            total += lesson_data
+            less_total += lesson_data
             lesson_count += lesson_data
             lesson_bag_items.append({
                 'lesson_id': lesson_id,
@@ -81,7 +81,7 @@ def lesson_bag_contents(request):
         else:
             lesson = get_object_or_404(Lesson, pk=lesson_id)
             for quantity in lesson_data.items():
-                total += quantity
+                less_total += quantity
                 lesson_count += quantity
                 lesson_bag_items.append({
                     'lesson_id': lesson_id,
@@ -89,13 +89,14 @@ def lesson_bag_contents(request):
                     'lesson': lesson,
                 })
 
-    lesson_total = total
+    lesson_total = less_total
 
     context = {
         'lesson_bag_items': lesson_bag_items,
-        'total': total,
+        'less_total': less_total,
         'lesson_count': lesson_count,
         'lesson_total': lesson_total,
+        'is_lesson_bag': True
     }
 
     return context
