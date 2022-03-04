@@ -39,40 +39,27 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-4 bg-white image-short-height">
-                        <div class="product-details-container mb-sm-3 mt-md-5 smaller-font ml-3 ml-sm-0 image-short-height">
+                        <div class="lesson-details-container mb-sm-3 mt-md-5 smaller-font ml-3 ml-sm-0 image-short-height">
                             <p class="mb-0">{{ lesson.name }}</p>
                             <p class="mt-3  mb-3 smaller-text">{{ lesson.description }}</p>
-                            <form class="form" action="{% url 'add_lesson' lesson.id %}" method="POST">
+                            <form class="lesson_form" action="{% url 'add_lesson' lesson.id %}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-row">
                                     <div class="col-12">
-                                        <p class="mt-3"><strong>Quantity:</strong></p>
+                                        <p class="mt-3"><strong>Select:</strong></p>
                                         <div class="form-group w-50">
-                                            <div class="input-group input-group-{{ lesson.id }}">
-                                                <div class="input-group-prepend">
-                                                    <button class="decrement-qty btn btn-black rounded-0 decrement-qty_{{ lesson.id }}" 
-                                                        data-lesson_id="{{ lesson.id }}">
-                                                        <span class="icon text-white">
-                                                            <i class="fas fa-minus"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
+                                        <input type="checkbox" name="selected" id="checkbox">
+                                        </div>
+                                        <div class="form-group w-50">
+                                            <div class="input-group input-group-{{ lesson.id }} hidden">
                                                 <input class="form-control qty_input id_qty_{{ lesson.id }}" type="number"
-                                                    name="quantity" value="0" min="0" max="10"
+                                                    name="quantity" value="1" min="1" max="1"
                                                     data-lesson_id="{{ lesson.id }}">
-                                                <div class="input-group-append">
-                                                    <button class="increment-qty btn btn-black rounded-0 increment-qty_{{ lesson.id }}"
-                                                        data-lesson_id="{{ lesson.id }}">
-                                                        <span class="icon text-white">
-                                                            <i class="fas fa-plus"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col{% if s %}-12 mt-2{% endif %}">
-                                        <input type="submit" class="btn btn advert-button text-uppercase mt-5 mb-5" value="Add to Bag">
+                                        <input type="submit" class="btn btn advert-button text-uppercase mt-5 mb-5" value="Add to Lesson Bag">
                                     </div>
                                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                 </div>
@@ -98,8 +85,4 @@
         {% include 'includes/store_advert.html' %}
 </section>
 <div class="footer-background-color">
-{% endblock %}
-{% block postloadjs %}
-{{ block.super }}
-{% include 'includes/lesson_quantity_input_script.html' %}
 {% endblock %}

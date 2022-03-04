@@ -96,7 +96,7 @@ def lesson_bag_contents(request):
         delivery = 0
         free_delivery_delta = 0
 
-    grand_total = delivery + total
+    lesson_total = delivery + total
 
     context = {
         'lesson_bag_items': lesson_bag_items,
@@ -105,7 +105,7 @@ def lesson_bag_contents(request):
         'delivery': delivery,
         'free_delivery_delta': free_delivery_delta,
         'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
-        'grand_total': grand_total,
+        'lesson_total': lesson_total,
     }
 
     return context

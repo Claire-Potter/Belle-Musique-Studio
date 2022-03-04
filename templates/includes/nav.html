@@ -3,6 +3,7 @@
     <div class="container-fluid">
        <h2 class="hidden">Belle Musique Studio</h2>
        <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
+       <div class="shopping-logos">
        <div class="store-logo">
           <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
              <div>
@@ -17,6 +18,21 @@
              </div>
           </a>
        </div>
+      <div class="lesson-logo">
+         <a class="{% if lesson_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_lesson_bag' %}">
+            <div>
+               <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+               <p class="my-0 icon">
+                  {% if grand_total %}
+                  ${{ grand_total|floatformat:2 }}
+                  {% else %}
+                  $0.00
+                  {% endif %}
+               </p>
+            </div>
+         </a>
+      </div> 
+   </div>
        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text" aria-controls="navbar-text" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
        </button>

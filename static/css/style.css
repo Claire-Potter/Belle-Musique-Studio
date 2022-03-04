@@ -43,12 +43,17 @@ body {
     font-size: 1.5rem;
 }
 
-.store-logo {
+.shopping-logos {
     display: flex;
-    align-items: flex-end;
-    justify-content: right;
-    align-content: flex-end;
-    vertical-align: middle;
+    margin-left: 65%;
+}
+
+.store-logo {
+    font-size: 1.5rem;
+    width: 80%
+}
+
+.lesson-logo {
     font-size: 1.5rem;
     width: 80%
 }
@@ -332,12 +337,15 @@ body {
         text-align: center;
     }
 
+    .shopping-logos {
+        margin-left: 65%;
+    }
+
     .store-logo {
-        display: flex;
-        align-items: flex-start;
-        justify-content: left;
-        align-content: flex-start;
-        vertical-align: middle;
+        font-size: 1.5rem;
+    }
+
+    .lesson-logo {
         font-size: 1.5rem;
     }
 
