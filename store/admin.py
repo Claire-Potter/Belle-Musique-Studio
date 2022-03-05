@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Product
+from .models import Category, MusicProduct
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -24,5 +24,5 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Product, ProductAdmin)
+admin.site.register(MusicProduct, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)

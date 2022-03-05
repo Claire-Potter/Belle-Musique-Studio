@@ -4,8 +4,8 @@ from decimal import Decimal
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 
-from lessons.models import Lesson
-from store.models import Product
+from djstripe.models import Product
+from store.models import MusicProduct
 
 
 def bag_contents(request):
@@ -18,7 +18,7 @@ def bag_contents(request):
 
     for item_id, item_data in bag.items():
         if isinstance(item_data, int):
-            product = get_object_or_404(Product, pk=item_id)
+            product = get_object_or_404(MusicProduct, pk=item_id)
             total += item_data * product.price
             product_count += item_data
             bag_items.append({
@@ -27,7 +27,7 @@ def bag_contents(request):
                 'product': product,
             })
         else:
-            product = get_object_or_404(Product, pk=item_id)
+            product = get_object_or_404(MusicProduct, pk=item_id)
             for size, quantity in item_data['items_by_size'].items():
                 total += quantity * product.price
                 product_count += quantity
@@ -70,7 +70,7 @@ def lesson_bag_contents(request):
 
     for lesson_id, lesson_data in lesson_bag.items():
         if isinstance(lesson_data, int):
-            lesson = get_object_or_404(Lesson, pk=lesson_id)
+            lesson = get_object_or_404(Product, pk=lesson_id)
             less_total += lesson_data
             lesson_count += lesson_data
             lesson_bag_items.append({
@@ -79,7 +79,7 @@ def lesson_bag_contents(request):
                 'lesson': lesson,
             })
         else:
-            lesson = get_object_or_404(Lesson, pk=lesson_id)
+            lesson = get_object_or_404(Product, pk=lesson_id)
             for quantity in lesson_data.items():
                 less_total += quantity
                 lesson_count += quantity

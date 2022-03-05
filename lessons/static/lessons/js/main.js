@@ -2,6 +2,7 @@
 
 console.log("Sanity check!");
 
+
 document.getElementById("submit").disabled = true;
 
 stripeElements();

@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from home.models import Cover
 
 from .forms import ProductForm
-from .models import Category, Product
+from .models import Category, MusicProduct
 
 
 def music_store(request):
@@ -22,7 +22,7 @@ def music_store(request):
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
-    products = Product.objects.all()
+    products = MusicProduct.objects.all()
     categories = None
     sort = None
     direction = None
@@ -66,7 +66,7 @@ def all_products(request):
 def product_detail(request, product_id):
     """ A view to show individual product details """
 
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(MusicProduct, pk=product_id)
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='product_detail')
     context = {
@@ -118,7 +118,7 @@ def edit_product(request, product_id):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(MusicProduct, pk=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
@@ -152,7 +152,7 @@ def delete_product(request, product_id):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(MusicProduct, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))

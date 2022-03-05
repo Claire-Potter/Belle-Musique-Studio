@@ -1,13 +1,13 @@
 from django import forms
 
-from .models import Category, Product
+from .models import Category, MusicProduct
 from .widgets import CustomClearableFileInput
 
 
 class ProductForm(forms.ModelForm):
 
     class Meta:
-        model = Product
+        model = MusicProduct
         fields = '__all__'
 
     image = forms.ImageField(label='Image',

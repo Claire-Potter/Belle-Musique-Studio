@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 
 from profiles.models import UserProfile
-from store.models import Product
+from store.models import MusicProduct
 
 from .models import Order, OrderLineItem
 
@@ -126,7 +126,7 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                 )
                 for item_id, item_data in json.loads(bag).items():
-                    product = Product.objects.get(id=item_id)
+                    product = MusicProduct.objects.get(id=item_id)
                     if isinstance(item_data, int):
                         order_line_item = OrderLineItem(
                             order=order,

@@ -18,7 +18,7 @@ class Category(models.Model):
         return '%s' % (self.call_name)
 
 
-class Product(models.Model):
+class MusicProduct(models.Model):
     category = (models.ForeignKey
                 ('Category', null=True, blank=True, on_delete=models.SET_NULL))
     sku = models.CharField(max_length=254, null=True, blank=True)

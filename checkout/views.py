@@ -12,7 +12,7 @@ from home.models import Cover
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from shopping_bag.contexts import bag_contents
-from store.models import Product
+from store.models import MusicProduct
 
 from .forms import OrderForm
 from .models import Order, OrderLineItem
@@ -64,7 +64,7 @@ def checkout(request):
             order.save()
             for item_id, item_data in bag.items():
                 try:
-                    product = Product.objects.get(id=item_id)
+                    product = MusicProduct.objects.get(id=item_id)
                     if isinstance(item_data, int):
                         order_line_item = OrderLineItem(
                             order=order,
@@ -81,7 +81,7 @@ def checkout(request):
                                 product_size=size,
                             )
                             order_line_item.save()
-                except Product.DoesNotExist:
+                except MusicProduct.DoesNotExist:
                     messages.error(request, (
                         "One of the products in your bag wasn't found in our database. "
                         "Please call us for assistance!")

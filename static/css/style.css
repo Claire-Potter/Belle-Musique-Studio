@@ -496,6 +496,10 @@ body {
         width: 150px;
     }
 
+    .shopping-logos {
+        margin-left: 0%;
+    }
+
     .bag-border {
         border: none;
     }
