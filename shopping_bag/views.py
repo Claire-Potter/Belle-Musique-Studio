@@ -4,7 +4,6 @@ from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
 
 from home.models import Cover
 from store.models import MusicProduct
-from djstripe.models import Product
 
 
 def view_bag(request):
@@ -66,7 +65,6 @@ def add_to_bag(request, item_id):
 
 def add_lesson(request, lesson_id):
     """.git/"""
-    lesson = get_object_or_404(Product, pk=lesson_id)
     price_only = float(request.POST.get('price_only'))
     priceId = request.POST.get('priceId')
     name = request.POST.get('name')
@@ -76,7 +74,7 @@ def add_lesson(request, lesson_id):
     redirect_lesson_url = request.POST.get('redirect_lesson_url')
     lesson_bag = request.session.get('lesson_bag', {})
     lesson_bag[lesson_id] = price_only, priceId, name, price, url, caption
-    messages.success(request, f'Added {lesson.name} to your bag')
+    messages.success(request, f'Added {name} to your bag')
 
     request.session['lesson_bag'] = lesson_bag
     return redirect(redirect_lesson_url)
@@ -142,10 +140,16 @@ def remove_from_bag(request, item_id):
 
 def remove_lesson_from_bag(request, lesson_id):
     """Remove the item from the shopping bag"""
+    lesson_bag = request.session.get('lesson_bag', {})
+    for lesson_id, lesson_data in lesson_bag.items():
+       
+        lesson_bag_items = []
+        name = lesson_data[2]
+        lesson_bag_items.append({
+                'name': name,
+            })
 
     try:
-        lesson_bag = request.session.get('lesson_bag', {})
-        name = request.session.get('lesson_name')
         lesson_bag.pop(lesson_id)
         messages.success(request, f'Removed {name} from your bag')
 

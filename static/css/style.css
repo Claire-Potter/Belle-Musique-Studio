@@ -48,6 +48,11 @@ body {
     margin-left: 65%;
 }
 
+.border-none {
+    border-width: 0;
+    font-size: 1.5rem;
+}
+
 .store-logo {
     font-size: 1.5rem;
     width: 80%
@@ -473,6 +478,16 @@ body {
 
     }
 
+    .container-fluid {
+        margin-left: 15px;
+    }
+
+    .border-none {
+        border-width: 0;
+        font-size: calc(1rem + .4vw) !important;
+        padding: 0;
+    }
+
     .detail-image {
         width: 70%;
         height: 70%;
@@ -498,10 +513,6 @@ body {
 
     .shopping-logos {
         margin-left: 0%;
-    }
-
-    .formSelected {
-        background-color: #ffc107;
     }
 
     .bag-border {
