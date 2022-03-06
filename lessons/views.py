@@ -14,8 +14,6 @@ from profiles.models import UserProfile
 
 from home.models import Cover
 
-from .models import Lesson, SubscribedCustomer
-
 
 def lessons_details(request):
     """ A view to show the lessons page """

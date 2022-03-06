@@ -67,10 +67,15 @@ def add_to_bag(request, item_id):
 def add_lesson(request, lesson_id):
     """.git/"""
     lesson = get_object_or_404(Product, pk=lesson_id)
-    price = float(request.POST.get('price'))
+    price_only = float(request.POST.get('price_only'))
+    priceId = request.POST.get('priceId')
+    name = request.POST.get('name')
+    price = request.POST.get('price')
+    caption = request.POST.get('caption')
+    url = request.POST.get('url')
     redirect_lesson_url = request.POST.get('redirect_lesson_url')
     lesson_bag = request.session.get('lesson_bag', {})
-    lesson_bag[lesson_id] = price
+    lesson_bag[lesson_id] = price_only, priceId, name, price, url, caption
     messages.success(request, f'Added {lesson.name} to your bag')
 
     request.session['lesson_bag'] = lesson_bag
@@ -139,10 +144,10 @@ def remove_lesson_from_bag(request, lesson_id):
     """Remove the item from the shopping bag"""
 
     try:
-        lesson = get_object_or_404(Product, pk=lesson_id)
         lesson_bag = request.session.get('lesson_bag', {})
+        name = request.session.get('lesson_name')
         lesson_bag.pop(lesson_id)
-        messages.success(request, f'Removed {lesson.name} from your bag')
+        messages.success(request, f'Removed {name} from your bag')
 
         request.session['lesson_bag'] = lesson_bag
         return HttpResponse(status=200)

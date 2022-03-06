@@ -60,16 +60,16 @@
             {% for item in lesson_bag_items %}
                 <div class="row">
                     <div class="col-3 my-1">
-                        {% if item.lesson.url %}
-                        <img class="w-100" src="{{ item.lesson.url }}" alt="{{ item.lesson.caption }}">
+                        {% if item.url %}
+                        <img class="w-100" src="{{ item.url }}" alt="{{ item.caption }}">
                         {% else %}
-                        <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.lesson.name }}">
+                        <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.name }}">
                         {% endif %}
                     </div>
                     <div class="col-9">
-                        <p class="my-0"><strong>{{ item.lesson.name }}</strong></p>
+                        <p class="my-0"><strong>{{ item.name }}</strong></p>
                         <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
-                        <p class="my-0 small text-muted">Price: £{{ item.price|floatformat:2 }} </p>
+                        <p class="my-0 small text-muted">Price: £{{ item.price_only|floatformat:2 }} </p>
                        
                     </div>
                 </div>

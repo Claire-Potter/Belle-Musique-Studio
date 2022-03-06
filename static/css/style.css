@@ -500,6 +500,10 @@ body {
         margin-left: 0%;
     }
 
+    .formSelected {
+        background-color: #ffc107;
+    }
+
     .bag-border {
         border: none;
     }

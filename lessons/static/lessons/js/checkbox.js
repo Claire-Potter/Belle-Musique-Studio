@@ -1,17 +1,27 @@
-// the selector will match all input controls of type :checkbox
-// and attach a click event handler 
-$("input:checkbox").on('click', function() {
-    // in the handler, 'this' refers to the box clicked on
-    var $box = $(this);
-    if ($box.is(":checked")) {
-        // the name of the box is retrieved using the .attr() method
-        // as it is assumed and expected to be immutable
-        var group = "input:checkbox[name='" + $box.attr("name") + "']";
-        // the checked state of the group/box on the other hand will change
-        // and the current value is retrieved using .prop() method
-        $(group).prop("checked", false);
-        $box.prop("checked", true);
-    } else {
-        $box.prop("checked", false);
+/* jshint esversion: 6 */
+// static/main.js
+
+function planSelect(name, price, priceId, url, caption, price_only) {
+    var inputs = document.getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].checked = false;
+        if (inputs[i].name == name) {
+
+            inputs[i].checked = true;
+        }
     }
-});
+    var n = document.getElementById('name');
+    var p = document.getElementById('price');
+    var pid = document.getElementById('priceId');
+    var ur = document.getElementById('url');
+    var cap = document.getElementById('caption');
+    var po = document.getElementById('price_only');
+    n.value = name;
+    p.value = price;
+    pid.value = priceId;
+    ur.value = url;
+    cap.value = caption;
+    po.value = price_only;
+
+}

@@ -53,19 +53,12 @@
                                 {% csrf_token %}
                                 <div class="form-row">
                                     <div class="col-12">
-                                        <div class="form-group w-50">
-                                            <div class="input-group input-group-{{ lesson.id }} hidden">
-                                                <input class="form-control qty_input id_qty_{{ lesson.id }}" type="number"
-                                                    name="quantity" value="1" min="1" max="1"
-                                                    data-lesson_id="{{ lesson.id }}">
-                                            </div>
-                                        </div>
                                         {% for plan in lesson.plan_set.all %}
                                         <div>
                  
                  <div class="text-right">
                     <h5 >{{ plan.human_readable_price }}</h5>
-                   <input type="radio" name="price" value="{{plan.amount}}" onclick="planSelect('{{lesson.name}}' ,'{{plan.human_readable_price}}', '{{plan.id}}', {{plan.amount}})"> 
+                    <input type="radio" name="price_only" value="{{plan.amount}}"  onclick="planSelect('{{lesson.name}}', '{{plan.human_readable_price}}', '{{plan.id}}', '{{lesson.url}}', '{{lesson.caption}}', '{{plan.amount}}')">
                  </div>
                 
                  {% endfor %}
@@ -80,6 +73,17 @@
             </div>
         </div>
               {% endfor %}
+              <div class="row">
+                <div class="col-6 text-right">
+                  <input type="text" name="name" id="name">
+                  <input type="text" name="price_only" id="price_only">
+                  <input type="text" name="price" id="price">
+                  <input type="text" name="priceId" id="priceId">
+                  <input type="text" name="url" id="url">
+                  <input type="text" name="caption" id="caption">
+                </div>
+  
+              </div>
             <div class="text-center">
                 <div class="col{% if s %}-12 mt-2{% endif %}">
                     <input type="submit" class="btn btn advert-button text-uppercase mt-5 mb-5" value="Add to Lesson Bag">
@@ -99,6 +103,6 @@
 <div class="footer-background-color">
 {% endblock %}
 {% block postloadjs %}
-    {{ block.super }}
-    <script src="{% static 'lessons/js/checkbox.js' %}"></script>
+{{ block.super }}
+<script src="{% static 'lessons/js/checkbox.js' %}"></script>
 {% endblock %}
