@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 // static/main.js
 
 console.log("Sanity check!");

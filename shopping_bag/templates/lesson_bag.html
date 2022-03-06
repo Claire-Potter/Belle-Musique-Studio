@@ -25,20 +25,24 @@
                            <th scope="col">Info</th>
                            <th scope="col"></th>
                            <th scope="col">Qty</th>
+                           <th scope="col">Price</th>
                         </tr>
                      </thead>
                      <tbody>
                         {% for item in lesson_bag_items %}
                         <tr class="table-font">
                            <td class="p-3 p-sm-5 w-25">
-                              <img class="img-fluid rounded" src="{{ item.lesson.image_url }}">
+                              <img class="img-fluid rounded" src="{{ item.lesson.url }}">
                            </td>
                            <td class="py-3 py-sm-5">
                               <p class="my-0"><strong>{{ item.lesson.name }}</strong></p>
-                              <p class="my-0 small text-muted">SKU: {{ item.lesson.sku|upper }}</p>
+                              <p class="my-0 small text-muted">Plan: </p>
                            </td>
                            <td class="py-3 py-sm-5 w-25">
                               <p class="my-0 mx-3">{{ item.quantity }}</p>
+                           </td>
+                           <td class="py-3 py-sm-5 w-25">
+                              <p class="my-0 mx-3">£{{ item.price |floatformat:2 }}</p>
                            </td>
                            <td class="py-3 py-sm-5 w-25">               
                               <a class="remove-item text-danger float-sm-right" id="remove_{{ item.lesson_id }}"><small>Remove</small></a>
@@ -53,7 +57,7 @@
                <div class="row">
                   <div class="col-12 mt-5">
                      <div class="col mb-5 mr-sm-5 text-center text-sm-right">
-                        <h6 class="my-3"><strong>Bag Total: £{{ less_total|floatformat:2 }}</strong></h6>
+                        <h6 class="my-3"><strong>Bag Total: £{{ less_total |floatformat:2 }}</strong></h6>
                      </div>
                   </div>
                </div>

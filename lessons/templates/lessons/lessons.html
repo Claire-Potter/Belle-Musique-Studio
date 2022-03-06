@@ -57,7 +57,7 @@
                                             <div class="input-group input-group-{{ lesson.id }} hidden">
                                                 <input class="form-control qty_input id_qty_{{ lesson.id }}" type="number"
                                                     name="quantity" value="1" min="1" max="1"
-                                                    data-lesson_id="{{ lesson.djstripe_id }}">
+                                                    data-lesson_id="{{ lesson.id }}">
                                             </div>
                                         </div>
                                         {% for plan in lesson.plan_set.all %}
@@ -65,7 +65,7 @@
                  
                  <div class="text-right">
                     <h5 >{{ plan.human_readable_price }}</h5>
-                   <input type="radio" name="price" value="{{lesson.id}}" onclick="planSelect('{{lesson.name}}' ,'{{plan.human_readable_price}}', '{{plan.id}}')">
+                   <input type="radio" name="price" value="{{plan.amount}}" onclick="planSelect('{{lesson.name}}' ,'{{plan.human_readable_price}}', '{{plan.id}}', {{plan.amount}})"> 
                  </div>
                 
                  {% endfor %}

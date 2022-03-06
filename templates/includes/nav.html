@@ -10,9 +10,9 @@
                 <div class="icon"><i class="fas fa-shopping-bag fa-lg"></i></div>
                 <p class="my-0 icon">
                    {% if grand_total %}
-                   ${{ grand_total|floatformat:2 }}
+                   £{{ grand_total|floatformat:2 }}
                    {% else %}
-                   $0.00
+                   £0.00
                    {% endif %}
                 </p>
              </div>
@@ -24,9 +24,9 @@
                <div class="icon"><i class="fa-solid fa-handshake"></i></div>
                <p class="my-0 icon">
                   {% if lesson_total %}
-                  ${{ lesson_total|floatformat:2 }}
+                  £{{ lesson_total|floatformat:2 }}
                   {% else %}
-                  $0.00
+                  £0.00
                   {% endif %}
                </p>
             </div>

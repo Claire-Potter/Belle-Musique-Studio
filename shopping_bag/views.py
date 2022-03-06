@@ -67,10 +67,10 @@ def add_to_bag(request, item_id):
 def add_lesson(request, lesson_id):
     """.git/"""
     lesson = get_object_or_404(Product, pk=lesson_id)
-    quantity = int(request.POST.get('quantity'))
+    price = float(request.POST.get('price'))
     redirect_lesson_url = request.POST.get('redirect_lesson_url')
     lesson_bag = request.session.get('lesson_bag', {})
-    lesson_bag[lesson_id] = quantity
+    lesson_bag[lesson_id] = price
     messages.success(request, f'Added {lesson.name} to your bag')
 
     request.session['lesson_bag'] = lesson_bag

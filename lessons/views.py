@@ -67,6 +67,7 @@ def create_sub(request):
                 name=request.user.get_full_name(),
                 phone=profile.default_phone_number,
                 shipping={
+                    "name":request.user.get_full_name(),
                     "address": {
                 "city": profile.default_town_or_city,
                 "country": profile.default_country,
