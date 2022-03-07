@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+{% block page_header %}
+{% include "includes/advert_header.html" with advert="Free delivery on orders over £" store="store" %}
+{% endblock %}
+{% block content %}
+{% load bag_tools %}
+{% include "includes/cover.html" %}
+</div>
+<section class="bg-white">
+   <div class="container mb-3 pb-5 content-height">
+      <div class="row pt-3 pb-3 mt-5">
+         <div class="col text-center mt-3">
+            <hr class="w-50 mx-auto small-width-heading">
+            <h2 class="logo-font mt-5 mb-5">Checkout</h2>
+            <hr class="w-50 mx-auto small-width-heading">
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-lg-9 col-12 order-lg-last mb-5 mt-3">
+            <p class="text-muted">Order Summary ({{ lesson_count }})</p>
+            <div class="row">
+               <div class="col-7 offset-2">
+                  <p class="mb-1 mt-0 small text-muted">Item</p>
+               </div>
+               <div class="col-3 text-right">
+                  <p class="mb-1 mt-0 small text-muted">Subtotal</p>
+               </div>
+            </div>
+            {% for item in lesson_bag_items %}
+            <div class="row">
+               <div class="col-2 mb-1">
+                  <a href="{% url 'lessons' %}">
+                  {% if item.url %}
+                  <img class="w-100" src="{{ item.url }}" alt="{{ item.caption }}">
+                  {% else %}
+                  <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.name}}">
+                  {% endif %}
+                  </a>
+               </div>
+               <div class="col-7">
+                  <p class="my-0"><strong>{{ item.name }}</strong></p>
+                  <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+               </div>
+               <div class="col-3 text-right">
+                  <p class="my-0 small text-muted">£{{ item.price_only |floatformat:2 }}</p>
+               </div>
+            </div>
+            {% endfor %}
+            <hr class="my-0">
+            <div class="row  text-right">
+               <div class="col-7 offset-2">
+                  <p class="my-0">Order Total:</p>
+               </div>
+               <div class="col-3">
+                  <p class="my-0"><strong>£{{ lesson_total |floatformat:2 }}</strong></p>
+               </div>
+            </div>
+         </div>
+         <div class="col-12 col-lg-9">
+            <p class="text-muted">Please fill out the form below to complete your order</p>
+            <form id="subscription-form" >
+               <fieldset class="rounded px-3 mb-5">
+                  <legend class="fieldset-label small  px-2 w-auto">Personal Details</legend>
+                  {{ order_form.full_name | as_crispy_field }}
+                  {{ order_form.email | as_crispy_field }}
+               </fieldset>
+               <fieldset class="rounded px-3 mb-5">
+                  <legend class="fieldset-label small  px-2 w-auto">Additional Details</legend>
+                  {{ order_form.phone_number | as_crispy_field }}
+                  {{ order_form.street_address1 | as_crispy_field }}
+                  {{ order_form.street_address2 | as_crispy_field }}
+                  {{ order_form.county | as_crispy_field }}
+                  {{ order_form.town_or_city | as_crispy_field }}
+                  {{ order_form.postcode | as_crispy_field }}
+                  {{ order_form.country | as_crispy_field }}
+                  <div class="form-check form-check-inline float-right mr-0">
+                     {% if user.is_authenticated %}
+                     <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                     <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                     {% else %}
+                     <label class="form-check-label" for="id-save-info">
+                     <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                     <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                     </label>
+                     {% endif %}
+                  </div>
+               </fieldset>
+               <fieldset class="px-3">
+                  <legend class="fieldset-label small  px-2 w-auto">Payment</legend>
+               <div id="card-element" class="MyCardElement mb-3">
+                 <!-- Elements will create input elements here -->
+               </div>
+               
+               <!-- We'll put the error messages in this element -->
+               <div id="card-errors" role="alert"></div>
+               <button id="submit" type="submit">
+                 <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
+                   <span class="sr-only">Loading...</span>
+                 </div>
+                 <span id="button-text">Subscribe</span>
+               </button>
+            </fieldset>
+             </form>
+
+               <div class="submit-button mt-5 mb-2">
+                  <a href="{% url 'view_bag' %}" class="btn btn-outline-black text-uppercase">
+                  <span class="icon">
+                  <i class="fas fa-chevron-left"></i>
+                  </span>
+                  <span class="font-weight-bold">Adjust Bag</span>
+                  </a>
+                  <button id="submit-button" class="btn advert-button text-uppercase">
+                  <span class="font-weight-bold">Complete Order</span>
+                  <span class="icon">
+                  <i class="fas fa-lock"></i>
+                  </span>
+                  </button>
+                  <p class="small text-danger my-0">
+                     <span class="icon">
+                     <i class="fas fa-exclamation-circle"></i>
+                     </span>
+                     <span>Your card will be charged <strong>£{{ grand_total|floatformat:2 }}</strong></span>
+                  </p>
+               </div>
+            </form>
+         </div>
+         <div class="col-lg-3 col-12 mt-5 mt-lg-0">
+            {% include 'includes/lessons_advert_four.html' %}
+            {% include 'includes/workshops_advert_four.html' %}
+            {% include 'includes/store_advert_small.html' %}
+         </div>
+      </div>
+      <div id="loading-overlay">
+         <h1 class="text-light logo-font loading-spinner">
+             <span class="icon">
+                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+             </span>
+         </h1>
+     </div>
+   </div>
+</section>
+<div class="footer-background-color">
+{% endblock %}
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{% endblock %}
