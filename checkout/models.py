@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 from django_countries.fields import CountryField
+from djstripe.models import Customer, Subscription
 
 from profiles.models import UserProfile
 from store.models import MusicProduct
@@ -84,3 +85,59 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return f'SKU {self.product.sku} on order {self.order.order_number}'
+
+
+class SubscribedCustomer(models.Model):
+    """.git/"""
+
+    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
+    user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    phone_number = models.CharField(max_length=20, null=False, blank=False)
+    country = CountryField(blank_label='Country', null=True, blank=True)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40, null=True, blank=True)
+    street_address1 = models.CharField(max_length=80, null=True, blank=True)
+    street_address2 = models.CharField(max_length=80, null=True, blank=True)
+    county = models.CharField(max_length=80, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    original_lesson_bag = models.TextField(null=False, blank=False, default='')
+
+
+    def update_total(self):
+        """
+        Update grand total each time a line item is added,
+        accounting for delivery costs.
+        """
+        self.order_total = (self.lineitems.aggregate
+                            (Sum('lineitem_total'))['lineitem_total__sum'] or 0)
+        self.save()
+
+    def __str__(self):
+        return f'{self.customer}'
+
+
+class SubscriptionLineItem(models.Model):
+    """.git/"""
+    subscription = models.ForeignKey(Subscription, null=False, blank=False,
+                              on_delete=models.CASCADE, related_name='subscription_lineitems')
+    customer= models.ForeignKey(SubscribedCustomer, blank=False,
+                              on_delete=models.CASCADE, related_name='subscription_customer')
+    quantity = models.IntegerField(null=False, blank=False, default=0)
+    price= models.DecimalField(max_digits=6, decimal_places=2,
+                                         null=False, blank=False, editable=False)
+    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2,
+                                         null=False, blank=False, editable=False)
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the lineitem total
+        and update the subscription total.
+        """
+        self.lineitem_total = self.price * self.quantity
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Subscription number {self.subscription} for {self.customer}'
