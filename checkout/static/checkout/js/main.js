@@ -122,7 +122,7 @@ function createPaymentMethod({
                 }).then((result) => {
                     if (result && result.status === 'active') {
 
-                        window.location.href = 'complete';
+                        window.location.href = 'subscribe';
                     };
                 }).catch(() => {
                     displayError(result.error.message);
