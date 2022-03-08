@@ -57,7 +57,7 @@
                   <p class="my-0">Order Total:</p>
                </div>
                <div class="col-3">
-                  <p class="my-0"><strong>£{{ lesson_total |floatformat:2 }}</strong></p>
+                  <p class="my-0"><strong>£{{ total |floatformat:2 }}</strong></p>
                </div>
             </div>
          </div>
@@ -112,7 +112,10 @@
                   <span class="font-weight-bold">Change Subscription</span>
                   </a>
                   <button id="submit" type="submit" class="btn advert-button text-uppercase">
-                  <span class="font-weight-bold">Complete Subscription</span>
+                     <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                  <span id="button-text" class="font-weight-bold">Complete Subscription</span>
                   <span class="icon">
                   <i class="fas fa-lock"></i>
                   </span>
@@ -145,7 +148,5 @@
 {% endblock %}
 {% block postloadjs %}
     {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_stripe_secret_key" }}
-    <script src="{% static 'checkout/js/djstripe.js' %}"></script>
+    <script src="{% static 'checkout/js/main.js' %}"></script>
 {% endblock %}

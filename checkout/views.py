@@ -204,15 +204,45 @@ def checkout_success(request, order_number):
 
     return render(request, template, context)
 
+
 @login_required
-@csrf_exempt
 def checkout_lesson(request):
     """.git/"""
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    lesson_bag = request.session.get('lesson_bag', {})
+    if not lesson_bag:
+        messages.error(request, "There's nothing in your bag at the moment")
+        return redirect(reverse('lessons'))
+
+    current_bag = lesson_bag_contents(request)
+    total = current_bag['lesson_total']
+
+    if request.user.is_authenticated:
+        subscription_form = SubscribedCustomerForm(initial={
+            'full_name': request.user.get_full_name(),
+            'email': request.user.email})
+    else:
+        subscription_form = SubscribedCustomerForm()
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='checkout')
+    template = 'checkout/checkout_lesson.html'
+    context = {
+        'subscription_form': subscription_form,
+        'covers': covers,
+        'cover': cover,
+        'stripe_public_key': stripe_public_key,
+        'total': total,
+    }
+
+    return render(request, template, context)
+
+@login_required
+@csrf_exempt
+def create_sub(request):
+    """.git/"""
+
     if request.method == 'POST':
-        lesson_bag = request.session.get('lesson_bag', {})
-         # Reads application/json and returns a response
+        # Reads application/json and returns a response
         data = json.loads(request.body)
         payment_method = data['payment_method']
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -220,21 +250,10 @@ def checkout_lesson(request):
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
 
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
-            'country': request.POST['country'],
-            'postcode': request.POST['postcode'],
-            'town_or_city': request.POST['town_or_city'],
-            'street_address1': request.POST['street_address1'],
-            'street_address2': request.POST['street_address2'],
-            'county': request.POST['county'],
-        }
         try:
-             customer = stripe.Customer.create(
+            customer = stripe.Customer.create(
                 payment_method=payment_method,
-                email=request.POST['email'],
+                email=request.user.username,
                 name=request.POST['full_name'],
                 phone=request.POST['phone_number'],
                 shipping={
@@ -251,16 +270,15 @@ def checkout_lesson(request):
                     'default_payment_method': payment_method}
                     )
 
-             djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
-             customer = djstripe_customer
+            djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
+            request.user.customer = djstripe_customer
 
-             # This creates a new Customer and attaches the PaymentMethod in one API call.
-             # At this point, associate the ID of the Customer object with your
-             # own internal representation of a customer, if you have one.
-             # print(customer)
+            # At this point, associate the ID of the Customer object with your
+            # own internal representation of a customer, if you have one.
+            # print(customer)
 
-             # Subscribe the user to the subscription created
-             subscription = stripe.Subscription.create(
+            # Subscribe the user to the subscription created
+            subscription = stripe.Subscription.create(
                 customer=customer.id,
                 items=[
                     {
@@ -270,101 +288,84 @@ def checkout_lesson(request):
                 expand=["latest_invoice.payment_intent"]
             )
 
-             djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
-
-             subscription = djstripe_subscription
-             subscription_form = SubscribedCustomerForm(form_data)
-             if subscription_form.is_valid():
-                 subscription_internal = subscription_form.save(commit=False)
-                 subscription_internal.original_lesson_bag = json.dumps(lesson_bag)
-                 subscription_internal.save()
-                 for lesson_id, lesson_data in lesson_bag.items():
-                     try:
-
-                         if isinstance(lesson_data, int):
-                             price_only = lesson_data[0]
-                             priceId = lesson_data[1]
-                             name = lesson_data[2]
-                             price = lesson_data[3]
-                             url = lesson_data[4]
-                             caption = lesson_data[5]
-                             subscription_line_item = SubscriptionLineItem(
-                                 subscription=subscription,
-                                 customer=customer,
-                                 quantity=1,
-                                 price=price_only,
-                                 lineitem_total=price_only,
-                            
-                             ) 
-                             subscription_line_item.save()
-                         else:
-                             price_only = lesson_data[0]
-                             priceId = lesson_data[1]
-                             name = lesson_data[2]
-                             price = lesson_data[3]
-                             url = lesson_data[4]
-                             caption = lesson_data[5]
-                             subscription_line_item = SubscriptionLineItem(
-                                 subscription=subscription,
-                                 customer=customer,
-                                 quantity=1,
-                                 price=price_only,
-                                 lineitem_total=price_only,
-                            
-                             )
-                             subscription_line_item.save()
-                     except lesson_bag.DoesNotExist:
-                         messages.error(request, (
-                             "Your subscription wasn't found. "
-                             "Please call us for assistance!")
-                         )
-                         subscription.delete()
-                         return redirect(reverse('view_lesson_bag'))
-
-                 request.session['save_info'] = 'save-info' in request.POST
-                 return redirect(reverse('checkout_lesson_success', args=[subscription]))
-             else:
-                 messages.error(request, 'There was an error with your form. \
-                    Please double check your information.')
+            djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
             
+            lesson_bag = request.session.get('lesson_bag', {})
 
-             return JsonResponse(subscription)
+            form_data = {
+               'full_name': request.POST['full_name'],
+               'email': request.POST['email'],
+               'phone_number': request.POST['phone_number'],
+               'country': request.POST['country'],
+               'postcode': request.POST['postcode'],
+               'town_or_city': request.POST['town_or_city'],
+               'street_address1': request.POST['street_address1'],
+               'street_address2': request.POST['street_address2'],
+               'county': request.POST['county'],
+            }
+
+            subscription = djstripe_subscription
+            subscription_form = SubscribedCustomerForm(form_data)
+            if subscription_form.is_valid():
+                subscription_internal = subscription_form.save(commit=False)
+                subscription_internal.original_lesson_bag = json.dumps(lesson_bag)
+                subscription_internal.save()
+                for lesson_id, lesson_data in lesson_bag.items():
+                    try:
+
+                        if isinstance(lesson_data, int):
+                            price_only = lesson_data[0]
+                            priceId = lesson_data[1]
+                            name = lesson_data[2]
+                            price = lesson_data[3]
+                            url = lesson_data[4]
+                            caption = lesson_data[5]
+                            subscription_line_item = SubscriptionLineItem(
+                            subscription=subscription,
+                            customer=customer,
+                            quantity=1,
+                            price=price_only,
+                            lineitem_total=price_only,
+                            )
+                            subscription_line_item.save()
+                        else:
+                            price_only = lesson_data[0]
+                            priceId = lesson_data[1]
+                            name = lesson_data[2]
+                            price = lesson_data[3]
+                            url = lesson_data[4]
+                            caption = lesson_data[5]
+                            subscription_line_item = SubscriptionLineItem(
+                                subscription=subscription,
+                                customer=customer,
+                                quantity=1,
+                                price=price_only,
+                                lineitem_total=price_only,
+                                )
+                            subscription_line_item.save()
+                    except subscription.DoesNotExist:
+                        messages.error(request, (
+                            "Your subscription wasn't found. "
+                            "Please call us for assistance!")
+                            )
+                        subscription.delete()
+                        return redirect(reverse('view_lesson_bag'))
+
+                    request.session['save_info'] = 'save-info' in request.POST
+
+            return JsonResponse(subscription)
         except Exception as e_rr:
-            return JsonResponse({'error': (e_rr.args[0])}, status =403) 
+            return JsonResponse({'error': (e_rr.args[0])}, status =403)
     else:
-        lesson_bag = request.session.get('lesson_bag', {})
-        if not lesson_bag:
-            messages.error(request, "There's nothing in your bag at the moment")
-            return redirect(reverse('lessons'))
-
-        current_bag = lesson_bag_contents(request)
-        total = current_bag['lesson_total']
-
-        if request.user.is_authenticated:
-            subscription_form = SubscribedCustomerForm(initial={'full_name': request.user.get_full_name(),
-                                            'email': request.user.email})
-        else:
-            subscription_form = SubscribedCustomerForm()
-        covers = Cover.objects.all()
-        cover = get_object_or_404(covers, page='checkout')
-
-    template = 'checkout/checkout_lesson.html'
-    context = {
-        'subscription_form': subscription_form,
-        'covers': covers,
-        'cover': cover,
-        'stripe_public_key': stripe_public_key,
-    }
-
-    return render(request, template, context)
+        return HttpResponse('request method not allowed')
 
 
-def checkout_lesson_success(request):
+def complete(request):
     """.git/"""
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
     context = {'covers': covers,
-    'cover': cover,}
+                'cover': cover}
     return render(request, "checkout/complete.html", context)
 
 
