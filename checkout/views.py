@@ -289,6 +289,7 @@ def create_sub(request):
             )
 
             djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
+            request.user.customer = djstripe_subscription
             
             lesson_bag = request.session.get('lesson_bag', {})
 
