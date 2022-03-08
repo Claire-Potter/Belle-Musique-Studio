@@ -270,7 +270,7 @@ def subscribe(request):
 @login_required
 @require_POST
 @csrf_exempt
-def cache_checkout_data_lesson(request):
+def zcache_checkout_data_lesson(request):
     """.git/"""
     if request.method == 'POST':
         lesson_bag = request.session.get('lesson_bag', {})

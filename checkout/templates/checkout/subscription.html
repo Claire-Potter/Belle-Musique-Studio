@@ -32,6 +32,26 @@
       <a class="btn btn-danger text-uppercase mb-5" href="{% url "cancel" %}">Cancel Subscription</a>
     </div>
   </div>
+  <div class="row mt-5 mb-5">
+    <div class="col-12 col-lg-7 mx-auto smallest-text">
+        <div class="order-confirmation-wrapper p-2 border">
+            <div class="row">
+                <div class="col">
+                    <small class="text-muted">Subscription Info:</small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <p class="mb-0  font-weight-bold">Subscription</p>
+                </div>
+                <div class="col-12 col-md-8 text-md-right">
+                    <p class="mb-0">{{ user.subscription }}</p>
+                    <p class="mb-0">{{ user.customer}}</p>
+                </div>
+            </div>
+    </div>
+</div>
 </div>
 </section>
 <div class="footer-background-color">
