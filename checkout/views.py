@@ -24,6 +24,7 @@ from .models import Order, OrderLineItem, SubscribedCustomer, SubscriptionLineIt
 
 @require_POST
 def cache_checkout_data(request):
+    """.flake8"""
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -40,6 +41,7 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """.flake8"""
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -167,13 +169,7 @@ def checkout_lesson(request):
 
     current_bag = lesson_bag_contents(request)
     total = current_bag['lesson_total']
-
-    if request.user.is_authenticated:
-        subscription_form = SubscribedCustomerForm(initial={
-            'full_name': request.user.get_full_name(),
-            'email': request.user.email})
-    else:
-        subscription_form = SubscribedCustomerForm()
+    subscription_form = SubscribedCustomerForm()
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='checkout')
     template = 'checkout/checkout_lesson.html'
@@ -191,8 +187,7 @@ def checkout_lesson(request):
 @csrf_exempt
 def create_sub(request):
     """.git/"""
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
+    profile = UserProfile.objects.get(user=request.user)
 
     if request.method == 'POST':
         # Reads application/json and returns a response
@@ -272,25 +267,25 @@ def subscribe(request):
                 'cover': cover}
     return render(request, "checkout/subscription.html", context)
 
-
+@login_required
 @require_POST
+@csrf_exempt
 def cache_checkout_data_lesson(request):
     """.git/"""
     if request.method == 'POST':
         lesson_bag = request.session.get('lesson_bag', {})
-        if request.user.is_authenticated:
-            profile = UserProfile.objects.get(user=request.user)
+        profile = UserProfile.objects.get(user=request.user)
 
         form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
-            'country': request.POST['country'],
-            'postcode': request.POST['postcode'],
-            'town_or_city': request.POST['town_or_city'],
-            'street_address1': request.POST['street_address1'],
-            'street_address2': request.POST['street_address2'],
-            'county': request.POST['county'],
+            'full_name': request.POST.get('full_name'),
+            'email': request.POST.get('email'),
+            'phone_number': request.POST.get('phone_number'),
+            'country': request.POST.get('country'),
+            'postcode': request.POST.get('postcode'),
+            'town_or_city': request.POST.get('town_or_city'),
+            'street_address1': request.POST.get('street_address1'),
+            'street_address2': request.POST.get('street_address2'),
+            'county': request.POST.get('county'),
         }
         subscription_form = SubscribedCustomerForm(form_data)
         if subscription_form.is_valid():
@@ -310,8 +305,7 @@ def cache_checkout_data_lesson(request):
                             quantity = 1
                         )
                         subscription_line_item.save()
-                    subscription_new=request.user.subscription,
-                except subscription_new.DoesNotExist:
+                except lesson_bag.DoesNotExist:
                     messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
                         "Please call us for assistance!")
@@ -320,10 +314,12 @@ def cache_checkout_data_lesson(request):
                     return redirect(reverse('view_lesson_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return
+            return HttpResponse(status=200)
+
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
+            return HttpResponse(status=400)
 
 
 def cancel(request):
