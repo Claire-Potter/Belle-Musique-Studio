@@ -11,7 +11,7 @@ urlpatterns = [
     path('checkout_lesson/', views.checkout_lesson, name='checkout_lesson'),
     path("checkout_lesson/create-sub/", views.create_sub, name="create_sub"),
     path('checkout_success/<order_number>', views.checkout_success, name='checkout_success'),
-    path('checkout_lesson_success/<subscription>', views.complete,
+    path('checkout_lesson/complete', views.complete,
          name='checkout_lesson_success'),
     path('checkout_lesson_cancel/<subscription>', views.cancel,
          name='checkout_lesson_cancel'),

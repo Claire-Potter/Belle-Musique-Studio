@@ -236,10 +236,13 @@ def checkout_lesson(request):
 
     return render(request, template, context)
 
+
 @login_required
 @csrf_exempt
 def create_sub(request):
     """.git/"""
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
 
     if request.method == 'POST':
         # Reads application/json and returns a response
@@ -249,22 +252,33 @@ def create_sub(request):
 
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
+        
 
         try:
+            # This creates a new Customer and attaches the PaymentMethod in one API call.
             customer = stripe.Customer.create(
                 payment_method=payment_method,
-                email=request.user.username,
-                name=request.POST['full_name'],
-                phone=request.POST['phone_number'],
+                email=request.user.email,
+                name=request.user.get_full_name(),
+                phone=profile.default_phone_number,
+                address={
+                "city": profile.default_town_or_city,
+                "country": profile.default_country,
+                "line1": profile.default_street_address1,
+                "line2": profile.default_street_address2,
+                "postal_code": profile.default_postcode,
+                "state": profile.default_county
+                 },
                 shipping={
-                    "name":request.POST['full_name'],
+                    "name":request.user.get_full_name(),
+                    "phone":profile.default_phone_number,
                     "address": {
-                "city": request.POST['town_or_city'],
-                "country": request.POST['country'],
-                "line1": request.POST['street_address1'],
-                "line2": request.POST['street_address2'],
-                "postal_code": request.POST['postcode'],
-                "state": request.POST['county']
+                "city": profile.default_town_or_city,
+                "country": profile.default_country,
+                "line1": profile.default_street_address1,
+                "line2": profile.default_street_address2,
+                "postal_code": profile.default_postcode,
+                "state": profile.default_county
               },},
                 invoice_settings={
                     'default_payment_method': payment_method}
@@ -289,70 +303,9 @@ def create_sub(request):
             )
 
             djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
-            request.user.customer = djstripe_subscription
-            
-            lesson_bag = request.session.get('lesson_bag', {})
 
-            form_data = {
-               'full_name': request.POST['full_name'],
-               'email': request.POST['email'],
-               'phone_number': request.POST['phone_number'],
-               'country': request.POST['country'],
-               'postcode': request.POST['postcode'],
-               'town_or_city': request.POST['town_or_city'],
-               'street_address1': request.POST['street_address1'],
-               'street_address2': request.POST['street_address2'],
-               'county': request.POST['county'],
-            }
-
-            subscription = djstripe_subscription
-            subscription_form = SubscribedCustomerForm(form_data)
-            if subscription_form.is_valid():
-                subscription_internal = subscription_form.save(commit=False)
-                subscription_internal.original_lesson_bag = json.dumps(lesson_bag)
-                subscription_internal.save()
-                for lesson_id, lesson_data in lesson_bag.items():
-                    try:
-
-                        if isinstance(lesson_data, int):
-                            price_only = lesson_data[0]
-                            priceId = lesson_data[1]
-                            name = lesson_data[2]
-                            price = lesson_data[3]
-                            url = lesson_data[4]
-                            caption = lesson_data[5]
-                            subscription_line_item = SubscriptionLineItem(
-                            subscription=subscription,
-                            customer=customer,
-                            quantity=1,
-                            price=price_only,
-                            lineitem_total=price_only,
-                            )
-                            subscription_line_item.save()
-                        else:
-                            price_only = lesson_data[0]
-                            priceId = lesson_data[1]
-                            name = lesson_data[2]
-                            price = lesson_data[3]
-                            url = lesson_data[4]
-                            caption = lesson_data[5]
-                            subscription_line_item = SubscriptionLineItem(
-                                subscription=subscription,
-                                customer=customer,
-                                quantity=1,
-                                price=price_only,
-                                lineitem_total=price_only,
-                                )
-                            subscription_line_item.save()
-                    except subscription.DoesNotExist:
-                        messages.error(request, (
-                            "Your subscription wasn't found. "
-                            "Please call us for assistance!")
-                            )
-                        subscription.delete()
-                        return redirect(reverse('view_lesson_bag'))
-
-                    request.session['save_info'] = 'save-info' in request.POST
+            request.user.subscription = djstripe_subscription
+            request.user.save()
 
             return JsonResponse(subscription)
         except Exception as e_rr:

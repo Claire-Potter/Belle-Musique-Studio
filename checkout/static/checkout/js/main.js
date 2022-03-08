@@ -63,6 +63,7 @@ function displayError(event) {
     }
 }
 
+
 //we'll add payment form handling here
 let paymentForm = document.getElementById('subscription-form');
 if (paymentForm) {
@@ -78,7 +79,6 @@ if (paymentForm) {
         });
     });
 }
-
 
 function createPaymentMethod({
     card
@@ -121,7 +121,8 @@ function createPaymentMethod({
                     return result;
                 }).then((result) => {
                     if (result && result.status === 'active') {
-                        window.location.href = 'complete/';
+
+                        window.location.href = 'complete';
                     };
                 }).catch(() => {
                     displayError(result.error.message);
