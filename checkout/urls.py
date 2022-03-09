@@ -14,7 +14,7 @@ urlpatterns = [
     path("checkout_lesson/create-sub/", views.create_sub, name="create_sub"),
     path('checkout_lesson/subscribe', views.subscribe,
          name='checkout_lesson_subscription'),
-    path('checkout_lesson_cancel/<subscription>', views.cancel,
+    path('checkout_lesson_cancel', views.cancel,
          name='checkout_lesson_cancel'),
     path('checkout_lesson_complete/<sub_id>', views.checkout_lesson_complete,
           name='checkout_lesson_complete'),

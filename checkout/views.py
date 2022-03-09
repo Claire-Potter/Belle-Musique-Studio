@@ -259,18 +259,9 @@ def create_sub(request):
 @login_required
 def subscribe(request):
     """.git/"""
-    lesson_bag = request.session.get('lesson_bag', {})
-    if not lesson_bag:
-        messages.error(request, "There's nothing in your bag at the moment")
-        return redirect(reverse('lessons'))
-
-    current_bag = lesson_bag_contents(request)
-    total = current_bag['lesson_total']
-    sub_id = request.user.subscription.id
-    profile = UserProfile.objects.get(user=request.user)
-    subscription=request.user.subscription
 
     if request.method == 'POST':
+        lesson_bag = request.session.get('lesson_bag', {})
 
         form_data = {
             'full_name': request.POST.get('full_name'),
@@ -284,6 +275,12 @@ def subscribe(request):
             'county': request.POST.get('county'),
         }
         subscription_form = SubscribedCustomerForm(form_data)
+        sub_id = request.user.subscription.id
+        profile = UserProfile.objects.get(user=request.user)
+        current_bag = lesson_bag_contents(request)
+        total = current_bag['lesson_total']
+        subscription=request.user.subscription
+        subscription=request.user.subscription
         if subscription_form.is_valid():
             subscription_internal = subscription_form.save(commit=False)
             subscription_internal.customer = request.user.customer
@@ -313,6 +310,15 @@ def subscribe(request):
                 Please double check your information.')
             return HttpResponse(status=400)
     else:
+        lesson_bag = request.session.get('lesson_bag', {})
+        if not lesson_bag:
+            messages.error(request, "There's nothing in your bag at the moment")
+            return redirect(reverse('lessons'))
+        current_bag = lesson_bag_contents(request)
+        total = current_bag['lesson_total']
+        sub_id = request.user.subscription.id
+        profile = UserProfile.objects.get(user=request.user)
+        subscription=request.user.subscription
         subscription_form = SubscribedCustomerForm()
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
@@ -354,8 +360,8 @@ def checkout_lesson_complete(request, sub_id):
         Your subscription number is {sub_id}. A confirmation \
         email will be sent to {subscribed_customer.email}.')
 
-    if 'bag' in request.session:
-        del request.session['bag']
+    if 'lesson_bag' in request.session:
+        del request.session['lesson_bag']
 
     template = 'checkout/checkout_lesson_complete.html'
     context = {

@@ -56,7 +56,7 @@
             <div class="mb-3">
                 <div class="col-12 col-lg-9 mx-auto">
                     <p class="text-muted small text-center mt-3 mb-3">Please fill out the form below to finalise your subscription</p>
-                    <form  method="POST" id="subscription-form" >
+                    <form  action="{% url 'checkout_lesson_subscription' %}" method="POST" id="subscription-form" >
                         {% csrf_token %}
                        <fieldset class="rounded px-3 mb-3">
                           <legend class="fieldset-label small  px-2 w-auto">Personal Details</legend>
@@ -85,7 +85,7 @@
                  </div>
                  <div class="text-center">
                  <p class="text-muted small mb-3">If you wish to cancel your suscription please select so below:</p>
-                <a class="btn btn-danger text-uppercase mb-3" href="{% url "cancel" %}">Cancel Subscription</a>
+                <a class="btn btn-danger text-uppercase mb-3" href="{% url "checkout_lesson_cancel" %}">Cancel Subscription</a>
                 <p class="text-muted small mb-3">Return to our Lessons page to browse other lesson options or purchase an additional subscription:</p>
                 <a class="btn-outline-black-lessons text-uppercase mb-5 px-2 py-2" href="{% url "lessons" %}">Return to Lessons </a>
                  </div> 
