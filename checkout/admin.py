@@ -46,19 +46,16 @@ class SubscribedCustomerAdmin(admin.ModelAdmin):
     inlines = (SubscriptionLineItemAdminInline,)
 
     readonly_fields = ('date', 'customer',
-                       'order_total',
                        'original_lesson_bag',
                        )
 
     fields = ('customer', 'user_profile', 'date', 'full_name',
               'email', 'phone_number', 'country',
               'postcode', 'town_or_city', 'street_address1',
-              'street_address2', 'county',
-              'order_total', 'original_lesson_bag',
+              'street_address2', 'county','original_lesson_bag',
               )
 
-    list_display = ('customer', 'date', 'full_name',
-                    'order_total')
+    list_display = ('customer', 'date', 'full_name')
 
     ordering = ('-date',)
 

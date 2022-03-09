@@ -313,6 +313,20 @@ body {
     color: black !important;
     /* use important to override link colors for <a> elements */
     border: 1px solid black;
+    border-radius: 5%;
+}
+
+.btn-width {
+    width: 40%;
+}
+
+.btn-outline-black-lessons {
+    background: white;
+    color: black !important;
+    /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+    border-radius: 5%;
+    font-size: 1rem;
 }
 
 #new-image {
@@ -324,7 +338,10 @@ body {
 
 .btn-outline-black:hover,
 .btn-outline-black:active,
-.btn-outline-black:focus {
+.btn-outline-black:focus,
+.btn-outline-black-lessons:hover,
+.btn-outline-black-lessons:active,
+.btn-outline-black-lessons:focus {
     background: black;
     color: white !important;
 }

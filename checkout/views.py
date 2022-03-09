@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from home.models import Cover
-from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from shopping_bag.contexts import bag_contents, lesson_bag_contents
 from store.models import MusicProduct
@@ -34,10 +33,10 @@ def cache_checkout_data(request):
             'username': request.user,
         })
         return HttpResponse(status=200)
-    except Exception as e:
+    except Exception as e_rr:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
-        return HttpResponse(content=e, status=400)
+        return HttpResponse(content=e_rr, status=400)
 
 
 def checkout(request):
@@ -169,12 +168,10 @@ def checkout_lesson(request):
 
     current_bag = lesson_bag_contents(request)
     total = current_bag['lesson_total']
-    subscription_form = SubscribedCustomerForm()
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='checkout')
     template = 'checkout/checkout_lesson.html'
     context = {
-        'subscription_form': subscription_form,
         'covers': covers,
         'cover': cover,
         'total': total,
@@ -259,22 +256,21 @@ def create_sub(request):
         return HttpResponse('request method not allowed')
 
 
+@login_required
 def subscribe(request):
     """.git/"""
-    covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='subscriptions')
-    context = {'covers': covers,
-                'cover': cover}
-    return render(request, "checkout/subscription.html", context)
+    lesson_bag = request.session.get('lesson_bag', {})
+    if not lesson_bag:
+        messages.error(request, "There's nothing in your bag at the moment")
+        return redirect(reverse('lessons'))
 
-@login_required
-@require_POST
-@csrf_exempt
-def zcache_checkout_data_lesson(request):
-    """.git/"""
+    current_bag = lesson_bag_contents(request)
+    total = current_bag['lesson_total']
+    sub_id = request.user.subscription.id
+    profile = UserProfile.objects.get(user=request.user)
+    subscription=request.user.subscription
+
     if request.method == 'POST':
-        lesson_bag = request.session.get('lesson_bag', {})
-        profile = UserProfile.objects.get(user=request.user)
 
         form_data = {
             'full_name': request.POST.get('full_name'),
@@ -291,35 +287,44 @@ def zcache_checkout_data_lesson(request):
         if subscription_form.is_valid():
             subscription_internal = subscription_form.save(commit=False)
             subscription_internal.customer = request.user.customer
-            subscription_internal.profile = profile
+            subscription_internal.user_profile = profile
             subscription_internal.original_lesson_bag = json.dumps(lesson_bag)
             subscription_internal.save()
             for lesson_data in lesson_bag.items():
                 try:
-                    if isinstance(lesson_data, int):
-                        subscription_line_item = SubscriptionLineItem(
-                            subscription=request.user.subscription,
-                            customer=subscription_internal,
-                            price=lesson_data[0],
-                            lineitem_total=lesson_data[0],
-                            quantity = 1
-                        )
-                        subscription_line_item.save()
-                except lesson_bag.DoesNotExist:
+                    subscription_line_item = SubscriptionLineItem(
+                        subscribed_id=subscription.id,
+                        subscription=subscription,
+                        customer=subscription_internal,
+                        price=total,
+                        quantity = 1
+                    )
+                    subscription_line_item.save()
+                except subscription.DoesNotExist:
                     messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
                         "Please call us for assistance!")
                     )
                     subscription_internal.delete()
                     return redirect(reverse('view_lesson_bag'))
-
-            request.session['save_info'] = 'save-info' in request.POST
-            return HttpResponse(status=200)
+            return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
 
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
             return HttpResponse(status=400)
+    else:
+        subscription_form = SubscribedCustomerForm()
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='subscriptions')
+
+    context = {'covers': covers,
+                'cover': cover,
+                'total': total,
+                'sub_id': sub_id,
+                'subscription_form': subscription_form
+    }
+    return render(request, "checkout/subscription.html", context)
 
 
 def cancel(request):
@@ -336,3 +341,30 @@ def cancel(request):
 
 
     return redirect("home")
+
+def checkout_lesson_complete(request, sub_id):
+    """
+    Handle successful checkouts
+    """
+    customer = request.user.customer
+    subscribed_customer = get_object_or_404(SubscribedCustomer, customer=customer)
+    subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=sub_id)
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='checkout')
+    messages.success(request, f'Subscription successfully processed! \
+        Your subscription number is {sub_id}. A confirmation \
+        email will be sent to {subscribed_customer.email}.')
+
+    if 'bag' in request.session:
+        del request.session['bag']
+
+    template = 'checkout/checkout_lesson_complete.html'
+    context = {
+        'subscribed_customer': subscribed_customer,
+        'subscription_item': subscription_item,
+        'sub_id': sub_id,
+        'covers': covers,
+        'cover': cover,
+    }
+
+    return render(request, template, context)
