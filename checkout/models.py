@@ -90,8 +90,8 @@ class OrderLineItem(models.Model):
 class SubscribedCustomer(models.Model):
     """.git/"""
 
-    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
-    user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, null=False, blank=False)
+    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE, null=False, blank=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)

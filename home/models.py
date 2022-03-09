@@ -16,8 +16,8 @@ from djstripe.models import Customer, Subscription
 
 class User(AbstractUser):
     """.git/"""
-    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
-    subscription = models.ForeignKey(Subscription(), null=True, blank=True, on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL, unique=True)
+    subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL)
 
 
 class Contact(models.Model):
