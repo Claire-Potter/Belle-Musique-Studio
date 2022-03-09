@@ -290,23 +290,22 @@ def subscribe(request):
             subscription_internal.user_profile = profile
             subscription_internal.original_lesson_bag = json.dumps(lesson_bag)
             subscription_internal.save()
-            for lesson_data in lesson_bag.items():
-                try:
-                    subscription_line_item = SubscriptionLineItem(
-                        subscribed_id=subscription.id,
-                        subscription=subscription,
-                        customer=subscription_internal,
-                        price=total,
-                        quantity = 1
+            try:
+                subscription_line_item = SubscriptionLineItem(
+                    subscribed_id=subscription.id,
+                    subscription=subscription,
+                    customer=subscription_internal,
+                    price=total,
+                    quantity = 1
                     )
-                    subscription_line_item.save()
-                except subscription.DoesNotExist:
-                    messages.error(request, (
-                        "The subscription in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
-                    )
-                    subscription_internal.delete()
-                    return redirect(reverse('view_lesson_bag'))
+                subscription_line_item.save()
+            except subscription.DoesNotExist:
+                messages.error(request, (
+                    "The subscription in your bag wasn't found in our database. "
+                    "Please call us for assistance!")
+                )
+                subscription_internal.delete()
+                return redirect(reverse('view_lesson_bag'))
             return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
 
         else:
