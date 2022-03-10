@@ -118,6 +118,7 @@ class SubscriptionLineItem(models.Model):
     subscription = models.ForeignKey(Subscription, null=False, blank=False,
                               on_delete=models.CASCADE, related_name='subscription_lineitems',
                               editable=False)
+    subscription_name = models.CharField(max_length=350, null=False, blank=False, editable=False)
     customer= models.ForeignKey(SubscribedCustomer, blank=False,
                                 on_delete=models.CASCADE, related_name='subscription_customer',
                                 editable=False)

@@ -12,6 +12,7 @@ from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from djstripe.models import Subscription
 
 from home.models import Cover, User, UserLineItem
 from profiles.models import UserProfile
@@ -220,13 +221,14 @@ def create_sub(request):
                         ],
                         expand=["latest_invoice.payment_intent"]
                     )
-
-                djstripe_subscription = (djstripe.models.Subscription
-                                         .sync_from_stripe_data(subscription))
+                djstripe_subscription = (djstripe.models.Subscription.
+                                         sync_from_stripe_data(subscription))
                 try:
                     user_line_item = UserLineItem(
                         username=request.user,
                         subscription=djstripe_subscription,
+                        subscription_user_id=djstripe_subscription.id,
+                        subscription_name=djstripe_subscription.plan
                         )
                     user_line_item.save()
                     request.user.save()
@@ -287,14 +289,16 @@ def create_sub(request):
                     ],
                     expand=["latest_invoice.payment_intent"]
                 )
-
                 djstripe_subscription = (djstripe.models
-                                         .Subscription.sync_from_stripe_data(subscription))
+                                         .Subscription.
+                                         sync_from_stripe_data(subscription))
 
                 try:
                     user_line_item = UserLineItem(
                         username=request.user,
                         subscription=djstripe_subscription,
+                        subscription_user_id=djstripe_subscription.id,
+                        subscription_name=djstripe_subscription.plan
                         )
                     user_line_item.save()
                     request.user.save()
@@ -340,9 +344,11 @@ def subscribe(request):
                 subscription_internal.save()
                 try:
                     userlineitem = UserLineItem.objects.filter(username=request.user).latest()
+                    subscription_id=userlineitem.subscription.id
                     subscription_line_item = SubscriptionLineItem(
-                        subscribed_id=userlineitem.subscription.id,
+                        subscribed_id=subscription_id,
                         subscription=userlineitem.subscription,
+                        subscription_name=userlineitem.subscription_name,
                         customer=subscription_internal,
                         price=total,
                         quantity = 1,
@@ -350,8 +356,8 @@ def subscribe(request):
                         )
                     subscription_line_item.save()
                     userlineitem = UserLineItem.objects.filter(username=request.user).latest()
-                    subscription=userlineitem.subscription
                     sub_id=userlineitem.subscription.id
+                    subscription=get_object_or_404(Subscription, id=sub_id)
                 except subscription.DoesNotExist:
                     messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
@@ -384,7 +390,7 @@ def subscribe(request):
                 profile = UserProfile.objects.get(user=request.user)
                 current_bag = lesson_bag_contents(request)
                 total = current_bag['lesson_total']
-                subscription= userlineitem.subscription
+                subscription=userlineitem.subscription
                 if subscription_form.is_valid():
                     subscription_internal = subscription_form.save(commit=False)
                     subscription_internal.customer = request.user.customer
@@ -395,6 +401,7 @@ def subscribe(request):
                         subscription_line_item = SubscriptionLineItem(
                             subscribed_id=subscription.id,
                             subscription=subscription,
+                            subscription_name=subscription.subscription_name,
                             customer=subscription_internal,
                             price=total,
                             quantity = 1,
@@ -431,7 +438,7 @@ def subscribe(request):
         userlineitem = UserLineItem.objects.filter(username=request.user).latest()
         sub_id = userlineitem.subscription.id
         profile = UserProfile.objects.get(user=request.user)
-        subscription= userlineitem.subscription
+        subscription= userlineitem.subscription_name
         subscription_form = SubscribedCustomerForm()
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
@@ -440,6 +447,7 @@ def subscribe(request):
                 'cover': cover,
                 'total': total,
                 'sub_id': sub_id,
+                'subscription': subscription,
                 'subscription_form': subscription_form
     }
     return render(request, "checkout/subscription.html", context)

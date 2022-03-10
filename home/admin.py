@@ -35,7 +35,7 @@ class CoverAdmin(admin.ModelAdmin):
 class UserLineItemAdminInline(admin.TabularInline):
     """.git/"""
     model = UserLineItem
-    fields = ('username', 'subscription')
+    fields = ('subscription_user_id', 'subscription_name')
 
 
 class UserAdmin(admin.ModelAdmin):

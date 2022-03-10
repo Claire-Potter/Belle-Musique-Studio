@@ -23,6 +23,8 @@ class UserLineItem(models.Model):
     """.git/"""
     username = models.ForeignKey(User, null=False, blank=False,
                               on_delete=models.CASCADE, related_name='userlineitems')
+    subscription_user_id = models.CharField(max_length=350, unique=True, null=True, blank=True)
+    subscription_name = models.CharField(max_length=350, null=True, blank=True)
     subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now_add=True)
 

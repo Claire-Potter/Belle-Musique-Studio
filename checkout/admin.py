@@ -38,7 +38,7 @@ admin.site.register(Order, OrderAdmin)
 class SubscriptionLineItemAdminInline(admin.TabularInline):
     """.git/"""
     model = SubscriptionLineItem
-    readonly_fields = ('subscribed_id', 'subscription', 'customer', 'lineitem_total',
+    readonly_fields = ('subscribed_id', 'subscription_name', 'customer', 'lineitem_total',
                        'original_lesson_bag',)
 
 
