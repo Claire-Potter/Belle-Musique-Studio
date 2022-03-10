@@ -16,8 +16,29 @@ from djstripe.models import Customer, Subscription
 
 class User(AbstractUser):
     """.git/"""
-    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL, unique=True)
+    customer = models.OneToOneField(Customer, null=True, blank=True, on_delete=models.CASCADE)
+
+
+class UserLineItem(models.Model):
+    """.git/"""
+    username = models.ForeignKey(User, null=False, blank=False,
+                              on_delete=models.CASCADE, related_name='userlineitems')
     subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL)
+    date = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        """
+        Meta created to order the Image Model according
+        to the order_number. It also determines the latest
+        entry saved to the model referring to the added date.
+        """
+        ordering = ['date']
+        get_latest_by = ['date']
+
+
+    def __str__(self):
+        return f'{self.subscription}'
 
 
 class Contact(models.Model):

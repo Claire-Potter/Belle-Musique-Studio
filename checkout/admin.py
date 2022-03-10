@@ -38,24 +38,24 @@ admin.site.register(Order, OrderAdmin)
 class SubscriptionLineItemAdminInline(admin.TabularInline):
     """.git/"""
     model = SubscriptionLineItem
-    readonly_fields = ('lineitem_total',)
+    readonly_fields = ('subscribed_id', 'subscription', 'customer', 'lineitem_total',
+                       'original_lesson_bag',)
 
 
 class SubscribedCustomerAdmin(admin.ModelAdmin):
     """.git/"""
     inlines = (SubscriptionLineItemAdminInline,)
 
-    readonly_fields = ('date', 'customer',
-                       'original_lesson_bag',
+    readonly_fields = ('subscribed_customer_id', 'user_profile', 'date', 'customer',
                        )
 
-    fields = ('customer', 'user_profile', 'date', 'full_name',
+    fields = ('subscribed_customer_id', 'customer', 'user_profile', 'date', 'full_name',
               'email', 'phone_number', 'country',
               'postcode', 'town_or_city', 'street_address1',
-              'street_address2', 'county','original_lesson_bag',
+              'street_address2', 'county',
               )
 
-    list_display = ('customer', 'date', 'full_name')
+    list_display = ('subscribed_customer_id', 'customer', 'date', 'full_name')
 
     ordering = ('-date',)
 

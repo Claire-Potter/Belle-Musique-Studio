@@ -1,5 +1,6 @@
 """.git/"""
 import json
+import time
 
 import stripe
 import djstripe
@@ -12,7 +13,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from home.models import Cover
+from home.models import Cover, User, UserLineItem
 from profiles.models import UserProfile
 from shopping_bag.contexts import bag_contents, lesson_bag_contents
 from store.models import MusicProduct
@@ -194,63 +195,119 @@ def create_sub(request):
 
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
+        user = get_object_or_404(User, username=request.user)
+        user_customer = user.customer
+        if  user_customer is None:
+            customer_exists = False
+        else:
+            customer_exists = True
+        if customer_exists:
+            try:
+                customer_id = request.user.customer.id
+                customer = stripe.Customer.retrieve(f'{customer_id}')
 
-        try:
-            # This creates a new Customer and attaches the PaymentMethod in one API call.
-            customer = stripe.Customer.create(
-                payment_method=payment_method,
-                email=request.user.email,
-                name=request.user.get_full_name(),
-                phone=profile.default_phone_number,
-                address={
-                "city": profile.default_town_or_city,
-                "country": profile.default_country,
-                "line1": profile.default_street_address1,
-                "line2": profile.default_street_address2,
-                "postal_code": profile.default_postcode,
-                "state": profile.default_county
-                 },
-                shipping={
-                    "name":request.user.get_full_name(),
-                    "phone":profile.default_phone_number,
-                    "address": {
-                "city": profile.default_town_or_city,
-                "country": profile.default_country,
-                "line1": profile.default_street_address1,
-                "line2": profile.default_street_address2,
-                "postal_code": profile.default_postcode,
-                "state": profile.default_county
-              },},
-                invoice_settings={
-                    'default_payment_method': payment_method}
+                # At this point, associate the ID of the Customer object with your
+                # own internal representation of a customer, if you have one.
+                # print(customer)
+
+                # Subscribe the user to the subscription created
+                subscription = stripe.Subscription.create(
+                        customer=customer.id,
+                        items=[
+                            {
+                                "price": data["price_id"],
+                            },
+                        ],
+                        expand=["latest_invoice.payment_intent"]
                     )
 
-            djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
-            request.user.customer = djstripe_customer
+                djstripe_subscription = (djstripe.models.Subscription
+                                         .sync_from_stripe_data(subscription))
+                try:
+                    user_line_item = UserLineItem(
+                        username=request.user,
+                        subscription=djstripe_subscription,
+                        )
+                    user_line_item.save()
+                    request.user.save()
+                    username=request.user
+                except username.DoesNotExist:
+                    messages.error(request, (
+                        "The user wasn't found in our database. "
+                        "Please call us for assistance!")
+                    )
+                    subscription.delete()
+                return JsonResponse(subscription)
+            except Exception as e_rr:
+                return JsonResponse({'error': (e_rr.args[0])}, status =403)
+        else:
+            try:
+                # This creates a new Customer and attaches the PaymentMethod in one API call.
+                customer = stripe.Customer.create(
+                     payment_method=payment_method,
+                     email=request.user.email,
+                     name=request.user.get_full_name(),
+                     phone=profile.default_phone_number,
+                     address={
+                         "city": profile.default_town_or_city,
+                         "country": profile.default_country,
+                         "line1": profile.default_street_address1,
+                         "line2": profile.default_street_address2,
+                         "postal_code": profile.default_postcode,
+                         "state": profile.default_county
+                         },
+                     shipping={
+                         "name":request.user.get_full_name(),
+                         "phone":profile.default_phone_number,
+                         "address": {
+                             "city": profile.default_town_or_city,
+                             "country": profile.default_country,
+                             "line1": profile.default_street_address1,
+                             "line2": profile.default_street_address2,
+                             "postal_code": profile.default_postcode,
+                             "state": profile.default_county
+                         },},
+                     invoice_settings={
+                             'default_payment_method': payment_method}
+                         )
+                djstripe_customer = djstripe.models.Customer.sync_from_stripe_data(customer)
+                request.user.customer = djstripe_customer
 
-            # At this point, associate the ID of the Customer object with your
-            # own internal representation of a customer, if you have one.
-            # print(customer)
+                # At this point, associate the ID of the Customer object with your
+                # own internal representation of a customer, if you have one.
+                # print(customer)
 
-            # Subscribe the user to the subscription created
-            subscription = stripe.Subscription.create(
-                customer=customer.id,
-                items=[
-                    {
-                        "price": data["price_id"],
-                    },
-                ],
-                expand=["latest_invoice.payment_intent"]
-            )
+                # Subscribe the user to the subscription created
+                subscription = stripe.Subscription.create(
+                    customer=customer,
+                    items=[
+                        {
+                            "price": data["price_id"],
+                        },
+                    ],
+                    expand=["latest_invoice.payment_intent"]
+                )
 
-            djstripe_subscription = djstripe.models.Subscription.sync_from_stripe_data(subscription)
+                djstripe_subscription = (djstripe.models
+                                         .Subscription.sync_from_stripe_data(subscription))
 
-            request.user.subscription = djstripe_subscription
-            request.user.save()
-
-            return JsonResponse(subscription)
-        except Exception as e_rr:
-            return JsonResponse({'error': (e_rr.args[0])}, status =403)
+                try:
+                    user_line_item = UserLineItem(
+                        username=request.user,
+                        subscription=djstripe_subscription,
+                        )
+                    user_line_item.save()
+                    request.user.save()
+                    username=request.user
+                except username.DoesNotExist:
+                    messages.error(request, (
+                        "The user wasn't found in our database. "
+                        "Please call us for assistance!")
+                    )
+                    subscription.delete()
+                return JsonResponse(subscription)
+            except Exception as e_rr:
+                return JsonResponse({'error': (e_rr.args[0])}, status =403)
 
     else:
         return HttpResponse('request method not allowed')
@@ -262,53 +319,108 @@ def subscribe(request):
 
     if request.method == 'POST':
         lesson_bag = request.session.get('lesson_bag', {})
-
-        form_data = {
-            'full_name': request.POST.get('full_name'),
-            'email': request.POST.get('email'),
-            'phone_number': request.POST.get('phone_number'),
-            'country': request.POST.get('country'),
-            'postcode': request.POST.get('postcode'),
-            'town_or_city': request.POST.get('town_or_city'),
-            'street_address1': request.POST.get('street_address1'),
-            'street_address2': request.POST.get('street_address2'),
-            'county': request.POST.get('county'),
-        }
-        subscription_form = SubscribedCustomerForm(form_data)
-        sub_id = request.user.subscription.id
-        profile = UserProfile.objects.get(user=request.user)
-        current_bag = lesson_bag_contents(request)
-        total = current_bag['lesson_total']
-        subscription=request.user.subscription
-        subscription=request.user.subscription
-        if subscription_form.is_valid():
-            subscription_internal = subscription_form.save(commit=False)
-            subscription_internal.customer = request.user.customer
-            subscription_internal.user_profile = profile
-            subscription_internal.original_lesson_bag = json.dumps(lesson_bag)
-            subscription_internal.save()
+        customer_exists = False
+        attempt = 1
+        while attempt <= 5:
             try:
-                subscription_line_item = SubscriptionLineItem(
-                    subscribed_id=subscription.id,
-                    subscription=subscription,
-                    customer=subscription_internal,
-                    price=total,
-                    quantity = 1
+                user_customer_id = request.user.customer.id
+                customer_subscribed = (SubscribedCustomer
+                                       .objects.get(subscribed_customer_id=user_customer_id))
+                customer_exists = True
+                break
+            except SubscribedCustomer.DoesNotExist:
+                attempt += 1
+                time.sleep(1)
+        if customer_exists:
+            subscription_form = SubscribedCustomerForm(request.POST, instance=customer_subscribed)
+            current_bag = lesson_bag_contents(request)
+            total = current_bag['lesson_total']
+            if subscription_form.is_valid():
+                subscription_internal = subscription_form.save(commit=False)
+                subscription_internal.save()
+                try:
+                    userlineitem = UserLineItem.objects.filter(username=request.user).latest()
+                    subscription_line_item = SubscriptionLineItem(
+                        subscribed_id=userlineitem.subscription.id,
+                        subscription=userlineitem.subscription,
+                        customer=subscription_internal,
+                        price=total,
+                        quantity = 1,
+                        original_lesson_bag = json.dumps(lesson_bag)
+                        )
+                    subscription_line_item.save()
+                    userlineitem = UserLineItem.objects.filter(username=request.user).latest()
+                    subscription=userlineitem.subscription
+                    sub_id=userlineitem.subscription.id
+                except subscription.DoesNotExist:
+                    messages.error(request, (
+                        "The subscription in your bag wasn't found in our database. "
+                        "Please call us for assistance!")
                     )
-                subscription_line_item.save()
-            except subscription.DoesNotExist:
-                messages.error(request, (
-                    "The subscription in your bag wasn't found in our database. "
-                    "Please call us for assistance!")
-                )
-                subscription_internal.delete()
-                return redirect(reverse('view_lesson_bag'))
-            return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
-
+                    subscription_internal.delete()
+                    return redirect(reverse('view_lesson_bag'))
+                return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
+            else:
+                messages.error(request, 'There was an error with your form. \
+                    Please double check your information.')
+                return HttpResponse(status=400)
         else:
-            messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
-            return HttpResponse(status=400)
+            customer = None
+            try:
+                form_data = {
+                    'full_name': request.POST.get('full_name'),
+                    'email': request.POST.get('email'),
+                    'phone_number': request.POST.get('phone_number'),
+                    'country': request.POST.get('country'),
+                    'postcode': request.POST.get('postcode'),
+                    'town_or_city': request.POST.get('town_or_city'),
+                    'street_address1': request.POST.get('street_address1'),
+                    'street_address2': request.POST.get('street_address2'),
+                    'county': request.POST.get('county'),
+                }
+                subscription_form = SubscribedCustomerForm(form_data)
+                userlineitem = UserLineItem.objects.filter(username=request.user).latest()
+                sub_id = userlineitem.subscription.id
+                profile = UserProfile.objects.get(user=request.user)
+                current_bag = lesson_bag_contents(request)
+                total = current_bag['lesson_total']
+                subscription= userlineitem.subscription
+                if subscription_form.is_valid():
+                    subscription_internal = subscription_form.save(commit=False)
+                    subscription_internal.customer = request.user.customer
+                    subscription_internal.subscribed_customer_id = request.user.customer.id
+                    subscription_internal.user_profile = profile
+                    subscription_internal.save()
+                    try:
+                        subscription_line_item = SubscriptionLineItem(
+                            subscribed_id=subscription.id,
+                            subscription=subscription,
+                            customer=subscription_internal,
+                            price=total,
+                            quantity = 1,
+                            original_lesson_bag = json.dumps(lesson_bag)
+                            )
+                        subscription_line_item.save()
+                    except subscription.DoesNotExist:
+                        messages.error(request, (
+                        "The subscription in your bag wasn't found in our database. "
+                        "Please call us for assistance!")
+                        )
+                        subscription_internal.delete()
+                        return redirect(reverse('view_lesson_bag'))
+                    customer = subscription_internal
+                    return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
+
+                else:
+                    messages.error(request, 'There was an error with your form. \
+                        Please double check your information.')
+                    return HttpResponse(status=400)
+            except Exception as e_rr:
+                if customer:
+                    customer.delete()
+                return HttpResponse(
+                    content=f'Request to subscribe customer received:| ERROR: {e_rr}',
+                    status=500)
     else:
         lesson_bag = request.session.get('lesson_bag', {})
         if not lesson_bag:
@@ -316,9 +428,10 @@ def subscribe(request):
             return redirect(reverse('lessons'))
         current_bag = lesson_bag_contents(request)
         total = current_bag['lesson_total']
-        sub_id = request.user.subscription.id
+        userlineitem = UserLineItem.objects.filter(username=request.user).latest()
+        sub_id = userlineitem.subscription.id
         profile = UserProfile.objects.get(user=request.user)
-        subscription=request.user.subscription
+        subscription= userlineitem.subscription
         subscription_form = SubscribedCustomerForm()
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
@@ -335,7 +448,8 @@ def subscribe(request):
 def cancel(request):
     """.git/"""
     if request.user.is_authenticated:
-        sub_id = request.user.subscription.id
+        userlineitem = UserLineItem.objects.filter(username=request.user).latest()
+        sub_id = userlineitem.subscription.id
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -352,7 +466,7 @@ def checkout_lesson_complete(request, sub_id):
     Handle successful checkouts
     """
     customer = request.user.customer
-    subscribed_customer = get_object_or_404(SubscribedCustomer, customer=customer)
+    subscribed_customer = get_object_or_404(SubscribedCustomer, subscribed_customer_id=customer.id)
     subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=sub_id)
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='checkout')

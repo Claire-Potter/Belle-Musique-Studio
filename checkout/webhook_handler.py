@@ -7,16 +7,11 @@ import time
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
-from djstripe import webhooks
-from djstripe.models import Customer
 
-from home.models import User
 from profiles.models import UserProfile
 from store.models import MusicProduct
-from .models import Order, OrderLineItem, SubscribedCustomer
-
+from .models import Order, OrderLineItem
 
 
 class StripeWhHandler:
@@ -165,34 +160,3 @@ class StripeWhHandler:
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)
-
-
-
-
-def __init__(self, request):
-    self.request = request
-
-
-@webhooks.handler("customer.subscription.created")
-def customer_created_event_listener(event, **kwargs):
-    """.git/"""
-    intent = event.data.object
-    user_name = intent.metadata.username
-    user = get_object_or_404(User, username=user_name)
-    user_customer = user.customer
-    sub_id = user.subscription.id
-    subscribed_customer = get_object_or_404(SubscribedCustomer, customer=user_customer)
-    cust_email = subscribed_customer.email
-    subject = render_to_string(
-            'lesson_emails/confirmation_emails/confirmation_email_subject.txt',
-            {'event': event})
-    body = render_to_string(
-            'lesson_emails/confirmation_emails/confirmation_email_body.txt',
-            {'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-    send_mail(
-           subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [cust_email],
-            fail_silently=False,
-)

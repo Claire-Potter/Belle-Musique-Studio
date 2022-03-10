@@ -3,7 +3,7 @@ Belle Musique Studio home app  adminconfiguration
 """
 from django.contrib import admin
 
-from .models import Contact, Cover, User
+from .models import Contact, Cover, User,UserLineItem
 
 
 @admin.register(Contact)
@@ -31,4 +31,15 @@ class CoverAdmin(admin.ModelAdmin):
     list_filter = ('name', 'quote', 'page')
     search_fields = ('name', 'quote', 'page')
 
-admin.site.register(User)
+
+class UserLineItemAdminInline(admin.TabularInline):
+    """.git/"""
+    model = UserLineItem
+    fields = ('username', 'subscription')
+
+
+class UserAdmin(admin.ModelAdmin):
+    """.git/"""
+    inlines = (UserLineItemAdminInline,)
+
+admin.site.register(User, UserAdmin)

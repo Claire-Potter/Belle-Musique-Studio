@@ -1,11 +1,18 @@
 """.git/"""
 import stripe
 from django.conf import settings
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
+from djstripe import webhooks
+from djstripe.models import Customer
 
 from checkout.webhook_handler import StripeWhHandler
+from home.models import User
+from .models import SubscribedCustomer
 
 
 @require_POST
@@ -53,3 +60,32 @@ def webhook(request):
     # Call the event handler with the event
     response = event_handler(event)
     return response
+
+
+def __init__(self, request):
+    self.request = request
+
+
+@webhooks.handler("customer.subscription.created")
+def customer_created_event_listener(event, **kwargs):
+    """.git/"""
+    intent = event.data.object
+    user_name = intent.metadata.username
+    user = get_object_or_404(User, username=user_name)
+    user_customer = user.customer
+    sub_id = user.subscription.id
+    subscribed_customer = get_object_or_404(SubscribedCustomer, customer=user_customer)
+    cust_email = subscribed_customer.email
+    subject = render_to_string(
+            'lesson_emails/confirmation_emails/confirmation_email_subject.txt',
+            {'event': event})
+    body = render_to_string(
+            'lesson_emails/confirmation_emails/confirmation_email_body.txt',
+            {'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+    send_mail(
+           subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [cust_email],
+            fail_silently=False,
+)
