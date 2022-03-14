@@ -24,7 +24,7 @@
 
 .profile-form-input {
     box-sizing: border-box;
-    height: 40px;
+    height: 50px;
     padding: 10px 12px;
     border: 1px solid transparent;
     border-radius: 5px;
@@ -32,6 +32,11 @@
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
+}
+
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(3.5rem + 5px);
 }
 
 .profile-form-input:focus,
@@ -47,6 +52,14 @@
     .smallest-text {
         font-size: calc(0.6rem + .9vw) !important;
 
+    }
+
+    .profile-form-input {
+        height: inherit;
+    }
+
+    select.form-control:not([size]):not([multiple]) {
+        height: calc(2.25rem + 2px);
     }
 }
 

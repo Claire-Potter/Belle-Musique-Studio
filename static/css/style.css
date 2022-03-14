@@ -486,6 +486,7 @@ body {
     height: 250px;
 }
 
+
 /* Media query to center logo for small screens */
 
 @media (max-width: 800px) {

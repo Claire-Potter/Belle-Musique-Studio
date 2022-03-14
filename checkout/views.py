@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from djstripe.models import Subscription
 
-from home.models import Cover, User, UserLineItem
+from home.models import Cover, User, UserSubscription
 from profiles.models import UserProfile
 from shopping_bag.contexts import bag_contents, lesson_bag_contents
 from store.models import MusicProduct
@@ -114,7 +114,8 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        order_form = OrderForm()
+        order_form = OrderForm(initial={'full_name': request.user.get_full_name(),
+            'email': request.user.email,})
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='checkout')
 
@@ -224,7 +225,7 @@ def create_sub(request):
                 djstripe_subscription = (djstripe.models.Subscription.
                                          sync_from_stripe_data(subscription))
                 try:
-                    user_line_item = UserLineItem(
+                    user_line_item = UserSubscription(
                         username=request.user,
                         subscription=djstripe_subscription,
                         subscription_user_id=djstripe_subscription.id,
@@ -294,7 +295,7 @@ def create_sub(request):
                                          sync_from_stripe_data(subscription))
 
                 try:
-                    user_line_item = UserLineItem(
+                    user_line_item = UserSubscription(
                         username=request.user,
                         subscription=djstripe_subscription,
                         subscription_user_id=djstripe_subscription.id,
@@ -343,20 +344,22 @@ def subscribe(request):
                 subscription_internal = subscription_form.save(commit=False)
                 subscription_internal.save()
                 try:
-                    userlineitem = UserLineItem.objects.filter(username=request.user).latest()
-                    subscription_id=userlineitem.subscription.id
+                    user_subscription = (UserSubscription.objects
+                                         .filter(username=request.user).latest())
+                    subscription_id=user_subscription.subscription.id
                     subscription_line_item = SubscriptionLineItem(
                         subscribed_id=subscription_id,
-                        subscription=userlineitem.subscription,
-                        subscription_name=userlineitem.subscription_name,
+                        subscription=user_subscription.subscription,
+                        subscription_name=user_subscription.subscription_name,
                         customer=subscription_internal,
                         price=total,
                         quantity = 1,
                         original_lesson_bag = json.dumps(lesson_bag)
                         )
                     subscription_line_item.save()
-                    userlineitem = UserLineItem.objects.filter(username=request.user).latest()
-                    sub_id=userlineitem.subscription.id
+                    user_subscription = (UserSubscription.objects
+                                         .filter(username=request.user).latest())
+                    sub_id=user_subscription.subscription.id
                     subscription=get_object_or_404(Subscription, id=sub_id)
                 except subscription.DoesNotExist:
                     messages.error(request, (
@@ -385,12 +388,12 @@ def subscribe(request):
                     'county': request.POST.get('county'),
                 }
                 subscription_form = SubscribedCustomerForm(form_data)
-                userlineitem = UserLineItem.objects.filter(username=request.user).latest()
-                sub_id = userlineitem.subscription.id
+                user_subscription = UserSubscription.objects.filter(username=request.user).latest()
+                sub_id = user_subscription.subscription.id
                 profile = UserProfile.objects.get(user=request.user)
                 current_bag = lesson_bag_contents(request)
                 total = current_bag['lesson_total']
-                subscription=userlineitem.subscription
+                subscription=user_subscription.subscription_name
                 if subscription_form.is_valid():
                     subscription_internal = subscription_form.save(commit=False)
                     subscription_internal.customer = request.user.customer
@@ -401,7 +404,7 @@ def subscribe(request):
                         subscription_line_item = SubscriptionLineItem(
                             subscribed_id=subscription.id,
                             subscription=subscription,
-                            subscription_name=subscription.subscription_name,
+                            subscription_name=subscription,
                             customer=subscription_internal,
                             price=total,
                             quantity = 1,
@@ -435,11 +438,39 @@ def subscribe(request):
             return redirect(reverse('lessons'))
         current_bag = lesson_bag_contents(request)
         total = current_bag['lesson_total']
-        userlineitem = UserLineItem.objects.filter(username=request.user).latest()
-        sub_id = userlineitem.subscription.id
+        user_subscription = UserSubscription.objects.filter(username=request.user).latest()
+        sub_id = user_subscription.subscription.id
         profile = UserProfile.objects.get(user=request.user)
-        subscription= userlineitem.subscription_name
-        subscription_form = SubscribedCustomerForm()
+        if  profile is None:
+            profile_exists = False
+            phone_number = None
+            postcode = None
+            town_or_city = None
+            street_address1 = None
+            street_address2 = None
+            county = None
+            country = None
+
+        else:
+            profile_exists = True
+            phone_number = profile.default_phone_number
+            postcode = profile.default_postcode
+            town_or_city = profile.default_town_or_city
+            street_address1 = profile.default_street_address1
+            street_address2 = profile.default_street_address2
+            county = profile.default_county
+            country = profile.default_country
+        subscription= user_subscription.subscription_name
+        subscription_form = (SubscribedCustomerForm(initial={
+                              'full_name': request.user.get_full_name(),
+                              'email': request.user.email,
+                              'phone_number': phone_number,
+                              'postcode': postcode,
+                              'town_or_city': town_or_city,
+                              'street_address1': street_address1,
+                              'street_address2': street_address2,
+                              'county': county,
+                              'country': country,}))
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
 
@@ -448,7 +479,8 @@ def subscribe(request):
                 'total': total,
                 'sub_id': sub_id,
                 'subscription': subscription,
-                'subscription_form': subscription_form
+                'subscription_form': subscription_form,
+                'profile_exists': profile_exists
     }
     return render(request, "checkout/subscription.html", context)
 
@@ -456,8 +488,8 @@ def subscribe(request):
 def cancel(request):
     """.git/"""
     if request.user.is_authenticated:
-        userlineitem = UserLineItem.objects.filter(username=request.user).latest()
-        sub_id = userlineitem.subscription.id
+        user_subscription = UserSubscription.objects.filter(username=request.user).latest()
+        sub_id = user_subscription.subscription.id
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 

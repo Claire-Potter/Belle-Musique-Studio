@@ -20,7 +20,8 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
 
-    form = UserProfileForm(instance=profile)
+    form = UserProfileForm(instance=profile, initial={'default_full_name': request.user.get_full_name(),
+            'default_email': request.user.email,})
     orders = profile.orders.all()
     template = 'profiles/profile.html'
     covers = Cover.objects.all()
