@@ -12,14 +12,14 @@ from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from djstripe.models import Subscription
+from djstripe.models import Subscription, Invoice
 
 from home.models import Cover, User, UserSubscription
 from profiles.models import UserProfile
 from shopping_bag.contexts import bag_contents, lesson_bag_contents
 from store.models import MusicProduct
 
-from .forms import OrderForm, SubscribedCustomerForm
+from .forms import OrderForm, SubscribedCustomerForm, SubscriptionLineItemForm
 from .models import Order, OrderLineItem, SubscribedCustomer, SubscriptionLineItem
 
 
@@ -331,6 +331,7 @@ def subscribe(request):
                 user_customer_id = request.user.customer.id
                 customer_subscribed = (SubscribedCustomer
                                        .objects.get(subscribed_customer_id=user_customer_id))
+                subscribed_item = (SubscriptionLineItem.objects.get(customer=customer_subscribed))  
                 customer_exists = True
                 break
             except SubscribedCustomer.DoesNotExist:
@@ -338,6 +339,7 @@ def subscribe(request):
                 time.sleep(1)
         if customer_exists:
             subscription_form = SubscribedCustomerForm(request.POST, instance=customer_subscribed)
+            subscription_lineitem_form = SubscriptionLineItemForm(request.POST, instance=subscribed_item)
             current_bag = lesson_bag_contents(request)
             total = current_bag['lesson_total']
             if subscription_form.is_valid():
@@ -347,11 +349,19 @@ def subscribe(request):
                     user_subscription = (UserSubscription.objects
                                          .filter(username=request.user).latest())
                     subscription_id=user_subscription.subscription.id
+                    subscription_status=user_subscription.subscription.status
+                    subscription_start=user_subscription.subscription.current_period_start
+                    subscription_end=user_subscription.subscription.current_period_end
+                    subscription_invoice=user_subscription.subscription.latest_invoice
                     subscription_line_item = SubscriptionLineItem(
                         subscribed_id=subscription_id,
                         subscription=user_subscription.subscription,
                         subscription_name=user_subscription.subscription_name,
+                        status=subscription_status,
                         customer=subscription_internal,
+                        start_date=subscription_start,
+                        end_date=subscription_end,
+                        latest_invoice=subscription_invoice,
                         price=total,
                         quantity = 1,
                         original_lesson_bag = json.dumps(lesson_bag)
@@ -380,14 +390,12 @@ def subscribe(request):
                     'full_name': request.POST.get('full_name'),
                     'email': request.POST.get('email'),
                     'phone_number': request.POST.get('phone_number'),
-                    'country': request.POST.get('country'),
-                    'postcode': request.POST.get('postcode'),
-                    'town_or_city': request.POST.get('town_or_city'),
-                    'street_address1': request.POST.get('street_address1'),
-                    'street_address2': request.POST.get('street_address2'),
-                    'county': request.POST.get('county'),
+                }
+                form_data_two = {
+                    'student': request.POST.get('student'),
                 }
                 subscription_form = SubscribedCustomerForm(form_data)
+                subscription_lineitem_form = SubscriptionLineItemForm(form_data_two)
                 user_subscription = UserSubscription.objects.filter(username=request.user).latest()
                 sub_id = user_subscription.subscription.id
                 profile = UserProfile.objects.get(user=request.user)
@@ -401,11 +409,22 @@ def subscribe(request):
                     subscription_internal.user_profile = profile
                     subscription_internal.save()
                     try:
+                        user_subscription = (UserSubscription.objects
+                                         .filter(username=request.user).latest())
+                        subscription_id=user_subscription.subscription.id
+                        subscription_status=user_subscription.subscription.status
+                        subscription_start=user_subscription.subscription.current_period_start
+                        subscription_end=user_subscription.subscription.current_period_end
+                        subscription_invoice=user_subscription.subscription.latest_invoice
                         subscription_line_item = SubscriptionLineItem(
                             subscribed_id=subscription.id,
                             subscription=subscription,
                             subscription_name=subscription,
+                            status=subscription_status,
                             customer=subscription_internal,
+                            start_date=subscription_start,
+                            end_date=subscription_end,
+                            latest_invoice=subscription_invoice,
                             price=total,
                             quantity = 1,
                             original_lesson_bag = json.dumps(lesson_bag)

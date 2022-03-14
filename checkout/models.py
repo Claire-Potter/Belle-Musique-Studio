@@ -5,7 +5,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 from django_countries.fields import CountryField
-from djstripe.models import Customer, Subscription
+from djstripe.models import Customer, Subscription, Invoice
 
 from profiles.models import UserProfile
 from store.models import MusicProduct
@@ -100,11 +100,6 @@ class SubscribedCustomer(models.Model):
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     country = CountryField(blank_label='Country', null=True, blank=True)
-    postcode = models.CharField(max_length=20, null=True, blank=True)
-    town_or_city = models.CharField(max_length=40, null=True, blank=True)
-    street_address1 = models.CharField(max_length=80, null=True, blank=True)
-    street_address2 = models.CharField(max_length=80, null=True, blank=True)
-    county = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
 
@@ -119,14 +114,22 @@ class SubscriptionLineItem(models.Model):
                               on_delete=models.CASCADE, related_name='subscription_lineitems',
                               editable=False)
     subscription_name = models.CharField(max_length=350, null=False, blank=False, editable=False)
+    status =  models.CharField(max_length=250, null=False, blank=False, editable=False)
     customer= models.ForeignKey(SubscribedCustomer, blank=False,
                                 on_delete=models.CASCADE, related_name='subscription_customer',
                                 editable=False)
     quantity = models.IntegerField(null=False, blank=False, default=0)
+    student = models.CharField(max_length=250, null=False, blank=False, editable=False)
+    start_date= models.CharField(max_length=250, null=False, blank=False, editable=False)
+    end_date = models.CharField(max_length=250, null=False, blank=False, editable=False)
     price= models.DecimalField(max_digits=6, decimal_places=2,
                                          null=False, blank=False, editable=False)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2,
                                          null=False, blank=False, editable=False)
+    latest_invoice = models.ForeignKey(Invoice, null=False, blank=False,
+                              on_delete=models.CASCADE, related_name='subscription_invoice',
+                              editable=False)
+
     original_lesson_bag = models.TextField(null=False, blank=False, default='')
 
 

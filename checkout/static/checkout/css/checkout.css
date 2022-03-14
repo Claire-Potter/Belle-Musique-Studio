@@ -55,6 +55,17 @@ select.form-control:not([size]):not([multiple]) {
 
 }
 
+.smallest-headings {
+    font-size: calc(0.2rem + .9vw) !important;
+
+}
+
+
+.smallest-headings2 {
+    font-size: calc(0.1rem + .9vw) !important;
+
+}
+
 #loading-overlay {
     display: none;
     position: fixed;
@@ -74,6 +85,9 @@ select.form-control:not([size]):not([multiple]) {
     height: 100%;
 }
 
+.btn-width {
+    width: 40%;
+}
 
 /* Media queries */
 
@@ -81,6 +95,17 @@ select.form-control:not([size]):not([multiple]) {
 
     .smallest-text {
         font-size: calc(0.8rem + .9vw) !important;
+
+    }
+
+    .smallest-headings {
+        font-size: calc(0.5rem + .9vw) !important;
+
+    }
+
+
+    .smallest-headings2 {
+        font-size: calc(0.28rem + .9vw) !important;
 
     }
 }

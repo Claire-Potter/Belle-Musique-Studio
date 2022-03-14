@@ -8,94 +8,102 @@
 {% endblock %}
 {% block extra_css %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'lessons/css/subscriptions.css' %}">
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 {% block page_header %}
-   {% include "includes/advert_header.html" with advert="Take a look at the various discount options available" %}
+{% include "includes/advert_header.html" with advert="Take a look at the various discount options available" %}
 {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
 {% include "includes/cover.html" %}
 </div>
-<section>
-    <div class="row advert-topper d-flex w-100 mx-auto">
-        <div class="col-12">
-            <div class="w-50 small-width-heading mx-auto">
-             <hr>
-             <h2 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Lesson Subscriptions</h2>
-              <hr>
-            </div>
-        </div>
-  <div class="row">
-    <div class="container mt-5 text-center">
-      <p>You have successfully subscribed!</p>
-    </div>
-  </div>
-  <div class="row mt-5 mb-5">
-    <div class="col-12 col-lg-7 mx-auto smallest-text">
-        <div class="order-confirmation-wrapper p-2 border">
-            <div class="row">
-                <div class="col">
-                    <small class="text-muted mt-5 px-5 py-5">Subscription Info:</small>
-                </div>
-            </div>
-
-            <div class="row px-5 py-5">
-                <div class="col-12 col-lg-4">
-                    <p class="mb-0  font-weight-bold small">Subscription:</p>
-                    <p class="mb-0  font-weight-bold small">Subscription ID:</p>
-                    <p class="mb-5 font-weight-bold small">Total:</p>
-                </div>
-                <div class="col-12 col-lg-8 text-lg-right">
-                    <p class="mb-0 small">{{ subscription }}</p>
-                    <p class="mb-0 small">{{ sub_id }}</p>
-                    <p class="mb-3 small"><strong>£{{ total|floatformat:2 }}</strong></p>
-                </div>
-            </div>
+<section class="bg-white">
+   <div class="container mb-3 pb-5 content-height w-100">
+      <div class="col-12">
+         <div class="w-50 small-width-heading mx-auto">
             <hr>
-            <div class="mb-3">
-                <div class="col-12 col-lg-9 mx-auto">
-                    <p class="text-muted small text-center mt-3 mb-3">Please fill out the form below to finalise your subscription</p>
-                    <form  action="{% url 'checkout_lesson_subscription' %}" method="POST" id="subscription-form" >
+            <h2 class="cover-heading inline pt-sm-3 pb-sm-3 text-center">Lesson Subscriptions</h2>
+            <hr>
+         </div>
+      </div>
+      <div class="row">
+         <div class="container mt-5 text-center">
+            <p>You have successfully subscribed!</p>
+         </div>
+      </div>
+      <div class="row mt-5 mb-5">
+         <div class="col-12 col-lg-9 mx-auto smallest-text">
+            <div class="order-confirmation-wrapper p-2 border">
+               <div class="row">
+                  <div class="col">
+                     <small class="text-muted mt-5 px-lg-5 px-3 py-lg-5 py-3">Subscription Info:</small>
+                  </div>
+               </div>
+               <div class="row px-lg-5 px-3 py-lg-5 py-3">
+                  <div class="col-4 col-lg-4">
+                     <p class="mb-0  font-weight-bold smallest-headings">Subscription:</p>
+                     <p class="mb-0  font-weight-bold smallest-headings">Subscription ID:</p>
+                     <p class="mb-5 font-weight-bold smallest-headings">Total:</p>
+                  </div>
+                  <div class="col-8 col-lg-8 text-lg-right">
+                     <p class="mb-0 smallest-headings2">{{ subscription }}</p>
+                     <p class="mb-0 smallest-headings2">{{ sub_id }}</p>
+                     <p class="mb-3 smallest-headings2"><strong>£{{ total|floatformat:2 }}</strong></p>
+                  </div>
+               </div>
+               <hr>
+               <div class="mb-3">
+                  <div class="col-12 col-lg-9 mx-auto">
+                     <p class="text-muted small text-center mt-3 mb-3">Please fill out the form below to finalise your subscription</p>
+                     <form  action="{% url 'checkout_lesson_subscription' %}" method="POST" id="subscription-form" >
                         {% csrf_token %}
-                       <fieldset class="rounded px-3 mb-3">
-                          <legend class="fieldset-label small  px-2 w-auto">Personal Details</legend>
-                          {{ subscription_form.full_name | as_crispy_field }}
-                          {{ subscription_form.email | as_crispy_field }}
-                       </fieldset>
-                       <fieldset class="rounded px-3 mb-3">
-                          <legend class="fieldset-label small  px-2 w-auto">Additional Details</legend>
-                          {{ subscription_form.phone_number | as_crispy_field }}
-                          {{ subscription_form.street_address1 | as_crispy_field }}
-                          {{ subscription_form.street_address2 | as_crispy_field }}
-                          {{ subscription_form.county | as_crispy_field }}
-                          {{ subscription_form.town_or_city | as_crispy_field }}
-                          {{ subscription_form.postcode | as_crispy_field }}
-                          {{ subscription_form.country | as_crispy_field }}
-                       </fieldset>
-                       <div class="submit-button mx-auto btn-width">
-                          <button id="submit" type="submit" class="btn advert-button text-uppercase mt-3 mb-3">
-                             <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                          <span id="button-text" class="font-weight-bold">Finalise Subscription</span>
-                          </button>
-                       </div>
-                    </form>
-                 </div>
-                 <div class="text-center">
-                 <p class="text-muted small mb-3">If you wish to cancel your suscription please select so below:</p>
-                <a class="btn btn-danger text-uppercase mb-3" href="{% url "checkout_lesson_cancel" %}">Cancel Subscription</a>
-                <p class="text-muted small mb-3">Return to our Lessons page to browse other lesson options or purchase an additional subscription:</p>
-                <a class="btn-outline-black-lessons text-uppercase mb-5 px-2 py-2" href="{% url "lessons" %}">Return to Lessons </a>
-                 </div> 
+                        <fieldset class="rounded px-3 mb-3">
+                           <legend class="fieldset-label small  px-2 w-auto">Personal Details</legend>
+                           {{ subscription_form.full_name | as_crispy_field }}
+                           {{ subscription_form.email | as_crispy_field }}
+                        </fieldset>
+                        <fieldset class="rounded px-3 mb-3">
+                           <legend class="fieldset-label small  px-2 w-auto">Additional Details</legend>
+                           {{ subscription_form.phone_number | as_crispy_field }}
+                           {{ subscription_form.street_address1 | as_crispy_field }}
+                           {{ subscription_form.street_address2 | as_crispy_field }}
+                           {{ subscription_form.county | as_crispy_field }}
+                           {{ subscription_form.town_or_city | as_crispy_field }}
+                           {{ subscription_form.postcode | as_crispy_field }}
+                           {{ subscription_form.country | as_crispy_field }}
+                        </fieldset>
+                        <div class="submit-button mx-auto text-center">
+                           <button id="submit" type="submit" class="btn advert-button text-uppercase mt-3 mb-3">
+                           <span id="button-text" class="font-weight-bold">Finalise</span>
+                           </button>
+                        </div>
+                     </form>
+                  </div>
+                  <div class="text-center">
+                     <p class="text-muted small mb-3">If you wish to cancel your suscription please select so below:</p>
+                     <a class="btn btn-danger text-uppercase mb-3" href="{% url "checkout_lesson_cancel" %}">Cancel</a>
+                     <p class="text-muted small mb-3">Return to our Lessons page to browse other lesson options or purchase an additional subscription:</p>
+                     <a class="btn-outline-black-lessons text-uppercase mb-5 px-2 py-2" href="{% url "lessons" %}">Return to Lessons </a>
+                  </div>
+               </div>
             </div>
-    </div>
-</div>
-</div>
+         </div>
+      </div>
+   </div>
+   <div class="row w-100">
+      <div class="col-lg-4 col-12 mt-5 mx-auto">
+         {% include 'includes/lessons_advert_four.html' %}
+      </div>
+      <div class="col-lg-4 col-12 mt-5 mx-auto">
+         {% include 'includes/workshops_advert_four.html' %}
+      </div>
+         <div class="col-lg-4 col-12 mt-5 mx-auto">
+         {% include 'includes/store_advert_small.html' %}
+      </div>
+     </div>
 </section>
 <div class="footer-background-color">
-  {% endblock %}
-  {% block postloadjs %}
-      {{ block.super }}
-  {% endblock %}
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}

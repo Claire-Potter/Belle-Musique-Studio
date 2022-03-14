@@ -13,17 +13,17 @@
 </div>
 <section class="bg-white">
    <div class="container mb-3 pb-5 content-height">
-      <div class="row pt-3 pb-3 mt-5">
-         <div class="col text-center mt-3">
-            <hr class="w-50 mx-auto small-width-heading">
+      <div class="row pt-3 pb-3 mt-5 w-100">
+         <div class="col-12 col-lg-9 text-center mx-auto mt-3">
+            <hr class="mx-auto small-width-heading">
             <h2 class="logo-font mt-5 mb-5">Checkout</h2>
-            <hr class="w-50 mx-auto small-width-heading">
+            <hr class="mx-auto small-width-heading">
          </div>
       </div>
-      <div class="row mt-5 mb-5">
-         <div class="col-lg-6 col-12 mx-auto">
+      <div class="row mt-5 mb-5 w-100">
+         <div class="col-lg-9 col-12 mx-auto">
             <p class="text-center">Subscription Summary</p>
-            <div class="row">
+            <div class="row w-100">
                <div class="col-7 offset-2">
                   <p class="mb-1 mt-0 small text-muted">Item</p>
                </div>
@@ -32,7 +32,7 @@
                </div>
             </div>
             {% for item in lesson_bag_items %}
-            <div class="row">
+            <div class="row w-100">
                <div class="col-2 mb-1">
                   <a href="{% url 'lessons' %}">
                   {% if item.url %}
@@ -52,7 +52,7 @@
             </div>
             {% endfor %}
             <hr class="my-0">
-            <div class="row  text-right">
+            <div class="row  text-right w-100">
                <div class="col-7 offset-2">
                   <p class="my-0">Order Total:</p>
                </div>
@@ -67,8 +67,8 @@
             <p id="priceId">{{ priceId }}</p>
           </div>
       </div>
-         <div class="row">
-         <div class="col-12 col-lg-6 mx-auto">
+         <div class="row w-100">
+         <div class="col-12 col-lg-9 mx-auto">
             <p class="text-center">Payment</p>
             <p class="text-muted text-center small">Please complete your payment information to subscribe</p>
                 <form id="subscription-form" >
@@ -79,8 +79,8 @@
                  <!-- Elements will create input elements here -->
                </div>
                
-               <!-- We'll put the error messages in this element -->
-               <div id="card-errors" role="alert"></div>
+               <!-- Used to display form errors -->
+               <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                <div class="submit-button mt-5 mb-2 text-right">
                   <a href="{% url 'lessons' %}" class="btn btn-outline-black text-uppercase">
                   <span class="icon">
@@ -89,9 +89,6 @@
                   <span class="font-weight-bold">Change Subscription</span>
                   </a>
                   <button id="submit" type="submit" class="btn advert-button text-uppercase">
-                     <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
-                        <span class="sr-only">Loading...</span>
-                      </div>
                   <span id="button-text" class="font-weight-bold">Subscribe</span>
                   <span class="icon">
                   <i class="fas fa-lock"></i>
@@ -115,8 +112,19 @@
          </h1>
      </div>
    </div>
+   <div class="row w-100 mx-auto">
+      <div class="col-lg-4 col-12 mt-5 mx-auto">
+         {% include 'includes/lessons_advert_four.html' %}
+      </div>
+      <div class="col-lg-4 col-12 mt-5 mx-auto">
+         {% include 'includes/workshops_advert_four.html' %}
+      </div>
+         <div class="col-lg-4 col-12 mt-5 mx-auto">
+         {% include 'includes/store_advert_small.html' %}
+      </div>
+     </div>
 </section>
-<div class="footer-background-color">
+<div class="footer-background-color w-100">
 {% endblock %}
 {% block postloadjs %}
     {{ block.super }}

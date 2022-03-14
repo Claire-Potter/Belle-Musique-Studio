@@ -1,8 +1,6 @@
 /* jshint esversion: 6 */
 // static/main.js
 
-console.log("Sanity check!");
-
 
 stripeElements();
 
@@ -70,7 +68,9 @@ if (paymentForm) {
 
     paymentForm.addEventListener('submit', function(evt) {
         evt.preventDefault();
-        changeLoadingState(true);
+        $('#submit-button').attr('disabled', true);
+        $('#payment-form').fadeToggle(100);
+        $('#loading-overlay').fadeToggle(100);
 
 
         // create new payment method & create subscription
@@ -126,21 +126,10 @@ function createPaymentMethod({
                     };
                 }).catch(() => {
                     displayError(result.error.message);
+                    $('#payment-form').fadeToggle(100);
+                    $('#loading-overlay').fadeToggle(100);
 
                 });
             }
         });
 }
-
-
-var changeLoadingState = function(isLoading) {
-    if (isLoading) {
-        document.getElementById("submit").disabled = true;
-        document.querySelector("#spinner").classList.remove("hidden");
-        document.querySelector("#button-text").classList.add("hidden");
-    } else {
-        document.getElementById("submit").disabled = false;
-        document.querySelector("#spinner").classList.add("hidden");
-        document.querySelector("#button-text").classList.remove("hidden");
-    }
-};

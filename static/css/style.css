@@ -258,7 +258,6 @@ body {
     background-color: #fbac2c;
     border: #fbac2c;
     color: #04142f;
-    font-weight: 800;
 }
 
 .advert-button:hover {
@@ -316,9 +315,6 @@ body {
     border-radius: 5%;
 }
 
-.btn-width {
-    width: 40%;
-}
 
 .btn-outline-black-lessons {
     background: white;
