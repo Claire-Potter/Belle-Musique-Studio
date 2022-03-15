@@ -1,6 +1,8 @@
 """.git/"""
 from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
 from djstripe.models import Product
+
 
 from home.models import Cover
 
@@ -13,7 +15,6 @@ def lessons_details(request):
     context = {'covers': covers,
                 'cover': cover,
                 'lessons': lessons,
-                'is_lesson_bag': True
               }
 
     return render(request, 'lessons/lessons.html', context)

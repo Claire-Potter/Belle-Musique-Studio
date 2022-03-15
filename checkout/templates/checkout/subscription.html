@@ -65,12 +65,7 @@
                         <fieldset class="rounded px-3 mb-3">
                            <legend class="fieldset-label small  px-2 w-auto">Additional Details</legend>
                            {{ subscription_form.phone_number | as_crispy_field }}
-                           {{ subscription_form.street_address1 | as_crispy_field }}
-                           {{ subscription_form.street_address2 | as_crispy_field }}
-                           {{ subscription_form.county | as_crispy_field }}
-                           {{ subscription_form.town_or_city | as_crispy_field }}
-                           {{ subscription_form.postcode | as_crispy_field }}
-                           {{ subscription_form.country | as_crispy_field }}
+                           {{ subscription_lineitem_form.student | as_crispy_field }}
                         </fieldset>
                         <div class="submit-button mx-auto text-center">
                            <button id="submit" type="submit" class="btn advert-button text-uppercase mt-3 mb-3">

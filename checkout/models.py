@@ -91,11 +91,11 @@ class SubscribedCustomer(models.Model):
     """.git/"""
 
     subscribed_customer_id = models.CharField(max_length=250, null=True,
-                                              blank=True, editable=False)
+                                              blank=True, )
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, null=False,
-                                    blank=False, editable=False)
+                                    blank=False, )
     user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE,
-                                        null=False, blank=False, editable=False)
+                                        null=False, blank=False, )
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -109,28 +109,28 @@ class SubscribedCustomer(models.Model):
 
 class SubscriptionLineItem(models.Model):
     """.git/"""
-    subscribed_id = models.CharField(max_length=250, null=False, blank=False, editable=False)
-    subscription = models.ForeignKey(Subscription, null=False, blank=False,
+    subscribed_id = models.CharField(max_length=250, null=True, blank=True, )
+    subscription = models.ForeignKey(Subscription, null=True, blank=True,
                               on_delete=models.CASCADE, related_name='subscription_lineitems',
-                              editable=False)
-    subscription_name = models.CharField(max_length=350, null=False, blank=False, editable=False)
-    status =  models.CharField(max_length=250, null=False, blank=False, editable=False)
-    customer= models.ForeignKey(SubscribedCustomer, blank=False,
+                              )
+    subscription_name = models.CharField(max_length=350, null=True, blank=True, )
+    status =  models.CharField(max_length=250, null=True, blank=True, )
+    customer= models.ForeignKey(SubscribedCustomer, blank=True,
                                 on_delete=models.CASCADE, related_name='subscription_customer',
-                                editable=False)
-    quantity = models.IntegerField(null=False, blank=False, default=0)
-    student = models.CharField(max_length=250, null=False, blank=False, editable=False)
-    start_date= models.CharField(max_length=250, null=False, blank=False, editable=False)
-    end_date = models.CharField(max_length=250, null=False, blank=False, editable=False)
+                                )
+    quantity = models.IntegerField(null=True, blank=True, default=0)
+    student = models.CharField(max_length=250, null=True, blank=True, editable=True)
+    start_date= models.CharField(max_length=250, null=True, blank=True, )
+    end_date = models.CharField(max_length=250, null=True, blank=True, )
     price= models.DecimalField(max_digits=6, decimal_places=2,
-                                         null=False, blank=False, editable=False)
+                                         null=True, blank=True, )
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2,
-                                         null=False, blank=False, editable=False)
-    latest_invoice = models.ForeignKey(Invoice, null=False, blank=False,
+                                         null=True, blank=True, )
+    latest_invoice = models.ForeignKey(Invoice, null=True, blank=True,
                               on_delete=models.CASCADE, related_name='subscription_invoice',
-                              editable=False)
+                              )
 
-    original_lesson_bag = models.TextField(null=False, blank=False, default='')
+    original_lesson_bag = models.TextField(null=True, blank=True, default='')
 
 
     def save(self, *args, **kwargs):

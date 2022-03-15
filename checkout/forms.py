@@ -45,7 +45,7 @@ class SubscriptionLineItemForm(forms.ModelForm):
     """.git/"""
     class Meta:
         """.git/"""
-        model = SubscriptionLineItem()
+        model = SubscriptionLineItem
         fields = ('student',)
 
     def __init__(self, *args, **kwargs):
@@ -55,10 +55,10 @@ class SubscriptionLineItemForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'student': 'Student Name',}
+            'student': 'Student Full Name',}
 
         for field in self.fields:
-            if field  in ('student'):
+            if field  == ('student'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
@@ -87,7 +87,7 @@ class SubscribedCustomerForm(forms.ModelForm):
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field not in ('country', 'full_name', 'email'):
+            if field == 'phone_number':
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:

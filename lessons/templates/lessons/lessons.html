@@ -22,9 +22,12 @@
             </div>
         </div>
         <div class="row w-100">
-        <div class="col-12 col-sm-6  mt-3 ml-3 mx-sm-auto ml-sm-0">
+        <div class="col-12 col-sm-6  mt-3 mb-5 ml-3 mx-sm-auto ml-sm-0">
             <p class="mx-3 my-3 pt-2 text-center">
                 Individual piano, singing and songwriting lessons are given weekly. Take out a subscription to pay annually, monthly or weekly.
+            </p>
+            <p class="mx-3 my-3 pt-2 text-center text-muted font-italic small">
+                When you select a lesson, it will be added to the "Selected Lesson" section at the end of the page. When ready, select "Add to Bag" to proceed to checkout.
             </p>
             <hr>
         </div>
@@ -75,10 +78,10 @@
               {% endfor %}
               <div>
                 <div class="row mt-5">
-                  <div class="col-12">
+                  <div class="col-12 col-sm-6 mx-auto">
                     <div class="card mx-5 mb-5 shadow rounded" style="border-radius:50px;border:none">
                       <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Selected Lesson Subscription:</h5>
+                        <h5 class="card-title font-weight-bold">Selected Lesson:</h5>
                         <div class="row">
                           <div class="col-6 text-muted">
                             <p>Plan:  <input type="text" name="name" id="name" class="border-none" readonly></p>
@@ -97,7 +100,7 @@
               </div>
             <div class="text-center">
                 <div class="col{% if s %}-12 mt-2{% endif %}">
-                    <input type="submit" class="btn btn advert-button text-uppercase mt-5 mb-5" value="Add to Lesson Bag">
+                    <input type="submit" class="btn btn advert-button text-uppercase mt-5 mb-5" value="Add to Bag">
                 </div>
             </form>
                 <a href="{% url 'home' %}" class="btn btn-outline-black mt-5 mb-5">

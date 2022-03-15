@@ -39,7 +39,7 @@ class UserSubscription(models.Model):
 
 
     def __str__(self):
-        return f'{self.subscription_user_id}'
+        return f'{self.subscription}'
 
 
 class Contact(models.Model):

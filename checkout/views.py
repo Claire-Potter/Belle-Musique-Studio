@@ -12,7 +12,7 @@ from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from djstripe.models import Subscription, Invoice
+from djstripe.models import Subscription
 
 from home.models import Cover, User, UserSubscription
 from profiles.models import UserProfile
@@ -331,7 +331,6 @@ def subscribe(request):
                 user_customer_id = request.user.customer.id
                 customer_subscribed = (SubscribedCustomer
                                        .objects.get(subscribed_customer_id=user_customer_id))
-                subscribed_item = (SubscriptionLineItem.objects.get(customer=customer_subscribed))  
                 customer_exists = True
                 break
             except SubscribedCustomer.DoesNotExist:
@@ -339,44 +338,44 @@ def subscribe(request):
                 time.sleep(1)
         if customer_exists:
             subscription_form = SubscribedCustomerForm(request.POST, instance=customer_subscribed)
-            subscription_lineitem_form = SubscriptionLineItemForm(request.POST, instance=subscribed_item)
+            subscription_lineitem_form = SubscriptionLineItemForm(request.POST)
             current_bag = lesson_bag_contents(request)
             total = current_bag['lesson_total']
-            if subscription_form.is_valid():
+            if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
                 subscription_internal = subscription_form.save(commit=False)
+                subscription_lineitem_internal = subscription_lineitem_form.save(commit=False)
                 subscription_internal.save()
+                user_subscription = (UserSubscription.objects
+                                     .filter(username=request.user).latest())
+                sub_id=user_subscription.subscription.id
+                subscription_check=get_object_or_404(Subscription, id=sub_id)
                 try:
                     user_subscription = (UserSubscription.objects
                                          .filter(username=request.user).latest())
-                    subscription_id=user_subscription.subscription.id
+                    subscribed_id=user_subscription.subscription.id
                     subscription_status=user_subscription.subscription.status
                     subscription_start=user_subscription.subscription.current_period_start
                     subscription_end=user_subscription.subscription.current_period_end
                     subscription_invoice=user_subscription.subscription.latest_invoice
-                    subscription_line_item = SubscriptionLineItem(
-                        subscribed_id=subscription_id,
-                        subscription=user_subscription.subscription,
-                        subscription_name=user_subscription.subscription_name,
-                        status=subscription_status,
-                        customer=subscription_internal,
-                        start_date=subscription_start,
-                        end_date=subscription_end,
-                        latest_invoice=subscription_invoice,
-                        price=total,
-                        quantity = 1,
-                        original_lesson_bag = json.dumps(lesson_bag)
-                        )
-                    subscription_line_item.save()
-                    user_subscription = (UserSubscription.objects
-                                         .filter(username=request.user).latest())
-                    sub_id=user_subscription.subscription.id
-                    subscription=get_object_or_404(Subscription, id=sub_id)
-                except subscription.DoesNotExist:
+                    subscription_lineitem_internal.subscribed_id=subscribed_id
+                    subscription_lineitem_internal.subscription=user_subscription.subscription
+                    subscription_lineitem_internal.subscription_name=user_subscription.subscription_name
+                    subscription_lineitem_internal.status=subscription_status
+                    subscription_lineitem_internal.customer=subscription_internal
+                    subscription_lineitem_internal.start_date=subscription_start
+                    subscription_lineitem_internal.end_date=subscription_end
+                    subscription_lineitem_internal.latest_invoice=subscription_invoice
+                    subscription_lineitem_internal.price=int(total)
+                    subscription_lineitem_internal.quantity = 1
+                    subscription_lineitem_internal.original_lesson_bag = json.dumps(lesson_bag)
+                    subscription_lineitem_internal.save()
+                except subscription_check.DoesNotExist:
                     messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
                         "Please call us for assistance!")
                     )
                     subscription_internal.delete()
+                    subscription_lineitem_internal.delete()
                     return redirect(reverse('view_lesson_bag'))
                 return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
             else:
@@ -402,42 +401,47 @@ def subscribe(request):
                 current_bag = lesson_bag_contents(request)
                 total = current_bag['lesson_total']
                 subscription=user_subscription.subscription_name
-                if subscription_form.is_valid():
+                if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
                     subscription_internal = subscription_form.save(commit=False)
-                    subscription_internal.customer = request.user.customer
-                    subscription_internal.subscribed_customer_id = request.user.customer.id
-                    subscription_internal.user_profile = profile
+                    subscription_internal.subscribed_customer_id=user_customer_id
+                    subscription_internal.customer=request.user.customer
+                    subscription_internal.user_profile=profile
+                    subscription_lineitem_internal = subscription_lineitem_form.save(commit=False)
                     subscription_internal.save()
+                    user_subscription = (UserSubscription.objects
+                                     .filter(username=request.user).latest())
+                    sub_id=user_subscription.subscription.id
+                    subscription_check=get_object_or_404(Subscription, id=sub_id)
                     try:
                         user_subscription = (UserSubscription.objects
                                          .filter(username=request.user).latest())
-                        subscription_id=user_subscription.subscription.id
+                        subscribed_id=user_subscription.subscription.id
                         subscription_status=user_subscription.subscription.status
                         subscription_start=user_subscription.subscription.current_period_start
                         subscription_end=user_subscription.subscription.current_period_end
                         subscription_invoice=user_subscription.subscription.latest_invoice
-                        subscription_line_item = SubscriptionLineItem(
-                            subscribed_id=subscription.id,
-                            subscription=subscription,
-                            subscription_name=subscription,
-                            status=subscription_status,
-                            customer=subscription_internal,
-                            start_date=subscription_start,
-                            end_date=subscription_end,
-                            latest_invoice=subscription_invoice,
-                            price=total,
-                            quantity = 1,
-                            original_lesson_bag = json.dumps(lesson_bag)
-                            )
-                        subscription_line_item.save()
-                    except subscription.DoesNotExist:
+                        subscription_lineitem_internal.subscribed_id=subscribed_id
+                        subscription_lineitem_internal.subscription=user_subscription.subscription
+                        subscription_lineitem_internal.subscription_name=user_subscription.subscription_name
+                        subscription_lineitem_internal.status=subscription_status
+                        subscription_lineitem_internal.customer=subscription_internal
+                        subscription_lineitem_internal.start_date=subscription_start
+                        subscription_lineitem_internal.end_date=subscription_end
+                        subscription_lineitem_internal.latest_invoice=subscription_invoice
+                        subscription_lineitem_internal.price=int(total)
+                        subscription_lineitem_internal.quantity = 1
+                        subscription_lineitem_internal.original_lesson_bag = json.dumps(lesson_bag)
+                        subscription_lineitem_internal.save()
+                        subscription_check=get_object_or_404(Subscription, id=sub_id)
+                    except subscription_check.DoesNotExist:
                         messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
                         "Please call us for assistance!")
                         )
                         subscription_internal.delete()
+                        subscription_lineitem_internal.delete()
                         return redirect(reverse('view_lesson_bag'))
-                    customer = subscription_internal
+                    customer = user_customer_id
                     return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
 
                 else:
@@ -463,33 +467,15 @@ def subscribe(request):
         if  profile is None:
             profile_exists = False
             phone_number = None
-            postcode = None
-            town_or_city = None
-            street_address1 = None
-            street_address2 = None
-            county = None
-            country = None
-
         else:
             profile_exists = True
             phone_number = profile.default_phone_number
-            postcode = profile.default_postcode
-            town_or_city = profile.default_town_or_city
-            street_address1 = profile.default_street_address1
-            street_address2 = profile.default_street_address2
-            county = profile.default_county
-            country = profile.default_country
         subscription= user_subscription.subscription_name
         subscription_form = (SubscribedCustomerForm(initial={
                               'full_name': request.user.get_full_name(),
                               'email': request.user.email,
-                              'phone_number': phone_number,
-                              'postcode': postcode,
-                              'town_or_city': town_or_city,
-                              'street_address1': street_address1,
-                              'street_address2': street_address2,
-                              'county': county,
-                              'country': country,}))
+                              'phone_number': phone_number,}))
+        subscription_lineitem_form = SubscriptionLineItemForm()
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')
 
@@ -499,6 +485,7 @@ def subscribe(request):
                 'sub_id': sub_id,
                 'subscription': subscription,
                 'subscription_form': subscription_form,
+                'subscription_lineitem_form': subscription_lineitem_form,
                 'profile_exists': profile_exists
     }
     return render(request, "checkout/subscription.html", context)
