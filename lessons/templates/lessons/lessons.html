@@ -66,6 +66,10 @@
                 
                  {% endfor %}
                 </div>
+                <small class="ml-3">
+                    <a href="{% url 'edit_lesson' lesson.id %}">Edit</a> | 
+                    <a class="text-danger" href="{% url 'add_new_lesson' %}">Add</a>
+                </small>
                                    
                                     <input type="hidden" name="redirect_lesson_url" value="{{ request.path }}">
                                 </div>

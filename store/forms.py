@@ -5,8 +5,10 @@ from .widgets import CustomClearableFileInput
 
 
 class ProductForm(forms.ModelForm):
+    """.flake8"""
 
     class Meta:
+        """.flake8"""
         model = MusicProduct
         fields = '__all__'
 

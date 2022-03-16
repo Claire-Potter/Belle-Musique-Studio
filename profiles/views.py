@@ -3,7 +3,7 @@ xxx
 """
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render
-from djstripe.models import Invoice
+from djstripe.models import Invoice, Subscription
 
 from checkout.models import Order
 from home.models import Cover
@@ -67,7 +67,8 @@ def subscription_detail(request, subscribed_id):
     profile = get_object_or_404(UserProfile, user=request.user)
     subscribed_customer = get_object_or_404(SubscribedCustomer, user_profile=profile)
     subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=subscribed_id)
-    invoice = Invoice.objects.filter(customer_id=subscribed_customer.customer).latest('created')
+    subscription = get_object_or_404(Subscription, id=subscribed_id)
+    invoice = get_object_or_404(Invoice, id=subscription.latest_invoice.id)
     invoice_link = invoice.hosted_invoice_url
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='subscriptions')

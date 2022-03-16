@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "includes/cover.html" %}
+</div>
+<section>
+    <div class="container-fluid bg-white w-100">
+        <div class="row mx-auto">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+                <div class="col-12 col-md-6 text-center mx-auto">
+                    <hr>
+                    <h2 class="font-weight-bold text-center mt-4 mb-4">Edit a Lesson</h2>
+                    <hr>
+                </div>
+                <div>
+                    <p class="small text-muted font-italic mt-3 mb-3 text-center">Please save the image url in the url field. Please save the image alt text under caption.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto">
+           <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+                <form method="POST" action="{% url 'edit_lesson' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                            {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <div class="text-right">
+                        <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'lessons' %}">Cancel</a>
+                        <button class="btn advert-button mb-3 text-uppercase" type="submit">Update Lesson</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+</section>
+<div class="footer-background-color w-100">
+{% endblock %}

@@ -514,7 +514,8 @@ def checkout_lesson_complete(request, sub_id):
     customer = request.user.customer
     subscribed_customer = get_object_or_404(SubscribedCustomer, subscribed_customer_id=customer.id)
     subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=sub_id)
-    invoice = Invoice.objects.filter(customer_id=subscribed_customer.customer).latest('created')
+    subscription = get_object_or_404(Subscription, id=sub_id)
+    invoice = get_object_or_404(Invoice, id=subscription.latest_invoice.id)
     invoice_link = invoice.hosted_invoice_url
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='checkout')
