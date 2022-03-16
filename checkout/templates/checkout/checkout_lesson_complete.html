@@ -147,7 +147,9 @@
                             <p class="mb-0  font-weight-bold small">Invoice</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0 small">{{ subscription_item.latest_invoice }}</p>
+                            <a href="{{ invoice_link }}" target="_blank"
+                            title="{{ subscription_item.subscription_name }}" class="small invoice-link">
+                                {{ subscription_item.latest_invoice }}</a>
                         </div>
                     </div>
 

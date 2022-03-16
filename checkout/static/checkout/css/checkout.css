@@ -89,6 +89,11 @@ select.form-control:not([size]):not([multiple]) {
     width: 40%;
 }
 
+.invoice-link {
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
 /* Media queries */
 
 @media (max-width: 800px) {

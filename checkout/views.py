@@ -12,7 +12,7 @@ from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from djstripe.models import Subscription
+from djstripe.models import Subscription, Invoice
 
 from home.models import Cover, User, UserSubscription
 from profiles.models import UserProfile
@@ -514,6 +514,8 @@ def checkout_lesson_complete(request, sub_id):
     customer = request.user.customer
     subscribed_customer = get_object_or_404(SubscribedCustomer, subscribed_customer_id=customer.id)
     subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=sub_id)
+    invoice = Invoice.objects.filter(customer_id=subscribed_customer.customer).latest('created')
+    invoice_link = invoice.hosted_invoice_url
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='checkout')
     messages.success(request, f'Subscription successfully processed! \
@@ -528,6 +530,7 @@ def checkout_lesson_complete(request, sub_id):
         'subscribed_customer': subscribed_customer,
         'subscription_item': subscription_item,
         'sub_id': sub_id,
+        'invoice_link': invoice_link,
         'covers': covers,
         'cover': cover,
     }
