@@ -95,7 +95,7 @@ class SubscribedCustomer(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, null=False,
                                     blank=False, )
     user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE,
-                                        null=False, blank=False, )
+                                        null=False, blank=False, related_name='subscribed_customers')
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)

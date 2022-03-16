@@ -34,23 +34,24 @@
                 <table class="table table-sm table-borderless">
                     <thead>
                         <tr>
-                            <th>Subscription ID</th>
-                            <th>Subscription</th>
-                            <th>Student</th>
-                            <th>Status</th>
+                            <th class="small font-weight-bold">Sub. ID</th>
+                            <th class="small font-weight-bold">Subscription</th>
+                            <th class="small font-weight-bold">Student</th>
+                            <th class="small font-weight-bold">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for subscription in subscriptionss %}
+                        {% for subscription in subscription_items %}
                             <tr>
                                 <td>
-                                    <a href="{% url '#' subscription.id %}"
-                                    title="{{ subscription.subscription_name }}">
-                                        {{ subscription.id|truncatechars:6 }}
+                                    <a href="{% url 'subscription_detail' subscription.subscribed_id %}"
+                                    title="{{ subscription.subscription_name }}" class="small">
+                                        {{ subscription.subscribed_id|truncatechars:6 }}
                                     </a>
                                 </td>
-                                <td>{{ subscription.student }}</td>
-                                <td>${{ subscription.status }}</td>
+                                <td class="small">{{ subscription.subscription_name|truncatewords:7 }}</td>
+                                <td class="small">{{ subscription.student }}</td>
+                                <td class="small">{{ subscription.status }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -61,10 +62,10 @@
                 <table class="table table-sm table-borderless">
                     <thead>
                         <tr>
-                            <th>Order Number</th>
-                            <th>Date</th>
-                            <th>Items</th>
-                            <th>Order Total</th>
+                            <th class="small font-weight-bold">Order Number</th>
+                            <th class="small font-weight-bold">Date</th>
+                            <th class="small font-weight-bold">Items</th>
+                            <th class="small font-weight-bold">Order Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,12 +73,12 @@
                             <tr>
                                 <td>
                                     <a href="{% url 'order_history' order.order_number %}"
-                                    title="{{ order.order_number }}">
+                                    title="{{ order.order_number }}" class="small">
                                         {{ order.order_number|truncatechars:6 }}
                                     </a>
                                 </td>
-                                <td>{{ order.date }}</td>
-                                <td>
+                                <td class="small">{{ order.date }}</td>
+                                <td class="small">
                                     <ul class="list-unstyled">
                                         {% for item in order.lineitems.all %}
                                             <li class="small">
@@ -88,7 +89,7 @@
                                         {% endfor %}
                                     </ul>
                                 </td>
-                                <td>${{ order.grand_total }}</td>
+                                <td class="small">${{ order.grand_total }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
