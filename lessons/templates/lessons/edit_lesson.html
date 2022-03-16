@@ -19,14 +19,15 @@
         </div>
         <div class="row mx-auto">
            <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
-                <form method="POST" action="{% url 'edit_lesson' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data">
+                <form method="POST" action="{% url 'edit_lesson' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data" id="edit-form">
                     {% csrf_token %}
+                    <p id="id_id" class="hidden">>ID {{ product.id }}</p>
                     {% for field in form %}
                             {{ field | as_crispy_field }}
                     {% endfor %}
                     <div class="text-right">
                         <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'lessons' %}">Cancel</a>
-                        <button class="btn advert-button mb-3 text-uppercase" type="submit">Update Lesson</button>
+                        <button class="btn advert-button mb-3 text-uppercase" type="submit" id="submit-button">Update Lesson</button>
                     </div>
                 </form>
             </div>            

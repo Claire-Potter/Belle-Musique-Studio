@@ -67,7 +67,7 @@ def __init__(self, request):
 
 
 @webhooks.handler("customer.subscription.created")
-def customer_created_event_listener(event, **kwargs):
+def customer_created_event_listener(event):
     """.git/"""
     intent = event.data.object
     user_name = intent.metadata.username
@@ -89,3 +89,14 @@ def customer_created_event_listener(event, **kwargs):
             [cust_email],
             fail_silently=False,
 )
+
+
+@webhooks.handler("customer.deleted")
+def customer_deleted_event_listener(event, **kwargs):
+    send_mail(
+        'Subscription Deleted',
+        'See ya! 👋',
+        'from@example.com',
+        ['to@example.com'],
+        fail_silently=False,
+    )

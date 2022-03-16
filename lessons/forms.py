@@ -11,7 +11,7 @@ class LessonProductForm(forms.ModelForm):
     class Meta:
         """.git/"""
         model = Product
-        fields = ('description', 'name', 'caption', 'url', 'unit_label', 'statement_descriptor')
+        fields = ('name', 'description', 'url', 'caption', 'statement_descriptor', 'unit_label',)
 
 
     def __init__(self, *args, **kwargs):

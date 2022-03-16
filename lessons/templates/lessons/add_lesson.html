@@ -12,7 +12,10 @@
                 <h2 class="font-weight-bold text-center mt-4 mb-4">Add a Lesson</h2>
                 <hr>
             </div>
+        <div>
+            <p class="small text-muted font-italic mt-3 mb-3 text-center">Please save the image url in the url field. Please save the image alt text under caption.</p>
         </div>
+    </div>
     </div>
     <div class="row mx-auto">
        <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
@@ -26,7 +29,7 @@
                         {% endif %}
                     {% endfor %}
                     <div class="text-right">
-                        <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'products' %}">Cancel</a>
+                        <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'lessons' %}">Cancel</a>
                         <button class="btn advert-button text-uppercase mb-3 " type="submit">Add Lesson</button>
                     </div>
           </form>
@@ -35,14 +38,4 @@
 </div>
 </section>
 <div class="footer-background-color w-100">
-{% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('#new-image').change(function() {
-            var file = $('#new-image')[0].files[0];
-            $('#filename').text(`Image will be set to: ${file.name}`);
-        });
-    </script>
 {% endblock %}
