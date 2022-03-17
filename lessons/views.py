@@ -51,6 +51,8 @@ def add_lesson(request):
             active='true')
             try:
                 djstripe_obj = djstripe.models.Product.sync_from_stripe_data(stripe_data)
+                product = djstripe_obj
+                new_form = LessonProductAddForm(request.POST, prefix='product', instance=product)
                 try:
                     amount_one = request.POST['price_one-amount']
                     amount_two = request.POST['price_two-amount']
@@ -68,32 +70,29 @@ def add_lesson(request):
                     new_amount_three = pound_to_cent(amount_three)
 
 
-                    price_one_data = stripe.Plan.create(amount=new_amount_one,
+                    price_one_price = stripe.Price.create(
+                    unit_amount=new_amount_one,
                     currency=request.POST['price_one-currency'],
-                    interval=request.POST['price_one-interval'],
-                    nickname=request.POST['price_one-nickname'],
-                    usage_type=request.POST['price_one-usage_type'],
+                    recurring={"interval": request.POST['price_one-interval']},
+                    price_description=request.POST['price_one-nickname'],
                     product=djstripe_obj.id, active='true')
-                    price_two_data = stripe.Plan.create(amount=new_amount_two,
+                    price_two_price = stripe.Price.create(
+                    unit_amount=new_amount_two,
                     currency=request.POST['price_two-currency'],
-                    interval=request.POST['price_two-interval'],
-                    nickname=request.POST['price_two-nickname'],
-                    usage_type=request.POST['price_two-usage_type'], product=djstripe_obj.id,
-                    active='true')
-                    price_three_data = stripe.Plan.create(amount=new_amount_three,
+                    recurring={"interval": request.POST['price_two-interval']},
+                    product=djstripe_obj.id, active='true',
+                    price_description=request.POST['price_two-nickname'],)
+                    price_three_price = stripe.Price.create(
+                    unit_amount=new_amount_three,
                     currency=request.POST['price_three-currency'],
-                    interval=request.POST['price_three-interval'],
-                    nickname=request.POST['price_three-nickname'],
-                    usage_type=request.POST['price_three-usage_type'], product=djstripe_obj.id,
-                    active='true')
+                    recurring={"interval": request.POST['price_three-interval']},
+                    product=djstripe_obj.id, active='true',
+                    price_description=request.POST['price_three-nickname'],)
                     try:
-                        price_one_stripe = (djstripe.models.
-                                            Plan.sync_from_stripe_data(price_one_data))
-                        price_two_stripe = (djstripe.models.
-                                            Plan.sync_from_stripe_data(price_two_data))
-                        price_three_stripe = (djstripe.models.
-                                              Plan.sync_from_stripe_data(price_three_data))
-                    except price_one_stripe.DoesNotExist:
+                        djstripe.models.Price.sync_from_stripe_data(price_one_price)
+                        djstripe.models.Price.sync_from_stripe_data(price_two_price)
+                        djstripe.models.Price.sync_from_stripe_data(price_three_price)
+                    except djstripe_obj.DoesNotExist:
                         messages.error(request, (
                         "The lesson was not successfully created. Please contact an administrator"))
                 except djstripe_obj.DoesNotExist:
@@ -102,26 +101,8 @@ def add_lesson(request):
             except djstripe_obj.DoesNotExist:
                 messages.error(request, (
                 "The lesson was not successfully created. Please contact an administrator"))
-            product = djstripe_obj.id
-            price_1 = price_one_stripe.id
-            price_2 = price_two_stripe.id
-            price_3 = price_three_stripe.id
-            form = LessonProductForm(request.POST, prefix='product')
-            form.id = product
-            p1_form.id = price_1
-            p2_form.id = price_2
-            p3_form.id = price_3
-            add_form = form.save(commit=False)
-            p1_form.cleaned_data['product'] = add_form
-            p2_form.cleaned_data['product'] = add_form
-            p3_form.cleaned_data['product'] = add_form
-            price1 = p1_form.save(commit=False)
-            price2 = p2_form.save(commit=False)
-            price3 = p3_form.save(commit=False)
+            add_form = new_form.save(commit=False)
             add_form.save()
-            price1.save()
-            price2.save()
-            price3.save()
             messages.success(request, 'Successfully added new lesson!')
             return redirect(reverse('lessons'))
         else:

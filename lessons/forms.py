@@ -51,7 +51,7 @@ class LessonProductAddForm(forms.ModelForm):
     class Meta:
         """.git/"""
         model = Product
-        fields = ('id', 'name', 'description', 'url', 'caption',
+        fields = ('name', 'description', 'url', 'caption',
                   'statement_descriptor', 'unit_label',)
 
 
@@ -61,7 +61,6 @@ class LessonProductAddForm(forms.ModelForm):
         product_names = [(p.id, p.name ) for p in products]
 
         self.fields['name'].choices = product_names
-        self.fields['id'].widget.attrs['hidden'] = True
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
 
@@ -72,12 +71,11 @@ class LessonPriceAddForm(forms.ModelForm):
     class Meta:
         """.git/"""
         model = Plan
-        fields = ('id', 'amount', 'currency', 'interval', 'nickname', 'usage_type', 'active')
+        fields = ('amount', 'currency', 'interval', 'nickname', 'usage_type', 'active')
 
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['active'].initial = True
-        self.fields['id'].widget.attrs['hidden'] = True
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
