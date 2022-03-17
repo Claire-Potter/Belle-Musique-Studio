@@ -22,10 +22,14 @@ class User(AbstractUser):
 class UserSubscription(models.Model):
     """.git/"""
     username = models.ForeignKey(User, null=False, blank=False,
-                              on_delete=models.CASCADE, related_name='userlineitems', editable=False)
-    subscription_user_id = models.CharField(max_length=350, unique=True, null=True, blank=True, editable=False)
-    subscription_name = models.CharField(max_length=350, null=True, blank=True, editable=False)
-    subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL, editable=False)
+                              on_delete=models.CASCADE, related_name='userlineitems',
+                              editable=False)
+    subscription_user_id = models.CharField(max_length=350, unique=True, null=True, blank=True,
+                                             editable=False)
+    subscription_name = models.CharField(max_length=350, null=True, blank=True,
+                                          editable=False)
+    subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL,
+                                     editable=False)
     date = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:

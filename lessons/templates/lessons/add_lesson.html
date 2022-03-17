@@ -21,12 +21,22 @@
        <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
            <form method="POST" action="{% url 'add_new_lesson' %}" class="form mb-2 text-form" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <p class="font-weight-bold">Lesson Details:</p>
                     {% for field in form %}
-                        {% if field.name != 'image' %}
                             {{ field | as_crispy_field }}
-                        {% else %}
-                            {{ field }}
-                        {% endif %}
+                    {% endfor %}
+                    <p  class="font-weight-bold">Pricing Details:</p>
+                    <p  class="font-weight-bold">Price:</p>
+                    {% for field in p1_form %}
+                    {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <p  class="font-weight-bold">Price:</p>
+                    {% for field in p2_form %}
+                    {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <p  class="font-weight-bold">Price:</p>
+                    {% for field in p3_form %}
+                    {{ field | as_crispy_field }}
                     {% endfor %}
                     <div class="text-right">
                         <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'lessons' %}">Cancel</a>
