@@ -68,9 +68,11 @@ def add_lesson(request):
                             newest_amount = pound_to_cent(a_m)
                         return(newest_amount)
 
-                    new_amount_one = newest_amount(0)
-                    new_amount_two = newest_amount(1)
-                    new_amount_three = newest_amount(2)
+                        newest_amount
+                        new_amount_one = newest_amount(0)
+                        new_amount_two = newest_amount(1)
+                        new_amount_three = newest_amount(2)
+                        return(new_amount_one, new_amount_two, new_amount_three )
 
                     price_one_data = stripe.Plan.create(amount=new_amount_one,
                     currency=request.POST['price_one-currency'],
