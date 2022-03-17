@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'lessons/css/lessons.css' %}">
+{% endblock %}
 {% block content %}
 {% include "includes/cover.html" %}
 </div>

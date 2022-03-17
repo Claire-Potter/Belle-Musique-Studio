@@ -55,24 +55,18 @@ def add_lesson(request):
                     amount_one = request.POST['price_one-amount']
                     amount_two = request.POST['price_two-amount']
                     amount_three = request.POST['price_three-amount']
-                    amounts = (amount_one, amount_two, amount_three)
+
 
                     def pound_to_cent(amount, truncate=True):
                         new_amount = float(amount) * 100
                         if truncate:
                             return int(new_amount)
-                        else:
-                            return new_amount
 
-                        for a_m in amounts:
-                            newest_amount = pound_to_cent(a_m)
-                        return(newest_amount)
 
-                        newest_amount
-                        new_amount_one = newest_amount(0)
-                        new_amount_two = newest_amount(1)
-                        new_amount_three = newest_amount(2)
-                        return(new_amount_one, new_amount_two, new_amount_three )
+                    new_amount_one = pound_to_cent(amount_one)
+                    new_amount_two = pound_to_cent(amount_two)
+                    new_amount_three = pound_to_cent(amount_three)
+
 
                     price_one_data = stripe.Plan.create(amount=new_amount_one,
                     currency=request.POST['price_one-currency'],
@@ -95,8 +89,10 @@ def add_lesson(request):
                     try:
                         price_one_stripe = (djstripe.models.
                                             Plan.sync_from_stripe_data(price_one_data))
-                        djstripe.models.Plan.sync_from_stripe_data(price_two_data)
-                        djstripe.models.Plan.sync_from_stripe_data(price_three_data)
+                        price_two_stripe = (djstripe.models.
+                                            Plan.sync_from_stripe_data(price_two_data))
+                        price_three_stripe = (djstripe.models.
+                                              Plan.sync_from_stripe_data(price_three_data))
                     except price_one_stripe.DoesNotExist:
                         messages.error(request, (
                         "The lesson was not successfully created. Please contact an administrator"))
@@ -106,8 +102,15 @@ def add_lesson(request):
             except djstripe_obj.DoesNotExist:
                 messages.error(request, (
                 "The lesson was not successfully created. Please contact an administrator"))
-            product = Product.objects.filter(name=request.POST['name']).latest('name')    
-            form = LessonProductForm(form_data, instance=product) 
+            product = djstripe_obj.id
+            price_1 = price_one_stripe.id
+            price_2 = price_two_stripe.id
+            price_3 = price_three_stripe.id
+            form = LessonProductForm(request.POST, prefix='product')
+            form.id = product
+            p1_form.id = price_1
+            p2_form.id = price_2
+            p3_form.id = price_3
             add_form = form.save(commit=False)
             p1_form.cleaned_data['product'] = add_form
             p2_form.cleaned_data['product'] = add_form
