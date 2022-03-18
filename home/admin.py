@@ -14,10 +14,9 @@ class ContactAdmin(admin.ModelAdmin):
     field is added to indicate that the saved data
     should not be deleted if set to True.
     """
-    list_display = ('name', 'email', 'created_on',
-                    'deletable')
-    list_filter = ('created_on', 'name', 'deletable')
-    search_fields = ('name', 'email', 'deletable')
+    list_display = ('name', 'email', 'created_on')
+    list_filter = ('created_on', 'name')
+    search_fields = ('name', 'email')
 
 
 @admin.register(Cover)

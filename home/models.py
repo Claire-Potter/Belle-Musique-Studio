@@ -51,14 +51,10 @@ class Contact(models.Model):
     Model created to render the contact page
     and save the contact request data.
     """
-    username = models.ForeignKey(
-               User, on_delete=models.CASCADE, related_name='contact',
-               default='1', blank=True)
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    deletable = models.BooleanField(default=True, editable=False)
 
     class Meta:
         """
