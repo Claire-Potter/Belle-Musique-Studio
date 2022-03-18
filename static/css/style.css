@@ -48,10 +48,6 @@ body {
     margin-left: 65%;
 }
 
-.border-none {
-    border-width: 0;
-    font-size: 1.5rem;
-}
 
 .store-logo {
     font-size: 1.5rem;
@@ -316,15 +312,6 @@ body {
 }
 
 
-.btn-outline-black-lessons {
-    background: white;
-    color: black !important;
-    /* use important to override link colors for <a> elements */
-    border: 1px solid black;
-    border-radius: 5%;
-    font-size: 1rem;
-}
-
 #new-image {
     background: white;
     color: black !important;
@@ -334,10 +321,7 @@ body {
 
 .btn-outline-black:hover,
 .btn-outline-black:active,
-.btn-outline-black:focus,
-.btn-outline-black-lessons:hover,
-.btn-outline-black-lessons:active,
-.btn-outline-black-lessons:focus {
+.btn-outline-black:focus {
     background: black;
     color: white !important;
 }
@@ -473,15 +457,6 @@ body {
     display: none;
 }
 
-/* Lessons Page */
-
-.lessons-image {
-    border: #04142f 2px solid;
-    border-radius: 50%;
-    width: 250px;
-    height: 250px;
-}
-
 
 /* Media query to center logo for small screens */
 
@@ -492,15 +467,10 @@ body {
 
     }
 
-    .container-fluid {
-        margin-left: 15px;
+    .advert-button {
+        font-size: calc(0.8rem + .9vw) !important;
     }
 
-    .border-none {
-        border-width: 0;
-        font-size: calc(1rem + .4vw) !important;
-        padding: 0;
-    }
 
     .detail-image {
         width: 70%;
@@ -551,6 +521,27 @@ body {
         height: 65%;
     }
 
+    .smaller-text {
+        font-size: calc(0.6rem + .9vw) !important;
+    }
+
+    .advert-button {
+        font-size: calc(0.5rem + .9vw) !important;
+        padding: 3px;
+    }
+
+    .btn-outline-black {
+        font-size: calc(0.5rem + .9vw) !important;
+        padding: 3px;
+    }
+
+}
+
+
+@media (max-width: 370px) {
+    .smaller-text {
+        font-size: calc(1rem + .9vw) !important;
+    }
 }
 
 
@@ -583,6 +574,7 @@ body {
         font-size: calc(0.6rem + .9vw) !important;
 
     }
+
 
     .detail-image {
         width: 40%;

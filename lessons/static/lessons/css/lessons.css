@@ -1,3 +1,94 @@
-#div_id_product-id {
+/* Lessons Page */
+
+.lessons-image {
+    border: #04142f 2px solid;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+
+
+.border-none {
+    border-width: 0;
+    font-size: 1.5rem;
+}
+
+.btn-outline-black-lessons {
+    background: white;
+    color: black !important;
+    /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+    border-radius: 5%;
+    font-size: 1rem;
+}
+
+.btn-outline-black-lessons:hover,
+.btn-outline-black-lessons:active,
+.btn-outline-black-lessons:focus {
+    background: black;
+    color: white !important;
+}
+
+
+#hint_id_product-caption,
+#hint_id_product-name,
+#hint_id_product-url,
+#hint_id_product-description,
+#hint_id_product-statement_descriptor,
+#hint_id_price_one-amount,
+#hint_id_price_two-amount,
+#hint_id_price_three-amount {
     display: none;
+}
+
+@media (max-width: 830px) {
+
+    .border-none {
+        border-width: 0;
+        font-size: calc(0.9rem + .4vw) !important;
+        padding: 0;
+        margin: 0;
+    }
+
+    .lessons-image {
+        width: 70%;
+        height: 70%;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .border-none {
+        border-width: 0;
+        font-size: calc(0.8rem + .4vw) !important;
+        padding: 0;
+        margin: 0;
+        width: 150px;
+    }
+
+    .lessons-image {
+        width: 65%;
+        height: 65%;
+    }
+}
+
+@media (max-width: 300px) {
+
+    .lesson-small-font {
+        font-size: calc(0.6rem + .4vw) !important;
+
+    }
+
+    .border-none {
+        border-width: 0;
+        font-size: calc(0.6rem + .4vw) !important;
+        padding: 0;
+        margin: 0;
+        width: 100px;
+    }
+
+    .background-overlay {
+        font-size: calc(0.6rem + .4vw) !important;
+    }
+
 }
