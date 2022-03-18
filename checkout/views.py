@@ -501,6 +501,14 @@ def cancel(request):
 
     try:
         stripe.Subscription.delete(sub_id)
+        user_subscription.delete()
+        Subscription.objects.filter(id=sub_id).delete()
+        subscription_line_item = SubscriptionLineItem.objects.filter(subscribed_id=sub_id)
+        if subscription_line_item.exists() is True:
+            subscription_line_item.delete()
+        if 'lesson_bag' in request.session:
+            del request.session['lesson_bag']
+        messages.success(request, f'Subscription {sub_id} successfully cancelled!')
     except Exception as e_rr:
         return JsonResponse({'error': (e_rr.args[0])}, status =403)
 

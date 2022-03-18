@@ -37,7 +37,16 @@
 #hint_id_product-statement_descriptor,
 #hint_id_price_one-amount,
 #hint_id_price_two-amount,
-#hint_id_price_three-amount {
+#hint_id_price_three-amount,
+#hint_id_price_one-currency,
+#hint_id_price_two-currency,
+#hint_id_price_three-currency,
+#hint_id_price_one-nickname,
+#hint_id_price_two-nickname,
+#hint_id_price_three-nickname,
+#hint_id_price_one-trial_period_days,
+#hint_id_price_two-trial_period_days,
+#hint_id_price_three-trial_period_days {
     display: none;
 }
 

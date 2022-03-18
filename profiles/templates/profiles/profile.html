@@ -38,6 +38,7 @@
                             <th class="small font-weight-bold">Subscription</th>
                             <th class="small font-weight-bold">Student</th>
                             <th class="small font-weight-bold">Status</th>
+                            <th class="small font-weight-bold">Cancel Sub.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,9 @@
                                 <td class="small">{{ subscription.subscription_name|truncatewords:7 }}</td>
                                 <td class="small">{{ subscription.student }}</td>
                                 <td class="small">{{ subscription.status }}</td>
+                                <td class="small"> <div class="text-center">
+                                    <a class="btn btn-danger text-uppercase mb-3" href="{% url "checkout_lesson_cancel" %}">Cancel</a>
+                                 </div></td>
                             </tr>
                         {% endfor %}
                     </tbody>

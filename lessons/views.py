@@ -70,28 +70,32 @@ def add_lesson(request):
                     new_amount_three = pound_to_cent(amount_three)
 
 
-                    price_one_price = stripe.Price.create(
-                    unit_amount=new_amount_one,
+                    price_one_price = stripe.Plan.create(
+                    amount=new_amount_one,
                     currency=request.POST['price_one-currency'],
-                    recurring={"interval": request.POST['price_one-interval']},
-                    price_description=request.POST['price_one-nickname'],
-                    product=djstripe_obj.id, active='true')
-                    price_two_price = stripe.Price.create(
-                    unit_amount=new_amount_two,
+                    interval='week',
+                    nickname=request.POST['price_one-nickname'],
+                    product=djstripe_obj.id, active='true',
+                    usage_type=request.POST['price_one-usage_type'])
+                    price_two_price = stripe.Plan.create(
+                    amount=new_amount_two,
                     currency=request.POST['price_two-currency'],
-                    recurring={"interval": request.POST['price_two-interval']},
+                    interval='month',
                     product=djstripe_obj.id, active='true',
-                    price_description=request.POST['price_two-nickname'],)
-                    price_three_price = stripe.Price.create(
-                    unit_amount=new_amount_three,
+                    nickname=request.POST['price_two-nickname'],
+                    usage_type=request.POST['price_two-usage_type'])
+                    price_three_price = stripe.Plan.create(
+                    amount=new_amount_three,
                     currency=request.POST['price_three-currency'],
-                    recurring={"interval": request.POST['price_three-interval']},
+                    interval='year',
                     product=djstripe_obj.id, active='true',
-                    price_description=request.POST['price_three-nickname'],)
+                    nickname=request.POST['price_three-nickname'],
+                    usage_type=request.POST['price_three-usage_type'],
+                    trial_period_days=7)
                     try:
-                        djstripe.models.Price.sync_from_stripe_data(price_one_price)
-                        djstripe.models.Price.sync_from_stripe_data(price_two_price)
-                        djstripe.models.Price.sync_from_stripe_data(price_three_price)
+                        djstripe.models.Plan.sync_from_stripe_data(price_one_price)
+                        djstripe.models.Plan.sync_from_stripe_data(price_two_price)
+                        djstripe.models.Plan.sync_from_stripe_data(price_three_price)
                     except djstripe_obj.DoesNotExist:
                         messages.error(request, (
                         "The lesson was not successfully created. Please contact an administrator"))
@@ -111,9 +115,12 @@ def add_lesson(request):
                             'Please ensure the form is valid.'))
     else:
         form = LessonProductAddForm(prefix='product')
-        p1_form = LessonPriceAddForm(prefix = 'price_one')
-        p2_form = LessonPriceAddForm(prefix = 'price_two')
-        p3_form = LessonPriceAddForm(prefix = 'price_three')
+        p1_form = LessonPriceAddForm(prefix = 'price_one', initial={'interval': 'week',
+                                                'trial_period_days': 0})
+        p2_form = LessonPriceAddForm(prefix = 'price_two',  initial={'interval': 'month',
+                                                'trial_period_days': 0})
+        p3_form = LessonPriceAddForm(prefix = 'price_three',  initial={'interval': 'year',
+                                                'trial_period_days': 7})
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='product_manage')
     template = 'lessons/add_lesson.html'

@@ -20,6 +20,13 @@ class LessonProductForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
 
+        self.fields['name'].widget.attrs['cols'] = "20"
+        self.fields['description'].widget.attrs['cols'] = "20"
+        self.fields['caption'].widget.attrs['cols'] = "20"
+        self.fields['name'].widget.attrs['rows'] = "2"
+        self.fields['description'].widget.attrs['rows'] = "2"
+        self.fields['caption'].widget.attrs['rows'] = "2"
+
 
 class LessonPriceForm(forms.ModelForm):
     """.git/"""
@@ -27,7 +34,8 @@ class LessonPriceForm(forms.ModelForm):
     class Meta:
         """.git/"""
         model = Plan
-        fields = ('id', 'amount', 'currency', 'interval', 'nickname', 'usage_type', 'trial_period_days')
+        fields = ('id', 'amount', 'currency', 'interval',
+                   'nickname', 'usage_type', 'trial_period_days')
 
 
     def __init__(self, *args, **kwargs):
@@ -39,6 +47,11 @@ class LessonPriceForm(forms.ModelForm):
         self.fields['usage_type'].widget.attrs['readonly'] = True
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
+
+        self.fields['nickname'].widget.attrs['cols'] = "20"
+        self.fields['nickname'].widget.attrs['rows'] = "2"
+        self.fields['interval'].widget.attrs['style'] = 'width:250px'
+        self.fields['usage_type'].widget.attrs['style'] = 'width:250px'
 
 
 class LessonProductAddForm(forms.ModelForm):
@@ -73,6 +86,13 @@ class LessonProductAddForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
 
+        self.fields['name'].widget.attrs['cols'] = "20"
+        self.fields['description'].widget.attrs['cols'] = "20"
+        self.fields['caption'].widget.attrs['cols'] = "20"
+        self.fields['name'].widget.attrs['rows'] = "2"
+        self.fields['description'].widget.attrs['rows'] = "2"
+        self.fields['caption'].widget.attrs['rows'] = "2"
+
 
 class LessonPriceAddForm(forms.ModelForm):
     """.git/"""
@@ -89,21 +109,25 @@ class LessonPriceAddForm(forms.ModelForm):
 
         placeholders = {
             'amount': 'Amount (as decimal) to be charged on the interval specified.',
-            'currency': 'gbp',
-            'interval': 'A URL of a publicly-accessible image address.',
-            'nickname': 'The alt text for the image',
-            'usage_type': 'Appears on your customer\'s credit card statement',
-            'trial_period_days': 'Billed unit title eg: lesson',
+            'currency': 'Three letter ISO currency code eg: gbp',
+            'nickname': 'A brief description of the plan, hidden from customers.',
+            'usage_type': 'Configures how the quantity per period should be determined.',
         }
         for field in self.fields:
-            if field not in ('active', ):
+            if field not in ('active', 'usage_type', 'trial_period_days', 'interval' ):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
                     placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder 
-        
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+
         self.fields['active'].initial = True
+        self.fields['interval'].widget.attrs['readonly'] = True
+        self.fields['trial_period_days'].widget.attrs['readonly'] = True
+        self.fields['nickname'].widget.attrs['cols'] = "20"
+        self.fields['nickname'].widget.attrs['rows'] = "2"
+        self.fields['interval'].widget.attrs['style'] = 'width:250px'
+        self.fields['usage_type'].widget.attrs['style'] = 'width:250px'
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
