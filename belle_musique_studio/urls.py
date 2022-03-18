@@ -27,8 +27,6 @@ urlpatterns = [
          RedirectView.as_view(url=staticfiles_storage.url('img/favicon-32x32.png'))),
     path('favicon-16x16.png',
          RedirectView.as_view(url=staticfiles_storage.url('img/favicon-16x16.png'))),
-    path('site.webmanifest',
-         RedirectView.as_view(url=staticfiles_storage.url('img/site.webmanifest'))),
     path('apple-touch-icon.png',
          RedirectView.as_view(url=staticfiles_storage.url('img/apple-touch-icon.png'))),
     path('safari-pinned-tab.svg',
@@ -41,6 +39,6 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path('lessons/', include('lessons.urls')),
     path('profiles/', include('profiles.urls')),
-    path('workshops/', include('workshops.urls')),
     path('lessons/', include('lessons.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

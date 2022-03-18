@@ -20,10 +20,12 @@ the model tables
 
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views import View
 
-from .forms import ContactForm
+from .forms import ContactForm, StudentShowcaseForm
 from .models import Cover, User
 
 
@@ -140,3 +142,34 @@ def contact_sent(request):
                 'cover': cover}
 
     return render(request, 'contact_sent.html', context)
+
+
+@login_required
+def add_student_showcase(request):
+    """ Add a product to the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == 'POST':
+        form = StudentShowcaseForm(request.POST, request.FILES)
+        if form.is_valid():
+            student = form.save()
+            messages.success(request, 'Successfully added new student showcase!')
+            return redirect(reverse('home'))
+        else:
+            messages.error(request,
+                           ('Failed to add student showcase. '
+                            'Please ensure the form is valid.'))
+    else:
+        form = StudentShowcaseForm()
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='student_comm')
+    template = 'add_student_showcase.html'
+    context = {
+        'form': form,
+        'covers': covers,
+        'cover': cover,
+    }
+
+    return render(request, template, context)

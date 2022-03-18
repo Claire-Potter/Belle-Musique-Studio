@@ -1,123 +1,105 @@
 [{
-        "pk": 1,
-        "model": "home.cover",
-        "fields": {
-            "name": "Belle Musique Studio",
-            "quote": "Everyone Deserves Music",
-            "page": "home"
-        }
-    }, {
-        "pk": 2,
-        "model": "home.cover",
-        "fields": {
-            "name": "About Us",
-            "quote": "Music... this is the favourite passion of my soul",
-            "page": "about"
-        }
-    }, {
-        "pk": 3,
-        "model": "home.cover",
-        "fields": {
-            "name": "Music Store",
-            "quote": "Keep calm and make music",
-            "page": "music_store"
-        }
-    }, {
-        "pk": 4,
-        "model": "home.cover",
-        "fields": {
-            "name": "Music Store",
-            "quote": "Products",
-            "page": "product"
-        }
-    }, {
-        "pk": 5,
-        "model": "home.cover",
-        "fields": {
-            "name": "Music Store",
-            "quote": "Product Detail",
-            "page": "product_detail"
-        }
-    }, {
-        "pk": 6,
-        "model": "home.cover",
-        "fields": {
-            "name": "Product Management",
-            "quote": "A passionate activity is one you’re doing without regard for time",
-            "page": "product_manage"
-        }
-    }, {
-        "pk": 7,
-        "model": "home.cover",
-        "fields": {
-            "name": "Get in touch",
-            "quote": "Keep in touch, consistently, personally, and systematically. ~ Timothy L. Templeton",
-            "page": "contact"
-        }
-    }, {
-        "pk": 8,
-        "model": "home.cover",
-        "fields": {
-            "name": "Music Store",
-            "quote": "It's really one stop shopping for the music fan",
-            "page": "bag"
-        }
-    }, {
-        "pk": 9,
-        "model": "home.cover",
-        "fields": {
-            "name": "Checkout",
-            "quote": "Whoever said laughter is the best medicine, obviously never tried shopping",
-            "page": "checkout"
-        }
-    }, {
-        "pk": 10,
-        "model": "home.cover",
-        "fields": {
-            "name": "Lessons",
-            "quote": "The slower you go, the faster you'll get there...",
-            "page": "lessons"
-        }
-    }, {
-        "pk": 11,
-        "model": "home.cover",
-        "fields": {
-            "name": "Workshops",
-            "quote": "Touching heaven on frequency",
-            "page": "workshops"
-        }
-    }, {
-        "pk": 12,
-        "model": "home.cover",
-        "fields": {
-            "name": "My Profile",
-            "quote": "Be so good they can't ignore you",
-            "page": "account_profile"
-        }
-    }, {
-        "pk": 13,
-        "model": "home.cover",
-        "fields": {
-            "name": "Student Community",
-            "quote": "It's not only music. It's not only art. It's a community. A place to belong.",
-            "page": "student_comm"
-        }
-    },
-    {
-        "pk": 14,
-        "model": "home.cover",
-        "fields": {
-            "name": "Student Profile",
-            "quote": "It's not only music. It's not only art. It's a community. A place to belong.",
-            "page": "student"
-        }
-    }, {
-        "pk": 15,
-        "model": "home.cover",
-        "fields": {
-            "name": "Subscriptions",
-            "quote": "Some people have lives... Some people have music...",
-            "page": "subscriptions"
-        }
+    "pk": 1,
+    "model": "home.cover",
+    "fields": {
+        "name": "Belle Musique Studio",
+        "quote": "Everyone Deserves Music",
+        "page": "home"
     }
-]
+}, {
+    "pk": 2,
+    "model": "home.cover",
+    "fields": {
+        "name": "About Us",
+        "quote": "Music... this is the favourite passion of my soul",
+        "page": "about"
+    }
+}, {
+    "pk": 3,
+    "model": "home.cover",
+    "fields": {
+        "name": "Music Store",
+        "quote": "Keep calm and make music",
+        "page": "music_store"
+    }
+}, {
+    "pk": 4,
+    "model": "home.cover",
+    "fields": {
+        "name": "Music Store",
+        "quote": "Products",
+        "page": "product"
+    }
+}, {
+    "pk": 5,
+    "model": "home.cover",
+    "fields": {
+        "name": "Music Store",
+        "quote": "Product Detail",
+        "page": "product_detail"
+    }
+}, {
+    "pk": 6,
+    "model": "home.cover",
+    "fields": {
+        "name": "Product Management",
+        "quote": "A passionate activity is one you’re doing without regard for time",
+        "page": "product_manage"
+    }
+}, {
+    "pk": 7,
+    "model": "home.cover",
+    "fields": {
+        "name": "Get in touch",
+        "quote": "Keep in touch, consistently, personally, and systematically. ~ Timothy L. Templeton",
+        "page": "contact"
+    }
+}, {
+    "pk": 8,
+    "model": "home.cover",
+    "fields": {
+        "name": "Music Store",
+        "quote": "It's really one stop shopping for the music fan",
+        "page": "bag"
+    }
+}, {
+    "pk": 9,
+    "model": "home.cover",
+    "fields": {
+        "name": "Checkout",
+        "quote": "Whoever said laughter is the best medicine, obviously never tried shopping",
+        "page": "checkout"
+    }
+}, {
+    "pk": 10,
+    "model": "home.cover",
+    "fields": {
+        "name": "Lessons",
+        "quote": "The slower you go, the faster you'll get there...",
+        "page": "lessons"
+    }
+}, {
+    "pk": 11,
+    "model": "home.cover",
+    "fields": {
+        "name": "My Profile",
+        "quote": "Be so good they can't ignore you",
+        "page": "account_profile"
+    }
+}, {
+    "pk": 12,
+    "model": "home.cover",
+    "fields": {
+        "name": "Student Showcase",
+        "quote": "It's not only music. It's not only art. It's a community. A place to belong.",
+        "page": "student_comm"
+    }
+}, {
+    "pk": 13,
+    "model": "home.cover",
+    "fields": {
+        "name": "Subscriptions",
+        "quote": "Some people have lives... Some people have music...",
+        "page": "subscriptions"
+    }
+}]

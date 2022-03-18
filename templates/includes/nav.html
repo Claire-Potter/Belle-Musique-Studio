@@ -66,6 +66,7 @@
                    {% if request.user.is_superuser %}
                    <a class="dropdown-item nav-link" href="{% url 'admin:index' %}">Site Admin</a>
                    <a class="dropdown-item nav-link" href=" {% url 'add_new_lesson' %}">Manage Lesson Products</a>
+                   <a class="dropdown-item nav-link" href=" {% url 'add_student_showcase' %}">Showcase a Student</a>
                    {% endif %}
                    {% if user.is_staff %}
                    <a class="dropdown-item nav-link" href="{% url 'add_product' %}">Manage Shop Products</a>

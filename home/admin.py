@@ -2,8 +2,10 @@
 Belle Musique Studio home app  adminconfiguration
 """
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
+from embed_video.admin import AdminVideoMixin
 
-from .models import Contact, Cover, User,UserSubscription
+from .models import Contact, Cover, User, UserSubscription, StudentShowcase
 
 
 @admin.register(Contact)
@@ -46,3 +48,24 @@ class UserAdmin(admin.ModelAdmin):
     model = User
 
 admin.site.register(User, UserAdmin)
+
+
+@admin.register(StudentShowcase)
+class StudentShowcaseAdmin(SummernoteModelAdmin, AdminVideoMixin, admin.ModelAdmin):
+    """
+    The Tool admin set up reads the Tool model and allows
+    the admin user to create a new tool by adding the
+    required fields. Admin can also edit and delete.
+    Django summernote is included to allow the admin user
+    to style the body field.
+    Cloudinary storage is utilised to store the images.
+    Do not delete
+    field is added to indicate that the saved data
+    should not be deleted if set to True.
+    """
+    list_display = ('date', 'name',)
+    search_fields = ['date', 'name',]
+    summernote_fields = ('body', 'excerpt')
+
+    def has_delete_permission(self, request, obj=None):
+        return False

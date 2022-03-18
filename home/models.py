@@ -11,6 +11,7 @@ Admin can access this via the admin pane.
 """
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from embed_video.fields import EmbedVideoField
 from djstripe.models import Customer, Subscription
 
 
@@ -86,3 +87,35 @@ class Cover(models.Model):
 
     def __str__(self):
         return f'Cover details: {self.name} and {self.quote}'
+
+
+class StudentShowcase(models.Model):
+    """
+    Utilised to store the data and
+    create the view using the step_tool.html template.
+    """
+    name = models.CharField(max_length=80, unique=True,
+                             default='placeholder')
+    excerpt = models.TextField(blank=True)
+    body = models.TextField(blank=True)
+    image_url = models.URLField(max_length=1024, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
+    video_name = models.CharField(max_length=100, blank=True,
+                                  default='placeholder')
+    video_url = EmbedVideoField(blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+
+
+    class Meta:
+        """
+        Meta created to order the Tools Model according
+        to order number assigned.
+        """
+        ordering = ['date']
+        verbose_name_plural = "Student Showcase"
+
+    # The string is set to return the Title field if it exists
+    #  else a blank string
+    def __str__(self):
+        return '%s' % (self.name) if self.name else ' '
