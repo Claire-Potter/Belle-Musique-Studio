@@ -101,7 +101,6 @@ class StudentShowcase(models.Model):
     excerpt = models.TextField(blank=True)
     body = models.TextField(blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
     video_name = models.CharField(max_length=100, blank=True,
                                   default='placeholder')
     video_url = EmbedVideoField(blank=True)
@@ -120,6 +119,7 @@ class StudentShowcase(models.Model):
         """
         ordering = ['date']
         verbose_name_plural = "Student Showcase"
+        get_latest_by = ['date']
 
     # The string is set to return the Title field if it exists
     #  else a blank string

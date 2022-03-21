@@ -26,7 +26,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views import View
 
 from .forms import ContactForm, StudentShowcaseForm
-from .models import Cover, User
+from .models import Cover, User, StudentShowcase
 
 
 def index(request):
@@ -43,8 +43,10 @@ def about(request):
     """ A view to return the about page """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='about')
+    student_showcased =  StudentShowcase.objects.latest()
     context = {'covers': covers,
-                'cover': cover}
+                'cover': cover,
+                'student_showcased': student_showcased}
 
     return render(request, 'about.html', context)
 

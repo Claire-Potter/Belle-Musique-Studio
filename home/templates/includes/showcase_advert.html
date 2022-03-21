@@ -2,27 +2,32 @@
     <div class="advert-topper mx-sm-5 mx-2 my-sm-5 my-2 pb-2">
         <h2 class="cover-heading inline pt-5 text-center">Student Showcase</h2>
         <div class="d-flex justify-content-center ">
-            <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image" alt="A picture of the student of the week" aria-label="An image of a girl playing the piano" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lessons-advert.jpg">
+            <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image" alt="A picture of the student of the week" aria-label="An image of the student of the week" src="{{student_showcased.image_url}}">
         </div>
         <div class="about mx-sm-5 mx-2 my-sm-5 my-2">
-            <p class="mx-3 my-3 pt-2 font-weight-bold uppercase">
-               {{student.name}}
+            <p class="mx-3 my-3 pt-2 font-weight-bold">
+               {{student_showcased.name}}
             </p>
-            <p class="mx-3 my-3 pt-2">The rates per lesson are as follows:</p>
-            <ul class="mr-5">
-                <li class="font-weight-bold">30 minutes - £ 25.00</li>
-                <li class="font-weight-bold">45 minutes - £ 37.50</li>
-            </ul>
-            <p class="mx-3 my-3 pt-2">The rates per month are as follows:</p>
-            <ul class="mr-5">
-                <li class="font-weight-bold">30 minutes - £ 100.00</li>
-                <li class="font-weight-bold">45 minutes - £ 150.00</li>
-            </ul>
-            <div class="lead mx-3 my-3">
-                <a href="{% url 'lessons' %}" class="btn advert-button text-uppercase">
-                    <span>Subscribe Now</span>
-                </a>
+            <p class="mx-3 my-3 pt-2"> {{student_showcased.excerpt}}</p>
+            <p class="mx-3 my-3 pt-2"> {{student_showcased.body}}</p>
+    
+            {% if 'placeholder' in student_showcased.video_name %}
+            <div>
+               <p>Watch this space -a video will be added soon.</p>
             </div>
+            {% else %}
+            <div class="col-12">
+               <div class="card card-with-background mx-auto">
+                  <div class="card-body">
+                     <p class="card-title font-weight-bold text-center">{{ student_showcased.video_name }}</p>
+                  </div>
+                  <div class="iframe-container mx-auto mb-3">
+                     <iframe class="embed-responsive-item iframe" src="{{ student_showcased.video_url }}"
+                        title="YouTube video player" allowfullscreen></iframe>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
 
         </div>
 

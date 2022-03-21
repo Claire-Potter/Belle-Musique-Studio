@@ -52,4 +52,3 @@ class StudentShowcaseForm(forms.ModelForm):
                                  widget=CustomClearableFileInput)
         excerpt = SummernoteTextField()
         body = SummernoteTextField()
-
