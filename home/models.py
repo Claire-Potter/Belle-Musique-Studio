@@ -1,12 +1,22 @@
 """
-Belle Musique Studio home app model Configuration
+Belle Musique Studio home app model configuration:
 
-Home model created to render a view for the homepage.
-It stores the home page image and title.
+The User model replaces the allauth default User. It is
+used to create User accounts to authenticate and access the site.
 
-Contact model created to render the contact page
-and to store all contact requests submitted by users.
-Admin can access this via the admin pane.
+The User Subscription model is utilised to link djstripe Subscriptions to a
+User record when the record is created in Stripe.
+
+The Contact model created to render the contact page
+and to store all contact requests submitted by users and non-users.
+
+The Cover model is utilised to store the unique page titles and quotes for different
+site sections.
+
+The StudentShowcase model is utilised to add the details of a student who the staff have chosen
+to showcase. Once saved, the latest record displays on the About page.
+
+SuperUser can access all models from the Site Admin page.
 
 """
 from django.contrib.auth.models import AbstractUser
@@ -16,12 +26,24 @@ from djstripe.models import Customer, Subscription
 
 
 class User(AbstractUser):
-    """.git/"""
+    """
+    The User model replaces the allauth default User. It is
+    used to create User accounts to authenticate and access the site.
+    The customer field is used to store the associated Stripe customer once
+    they have been created and returned from Stripe.com.
+
+    Set up as per https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
+    and customised.
+    """
     customer = models.OneToOneField(Customer, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class UserSubscription(models.Model):
-    """.git/"""
+    """
+    The User Subscription model is utilised to link djstripe Subscriptions to a
+    User record when the record is created in Stripe. A Foreign key field is 
+    used to link the model to the parent User model.
+    """
     username = models.ForeignKey(User, null=False, blank=False,
                               on_delete=models.CASCADE, related_name='userlineitems',
                               editable=False)
@@ -35,9 +57,8 @@ class UserSubscription(models.Model):
 
     class Meta:
         """
-        Meta created to order the Image Model according
-        to the order_number. It also determines the latest
-        entry saved to the model referring to the added date.
+        Meta created to order the UserSubscription model by date
+        and to return the most recent field according to date.
         """
         ordering = ['date']
         get_latest_by = ['date']
@@ -93,8 +114,10 @@ class Cover(models.Model):
 
 class StudentShowcase(models.Model):
     """
-    Utilised to store the data and
-    create the view using the step_tool.html template.
+    Utilised to store the data added to create a student showcase record.
+    Data is captured via the Add Student Showcase front end page or in Site Admin.
+    Each record added should be linked back to the associated Stripe customer and 
+    subscription for record keeping purposes.
     """
     name = models.CharField(max_length=80, unique=True,
                              default='placeholder')
@@ -114,8 +137,9 @@ class StudentShowcase(models.Model):
 
     class Meta:
         """
-        Meta created to order the Tools Model according
-        to order number assigned.
+        Meta created to order the Student Showcase Model according
+        to date, to return the latest record according to date and
+        to set the admin model name to Student Showcase.
         """
         ordering = ['date']
         verbose_name_plural = "Student Showcase"

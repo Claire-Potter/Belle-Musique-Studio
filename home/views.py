@@ -1,5 +1,6 @@
 """
 Belle Musique Studio home app views configuration
+
 After correcting any pylint issues, I was still left with the issue
 'class has no objects member', the object is only added when the screen
 is  rendered in the browser, so the issue is not valid. I followed
@@ -7,30 +8,71 @@ the steps available for the following stack overflow:
 https://stackoverflow.com/questions/45135263/class-has-no-objects-member
 and created the .pylintrc file to customise the pylint settings to
 prevent this error from displaying.
+
 the index view is set up to display the homepage.
-the social media views are set up to authorise login via the
-various social media apps. This was completed as per the django
-documentation:
-https://django-rest-auth.readthedocs.io/en/latest/installation.html
+
+the About view is set up to display the about page. 
+
 Contact View created to render the Contact page.
 The view also references the Contact model
 and form in order to update the fields within
-the model tables
+the model tables.
+
+Contact sent view rendered once a contact sent request has been
+successfully submitted and sent.
+
+Student showcase view utilised to render the form within which
+admin can capture the information of the student to be showcased.
+
+Messages definition from:
+https://docs.djangoproject.com/en/4.0/ref/contrib/messages/
+
+Definitions from https://www.fullstackpython.com
+unless stated otherwise.
 """
 
 from django.conf import settings
+# The Django settings file contains all of the configuration for a web application.
 from django.core.mail import send_mail
+# send_mail is a function in Django that can send an email using the EmailMessage class.
 from django.contrib import messages
+#Quite commonly in web applications, you need to display a one-time notification
+# message (also known as “flash message”) to the user after processing a form or
+#  some other types of user input.
+
+#For this, Django provides full support for cookie- and session-based messaging,
+# for both anonymous and authenticated users. The messages framework allows you
+# to temporarily store messages in one request and retrieve them for display in a
+# subsequent request (usually the next one). Every message is tagged with a specific level
+# that determines its priority (e.g., info, warning, or error).
+
 from django.contrib.auth.decorators import login_required
+# @login_required: Django's login_required function is used to secure views
+# in your web applications by forcing the client to
+# authenticate with a valid logged-in User.
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
+# redirect is a callable within the django.shortcuts module of the Django project.
+# render is a callable within the django.shortcuts module of the Django project.
+# reverse is a callable within the django.urls module of the Django project.
 from django.views import View
-
+# View is a class within the django.views.generic module of the Django project.
 from .forms import ContactForm, StudentShowcaseForm
+# Forms are imported from forms.py
 from .models import Cover, User, StudentShowcase
-
+# Models are imported from models.py
 
 def index(request):
-    """ A view to return the cover input as index.html """
+    """ 
+    A view to return the home page as index.html 
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+    """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='home')
     context = {'covers': covers,
@@ -40,7 +82,19 @@ def index(request):
 
 
 def about(request):
-    """ A view to return the about page """
+    """ 
+    A view to return the About page.
+    This contains the information about who Belle Musique Studio are,
+    who the owner is, high level information about lessons, the student showcase 
+    section and links to the various products in the music store.
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+    """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='about')
     student_showcased =  StudentShowcase.objects.latest()
@@ -66,9 +120,12 @@ class Contact(View):
         to generate the contact page.
         self: The self is used to represent the instance of the class.
         request: The requests module allows you to send HTTP
-        requests using Python.The HTTP request returns a Response
+        requests using Python.
+        The HTTP request returns a Response
         Object with all the response data (content, encoding, status, etc).
+
         Definition from https://www.w3schools.com/python/module_requests.asp
+
         If and else statement utilised to determine whether the user
         is logged in or not, if they are logged in, their name and email
         address will be derived from their user profile.
@@ -91,15 +148,16 @@ class Contact(View):
         """
         self: The self is used to represent the instance of the class.
         request: The requests module allows you to send HTTP
-        requests using Python.The HTTP request returns a Response
+        requests using Python.
+        The HTTP request returns a Response
         Object with all the response data (content, encoding, status, etc).
+
         Definition from https://www.w3schools.com/python/module_requests.asp
+
         If and else statement utilised to determine whether the user
         is logged in or not, if they are logged in, their name and email
         address will be derived from their user profile.
-        Set up according to django EmailMultiAlternatives
-        https://docs.djangoproject.com/en/4.0/topics/email/
-        and include Sendgrid email template
+
         """
         # check if form has been submitted
         if request.method == 'POST':
@@ -138,7 +196,15 @@ class Contact(View):
 
 
 def contact_sent(request):
-    """ A view to return the contact sent page """
+    """ 
+    A view to return the contact sent page
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+     """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='contact')
     context = {'covers': covers,
@@ -149,15 +215,37 @@ def contact_sent(request):
 
 @login_required
 def add_student_showcase(request):
-    """ Add a product to the store """
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
+    """ 
+    Add a student to be showcased on the about page.
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+
+    The StudentShowcaseForm is rendered on the page to allow admin to capture
+    student information from the front end. Once saved it is created as a record
+    within the StudentShowcase model. The most recent record is called and displayed
+    on the About page.
+
+    If statement is utilised to determine if the user is a staff member, if not
+    they will be denied access. 
+    If and else statement utilised to determine whether the request is a post or
+    not, if not, the form without content will be rendered for the user to complete,
+    if it is 'POST' the completed form will be requested and saved.
+    An If and else statement is utilised to check for errors, if successful a success 
+    message will display, if not an error message will display.
+    """
+    if not request.user.is_staff:
+        messages.error(request, 'Sorry, only staff can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        form = StudentShowcaseForm(request.POST, request.FILES)
+        form = StudentShowcaseForm(request.POST)
         if form.is_valid():
-            student = form.save()
+            form.save()
             messages.success(request, 'Successfully added new student showcase!')
             return redirect(reverse('home'))
         else:

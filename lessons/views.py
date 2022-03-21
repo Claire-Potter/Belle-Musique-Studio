@@ -30,8 +30,8 @@ def lessons_details(request):
 @login_required
 def add_lesson(request):
     """ Add a product to the store """
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
+    if not request.user.is_staff:
+        messages.error(request, 'Sorry, only staff can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
@@ -139,8 +139,8 @@ def add_lesson(request):
 @login_required
 def edit_lesson(request, lesson_id):
     """ Edit a product in the store """
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
+    if not request.user.is_staff:
+        messages.error(request, 'Sorry, only staff can do that.')
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, id=lesson_id)
