@@ -1,3 +1,4 @@
+ <!--Basic code from Bootstrap and fully adapted for site-->
 <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
   <section role="main" class="inner cover">
     <div class="row w-100">
@@ -7,14 +8,14 @@
         <div class="width-define">
           <div
             class="row background-overlay {% if 'product_manage' in cover.page %} mx-auto ml-sm-0 mx-sm-3 my-sm-3{% else %} ml-5 mx-3 my-3  {% endif %}"
-          >
+          >  <!--Slightly different code utilised for the product manage cover-->
             <h1
               class="cover-heading inline  {% if 'product_manage' in cover.page %} mx-auto  mt-sm-5 mr-sm-5 text-sm-right text-center{% else %} mt-5 mr-5 text-sm-right text-center {% endif %}"
-            >
+            > <!--If statement to determine if there is a cover in the Cover model or not. If not the default details below will be used.-->
              {% if 'placeholder' in name %}Belle Musique Studio {% else %}  {{ cover.name }} {% endif %}
             </h1>
             <p class="lead mr-5 text-sm-right text-center"> {% if 'placeholder' in quote %}Everyone deserves music{% else %}  {{ cover.quote}} {% endif %}</p>
-            {% if "home" in cover.page %}
+            {% if "home" in cover.page %}  <!--The below menu will only render on the home page-->
             <div class="lead mr-5 text-sm-right text-center">
               <a href="{% url 'about' %}" class="btn index-button">About</a>
             </div>

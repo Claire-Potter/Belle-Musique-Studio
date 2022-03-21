@@ -1,3 +1,4 @@
+<!--The student showcase section - section within the about page to showcase students. Includes image and video-->
 <div class="col-sm-6 col-12">
     <div class="advert-topper mx-sm-5 mx-2 my-sm-5 my-2 pb-2">
         <h2 class="cover-heading inline pt-5 text-center">Student Showcase</h2>
@@ -10,7 +11,7 @@
             </p>
             <p class="mx-3 my-3 pt-2"> {{student_showcased.excerpt}}</p>
             <p class="mx-3 my-3 pt-2"> {{student_showcased.body}}</p>
-    
+    <!--If no video has been uploaded the below text will be displayed-->
             {% if 'placeholder' in student_showcased.video_name %}
             <div>
                <p>Watch this space -a video will be added soon.</p>
