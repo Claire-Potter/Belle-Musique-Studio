@@ -7,10 +7,8 @@ be sent to the admin account and saved
 to the Contact model.
 """
 from django import forms
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
-from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+from django_summernote.fields import SummernoteTextField
 from lessons.widgets import CustomClearableFileInput
-from checkout.models import SubscriptionLineItem
 from .models import Contact, StudentShowcase
 
 
@@ -47,14 +45,11 @@ class StudentShowcaseForm(forms.ModelForm):
         to include for the user to edit.
         """
         model = StudentShowcase
-        widgets = {
-            'excerpt': SummernoteWidget(),
-            'body': SummernoteInplaceWidget(),
-        }
         fields = '__all__'
 
         image = forms.ImageField(label='Image',
                                  required=False,
                                  widget=CustomClearableFileInput)
         excerpt = SummernoteTextField()
-        body = SummernoteTextFormField()
+        body = SummernoteTextField()
+

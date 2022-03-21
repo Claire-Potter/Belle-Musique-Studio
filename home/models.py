@@ -52,6 +52,8 @@ class Contact(models.Model):
     Model created to render the contact page
     and save the contact request data.
     """
+    username = models.ForeignKey(User, null=False, blank=False,
+                              on_delete=models.CASCADE, related_name='contact')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
@@ -104,6 +106,10 @@ class StudentShowcase(models.Model):
                                   default='placeholder')
     video_url = EmbedVideoField(blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    customer = models.ForeignKey(Customer,
+                              on_delete=models.CASCADE, related_name='showcase_customer')
+    subscription = models.ForeignKey(Subscription,
+                              on_delete=models.CASCADE, related_name='showcase_subscription')
 
 
 

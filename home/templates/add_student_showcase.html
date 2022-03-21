@@ -19,9 +19,25 @@
            <form method="POST" action="{% url 'add_student_showcase' %}" class="form mb-2 text-form" enctype="multipart/form-data">
             
                     {% csrf_token %}
-                    {% for field in form %}
-                     {{ field | safe  }}
-                    {% endfor %}
+                
+                    {{ form.name |as_crispy_field  }}
+          
+            
+                    {{ form.excerpt |as_crispy_field }}
+              
+                    {{ form.body |as_crispy_field }}
+
+                    <label class="smallpx-2 w-auto" for="id_image">Image</label>
+                    {{ form.image | safe }}
+
+                    {{ form.image_url |as_crispy_field }}
+                    {{ form.video_name |as_crispy_field }}
+                    {{ form.video_url |as_crispy_field }}
+                    {{ form.customer |as_crispy_field }}
+                    {{ form.subscription |as_crispy_field }}
+               
+    
+                
                     <div class="text-right">
                         <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'home' %}">Cancel</a>
                         <button class="btn advert-button text-uppercase mb-3 " type="submit">Add Showcase</button>

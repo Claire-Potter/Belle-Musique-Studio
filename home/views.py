@@ -105,6 +105,7 @@ class Contact(View):
             contact_form = ContactForm(request.POST)
             if contact_form.is_valid():
                 contact = contact_form.save(commit=False)
+                contact.username = request.user
                 contact.save()
                 c_d = contact_form.cleaned_data
                 text_content = c_d['body']
