@@ -50,5 +50,5 @@ sqlparse==0.4.2
 stripe==2.67.0
 tokenize-rt==4.2.1
 tox==3.24.5
-urllib3==1.26.5
+urllib3==1.25.7
 yarg==0.1.9

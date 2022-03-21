@@ -22,10 +22,11 @@
                   <table class="table table-sm table-borderless">
                      <thead>
                         <tr>
-                           <th scope="col">Product Info</th>
                            <th scope="col"></th>
+                           <th scope="col">Product</th>
                            <th scope="col">Price</th>
                            <th scope="col">Qty</th>
+                           <th scope="col">Adjust</th>
                            <th scope="col">Subtotal</th>
                         </tr>
                      </thead>
@@ -33,15 +34,15 @@
                         {% for item in bag_items %}
                         <tr class="table-font">
                            <td class="p-3 p-sm-5 w-25">
-                              <img class="img-fluid rounded" src="{{ item.product.image.url }}">
+                              <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.image_alt }}">
                            </td>
                            <td class="py-3 py-sm-5">
-                              <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                              <p class="my-0"><strong>Size: </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
+                              <p class="my-0 font-weight-bold">{{ item.product.name }}</p>
+                              <p class="my-0">Size: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
                               <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
                            </td>
                            <td class="py-3 py-sm-5">
-                              <p class="my-0">£{{ item.product.price }}</p>
+                              <p class="my-0 font-weight-bold">£{{ item.product.price }}</p>
                            </td>
                            <td class="py-3 py-sm-5 w-25">
                               <p class="my-0 mx-3">{{ item.quantity }}</p>
@@ -91,12 +92,12 @@
                <div class="row">
                   <div class="col-12 mt-5">
                      <div class="col mb-5 mr-sm-5 text-center text-sm-right">
-                        <h6 class="my-3"><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
-                        <h6 class="my-3">Delivery: £{{ delivery|floatformat:2 }}</h6>
-                        <h4 class="my-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
+                        <h6 class="my-3 font-weight-bold">Bag Total: £{{ total|floatformat:2 }}</h6>
+                        <h6 class="my-3 font-weight-bold">Delivery: £{{ delivery|floatformat:2 }}</h6>
+                        <h4 class="my-4 font-weight-bold">Grand Total: £{{ grand_total|floatformat:2 }}</h4>
                         {% if free_delivery_delta > 0 %}
                         <p class="my-3 text-danger">
-                           You could get free delivery by spending just <strong>£{{ free_delivery_delta }}</strong> more!
+                           You could get free delivery by spending just £{{ free_delivery_delta }} more!
                         </p>
                         {% endif %}
                         <div class="col text-sm-right text-center">
@@ -163,7 +164,7 @@
 {% block postloadjs %}
 {{ block.super }}
 {% include 'includes/quantity_input_script.html' %}
-<script type="text/javascript">
+<script>
    // Update quantity on click
    $('.update-link').click(function(e) {
        var form = $(this).prev('.update-form');

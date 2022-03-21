@@ -25,10 +25,12 @@
                   <table class="table table-sm table-borderless">
                      <thead>
                         <tr>
-                           <th scope="col">Info</th>
                            <th scope="col"></th>
+                           <th scope="col">Info</th>
                            <th scope="col">Qty</th>
                            <th scope="col">Price</th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
                         </tr>
                      </thead>
                      <tbody>
@@ -115,13 +117,12 @@
            {% include 'includes/showcase_advert_four.html' %}
          </div>
       </div>
-   </div>
 </section>
 <div class="footer-background-color">
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
-<script type="text/javascript"> 
+<script> 
    // Remove item and reload on click
    $('.remove-item').click(function(e) {
        var csrfToken = "{{ csrf_token }}";

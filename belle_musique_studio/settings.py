@@ -71,9 +71,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'htmlvalidator.middleware.HTMLValidator',
 ]
 
 ROOT_URLCONF = 'belle_musique_studio.urls'
+
+
+HTMLVALIDATOR_ENABLED = True
+HTMLVALIDATOR_FAILFAST = True
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

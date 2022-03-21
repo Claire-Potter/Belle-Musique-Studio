@@ -1,6 +1,6 @@
 [{
         "pk": 1,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5001340155",
             "name": "Digital Recorder",
@@ -10,11 +10,12 @@
             "category": 1,
             "rating": 4.6,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194102/Belle%20Musique/products/digital-recorder_pcnhx3.jpg",
-            "image": "digital-recorder.jpg"
+            "image": "digital-recorder.jpg",
+            "image_alt": "A portable sound recording device."
         }
     }, {
         "pk": 2,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5001600425",
             "name": "RockJam Electronic Keyboard",
@@ -24,11 +25,12 @@
             "category": 2,
             "rating": 4.8,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/keyboard_dimqzr.jpg",
-            "image": "keyboard.jpg"
+            "image": "keyboard.jpg",
+            "image_alt": "A large electric piano keyboard."
         }
     }, {
         "pk": 3,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5001730010",
             "name": "Ricola Soothe and Clear Lozenges",
@@ -38,11 +40,12 @@
             "category": 1,
             "rating": 4.7,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/lozenges_nbdfcn.jpg",
-            "image": "lozenges.jpg"
+            "image": "lozenges.jpg",
+            "image_alt": "Orange throat lozenges. "
         }
     }, {
         "pk": 4,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5001890157",
             "name": "Professional LPK25 MIDI Keyboard",
@@ -52,11 +55,12 @@
             "category": 2,
             "rating": 4.25,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643195755/Belle%20Musique/products/mini-keyboard_ah1gof.jpg",
-            "image": "mini-keyboard.JPG"
+            "image": "mini-keyboard.JPG",
+            "image_alt": "A small electric piano keyboard."
         }
     }, {
         "pk": 5,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002111605",
             "name": "Digital Metronome - White & Silver",
@@ -66,11 +70,12 @@
             "category": 1,
             "rating": 5.0,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/metronome_z9ftrk.jpg",
-            "image": "metronome.jpg"
+            "image": "metronome.jpg",
+            "image_alt": "A metronome used to keep time."
         }
     }, {
         "pk": 6,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002260206",
             "name": "Shure Vocal Microphone",
@@ -80,11 +85,12 @@
             "category": 2,
             "rating": 5.0,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/microphone_ilvsvn.jpg",
-            "image": "microphone.jpg"
+            "image": "microphone.jpg",
+            "image_alt": "A microphone to sing into."
         }
     }, {
         "pk": 7,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002440521",
             "name": "Blank Sheet Music",
@@ -94,11 +100,12 @@
             "category": 1,
             "rating": 4.4,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-sheets_koklyr.jpg",
-            "image": "music-sheets.jpg"
+            "image": "music-sheets.jpg",
+            "image_alt": "Plain white music sheets with music bars to write your own music."
         }
     }, {
         "pk": 8,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002601115",
             "name": "Windsor Music Stand",
@@ -108,11 +115,12 @@
             "category": 1,
             "rating": 4.5,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-stand_q4fzj5.jpg",
-            "image": "music-stand.jpg"
+            "image": "music-stand.jpg",
+            "image_alt": "A black metal stand used to hold music sheets."
         }
     }, {
         "pk": 9,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002690715",
             "name": "Music Theory: From Beginner to Expert",
@@ -122,11 +130,12 @@
             "category": 1,
             "rating": 4.7,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-theory-book_iclwg6.jpg",
-            "image": "music-theory-book.jpg"
+            "image": "music-theory-book.jpg",
+            "image_alt": "A book of music theory lessons."
         }
     }, {
         "pk": 10,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002701115",
             "name": "30 Piano Sheet Music for Beginners",
@@ -136,11 +145,12 @@
             "category": 1,
             "rating": 4.4,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194104/Belle%20Musique/products/piano-music_yvre48.jpg",
-            "image": "piano-music.jpg"
+            "image": "piano-music.jpg",
+            "image_alt": "A picture of piano sheet music."
         }
     }, {
         "pk": 11,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002761055",
             "name": "Sound Recording Equipment",
@@ -150,12 +160,13 @@
             "category": 2,
             "rating": 4.0,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194104/Belle%20Musique/products/sound-equipment_c3in3r.jpg",
-            "image": "sound-equipment.jpg"
+            "image": "sound-equipment.jpg",
+            "image_alt": "A picture of sound recording equipment"
         }
     },
     {
         "pk": 12,
-        "model": "store.product",
+        "model": "store.musicproduct",
         "fields": {
             "sku": "pp5002761056",
             "name": "I Love Music T-Shirt",
@@ -165,7 +176,8 @@
             "category": 1,
             "rating": 4.8,
             "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643650396/Belle%20Musique/products/love-music-tshirt_lur22l.jpg",
-            "image": "love-music-tshirt.jpg"
+            "image": "love-music-tshirt.jpg",
+            "image_alt": "A grey t-shirt which states I Love Music."
         }
     }
 ]
