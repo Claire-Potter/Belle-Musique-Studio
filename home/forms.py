@@ -1,15 +1,21 @@
 """
-Forms created for the Xperience DezignWiz
+Forms created for the Belle Musique Studio
 Home application.
+
 ContactForm set up to enable a user to create
 a contact message and save it. It will
 be sent to the admin account and saved
 to the Contact model.
+
+StudentShowcaseForm set up to enable a staff user to create
+a student record to be showcased and save it. It will
+be sent to the admin account and saved
+to the StudentShowcase model.
 """
 from django import forms
-from django_summernote.fields import SummernoteTextField
-from lessons.widgets import CustomClearableFileInput
+# Forms are imported from forms.py
 from .models import Contact, StudentShowcase
+# Models are imported from models.py
 
 
 class ContactForm(forms.ModelForm):
@@ -32,11 +38,12 @@ class ContactForm(forms.ModelForm):
 
 class StudentShowcaseForm(forms.ModelForm):
     """
-     Form set up to enable a user to create
-     a contact message and save it. It will
+     StudentShowcaseForm set up to enable a staff user to create
+     a student record to be showcased and save it. It will
      be sent to the admin account and saved
-     to the Contact model. It can be accessed
-     via the admin pane.
+     to the StudentShowcase model. Accessed via the Add Student Showcase
+     page on the front end or from within Site Admin. The latest record
+     is displayed on the about page.
     """
     class Meta:
         """
@@ -46,9 +53,3 @@ class StudentShowcaseForm(forms.ModelForm):
         """
         model = StudentShowcase
         fields = '__all__'
-
-        image = forms.ImageField(label='Image',
-                                 required=False,
-                                 widget=CustomClearableFileInput)
-        excerpt = SummernoteTextField()
-        body = SummernoteTextField()

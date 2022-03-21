@@ -17,12 +17,28 @@ The StudentShowcase model is utilised to add the details of a student who the st
 to showcase. Once saved, the latest record displays on the About page.
 
 SuperUser can access all models from the Site Admin page.
+Admin provided necessary access only.
+
+Definitions from https://www.fullstackpython.com
+unless stated otherwise.
 
 """
 from django.contrib.auth.models import AbstractUser
+# Abstract User:
+# If you’re starting a new project, it’s highly recommended to set up a custom user model,
+# even if the default User model is sufficient for you. This model behaves identically to the
+# default user model, but you’ll be able to customize it in the future if the need arises.
+# Don’t forget to point AUTH_USER_MODEL to it. Do this before creating any migrations or running
+# manage.py migrate for the first time. Also, register the model in the app’s admin.py.
+# definition from https://docs.djangoproject.com/en/4.0/topics/auth/customizing/
 from django.db import models
+# models is a callable within the django.db module of the Django project.
 from embed_video.fields import EmbedVideoField
+# Django app for easy embedding YouTube and Vimeo videos and music from SoundCloud.
+# definition from https://pypi.org/project/django-embed-video/
 from djstripe.models import Customer, Subscription
+# dj-stripe implements all of the Stripe models, for Django.
+# definition from https://pypi.org/project/dj-stripe/
 
 
 class User(AbstractUser):
@@ -108,6 +124,7 @@ class Cover(models.Model):
         """
         ordering = ['page']
 
+    # The string is set to return the name and quote fields
     def __str__(self):
         return f'Cover details: {self.name} and {self.quote}'
 
@@ -145,7 +162,7 @@ class StudentShowcase(models.Model):
         verbose_name_plural = "Student Showcase"
         get_latest_by = ['date']
 
-    # The string is set to return the Title field if it exists
+    # The string is set to return the name field if it exists
     #  else a blank string
     def __str__(self):
         return '%s' % (self.name) if self.name else ' '

@@ -1,20 +1,26 @@
 """
-Belle Musique Studio home app  adminconfiguration
+Belle Musique Studio home app adminconfiguration
+
+Definitions from https://www.fullstackpython.com
+unless stated otherwise
 """
 from django.contrib import admin
+# The Django admin is an automatically-generated user interface for Django models. The admin interface can be heavily customized 
 from django_summernote.admin import SummernoteModelAdmin
+#Summernote is a simple WYSIWYG editor.
+# django-summernote allows you to embed Summernote into Django very handy. Support admin mixins and widgets.
+# definition from https://github.com/summernote/django-summernote
 from embed_video.admin import AdminVideoMixin
-
+# Django app for easy embedding YouTube and Vimeo videos and music from SoundCloud.
+# definition from https://pypi.org/project/django-embed-video/
 from .models import Contact, Cover, User, UserSubscription, StudentShowcase
-
+# Models are imported from models.py
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     """
     The Contact admin set up reads the Contact model and allows
-    the admin user to read and delete contact requests. Do not delete
-    field is added to indicate that the saved data
-    should not be deleted if set to True.
+    the admin user to read and delete contact requests.
     """
     list_display = ('name', 'email', 'created_on')
     list_filter = ('created_on', 'name')
@@ -25,7 +31,7 @@ class ContactAdmin(admin.ModelAdmin):
 class CoverAdmin(admin.ModelAdmin):
     """
     The Cover admin set up reads the Cover model and allows
-    the admin user to read and delete input for the cover name and cover quotes
+    the admin user to read, edit and delete input for the cover name and cover quotes
     used across the site.
     """
     list_display = ('name', 'quote', 'page')
@@ -34,7 +40,11 @@ class CoverAdmin(admin.ModelAdmin):
 
 
 class UserSubscriptionAdmin(admin.ModelAdmin):
-    """.git/"""
+    """
+    The UserSubscription admin set up reads the UserSubscription model.
+    It allows the user to readonly the subscription information linked to the username.
+    The records within the model are created through the djstripe integration.
+    """
     model = UserSubscription
     readonly_fields =('subscription_user_id', 'subscription_name', 'username', 'date')
     list_display = ('subscription_user_id', 'subscription_name', 'username', 'date')
@@ -44,7 +54,11 @@ admin.site.register(UserSubscription, UserSubscriptionAdmin)
 
 
 class UserAdmin(admin.ModelAdmin):
-    """.git/"""
+    """
+    The User admin set up reads the customised User model.
+    It allows the user to read, edit and delete the various user fields.
+    The customer field is created by djstripe when a customer record is created.
+    """
     model = User
 
 admin.site.register(User, UserAdmin)
@@ -53,15 +67,12 @@ admin.site.register(User, UserAdmin)
 @admin.register(StudentShowcase)
 class StudentShowcaseAdmin(SummernoteModelAdmin, AdminVideoMixin, admin.ModelAdmin):
     """
-    The Tool admin set up reads the Tool model and allows
-    the admin user to create a new tool by adding the
+    The StudentShowcase admin set up reads the StudentShowcase model and allows
+    the admin user to create a new record by adding the
     required fields. Admin can also edit and delete.
     Django summernote is included to allow the admin user
     to style the body field.
-    Cloudinary storage is utilised to store the images.
-    Do not delete
-    field is added to indicate that the saved data
-    should not be deleted if set to True.
+    Embed video field is used to save videos and display them in the admin pane.
     """
     list_display = ('date', 'name',)
     search_fields = ['date', 'name',]

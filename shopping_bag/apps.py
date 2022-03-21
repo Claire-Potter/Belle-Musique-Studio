@@ -1,3 +1,6 @@
+"""
+App configuration for Belle Musique Studio shopping_bag application.
+"""
 from django.apps import AppConfig
 
 
