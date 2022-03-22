@@ -94,6 +94,23 @@ select.form-control:not([size]):not([multiple]) {
     font-weight: bolder;
 }
 
+.btn-outline-black-lessons {
+    background: white;
+    color: black !important;
+    /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+    border-radius: 5%;
+    font-size: 1rem;
+}
+
+.btn-outline-black-lessons:hover,
+.btn-outline-black-lessons:active,
+.btn-outline-black-lessons:focus {
+    background: black;
+    color: white !important;
+}
+
+
 /* Media queries */
 
 @media (max-width: 800px) {

@@ -8,8 +8,8 @@
 {% include "includes/cover.html" %}
 </div>
 <section class="bg-white">
-   <div class="container mb-3 pb-5 content-height">
-      <div class="row w-100 pt-3 pb-3 mt-5">
+   <div class="container mb-3 pb-5 content-height mx-auto">
+      <div class="row pt-3 pb-3 mt-5">
          <div class="col text-center mt-3">
             <hr class="w-50 mx-auto small-width-heading">
             <h2 class="logo-font mt-5 mb-5">Bag</h2>
@@ -18,7 +18,7 @@
            </p>
             <hr class="w-50 mx-auto small-width-heading">
          </div>
-         <div class="row w-100">
+         <div class="row">
             <div class="col ml-3 ml-sm-0 mt-3">
                {% if lesson_bag_items %}
                <div class="table-responsive rounded">
@@ -64,7 +64,7 @@
                      </tbody>
                   </table>
                </div>
-               <div class="row w-100">
+               <div class="row">
                   <div class="col-12 mt-5">
                      <div class="col mb-2 mr-sm-5 text-center text-sm-right">
                         <h4 class="my-3"><strong>Bag Total: £{{ lesson_total |floatformat:2 }}</strong></h4>
@@ -83,30 +83,29 @@
                <div class="mobile-only">
                   <hr>
                </div>
-            </div>
             {% else %}
-            <div class="col-12 text-center bag-sm-height mt-5">
+            <div class="col-12 text-center bag-sm-height mt-5 mx-auto">
                <div class="col m-0">
-                  <p class="smaller-text">Your bag is empty.</p>
-                  <img class="img-fluid mx-3 my-3 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+                  <img class="img-fluid mx-3 my-3 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a beautiful sunset" src="https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/inspiration_wtmmwq.jpg">
+                  <p class="smaller-text mb-5">Your bag is empty.</p>
                </div>
                <div class="mobile-only">
                   <hr>
                </div>
             </div>
-            {% endif %}
          </div>
+          {% endif %}
       </div>
-      <div class="row w-100">
+      <div class="row">
          <div class="col-sm-4 col-12 text-center mt-3">
                <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-               <p class="smaller-text">Why not visit our Music Store?.</p>
+               <p class="smaller-text">Why not visit our Music Store and browse our products?</p>
             <div class="col mt-5 mt-sm-3 text-center">
                <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
                <span class="icon">
                <i class="fas fa-chevron-left"></i>
                </span>
-               <span class="text-uppercase">Keep Shopping</span>
+               <span class="text-uppercase">Click Here</span>
                </a>
             </div>
          </div>
@@ -117,6 +116,8 @@
            {% include 'includes/showcase_advert_four.html' %}
          </div>
       </div>
+   </div>
+</div>
 </section>
 <div class="footer-background-color">
 {% endblock %}

@@ -513,7 +513,7 @@ def cancel(request):
         return JsonResponse({'error': (e_rr.args[0])}, status =403)
 
 
-    return redirect("home")
+    return redirect("profile")
 
 def checkout_lesson_complete(request, sub_id):
     """

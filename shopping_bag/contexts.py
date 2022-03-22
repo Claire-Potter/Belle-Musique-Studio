@@ -75,9 +75,9 @@ def lesson_bag_contents(request):
     caption = ''
     lesson_bag = request.session.get('lesson_bag', {})
 
-    for lesson_id, lesson_data in lesson_bag.items():
+    for dj_stripe_id, lesson_data in lesson_bag.items():
         if isinstance(lesson_data, int):
-            lesson = get_object_or_404(Product, pk=lesson_id)
+            lesson = get_object_or_404(Product, pk=dj_stripe_id)
             price_only = lesson_data[0]
             priceId = lesson_data[1]
             name = lesson_data[2]
@@ -88,7 +88,7 @@ def lesson_bag_contents(request):
             lesson_count += 1
             quantity = 1
             lesson_bag_items.append({
-                'lesson_id': lesson_id,
+                'dj_stripe_id': dj_stripe_id,
                 'lesson': lesson,
                 'price_only': price_only,
                 'priceId' : priceId,
@@ -97,10 +97,11 @@ def lesson_bag_contents(request):
                 'url': url,
                 'caption': caption,
                 'quantity': quantity,
-                'lesson_data': lesson_data
+                'lesson_data': lesson_data,
+                'lesson_count': lesson_count
             })
         else:
-            lesson = get_object_or_404(Product, pk=lesson_id)
+            lesson = get_object_or_404(Product, pk=dj_stripe_id)
             price_only = lesson_data[0]
             priceId = lesson_data[1]
             name = lesson_data[2]
@@ -111,7 +112,7 @@ def lesson_bag_contents(request):
             quantity = 1
             lesson_count += 1
             lesson_bag_items.append({
-                    'lesson_id': lesson_id,
+                    'dj_stripe_id': dj_stripe_id,
                     'price_only': price_only,
                     'priceId': priceId,
                     'name': name,
@@ -120,6 +121,7 @@ def lesson_bag_contents(request):
                     'caption': caption,
                     'lesson': lesson,
                     'quantity': quantity,
+                    'lesson_count': lesson_count
                 })
 
     lesson_total = less_total
@@ -135,7 +137,7 @@ def lesson_bag_contents(request):
         'name': name,
         'url': url,
         'caption': caption,
-        'price': price
+        'price': price,
     }
 
     return context

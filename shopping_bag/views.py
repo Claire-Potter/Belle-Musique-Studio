@@ -63,7 +63,7 @@ def add_to_bag(request, item_id):
     return redirect(redirect_url)
 
 
-def add_lesson(request, lesson_id):
+def add_lesson(request):
     """.git/"""
     price_only = float(request.POST.get('price_only'))
     priceId = request.POST.get('priceId')
@@ -71,11 +71,12 @@ def add_lesson(request, lesson_id):
     price = request.POST.get('price')
     caption = request.POST.get('caption')
     url = request.POST.get('url')
+    dj_stripe_id = request.POST.get('dj_stripe')
     redirect_lesson_url = request.POST.get('redirect_lesson_url')
+    lesson_count = request.POST.get('lesson_count')
     lesson_bag = request.session.get('lesson_bag', {})
-    lesson_bag[lesson_id] = price_only, priceId, name, price, url, caption
+    lesson_bag[dj_stripe_id] = price_only, priceId, name, price, url, caption, dj_stripe_id
     messages.success(request, f'Added {name} to your bag')
-
     request.session['lesson_bag'] = lesson_bag
     return redirect(redirect_lesson_url)
 
@@ -138,10 +139,10 @@ def remove_from_bag(request, item_id):
         return HttpResponse(status=500)
 
 
-def remove_lesson_from_bag(request, lesson_id):
+def remove_lesson_from_bag(request):
     """Remove the item from the shopping bag"""
     lesson_bag = request.session.get('lesson_bag', {})
-    for lesson_id, lesson_data in lesson_bag.items():
+    for dj_stripe_id, lesson_data in lesson_bag.items():
        
         lesson_bag_items = []
         name = lesson_data[2]
@@ -150,7 +151,7 @@ def remove_lesson_from_bag(request, lesson_id):
             })
 
     try:
-        lesson_bag.pop(lesson_id)
+        lesson_bag.pop(dj_stripe_id)
         messages.success(request, f'Removed {name} from your bag')
 
         request.session['lesson_bag'] = lesson_bag

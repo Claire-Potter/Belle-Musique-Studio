@@ -22,13 +22,9 @@
          <a class="{% if lesson_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_lesson_bag' %}">
             <div>
                <div class="icon"><i class="fa-solid fa-handshake"></i></div>
-               <p class="my-0 icon">
-                  {% if lesson_total %}
-                  £{{ lesson_total|floatformat:2 }}
-                  {% else %}
-                  £0.00
-                  {% endif %}
-               </p>
+               <div class="my-0 icon">
+                  £<span id="lesson-bag-total">{% if lesson_total %}{{ lesson_total|floatformat:2 }}{% else %}0.00{% endif %}</span>
+            </div>
             </div>
          </a>
       </div> 
