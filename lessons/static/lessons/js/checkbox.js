@@ -5,7 +5,6 @@ bagValue();
 
 function bagValue() {
     var lessonTotal = document.getElementById('lesson-bag-total').innerHTML;
-    console.log(lessonTotal)
     Number(lessonTotal);
 
     if (lessonTotal == 0.00)
