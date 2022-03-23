@@ -1,4 +1,5 @@
-"""Belle Musique Studio URL Configuration
+"""
+Belle Musique Studio URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -22,6 +23,7 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # favicon paths to successfully render the favicon across devices
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
     path('favicon-32x32.png',
          RedirectView.as_view(url=staticfiles_storage.url('img/favicon-32x32.png'))),
@@ -32,6 +34,7 @@ urlpatterns = [
     path('safari-pinned-tab.svg',
          RedirectView.as_view(url=staticfiles_storage.url('img/safari-pinned-tab.svg'))),
     path('accounts/', include('allauth.urls')),
+    # djstripe set up
     path("stripe/", include("djstripe.urls", namespace="djstripe")),
     path('', include('home.urls')),
     path('products/', include('store.urls')),
@@ -40,5 +43,6 @@ urlpatterns = [
     path('lessons/', include('lessons.urls')),
     path('profiles/', include('profiles.urls')),
     path('lessons/', include('lessons.urls')),
+    # summernote for admin
     path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
