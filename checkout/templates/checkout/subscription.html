@@ -2,12 +2,14 @@
 {% load static %}
 {% block extra_js %}
 {{ block.super }}
+<!--Link to additional JS for cancellation through djstripe-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script src="https://js.stripe.com/v3/"></script>
 {% endblock %}
 {% block extra_css %}
 {{ block.super }}
+<!--Link to additional CSS-->
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 {% block page_header %}
@@ -17,6 +19,7 @@
 {% block content %}
 {% include "includes/cover.html" %}
 </div>
+<!--Section confirms subscription and then asks for additional details to be saved such as student name. A finalise and cancel option are provided at the end of the form-->
 <section class="bg-white">
    <div class="container mb-3 pb-5 content-height w-100">
       <div class="col-12">
@@ -86,19 +89,17 @@
       </div>
    </div>
    <div class="row w-100">
+      <!--The lesson advert, student showcase advert and store advert are rendered here-->
       <div class="col-lg-4 col-12 mt-5 mx-auto">
          {% include 'includes/lessons_advert_four.html' %}
       </div>
       <div class="col-lg-4 col-12 mt-5 mx-auto">
          {% include 'includes/showcase_advert_four.html' %}
       </div>
-         <div class="col-lg-4 col-12 mt-5 mx-auto">
+      <div class="col-lg-4 col-12 mt-5 mx-auto">
          {% include 'includes/store_advert_small.html' %}
       </div>
-     </div>
+   </div>
 </section>
 <div class="footer-background-color">
-{% endblock %}
-{% block postloadjs %}
-{{ block.super }}
 {% endblock %}

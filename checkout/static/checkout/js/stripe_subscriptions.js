@@ -1,5 +1,7 @@
 /* jshint esversion: 6 */
-// static/main.js
+// static/stripe_subscriptions.js
+/* Code from https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
+and customised for site purpose */
 
 
 stripeElements();
@@ -48,8 +50,8 @@ function stripeElements() {
             displayError(event);
         });
     }
-    //we'll add payment form handling here
 }
+// To display errors
 
 function displayError(event) {
 
@@ -62,7 +64,7 @@ function displayError(event) {
 }
 
 
-//we'll add payment form handling here
+//Payment form handling
 let paymentForm = document.getElementById('subscription-form');
 if (paymentForm) {
 
@@ -103,6 +105,7 @@ function createPaymentMethod({
                     price_id: document.getElementById("priceId").innerHTML,
                     payment_method: result.paymentMethod.id,
                 };
+                // csrf_token is exempt in views.py as recognition could not be achieved
                 fetch("create-sub/", {
                     method: 'POST',
                     headers: {
@@ -123,9 +126,10 @@ function createPaymentMethod({
                     if (result && result.status === 'active') {
 
                         window.location.href = 'subscribe';
-                    };
+                    }
                 }).catch(() => {
                     displayError(result.error.message);
+                    // overlay triggered
                     $('#payment-form').fadeToggle(100);
                     $('#loading-overlay').fadeToggle(100);
 

@@ -1,3 +1,4 @@
+/* Stripe element styling from 'Boutique Ado' project */
 .StripeElement,
 .stripe-style-input {
     box-sizing: border-box;
@@ -30,6 +31,8 @@
     right: .5rem;
 }
 
+/* Checkout form styling */
+
 #payment-form .form-control,
 #card-element {
     color: #04142f;
@@ -52,19 +55,17 @@ select.form-control:not([size]):not([multiple]) {
 
 .smallest-text {
     font-size: calc(0.4rem + .9vw) !important;
-
 }
 
 .smallest-headings {
     font-size: calc(0.2rem + .9vw) !important;
-
 }
-
 
 .smallest-headings2 {
     font-size: calc(0.1rem + .9vw) !important;
-
 }
+
+/* Overlay styling from 'Boutique Ado' project */
 
 #loading-overlay {
     display: none;
@@ -84,6 +85,8 @@ select.form-control:not([size]):not([multiple]) {
     margin: 0;
     height: 100%;
 }
+
+/* Additional styling */
 
 .btn-width {
     width: 40%;
@@ -114,20 +117,15 @@ select.form-control:not([size]):not([multiple]) {
 /* Media queries */
 
 @media (max-width: 800px) {
-
     .smallest-text {
         font-size: calc(0.8rem + .9vw) !important;
-
     }
 
     .smallest-headings {
         font-size: calc(0.5rem + .9vw) !important;
-
     }
-
 
     .smallest-headings2 {
         font-size: calc(0.28rem + .9vw) !important;
-
     }
 }
