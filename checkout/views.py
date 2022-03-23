@@ -21,6 +21,28 @@ The checkout_success view returns a successful
 checkout's order details. The user will receive
 a success message and their order details.
 
+The checkout view renders the checkout template through
+the url. The lesson_bag contains the lesson and subscription
+to be purchased.
+
+The create_sub view provides the stripe API key settings,
+it calls the lesson (stripe product) and subscription (stripe plan)
+to process. Payment details are collected and sent through 
+to stripe to process payment.
+
+The subscribe view renders the subscription template through
+the url. The customer and the subscription details are fetched
+from the logged in user.
+
+The cancel view is used to cancel a subscription.
+This can be completed just after the purchase of the
+subscription or from the userprofile, once a subscription
+has been added to the SubscriptionLineItem model.
+
+The checkout_lesson_complete view returns a successful
+checkout's subscription details. The user will receive
+a success message and their subscription details.
+
 Messages definition from:
 https://docs.djangoproject.com/en/4.0/ref/contrib/messages/
 
@@ -104,6 +126,13 @@ def cache_checkout_data(request):
     to connect to stripe to process the order
     payment.
 
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+
     Created as per the Code Institute 'Boutique Ado'
     project.
     """
@@ -134,15 +163,22 @@ def checkout(request):
     models.
     Payment details are collected and sent through to stripe to process
     payment.
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+
     Created as per the Code Institute 'Boutique Ado'
     project.
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-
+  
+    # if the form has been submitted, the current shopping bag
+    # is fetched from the current session
     if request.method == 'POST':
         bag = request.session.get('bag', {})
-
+    
+    # the form data is stipulated
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -154,6 +190,8 @@ def checkout(request):
             'street_address2': request.POST['street_address2'],
             'county': request.POST['county'],
         }
+
+        # the order form is validated
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
@@ -161,6 +199,8 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.save()
+            # the order is saved and the items in the shopping bag
+            # are saved to the OrderLineItem model
             for item_id, item_data in bag.items():
                 try:
                     product = MusicProduct.objects.get(id=item_id)
@@ -172,6 +212,7 @@ def checkout(request):
                         )
                         order_line_item.save()
                     else:
+                        # for items with sizes, the size field is included
                         for size, quantity in item_data['items_by_size'].items():
                             order_line_item = OrderLineItem(
                                 order=order,
@@ -180,6 +221,7 @@ def checkout(request):
                                 product_size=size,
                             )
                             order_line_item.save()
+                # error message if an item could not be found
                 except MusicProduct.DoesNotExist:
                     messages.error(request, (
                         "One of the products in your bag wasn't found in our database. "
@@ -187,18 +229,22 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
-
+            # the saved address information is requested
             request.session['save_info'] = 'save-info' in request.POST
+            # the user is redirected to the checkout_success page
             return redirect(reverse('checkout_success', args=[order.order_number]))
+         # error message if the form is not valid   
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     else:
+        # Process if the shopping bag is empty
         bag = request.session.get('bag', {})
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
-
+        
+        # Fetching data for the checkout page before the form is posted
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
@@ -212,7 +258,8 @@ def checkout(request):
             'email': request.user.email,})
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='checkout')
-
+    
+    # error if the stripe public key is not found
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
@@ -235,17 +282,24 @@ def checkout_success(request, order_number):
     checkout's order details. The user will receive
     a success message and their order details.
 
+    request: The requests module allows you to send HTTP
+    requests using Python.
+
+    order_number: the unique number generated to identify an order.
+
     Created as per the Code Institute 'Boutique Ado'
     project.
     """
+    # the saved address information is requested
     save_info = request.session.get('save_info')
+    # the order object is requested from the Order model
     order = get_object_or_404(Order, order_number=order_number)
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='checkout')
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
-
+    # removal of the shopping bag items as the order is now processed
     if 'bag' in request.session:
         del request.session['bag']
 
@@ -262,12 +316,23 @@ def checkout_success(request, order_number):
 
 @login_required
 def checkout_lesson(request):
-    """.git/"""
+    """
+    The checkout view renders the checkout template through
+    the url. The lesson_bag contains the lesson and subscription
+    to be purchased. Only one lesson subscription can be 
+    purchased per checkout because of the integration through
+    djstripe set up.
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    """
+    # fetch the lesson_bag from the current session if there is no
+    # lesson bag, send the error message
     lesson_bag = request.session.get('lesson_bag', {})
     if not lesson_bag:
         messages.error(request, "There's nothing in your bag at the moment")
         return redirect(reverse('lessons'))
-
+    # fetch the data required for the checkout_lesson page
     current_bag = lesson_bag_contents(request)
     total = current_bag['lesson_total']
     covers = Cover.objects.all()
@@ -283,9 +348,27 @@ def checkout_lesson(request):
 
 
 @login_required
+ # csrf exempt added, as the csrf details would not validate through javascript
 @csrf_exempt
 def create_sub(request):
-    """.git/"""
+    """
+    The create_sub view provides the stripe API key settings,
+    it calls the lesson (stripe product) and subscription (stripe plan)
+    to process. Payment details are collected and sent through 
+    to stripe to process payment.
+    If a customer record already exists on stripe it will be used to create
+    the new subscription against. If not a new customer record and a new
+    subscription will be created and returned and saved against the User model
+    and the UserSubscription model.
+    If a user has default details saved to their userprofile, these details will
+    be used to create the customer, however, they are not required.
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+
+    Created as per tutorial and customised for site:
+    https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
+    """
     profile = UserProfile.objects.get(user=request.user)
 
     if request.method == 'POST':
@@ -296,12 +379,15 @@ def create_sub(request):
 
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
+        # fetch the user customer field if it exists
         user = get_object_or_404(User, username=request.user)
         user_customer = user.customer
+        # validate if it exists or not
         if  user_customer is None:
             customer_exists = False
         else:
             customer_exists = True
+        # if the customer exists retrieve the customer from stripe
         if customer_exists:
             try:
                 customer_id = request.user.customer.id
@@ -321,9 +407,11 @@ def create_sub(request):
                         ],
                         expand=["latest_invoice.payment_intent"]
                     )
+                # sync the subscription to the djstripe Subscription model
                 djstripe_subscription = (djstripe.models.Subscription.
                                          sync_from_stripe_data(subscription))
                 try:
+                    # create the subscription against the user in the UserLineItem model
                     user_line_item = UserSubscription(
                         username=request.user,
                         subscription=djstripe_subscription,
@@ -333,6 +421,7 @@ def create_sub(request):
                     user_line_item.save()
                     request.user.save()
                     username=request.user
+                # error message if the user cannot be found
                 except username.DoesNotExist:
                     messages.error(request, (
                         "The user wasn't found in our database. "
@@ -351,6 +440,7 @@ def create_sub(request):
                      name=request.user.get_full_name(),
                      phone=profile.default_phone_number,
                      address={
+                         # address details provided if they exist, however not required
                          "city": profile.default_town_or_city,
                          "country": profile.default_country,
                          "line1": profile.default_street_address1,
@@ -389,11 +479,13 @@ def create_sub(request):
                     ],
                     expand=["latest_invoice.payment_intent"]
                 )
+                # sync the subscription to the djstripe Subscription model
                 djstripe_subscription = (djstripe.models
                                          .Subscription.
                                          sync_from_stripe_data(subscription))
 
                 try:
+                     # create the subscription against the user in the UserLineItem model
                     user_line_item = UserSubscription(
                         username=request.user,
                         subscription=djstripe_subscription,
@@ -403,6 +495,7 @@ def create_sub(request):
                     user_line_item.save()
                     request.user.save()
                     username=request.user
+                # error message if the user cannot be found    
                 except username.DoesNotExist:
                     messages.error(request, (
                         "The user wasn't found in our database. "
@@ -414,18 +507,33 @@ def create_sub(request):
                 return JsonResponse({'error': (e_rr.args[0])}, status =403)
 
     else:
+        # Default error response
         return HttpResponse('request method not allowed')
 
 
 @login_required
 def subscribe(request):
-    """.git/"""
+    """
+    The subscribe view renders the subscription template through
+    the url. The customer and the subscription details are fetched
+    from the logged in user.
+    The subscription_form is utilised to capture the 
+    user's phone number and the name of the student the subscription
+    is for. All customer details are saved to the SubscribedCustomer model
+    and the Subscription details are saved to the SubscriptionLineItem
+    model.
 
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    """
+    # if the form has been submitted, the current lesson bag
+    # is fetched from the current session
     if request.method == 'POST':
         lesson_bag = request.session.get('lesson_bag', {})
         customer_exists = False
         attempt = 1
         while attempt <= 5:
+            # determine whether the user has a customer id assigned
             try:
                 user_customer_id = request.user.customer.id
                 customer_subscribed = (SubscribedCustomer
@@ -435,11 +543,13 @@ def subscribe(request):
             except SubscribedCustomer.DoesNotExist:
                 attempt += 1
                 time.sleep(1)
+        # if the customer exists, set up the instance of the SubscribedCustomerForm to reference the customer id        
         if customer_exists:
             subscription_form = SubscribedCustomerForm(request.POST, instance=customer_subscribed)
             subscription_lineitem_form = SubscriptionLineItemForm(request.POST)
             current_bag = lesson_bag_contents(request)
             total = current_bag['lesson_total']
+            # if the forms are valid save the subscription form and proceed to fetch the subscription id from the user
             if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
                 subscription_internal = subscription_form.save(commit=False)
                 subscription_lineitem_internal = subscription_lineitem_form.save(commit=False)
@@ -448,6 +558,7 @@ def subscribe(request):
                                      .filter(username=request.user).latest())
                 sub_id=user_subscription.subscription.id
                 subscription_check=get_object_or_404(Subscription, id=sub_id)
+                # save the subscription to the SubscriptionLineItem model
                 try:
                     user_subscription = (UserSubscription.objects
                                          .filter(username=request.user).latest())
@@ -468,6 +579,7 @@ def subscribe(request):
                     subscription_lineitem_internal.quantity = 1
                     subscription_lineitem_internal.original_lesson_bag = json.dumps(lesson_bag)
                     subscription_lineitem_internal.save()
+                # error if the subscription cannot be found
                 except subscription_check.DoesNotExist:
                     messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
@@ -476,14 +588,18 @@ def subscribe(request):
                     subscription_internal.delete()
                     subscription_lineitem_internal.delete()
                     return redirect(reverse('view_lesson_bag'))
+                # direct the user to the checkout_lesson_complete page
                 return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
             else:
+                # error if the forms could not be validated
                 messages.error(request, 'There was an error with your form. \
                     Please double check your information.')
                 return HttpResponse(status=400)
         else:
+            # process if no customer record exists
             customer = None
             try:
+                # the forms data is stipulated
                 form_data = {
                     'full_name': request.POST.get('full_name'),
                     'email': request.POST.get('email'),
@@ -500,6 +616,7 @@ def subscribe(request):
                 current_bag = lesson_bag_contents(request)
                 total = current_bag['lesson_total']
                 subscription=user_subscription.subscription_name
+                # the forms are validated and the subscription_form is saved
                 if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
                     subscription_internal = subscription_form.save(commit=False)
                     subscription_internal.subscribed_customer_id=user_customer_id
@@ -512,6 +629,8 @@ def subscribe(request):
                     sub_id=user_subscription.subscription.id
                     subscription_check=get_object_or_404(Subscription, id=sub_id)
                     try:
+                        # the latest subscription id is fetched from the user and the subscription
+                        # line item is created and saved
                         user_subscription = (UserSubscription.objects
                                          .filter(username=request.user).latest())
                         subscribed_id=user_subscription.subscription.id
@@ -532,6 +651,7 @@ def subscribe(request):
                         subscription_lineitem_internal.original_lesson_bag = json.dumps(lesson_bag)
                         subscription_lineitem_internal.save()
                         subscription_check=get_object_or_404(Subscription, id=sub_id)
+                    # error if the subscription cannot be found
                     except subscription_check.DoesNotExist:
                         messages.error(request, (
                         "The subscription in your bag wasn't found in our database. "
@@ -540,9 +660,11 @@ def subscribe(request):
                         subscription_internal.delete()
                         subscription_lineitem_internal.delete()
                         return redirect(reverse('view_lesson_bag'))
+                    # customer is saved from the user record
                     customer = user_customer_id
                     return redirect(reverse('checkout_lesson_complete', args=[sub_id]))
 
+                # error message if the forms fo not validate
                 else:
                     messages.error(request, 'There was an error with your form. \
                         Please double check your information.')
@@ -554,15 +676,18 @@ def subscribe(request):
                     content=f'Request to subscribe customer received:| ERROR: {e_rr}',
                     status=500)
     else:
+        # Process if the lesson bag is empty
         lesson_bag = request.session.get('lesson_bag', {})
         if not lesson_bag:
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('lessons'))
+        # fetch data for page before forms are submitted    
         current_bag = lesson_bag_contents(request)
         total = current_bag['lesson_total']
         user_subscription = UserSubscription.objects.filter(username=request.user).latest()
         sub_id = user_subscription.subscription.id
         profile = UserProfile.objects.get(user=request.user)
+        # retrieve phone_number from user profile if it exists
         if  profile is None:
             profile_exists = False
             phone_number = None
@@ -591,37 +716,63 @@ def subscribe(request):
 
 
 def cancel(request):
-    """.git/"""
+    """
+    The cancel view is used to cancel a subscription.
+    This can be completed just after the purchase of the
+    subscription or from the userprofile, once a subscription
+    has been added to the SubscriptionLineItem model.
+    request: The requests module allows you to send HTTP
+    requests using Python.
+
+    Created as per tutorial and customised for site:
+    https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
+    """
     if request.user.is_authenticated:
+        # fetch the subscription id from against the user
         user_subscription = UserSubscription.objects.filter(username=request.user).latest()
         sub_id = user_subscription.subscription.id
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     try:
+        # access stripe through the api to delete (archive) the subscription
         stripe.Subscription.delete(sub_id)
+        # delete it from the user
         user_subscription.delete()
+        # delete it from dj_stripe Subscription model
         Subscription.objects.filter(id=sub_id).delete()
+        # delete it from SubscriptionLineItem model only if it exits
         subscription_line_item = SubscriptionLineItem.objects.filter(subscribed_id=sub_id)
         if subscription_line_item.exists() is True:
             subscription_line_item.delete()
+        # if they are still in session with a lesson bag delete the lesson bag
         if 'lesson_bag' in request.session:
             del request.session['lesson_bag']
         messages.success(request, f'Subscription {sub_id} successfully cancelled!')
     except Exception as e_rr:
         return JsonResponse({'error': (e_rr.args[0])}, status =403)
 
-
+    # direct the user to the user profile, as from a front end perspective, that is where
+    # the user will view their active subscriptions from
     return redirect("profile")
 
 def checkout_lesson_complete(request, sub_id):
     """
-    Handle successful checkouts
+    The checkout_lesson_complete view returns a successful
+    checkout's subscription details. The user will receive
+    a success message and their subscription details.
+    
+    request: The requests module allows you to send HTTP
+    requests using Python.
+
+    sub_id: the unique number used to identify the subscription
     """
+    # fetch the required data to be displayed on the page to confirm the subscription
     customer = request.user.customer
     subscribed_customer = get_object_or_404(SubscribedCustomer, subscribed_customer_id=customer.id)
     subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=sub_id)
     subscription = get_object_or_404(Subscription, id=sub_id)
+    # invoice is retrieved and is clickable to open the invoice item on stripe as a new page
     invoice = get_object_or_404(Invoice, id=subscription.latest_invoice.id)
     invoice_link = invoice.hosted_invoice_url
     covers = Cover.objects.all()
@@ -629,7 +780,7 @@ def checkout_lesson_complete(request, sub_id):
     messages.success(request, f'Subscription successfully processed! \
         Your subscription number is {sub_id}. A confirmation \
         email will be sent to {subscribed_customer.email}.')
-
+    # if the lesson bag is still in the session delete the lesson bag
     if 'lesson_bag' in request.session:
         del request.session['lesson_bag']
 
