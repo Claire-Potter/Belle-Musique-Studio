@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto+Condensed&family=The+Nautigal:wght@700&display=swap');
 
 /* Styling used across the site */
+
 html {
     height: 100%;
     width: 100%;
@@ -37,7 +38,6 @@ body {
     width: 50%;
 }
 
-
 .music-note {
     color: #04142f;
     font-size: 1.5rem;
@@ -47,7 +47,6 @@ body {
     display: flex;
     margin-left: 65%;
 }
-
 
 .store-logo {
     font-size: 1.5rem;
@@ -101,7 +100,6 @@ a:hover {
     text-decoration: none;
 }
 
-
 .btt-button {
     height: 42px;
     width: 42px;
@@ -118,7 +116,6 @@ a:hover {
     cursor: pointer;
 }
 
-
 /* Navbar for small screens*/
 
 .navbar-toggler:focus {
@@ -129,9 +126,7 @@ a:hover {
 
 /* Bootstrap Cover Example */
 
-/*
- * Base structure
- */
+/* Base structure*/
 
 body {
     text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
@@ -207,7 +202,6 @@ body {
     color: #fbac2c;
 }
 
-
 /* Advert Banner */
 
 .advert-banner-background {
@@ -261,6 +255,13 @@ body {
     box-shadow: 5px 10px #04142f;
 }
 
+.advert-image-two {
+    border: #04142f 2px solid;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+
 /* Contact Us */
 
 .text-form {
@@ -288,14 +289,6 @@ body {
 
 .smaller-text {
     font-size: calc(0.6rem + .9vw) !important;
-
-}
-
-.advert-image-two {
-    border: #04142f 2px solid;
-    border-radius: 50%;
-    width: 250px;
-    height: 250px;
 }
 
 .btn-black {
@@ -310,7 +303,6 @@ body {
     border: 1px solid black;
     border-radius: 5%;
 }
-
 
 #new-image {
     background: white;
@@ -330,50 +322,7 @@ body {
     color: #ffffff;
 }
 
-/* Media query to center logo for small screens */
-
-@media (max-width: 1500px) {
-
-    .navbar-brand {
-        width: 100%;
-        text-align: center;
-    }
-
-    .shopping-logos {
-        margin-left: 65%;
-    }
-
-    .store-logo {
-        font-size: 1.5rem;
-    }
-
-    .lesson-logo {
-        font-size: 1.5rem;
-    }
-
-    .spacer {
-        display: none;
-    }
-
-    .width-define {
-        display: flex;
-        width: auto;
-        align-items: flex-end;
-    }
-
-    .text-form {
-        font-size: 0.8rem;
-    }
-
-    .text-form input,
-    .text-form textarea {
-        font-size: 0.8rem;
-        max-width: 250px;
-    }
-}
-
-
-/* ------------------------------- bootstrap toasts */
+/* bootstrap toasts */
 
 .message-container {
     position: fixed;
@@ -391,6 +340,7 @@ body {
 }
 
 /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
+
 .arrow-up {
     width: 0;
     height: 0;
@@ -403,6 +353,7 @@ body {
 }
 
 /* Convenience classes - colors copied from Bootstrap */
+
 .arrow-primary {
     border-bottom-color: #007bff !important;
 }
@@ -443,7 +394,6 @@ body {
     font-size: calc(1rem + .9vw) !important;
 }
 
-
 .content-height {
     height: fit-content;
 }
@@ -457,26 +407,60 @@ body {
     display: none;
 }
 
+/* Media queries */
 
-/* Media query to center logo for small screens */
+@media (max-width: 1500px) {
+    .navbar-brand {
+        width: 100%;
+        text-align: center;
+    }
+
+    .shopping-logos {
+        margin-left: 65%;
+    }
+
+    .store-logo {
+        font-size: 1.5rem;
+    }
+
+    .lesson-logo {
+        font-size: 1.5rem;
+    }
+
+    .spacer {
+        display: none;
+    }
+
+    .width-define {
+        display: flex;
+        width: auto;
+        align-items: flex-end;
+    }
+
+    .text-form {
+        font-size: 0.8rem;
+    }
+
+    .text-form input,
+    .text-form textarea {
+        font-size: 0.8rem;
+        max-width: 250px;
+    }
+}
 
 @media (max-width: 800px) {
-
     .smaller-font {
         font-size: calc(1rem + .9vw) !important;
-
     }
 
     .advert-button {
         font-size: calc(0.8rem + .9vw) !important;
     }
 
-
     .detail-image {
         width: 70%;
         height: 70%;
     }
-
 
     .smaller-text {
         font-size: calc(1rem + .9vw) !important;
@@ -508,12 +492,9 @@ body {
     }
 }
 
-
 @media (max-height: 700px) {
-
     .smaller-font {
         font-size: calc(1rem + .9vw) !important;
-
     }
 
     .detail-image {
@@ -534,9 +515,7 @@ body {
         font-size: calc(0.5rem + .9vw) !important;
         padding: 3px;
     }
-
 }
-
 
 @media (max-width: 370px) {
     .smaller-text {
@@ -544,12 +523,9 @@ body {
     }
 }
 
-
 @media (max-width: 285px) {
-
     .smaller-font {
         font-size: calc(0.8rem + .9vw) !important;
-
     }
 
     .detail-image {
@@ -563,8 +539,6 @@ body {
 }
 
 @media (max-height: 370px) {
-
-
     .image-short-height {
         padding: 0;
         margin: 0;
@@ -572,9 +546,7 @@ body {
 
     .smaller-font {
         font-size: calc(0.6rem + .9vw) !important;
-
     }
-
 
     .detail-image {
         width: 40%;

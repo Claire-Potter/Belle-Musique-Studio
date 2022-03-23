@@ -1,6 +1,12 @@
+/* jshint esversion: 6 */
+// static/script.js
+/*jslint browser:true */
+
+// Code from 'Boutique Ado' to return user to the top of the screen
+
 $('.btt-link').click(function(e) {
-    window.scrollTo(0, 0)
-})
+    window.scrollTo(0, 0);
+});
 
 $('#sort-selector').change(function() {
     var selector = $(this);
@@ -21,10 +27,7 @@ $('#sort-selector').change(function() {
 
         window.location.replace(currentUrl);
     }
-})
-
-/* jshint esversion: 6 */
-/*jslint browser:true */
+});
 
 // Create constants for html input.
 const dropButton = document.getElementById("dropdown-menu-link");
