@@ -1,8 +1,16 @@
 /* jshint esversion: 6 */
 // static/main.js
+/* Original code from
+https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
+and customised for site */
+
 $('#submit-button').attr('disabled', true);
 bagValue();
 
+/* Function written by me. It checks the lesson bag icon value, if it is
+greater than zero, it disables the select buttons. This is to prevent more
+than one lesson being added to the checkout bag at a time as the djstripe integration
+can only handle one subscription per checkout */
 function bagValue() {
     var lessonTotal = document.getElementById('lesson-bag-total').innerHTML;
     Number(lessonTotal);

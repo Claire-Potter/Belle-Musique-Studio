@@ -7,7 +7,6 @@
     height: 250px;
 }
 
-
 .border-none {
     border-width: 0;
     font-size: 1.5rem;
@@ -28,7 +27,6 @@
     background: black;
     color: white !important;
 }
-
 
 #hint_id_product-caption,
 #hint_id_product-name,
@@ -51,7 +49,6 @@
 }
 
 @media (max-width: 830px) {
-
     .border-none {
         border-width: 0;
         font-size: calc(0.9rem + .4vw) !important;
@@ -66,7 +63,6 @@
 }
 
 @media (max-width: 700px) {
-
     .border-none {
         border-width: 0;
         font-size: calc(0.8rem + .4vw) !important;
@@ -82,10 +78,8 @@
 }
 
 @media (max-width: 300px) {
-
     .lesson-small-font {
         font-size: calc(0.6rem + .4vw) !important;
-
     }
 
     .border-none {
@@ -99,5 +93,4 @@
     .background-overlay {
         font-size: calc(0.6rem + .4vw) !important;
     }
-
 }
