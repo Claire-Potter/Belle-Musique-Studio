@@ -18,7 +18,7 @@ var elements = stripe.elements();
 var style = {
     base: {
         color: '#000',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontFamily: '\'Helvetica Neue\', Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
@@ -40,8 +40,8 @@ card.addEventListener('change', function(event) {
     var errorDiv = document.getElementById('card-errors');
     if (event.error) {
         var html = `
-            <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
+            <span class='icon' role='alert'>
+                <i class='fas fa-times'></i>
             </span>
             <span>${event.error.message}</span>
         `;
@@ -65,7 +65,7 @@ form.addEventListener('submit', function(ev) {
 
     var saveInfo = Boolean($('#id-save-info').attr('checked'));
     // From using {% csrf_token %} in the form
-    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var csrfToken = $('input[name=\'csrfmiddlewaretoken\']').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
@@ -106,8 +106,8 @@ form.addEventListener('submit', function(ev) {
             if (result.error) {
                 var errorDiv = document.getElementById('card-errors');
                 var html = `
-                    <span class="icon" role="alert">
-                    <i class="fas fa-times"></i>
+                    <span class='icon' role='alert'>
+                    <i class='fas fa-times'></i>
                     </span>
                     <span>${result.error.message}</span>`;
                 $(errorDiv).html(html);

@@ -11,7 +11,7 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 # get_object_or_404 is a callable within the django.shortcuts module of the Django project.
 from django.template.loader import render_to_string
-# render_to_string is a callable within the django.template.loader module of the Django project
+# render_to_string is a callable within the django.template.loader module of the Django project.
 from djstripe import webhooks
 # dj-stripe implements all of the Stripe models, for Django.
 # https://pypi.org/project/dj-stripe/2.2.3/

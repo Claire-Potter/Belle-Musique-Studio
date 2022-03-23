@@ -1,17 +1,39 @@
 """
-xxx
+Belle Musique Studio custom webhook handler configuration
+
+Completed as per Code Institute 'Boutique Ado' Project
+
+Definitions from https://www.fullstackpython.com
+unless stated otherwise.
 """
 import json
+# JavaScript Object Notation (JSON) is a standardized format commonly used to
+#  transfer data as text that can be sent over a network. It’s used by lots
+#  of APIs and Databases, and it’s easy for both humans and machines to read.
+# https://realpython.com/lessons/what-is-json/#:~:text=import%20json,data%20into%20a%20Python%20list).
 import time
+# When support for time zones is enabled, Django stores datetime information in UTC in the database,
+# uses time-zone-aware datetime objects internally, and translates them to the end user’s time zone
+# in templates and forms.
+# https://docs.djangoproject.com/en/4.0/topics/i18n/timezones/
 
 from django.conf import settings
+# The Django settings file contains all of the configuration for a web application.
 from django.core.mail import send_mail
+# send_mail is a function in Django that can send an email using the EmailMessage class.
 from django.http import HttpResponse
+# HttpResponse (source code) provides an inbound HTTP request to a Django web
+# application with a text response. This class is most frequently used
+# as a return object from a Django view.
 from django.template.loader import render_to_string
+# render_to_string is a callable within the django.template.loader module of the Django project.
 
 from profiles.models import UserProfile
+# Model imported from profile app models.py
 from store.models import MusicProduct
+# Model imported from store app models.py
 from .models import Order, OrderLineItem
+# Model imported from models.py
 
 
 class StripeWhHandler:
@@ -60,7 +82,7 @@ class StripeWhHandler:
 
         # Clean data in the shipping details
         for field, value in shipping_details.address.items():
-            if value == "":
+            if value == '':
                 shipping_details.address[field] = None
 
         # Update profile information if save_info was checked

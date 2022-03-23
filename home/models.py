@@ -102,7 +102,7 @@ class Contact(models.Model):
         to the created on date.
         """
         ordering = ['-created_on']
-        verbose_name_plural = "Contact Requests"
+        verbose_name_plural = 'Contact Requests'
 
     def __str__(self):
         return f'Contact request {self.body} by {self.name}'
@@ -159,7 +159,7 @@ class StudentShowcase(models.Model):
         to set the admin model name to Student Showcase.
         """
         ordering = ['date']
-        verbose_name_plural = "Student Showcase"
+        verbose_name_plural = 'Student Showcase'
         get_latest_by = ['date']
 
     # The string is set to return the name field if it exists

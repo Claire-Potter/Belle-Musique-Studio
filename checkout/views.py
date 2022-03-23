@@ -224,8 +224,8 @@ def checkout(request):
                 # error message if an item could not be found
                 except MusicProduct.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        'One of the products in your bag wasn\'t found in our database. '
+                        'Please call us for assistance!')
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
@@ -241,7 +241,7 @@ def checkout(request):
         # Process if the shopping bag is empty
         bag = request.session.get('bag', {})
         if not bag:
-            messages.error(request, "There's nothing in your bag at the moment")
+            messages.error(request, 'There\'s nothing in your bag at the moment')
             return redirect(reverse('products'))
 
         # Fetching data for the checkout page before the form is posted
@@ -330,7 +330,7 @@ def checkout_lesson(request):
     # lesson bag, send the error message
     lesson_bag = request.session.get('lesson_bag', {})
     if not lesson_bag:
-        messages.error(request, "There's nothing in your bag at the moment")
+        messages.error(request, 'There\'s nothing in your bag at the moment')
         return redirect(reverse('lessons'))
     # fetch the data required for the checkout_lesson page
     current_bag = lesson_bag_contents(request)
@@ -402,10 +402,10 @@ def create_sub(request):
                         customer=customer.id,
                         items=[
                             {
-                                "price": data["price_id"],
+                                'price': data['price_id'],
                             },
                         ],
-                        expand=["latest_invoice.payment_intent"]
+                        expand=['latest_invoice.payment_intent']
                     )
                 # sync the subscription to the djstripe Subscription model
                 djstripe_subscription = (djstripe.models.Subscription.
@@ -424,8 +424,8 @@ def create_sub(request):
                 # error message if the user cannot be found
                 except username.DoesNotExist:
                     messages.error(request, (
-                        "The user wasn't found in our database. "
-                        "Please call us for assistance!")
+                        'The user wasn\'t found in our database. '
+                        'Please call us for assistance!')
                     )
                     subscription.delete()
                 return JsonResponse(subscription)
@@ -441,23 +441,23 @@ def create_sub(request):
                      phone=profile.default_phone_number,
                      address={
                          # address details provided if they exist, however not required
-                         "city": profile.default_town_or_city,
-                         "country": profile.default_country,
-                         "line1": profile.default_street_address1,
-                         "line2": profile.default_street_address2,
-                         "postal_code": profile.default_postcode,
-                         "state": profile.default_county
+                         'city': profile.default_town_or_city,
+                         'country': profile.default_country,
+                         'line1': profile.default_street_address1,
+                         'line2': profile.default_street_address2,
+                         'postal_code': profile.default_postcode,
+                         'state': profile.default_county
                          },
                      shipping={
-                         "name":request.user.get_full_name(),
-                         "phone":profile.default_phone_number,
-                         "address": {
-                             "city": profile.default_town_or_city,
-                             "country": profile.default_country,
-                             "line1": profile.default_street_address1,
-                             "line2": profile.default_street_address2,
-                             "postal_code": profile.default_postcode,
-                             "state": profile.default_county
+                         'name':request.user.get_full_name(),
+                         'phone':profile.default_phone_number,
+                         'address': {
+                             'city': profile.default_town_or_city,
+                             'country': profile.default_country,
+                             'line1': profile.default_street_address1,
+                             'line2': profile.default_street_address2,
+                             'postal_code': profile.default_postcode,
+                             'state': profile.default_county
                          },},
                      invoice_settings={
                              'default_payment_method': payment_method}
@@ -474,10 +474,10 @@ def create_sub(request):
                     customer=customer,
                     items=[
                         {
-                            "price": data["price_id"],
+                            'price': data['price_id'],
                         },
                     ],
-                    expand=["latest_invoice.payment_intent"]
+                    expand=['latest_invoice.payment_intent']
                 )
                 # sync the subscription to the djstripe Subscription model
                 djstripe_subscription = (djstripe.models
@@ -498,8 +498,8 @@ def create_sub(request):
                 # error message if the user cannot be found
                 except username.DoesNotExist:
                     messages.error(request, (
-                        "The user wasn't found in our database. "
-                        "Please call us for assistance!")
+                        'The user wasn\'t found in our database. '
+                        'Please call us for assistance!')
                     )
                     subscription.delete()
                 return JsonResponse(subscription)
@@ -585,8 +585,8 @@ def subscribe(request):
                 # error if the subscription cannot be found
                 except subscription_check.DoesNotExist:
                     messages.error(request, (
-                        "The subscription in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        'The subscription in your bag wasn\'t found in our database. '
+                        'Please call us for assistance!')
                     )
                     subscription_internal.delete()
                     subscription_lineitem_internal.delete()
@@ -658,8 +658,8 @@ def subscribe(request):
                     # error if the subscription cannot be found
                     except subscription_check.DoesNotExist:
                         messages.error(request, (
-                        "The subscription in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        'The subscription in your bag wasn\'t found in our database. '
+                        'Please call us for assistance!')
                         )
                         subscription_internal.delete()
                         subscription_lineitem_internal.delete()
@@ -683,7 +683,7 @@ def subscribe(request):
         # Process if the lesson bag is empty
         lesson_bag = request.session.get('lesson_bag', {})
         if not lesson_bag:
-            messages.error(request, "There's nothing in your bag at the moment")
+            messages.error(request, 'There\'s nothing in your bag at the moment')
             return redirect(reverse('lessons'))
         # fetch data for page before forms are submitted
         current_bag = lesson_bag_contents(request)
@@ -716,7 +716,7 @@ def subscribe(request):
                 'subscription_lineitem_form': subscription_lineitem_form,
                 'profile_exists': profile_exists
     }
-    return render(request, "checkout/subscription.html", context)
+    return render(request, 'checkout/subscription.html', context)
 
 
 def cancel(request):
@@ -758,7 +758,7 @@ def cancel(request):
 
     # direct the user to the user profile, as from a front end perspective, that is where
     # the user will view their active subscriptions from
-    return redirect("profile")
+    return redirect('profile')
 
 def checkout_lesson_complete(request, sub_id):
     """

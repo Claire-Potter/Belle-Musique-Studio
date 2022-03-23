@@ -1,4 +1,4 @@
-/* Stripe element styling from 'Boutique Ado' project */
+/* Stripe element styling from "Boutique Ado" project */
 .StripeElement,
 .stripe-style-input {
     box-sizing: border-box;
@@ -65,7 +65,7 @@ select.form-control:not([size]):not([multiple]) {
     font-size: calc(0.1rem + .9vw) !important;
 }
 
-/* Overlay styling from 'Boutique Ado' project */
+/* Overlay styling from "Boutique Ado" project */
 
 #loading-overlay {
     display: none;

@@ -35,7 +35,7 @@ urlpatterns = [
          RedirectView.as_view(url=staticfiles_storage.url('img/safari-pinned-tab.svg'))),
     path('accounts/', include('allauth.urls')),
     # djstripe set up
-    path("stripe/", include("djstripe.urls", namespace="djstripe")),
+    path('stripe/', include('djstripe.urls', namespace='djstripe')),
     path('', include('home.urls')),
     path('products/', include('store.urls')),
     path('bag/', include('shopping_bag.urls')),

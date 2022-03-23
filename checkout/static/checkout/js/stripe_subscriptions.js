@@ -15,17 +15,17 @@ function stripeElements() {
         // Card Element styles
         let style = {
             base: {
-                color: "#32325d",
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: "antialiased",
-                fontSize: "16px",
-                "::placeholder": {
-                    color: "#aab7c4"
+                color: '#32325d',
+                fontFamily: '\'Helvetica Neue\', Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
                 }
             },
             invalid: {
-                color: "#fa755a",
-                iconColor: "#fa755a"
+                color: '#fa755a',
+                iconColor: '#fa755a'
             }
         };
 
@@ -102,11 +102,11 @@ function createPaymentMethod({
                 displayError(result);
             } else {
                 const paymentParams = {
-                    price_id: document.getElementById("priceId").innerHTML,
+                    price_id: document.getElementById('priceId').innerHTML,
                     payment_method: result.paymentMethod.id,
                 };
                 // csrf_token is exempt in views.py as recognition could not be achieved
-                fetch("create-sub/", {
+                fetch('create-sub/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
