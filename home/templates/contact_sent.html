@@ -8,36 +8,36 @@
 {% load crispy_forms_tags %}
 </div>
 <section>
-    <div class="row bg-white d-flex w-100 mx-auto">
-        <div class="row">
-            <div class="col-12 mt-5">
-                <div class="mx-auto pl-3 w-50 small-width-heading">
-                    <hr>
-                    <h2 class="font-weight-bold text-center mt-5 mb-5">Email successfully sent</h2>
-                    <hr>
-                </div>
-                <div class="col-sm-6 col-12 mx-sm-auto ml-3 w-50 small-width-heading">
-                    <h2 class=" text-center mx-sm-5 mx-3 my-sm-5 my-3 px-sm-5 px-3 py-sm-5 py-3">Your request was successfully sent to us!</h2>
-                </div>
+   <div class="row bg-white d-flex w-100 mx-auto">
+      <div class="row">
+         <div class="col-12 mt-5">
+            <div class="mx-auto pl-3 w-50 small-width-heading">
+               <hr>
+               <h2 class="font-weight-bold text-center mt-5 mb-5">Email successfully sent</h2>
+               <hr>
             </div>
-            <div class="col text-center mt-3">
-                 <!--Link to encourage purchases from the music store.-->
-                <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-                <p class="smaller-text">Now check out the latest deals that our Music Store has to offer!</p>
-                <div class="col mt-3 mt-sm-0 text-center">
-                   <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-                   <span class="icon">
-                   <i class="fas fa-chevron-left"></i>
-                   </span>
-                   <span class="text-uppercase">Shop Now</span>
-                   </a>
-                </div>
-             </div>
-              <!--Internal advertisements displayed at the end of the page.-->
-             {% include 'includes/lessons_advert_four.html' %}
-             {% include 'includes/showcase_advert_four.html' %}
-        </div>
-    </div>
+            <div class="col-sm-6 col-12 mx-sm-auto ml-3 w-50 small-width-heading">
+               <h2 class=" text-center mx-sm-5 mx-3 my-sm-5 my-3 px-sm-5 px-3 py-sm-5 py-3">Your request was successfully sent to us!</h2>
+            </div>
+         </div>
+         <div class="col text-center mt-3">
+            <!--Link to encourage purchases from the music store.-->
+            <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+            <p class="smaller-text">Now check out the latest deals that our Music Store has to offer!</p>
+            <div class="col mt-3 mt-sm-0 text-center">
+               <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
+               <span class="icon">
+               <i class="fas fa-chevron-left"></i>
+               </span>
+               <span class="text-uppercase">Shop Now</span>
+               </a>
+            </div>
+         </div>
+         <!--Internal advertisements displayed at the end of the page.-->
+         {% include 'includes/lessons_advert_four.html' %}
+         {% include 'includes/showcase_advert_four.html' %}
+      </div>
+   </div>
 </section>
 <div class="footer-background-color w-100">
-    {% endblock %}
+{% endblock %}

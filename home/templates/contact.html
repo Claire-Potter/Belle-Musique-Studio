@@ -8,45 +8,45 @@
 {% load crispy_forms_tags %}
 </div>
 <section>
-    <div class="row bg-white d-flex w-100 mx-auto">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="mx-auto pl-3 w-50 small-width-heading">
-                    <hr>
-                    <h2 class="font-weight-bold text-center mt-5">Require assistance?</h2>
-                    <h2 class="lead text-center">Please get in touch!</h2>
-                    <hr>
-                </div>
-                <div class="col-sm-6 px-sm-5 pb-2 mx-3 my-3 mx-sm-auto ">
-                    <form method="post" class="mt-5">
-                        {% csrf_token %}
-                        <div class="form-row px-3 py-3">
-                            <div class="form-group col-md-6 mb-0 text-form">
-                                <!--if the user is logged in the name will be auto-completed from the username-->
-                                {{ contact_form.name|as_crispy_field }}
-                            </div>
-                            <div class="form-group col-md-6 mb-0 text-form">
-                                <!--if the user is logged in the email will be auto-completed from the user email-->
-                                {{ contact_form.email|as_crispy_field }}
-                            </div>
-                        </div>
-                        <div class="text-form">
-                            <!--The user will complete their message in the body field-->
-                            {{ contact_form.body|as_crispy_field }}
-                        </div>
-                        <div class="text-center">
-                        <button type="submit" class="btn advert-button text-uppercase mt-3 mb-3">Send</button>
-                        </div>
-                    </form>
-                </div>
+   <div class="row bg-white d-flex w-100 mx-auto">
+      <div class="row align-items-center">
+         <div class="col-md-12">
+            <div class="mx-auto pl-3 w-50 small-width-heading">
+               <hr>
+               <h2 class="font-weight-bold text-center mt-5">Require assistance?</h2>
+               <h2 class="lead text-center">Please get in touch!</h2>
+               <hr>
             </div>
-        </div>
-        <div class="row pl-5">
-        <!--Internal advertisements displayed at the end of the page.-->
-        {% include 'includes/lessons_advert_three.html' %}
-        {% include 'includes/showcase_advert_three.html' %}
-        </div>
-    </div>
+            <div class="col-sm-6 px-sm-5 pb-2 mx-3 my-3 mx-sm-auto ">
+               <form method="post" class="mt-5">
+                  {% csrf_token %}
+                  <div class="form-row px-3 py-3">
+                     <div class="form-group col-md-6 mb-0 text-form">
+                        <!--if the user is logged in the name will be auto-completed from the username-->
+                        {{ contact_form.name|as_crispy_field }}
+                     </div>
+                     <div class="form-group col-md-6 mb-0 text-form">
+                        <!--if the user is logged in the email will be auto-completed from the user email-->
+                        {{ contact_form.email|as_crispy_field }}
+                     </div>
+                  </div>
+                  <div class="text-form">
+                     <!--The user will complete their message in the body field-->
+                     {{ contact_form.body|as_crispy_field }}
+                  </div>
+                  <div class="text-center">
+                     <button type="submit" class="btn advert-button text-uppercase mt-3 mb-3">Send</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="row pl-5">
+         <!--Internal advertisements displayed at the end of the page.-->
+         {% include 'includes/lessons_advert_three.html' %}
+         {% include 'includes/showcase_advert_three.html' %}
+      </div>
+   </div>
 </section>
 <div class="footer-background-color w-100">
-    {% endblock %}
+{% endblock %}

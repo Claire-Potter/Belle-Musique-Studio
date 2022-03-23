@@ -4,40 +4,38 @@
 {% include "includes/cover.html" %}
 </div>
 <section>
-
-<!--This page is only accessible by staff. It is utilised via the front end to capture a student showcase record. The latests record
-added will be displayed on the about page.-->
-<div class="container-fluid bg-white w-100">
-    <div class="row mx-auto">
-        <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+   <!--This page is only accessible by staff. It is utilised via the front end to capture a student showcase record. The latests record
+      added will be displayed on the about page.-->
+   <div class="container-fluid bg-white w-100">
+      <div class="row mx-auto">
+         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
             <div class="col-12 text-center mx-auto">
-                <hr>
-                <h2 class="font-weight-bold text-center mt-4 mb-4">Showcase A Student</h2>
-                <hr>
+               <hr>
+               <h2 class="font-weight-bold text-center mt-4 mb-4">Showcase A Student</h2>
+               <hr>
             </div>
-        </div>
-    </div>
-    <div class="row mx-auto">
-       <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
-           <form method="POST" action="{% url 'add_student_showcase' %}" class="form mb-2 text-form" enctype="multipart/form-data">
-            
-                    {% csrf_token %}
-                    {{ form.name |as_crispy_field  }}
-                    {{ form.excerpt |as_crispy_field }}
-                    {{ form.body |as_crispy_field }}
-                    {{ form.image_url |as_crispy_field }}
-                    {{ form.video_name |as_crispy_field }}
-                    {{ form.video_url |as_crispy_field }}
-                    {{ form.customer |as_crispy_field }}
-                    {{ form.subscription |as_crispy_field }}
-                    <div class="text-right">
-                        <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'home' %}">Cancel</a>
-                        <button class="btn advert-button text-uppercase mb-3 " type="submit">Add Showcase</button>
-                    </div>
-          </form>
-        </div>            
-    </div>
-</div>
+         </div>
+      </div>
+      <div class="row mx-auto">
+         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+            <form method="POST" action="{% url 'add_student_showcase' %}" class="form mb-2 text-form" enctype="multipart/form-data">
+               {% csrf_token %}
+               {{ form.name |as_crispy_field  }}
+               {{ form.excerpt |as_crispy_field }}
+               {{ form.body |as_crispy_field }}
+               {{ form.image_url |as_crispy_field }}
+               {{ form.video_name |as_crispy_field }}
+               {{ form.video_url |as_crispy_field }}
+               {{ form.customer |as_crispy_field }}
+               {{ form.subscription |as_crispy_field }}
+               <div class="text-right">
+                  <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'home' %}">Cancel</a>
+                  <button class="btn advert-button text-uppercase mb-3 " type="submit">Add Showcase</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </section>
 <div class="footer-background-color w-100">
 {% endblock %}
