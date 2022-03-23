@@ -36,7 +36,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 # send_mail is a function in Django that can send an email using the EmailMessage class.
 from django.contrib import messages
-#Quite commonly in web applications, you need to display a one-time notification
+# Quite commonly in web applications, you need to display a one-time notification
 # message (also known as “flash message”) to the user after processing a form or
 #  some other types of user input.
 

@@ -1,31 +1,112 @@
-""".git/"""
+"""
+Belle Musique Studio checkout app views configuration
+
+After correcting any pylint issues, I was still left with the issue
+'class has no objects member', the object is only added when the screen
+is  rendered in the browser, so the issue is not valid. I followed
+the steps available for the following stack overflow:
+https://stackoverflow.com/questions/45135263/class-has-no-objects-member
+and created the .pylintrc file to customise the pylint settings to
+prevent this error from displaying.
+
+The cache_checkout_data view is utilised
+to connect to stripe to process the order payment.
+
+The checkout view renders the checkout template through
+the url. It provides the stripe API key settings,
+it calls the current shopping bag, to process the contents
+as an order.
+
+The checkout_success view returns a successful
+checkout's order details. The user will receive
+a success message and their order details.
+
+Messages definition from:
+https://docs.djangoproject.com/en/4.0/ref/contrib/messages/
+
+Definitions from https://www.fullstackpython.com
+unless stated otherwise.
+"""
 import json
+# JavaScript Object Notation (JSON) is a standardized format commonly used to
+#  transfer data as text that can be sent over a network. It’s used by lots
+#  of APIs and Databases, and it’s easy for both humans and machines to read.
+# https://realpython.com/lessons/what-is-json/#:~:text=import%20json,data%20into%20a%20Python%20list).
 import time
+# When support for time zones is enabled, Django stores datetime information in UTC in the database,
+# uses time-zone-aware datetime objects internally, and translates them to the end user’s time zone
+# in templates and forms.
+# https://docs.djangoproject.com/en/4.0/topics/i18n/timezones/
 
 import stripe
+# A Python library for Stripe’s API.
+# https://pypi.org/project/stripe/
 import djstripe
+# dj-stripe implements all of the Stripe models, for Django. 
+# https://pypi.org/project/dj-stripe/2.2.3/
 from django.conf import settings
+# The Django settings file contains all of the configuration for a web application.
 from django.contrib import messages
+# Quite commonly in web applications, you need to display a one-time notification
+# message (also known as “flash message”) to the user after processing a form or
+#  some other types of user input.
+
+# For this, Django provides full support for cookie- and session-based messaging,
+# for both anonymous and authenticated users. The messages framework allows you
+# to temporarily store messages in one request and retrieve them for display in a
+# subsequent request (usually the next one). Every message is tagged with a specific level
+# that determines its priority (e.g., info, warning, or error).
 from django.http.response import JsonResponse
+# An HttpResponse subclass that helps to create a JSON-encoded response.
+# It inherits most behavior from its superclass.
+# https://docs.djangoproject.com/en/4.0/ref/request-response/
 from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
                               render, reverse)
+# HttpResponse (source code) provides an inbound HTTP request to a Django web 
+# application with a text response. This class is most frequently used
+# as a return object from a Django view.
+# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
+# redirect is a callable within the django.shortcuts module of the Django project.
+# render is a callable within the django.shortcuts module of the Django project.
+# reverse is a callable within the django.urls module of the Django project.
 from django.views.decorators.http import require_POST
+# require_POST is a callable within the django.views.decorators.http
+# module of the Django project.
 from django.contrib.auth.decorators import login_required
+# @login_required: Django's login_required function is used to secure views
+# in your web applications by forcing the client to
+# authenticate with a valid logged-in User.
 from django.views.decorators.csrf import csrf_exempt
+# csrf_exempt is a callable within the django.views.decorators.csrf 
+# module of the Django project.
 from djstripe.models import Subscription, Invoice
+# Models are imported from djstripe models.py
 
 from home.models import Cover, User, UserSubscription
+# Models are imported from home app models.py
 from profiles.models import UserProfile
+# Model imported from profiles app models.py
 from shopping_bag.contexts import bag_contents, lesson_bag_contents
+# Context imported from shopping_bag app contexts.py
 from store.models import MusicProduct
+# Model imported from store app models.py
 
 from .forms import OrderForm, SubscribedCustomerForm, SubscriptionLineItemForm
+# Forms are imported from forms.py
 from .models import Order, OrderLineItem, SubscribedCustomer, SubscriptionLineItem
+# Models are imported from models.py
 
 
 @require_POST
 def cache_checkout_data(request):
-    """.flake8"""
+    """
+    The cache_checkout_data view is utilised
+    to connect to stripe to process the order
+    payment.
+
+    Created as per the Code Institute 'Boutique Ado'
+    project.
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -42,7 +123,20 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
-    """.flake8"""
+    """
+    The checkout view renders the checkout template through
+    the url. It provides the stripe API key settings,
+    it calls the current shopping bag, to process the contents
+    as an order. The order_form is utilised to capture the 
+    user's shipping address details. The user can select to 
+    save this information to their user profile.
+    All order details are saved to the Order and the OrderLineItem
+    models.
+    Payment details are collected and sent through to stripe to process
+    payment.
+    Created as per the Code Institute 'Boutique Ado'
+    project.
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -137,7 +231,12 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     """
-    Handle successful checkouts
+    The checkout_success view returns a successful
+    checkout's order details. The user will receive
+    a success message and their order details.
+
+    Created as per the Code Institute 'Boutique Ado'
+    project.
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
