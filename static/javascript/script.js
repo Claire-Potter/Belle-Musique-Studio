@@ -13,27 +13,27 @@ $('#sort-selector').change(function() {
     var currentUrl = new URL(window.location);
 
     var selectedVal = selector.val();
-    if (selectedVal != "reset") {
-        var sort = selectedVal.split("_")[0];
-        var direction = selectedVal.split("_")[1];
+    if (selectedVal != 'reset') {
+        var sort = selectedVal.split('_')[0];
+        var direction = selectedVal.split('_')[1];
 
-        currentUrl.searchParams.set("sort", sort);
-        currentUrl.searchParams.set("direction", direction);
+        currentUrl.searchParams.set('sort', sort);
+        currentUrl.searchParams.set('direction', direction);
 
         window.location.replace(currentUrl);
     } else {
-        currentUrl.searchParams.delete("sort");
-        currentUrl.searchParams.delete("direction");
+        currentUrl.searchParams.delete('sort');
+        currentUrl.searchParams.delete('direction');
 
         window.location.replace(currentUrl);
     }
 });
 
 // Create constants for html input.
-const dropButton = document.getElementById("dropdown-menu-link");
-const dropDown = document.getElementById("my-dropdown");
-const dropdowns = document.getElementsByClassName("dropdown-menu");
-const navBar = document.getElementsByClassName("navbar");
+const dropButton = document.getElementById('dropdown-menu-link');
+const dropDown = document.getElementById('my-dropdown');
+const dropdowns = document.getElementsByClassName('dropdown-menu');
+const navBar = document.getElementsByClassName('navbar');
 var i;
 const openDropdown = dropdowns[i];
 
@@ -46,18 +46,18 @@ const openDropdown = dropdowns[i];
  */
 
 function dropdownMenu() {
-    dropDown.classList.toggle("show");
+    dropDown.classList.toggle('show');
 }
 
 // Close the dropdown menu if the user clicks outside of it
 navBar.onclick = function(event) {
-    if (!event.target.matches(".steps-button")) {
+    if (!event.target.matches('.steps-button')) {
         for (i = 0; i < dropdowns.length; i++) {
-            if (openDropdown.classList.contains("show")) {
-                openDropdown.classList.remove("show");
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
             }
         }
     }
 };
 
-dropButton.addEventListener("click", dropdownMenu);
+dropButton.addEventListener('click', dropdownMenu);
