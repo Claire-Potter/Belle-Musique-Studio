@@ -13,7 +13,7 @@ be sent to the admin account and saved
 to the StudentShowcase model.
 """
 from django import forms
-# Forms are imported from forms.py
+# Forms are imported from Django
 from .models import Contact, StudentShowcase
 # Models are imported from models.py
 
