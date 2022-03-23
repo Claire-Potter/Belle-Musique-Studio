@@ -26,13 +26,14 @@ def customer_created_event_listener(event):
     intent = event.data.object
     user_name = intent.metadata.username
     user = get_object_or_404(User, username=user_name)
+    name = user.first_name
     cust_email = user.email
     subject = render_to_string(
             'lesson_emails/confirmation_emails/confirmation_email_subject.txt',
             {'event': event})
     body = render_to_string(
             'lesson_emails/confirmation_emails/confirmation_email_body.txt',
-            {'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+            {'name': name, 'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
            subject,
             body,
@@ -51,12 +52,13 @@ def customer_subscription_deleted_event_listener(event, **kwargs):
     intent = event.data.object
     user_name = intent.metadata.username
     user = get_object_or_404(User, username=user_name)
+    name = user.first_name
     cust_email = user.email
     subject = render_to_string('lesson_emails/cancellation_emails/'
                                'cancellation_email_subject.txt',{'event': event}),
     body = render_to_string(
             'lesson_emails/cancellation_emails/cancellation_email_body.txt',
-            {'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+            {'name': name, 'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
         subject,
         body,

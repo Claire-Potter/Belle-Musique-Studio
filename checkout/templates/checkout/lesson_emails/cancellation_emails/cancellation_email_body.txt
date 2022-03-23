@@ -1,10 +1,11 @@
-Hello {{ subscribed_customer.full_name }}!
+Hello {{ name }}!
 
 This is a confirmation of the cancellation of your subscription with Belle Musique Studio. Your subscription information is below:
 
 Subscription Number: {{ event.subscription}}
 Subscription Date: {{ event.billing_cycle_anchor }}
-End Date: {{ event.end_date}}
+Cancellation Date: {{ event.canceled_at}}
+Current Period End Date: {{ event.current_period_end}}
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 

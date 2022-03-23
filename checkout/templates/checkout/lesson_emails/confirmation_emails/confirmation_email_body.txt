@@ -1,4 +1,4 @@
-Hello {{ subscribed_customer.full_name }}!
+Hello {{ name }}!
 
 This is a confirmation of your subscription with Belle Musique Studio. Your subscription information is below:
 
