@@ -1,10 +1,15 @@
-""".git/xxx
+"""
+Belle Musique Studio checkout app URL Configuration
 
+URLs for the checkout app setup according to checkout/views.py
 """
 from django.urls import path
+# path is a callable within the django.urls module of the Django project.
 
 from . import views
-from .webhooks import webhook
+# Views imported from views.py
+from .webhooks_custom import webhook
+# import the customised webhook from the webhooks_custom.py file
 
 urlpatterns = [
     path('', views.checkout, name='checkout'),

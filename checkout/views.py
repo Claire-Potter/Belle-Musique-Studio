@@ -27,7 +27,7 @@ to be purchased.
 
 The create_sub view provides the stripe API key settings,
 it calls the lesson (stripe product) and subscription (stripe plan)
-to process. Payment details are collected and sent through 
+to process. Payment details are collected and sent through
 to stripe to process payment.
 
 The subscribe view renders the subscription template through
@@ -64,7 +64,7 @@ import stripe
 # A Python library for Stripe’s API.
 # https://pypi.org/project/stripe/
 import djstripe
-# dj-stripe implements all of the Stripe models, for Django. 
+# dj-stripe implements all of the Stripe models, for Django.
 # https://pypi.org/project/dj-stripe/2.2.3/
 from django.conf import settings
 # The Django settings file contains all of the configuration for a web application.
@@ -84,7 +84,7 @@ from django.http.response import JsonResponse
 # https://docs.djangoproject.com/en/4.0/ref/request-response/
 from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
                               render, reverse)
-# HttpResponse (source code) provides an inbound HTTP request to a Django web 
+# HttpResponse (source code) provides an inbound HTTP request to a Django web
 # application with a text response. This class is most frequently used
 # as a return object from a Django view.
 # get_object_or_404 is a callable within the django.shortcuts module of the Django project.
@@ -99,7 +99,7 @@ from django.contrib.auth.decorators import login_required
 # in your web applications by forcing the client to
 # authenticate with a valid logged-in User.
 from django.views.decorators.csrf import csrf_exempt
-# csrf_exempt is a callable within the django.views.decorators.csrf 
+# csrf_exempt is a callable within the django.views.decorators.csrf
 # module of the Django project.
 from djstripe.models import Subscription, Invoice
 # Models are imported from djstripe models.py
@@ -156,8 +156,8 @@ def checkout(request):
     The checkout view renders the checkout template through
     the url. It provides the stripe API key settings,
     it calls the current shopping bag, to process the contents
-    as an order. The order_form is utilised to capture the 
-    user's shipping address details. The user can select to 
+    as an order. The order_form is utilised to capture the
+    user's shipping address details. The user can select to
     save this information to their user profile.
     All order details are saved to the Order and the OrderLineItem
     models.
@@ -172,12 +172,12 @@ def checkout(request):
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-  
+
     # if the form has been submitted, the current shopping bag
     # is fetched from the current session
     if request.method == 'POST':
         bag = request.session.get('bag', {})
-    
+
     # the form data is stipulated
         form_data = {
             'full_name': request.POST['full_name'],
@@ -233,7 +233,7 @@ def checkout(request):
             request.session['save_info'] = 'save-info' in request.POST
             # the user is redirected to the checkout_success page
             return redirect(reverse('checkout_success', args=[order.order_number]))
-         # error message if the form is not valid   
+         # error message if the form is not valid
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -243,7 +243,7 @@ def checkout(request):
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
-        
+
         # Fetching data for the checkout page before the form is posted
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
@@ -258,7 +258,7 @@ def checkout(request):
             'email': request.user.email,})
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='checkout')
-    
+
     # error if the stripe public key is not found
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
@@ -319,7 +319,7 @@ def checkout_lesson(request):
     """
     The checkout view renders the checkout template through
     the url. The lesson_bag contains the lesson and subscription
-    to be purchased. Only one lesson subscription can be 
+    to be purchased. Only one lesson subscription can be
     purchased per checkout because of the integration through
     djstripe set up.
 
@@ -354,7 +354,7 @@ def create_sub(request):
     """
     The create_sub view provides the stripe API key settings,
     it calls the lesson (stripe product) and subscription (stripe plan)
-    to process. Payment details are collected and sent through 
+    to process. Payment details are collected and sent through
     to stripe to process payment.
     If a customer record already exists on stripe it will be used to create
     the new subscription against. If not a new customer record and a new
@@ -495,7 +495,7 @@ def create_sub(request):
                     user_line_item.save()
                     request.user.save()
                     username=request.user
-                # error message if the user cannot be found    
+                # error message if the user cannot be found
                 except username.DoesNotExist:
                     messages.error(request, (
                         "The user wasn't found in our database. "
@@ -517,7 +517,7 @@ def subscribe(request):
     The subscribe view renders the subscription template through
     the url. The customer and the subscription details are fetched
     from the logged in user.
-    The subscription_form is utilised to capture the 
+    The subscription_form is utilised to capture the
     user's phone number and the name of the student the subscription
     is for. All customer details are saved to the SubscribedCustomer model
     and the Subscription details are saved to the SubscriptionLineItem
@@ -543,13 +543,15 @@ def subscribe(request):
             except SubscribedCustomer.DoesNotExist:
                 attempt += 1
                 time.sleep(1)
-        # if the customer exists, set up the instance of the SubscribedCustomerForm to reference the customer id        
+        # if the customer exists, set up the instance of
+        # the SubscribedCustomerForm to reference the customer id
         if customer_exists:
             subscription_form = SubscribedCustomerForm(request.POST, instance=customer_subscribed)
             subscription_lineitem_form = SubscriptionLineItemForm(request.POST)
             current_bag = lesson_bag_contents(request)
             total = current_bag['lesson_total']
-            # if the forms are valid save the subscription form and proceed to fetch the subscription id from the user
+            # if the forms are valid save the subscription form and proceed
+            # to fetch the subscription id from the user
             if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
                 subscription_internal = subscription_form.save(commit=False)
                 subscription_lineitem_internal = subscription_lineitem_form.save(commit=False)
@@ -569,7 +571,8 @@ def subscribe(request):
                     subscription_invoice=user_subscription.subscription.latest_invoice
                     subscription_lineitem_internal.subscribed_id=subscribed_id
                     subscription_lineitem_internal.subscription=user_subscription.subscription
-                    subscription_lineitem_internal.subscription_name=user_subscription.subscription_name
+                    subscription_lineitem_internal.subscription_name=(user_subscription.
+                                                                      subscription_name)
                     subscription_lineitem_internal.status=subscription_status
                     subscription_lineitem_internal.customer=subscription_internal
                     subscription_lineitem_internal.start_date=subscription_start
@@ -640,7 +643,8 @@ def subscribe(request):
                         subscription_invoice=user_subscription.subscription.latest_invoice
                         subscription_lineitem_internal.subscribed_id=subscribed_id
                         subscription_lineitem_internal.subscription=user_subscription.subscription
-                        subscription_lineitem_internal.subscription_name=user_subscription.subscription_name
+                        subscription_lineitem_internal.subscription_name=(user_subscription.
+                                                                          subscription_name)
                         subscription_lineitem_internal.status=subscription_status
                         subscription_lineitem_internal.customer=subscription_internal
                         subscription_lineitem_internal.start_date=subscription_start
@@ -681,7 +685,7 @@ def subscribe(request):
         if not lesson_bag:
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('lessons'))
-        # fetch data for page before forms are submitted    
+        # fetch data for page before forms are submitted
         current_bag = lesson_bag_contents(request)
         total = current_bag['lesson_total']
         user_subscription = UserSubscription.objects.filter(username=request.user).latest()
@@ -761,7 +765,7 @@ def checkout_lesson_complete(request, sub_id):
     The checkout_lesson_complete view returns a successful
     checkout's subscription details. The user will receive
     a success message and their subscription details.
-    
+
     request: The requests module allows you to send HTTP
     requests using Python.
 

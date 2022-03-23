@@ -11,7 +11,7 @@ prevent this error from displaying.
 
 the index view is set up to display the homepage.
 
-the About view is set up to display the about page. 
+the About view is set up to display the about page.
 
 Contact View created to render the Contact page.
 The view also references the Contact model
@@ -63,8 +63,8 @@ from .models import Cover, User, StudentShowcase
 # Models are imported from models.py
 
 def index(request):
-    """ 
-    A view to return the home page as index.html 
+    """
+    A view to return the home page as index.html
 
     request: The requests module allows you to send HTTP
     requests using Python.
@@ -82,10 +82,10 @@ def index(request):
 
 
 def about(request):
-    """ 
+    """
     A view to return the About page.
     This contains the information about who Belle Musique Studio are,
-    who the owner is, high level information about lessons, the student showcase 
+    who the owner is, high level information about lessons, the student showcase
     section and links to the various products in the music store.
 
     request: The requests module allows you to send HTTP
@@ -196,7 +196,7 @@ class Contact(View):
 
 
 def contact_sent(request):
-    """ 
+    """
     A view to return the contact sent page
     request: The requests module allows you to send HTTP
     requests using Python.
@@ -215,7 +215,7 @@ def contact_sent(request):
 
 @login_required
 def add_student_showcase(request):
-    """ 
+    """
     Add a student to be showcased on the about page.
 
     request: The requests module allows you to send HTTP
@@ -231,11 +231,11 @@ def add_student_showcase(request):
     on the About page.
 
     If statement is utilised to determine if the user is a staff member, if not
-    they will be denied access. 
+    they will be denied access.
     If and else statement utilised to determine whether the request is a post or
     not, if not, the form without content will be rendered for the user to complete,
     if it is 'POST' the completed form will be requested and saved.
-    An If and else statement is utilised to check for errors, if successful a success 
+    An If and else statement is utilised to check for errors, if successful a success
     message will display, if not an error message will display.
     """
     if not request.user.is_staff:
