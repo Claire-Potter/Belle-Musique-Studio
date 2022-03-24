@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-// static/main.js
+// static/lessons/checkbox.js
 /* Original code from
 https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
 and customised for site */

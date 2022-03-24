@@ -1,9 +1,10 @@
+/* Created as per Code Institute's "Boutique Ado" project  */
+
 .order-history {
     max-height: 416px;
     /* height of profile form + submit button */
     overflow-y: auto;
 }
-
 
 #profile-update-form .form-control {
     color: #04142f;
@@ -34,7 +35,6 @@
     transition: box-shadow 150ms ease;
 }
 
-
 select.form-control:not([size]):not([multiple]) {
     height: calc(3.5rem + 5px);
 }
@@ -44,14 +44,11 @@ select.form-control:not([size]):not([multiple]) {
     box-shadow: 0 1px 3px 0 #cfd7df;
 }
 
-
 /* Media queries */
 
 @media (max-width: 800px) {
-
     .smallest-text {
         font-size: calc(0.6rem + .9vw) !important;
-
     }
 
     .profile-form-input {
@@ -64,9 +61,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 @media (min-width: 801px) {
-
     .smallest-text {
         font-size: calc(0.1rem + .9vw) !important;
-
     }
 }
