@@ -47,6 +47,8 @@ class OrderForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'full_name': 'Full Name',
+            'email': 'Email',
             'phone_number': 'Phone Number',
             'postcode': 'Postal Code',
             'town_or_city': 'Town or City',
@@ -57,7 +59,7 @@ class OrderForm(forms.ModelForm):
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field not in ('country', 'full_name', 'email'):
+            if field not in ('country',):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:

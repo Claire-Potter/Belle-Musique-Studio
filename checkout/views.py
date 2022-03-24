@@ -108,6 +108,8 @@ from home.models import Cover, User, UserSubscription
 # Models are imported from home app models.py
 from profiles.models import UserProfile
 # Model imported from profiles app models.py
+from profiles.forms import UserProfileForm
+# Form imported from profiles app forms.py
 from shopping_bag.contexts import bag_contents, lesson_bag_contents
 # Context imported from shopping_bag app contexts.py
 from store.models import MusicProduct
@@ -145,10 +147,10 @@ def cache_checkout_data(request):
             'username': request.user,
         })
         return HttpResponse(status=200)
-    except Exception as e_rr:
+    except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
-        return HttpResponse(content=e_rr, status=400)
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
@@ -173,12 +175,11 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    # if the form has been submitted, the current shopping bag
-    # is fetched from the current session
     if request.method == 'POST':
+        # if the form has been submitted, the current shopping bag
+        # is fetched from the current session
         bag = request.session.get('bag', {})
 
-    # the form data is stipulated
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -191,7 +192,6 @@ def checkout(request):
             'county': request.POST['county'],
         }
 
-        # the order form is validated
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
@@ -212,7 +212,6 @@ def checkout(request):
                         )
                         order_line_item.save()
                     else:
-                        # for items with sizes, the size field is included
                         for size, quantity in item_data['items_by_size'].items():
                             order_line_item = OrderLineItem(
                                 order=order,
@@ -221,19 +220,17 @@ def checkout(request):
                                 product_size=size,
                             )
                             order_line_item.save()
-                # error message if an item could not be found
                 except MusicProduct.DoesNotExist:
                     messages.error(request, (
-                        'One of the products in your bag wasn\'t found in our database. '
-                        'Please call us for assistance!')
+                        "One of the products in your bag wasn't found in our database. "
+                        "Please call us for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
-            # the saved address information is requested
+
+            # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            # the user is redirected to the checkout_success page
             return redirect(reverse('checkout_success', args=[order.order_number]))
-         # error message if the form is not valid
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -241,10 +238,9 @@ def checkout(request):
         # Process if the shopping bag is empty
         bag = request.session.get('bag', {})
         if not bag:
-            messages.error(request, 'There\'s nothing in your bag at the moment')
+            messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
 
-        # Fetching data for the checkout page before the form is posted
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
@@ -254,12 +250,26 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        order_form = OrderForm(initial={'full_name': request.user.get_full_name(),
-            'email': request.user.email,})
-        covers = Cover.objects.all()
-        cover = get_object_or_404(covers, page='checkout')
+        # Attempt to prefill the form with any info the user maintains in their profile
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name':  profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    'phone_number': profile.default_phone_number,
+                    'country': profile.default_country,
+                    'postcode': profile.default_postcode,
+                    'town_or_city': profile.default_town_or_city,
+                    'street_address1': profile.default_street_address1,
+                    'street_address2': profile.default_street_address2,
+                    'county': profile.default_county,
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
 
-    # error if the stripe public key is not found
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
@@ -267,8 +277,6 @@ def checkout(request):
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
-        'covers': covers,
-        'cover': cover,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
     }
@@ -290,25 +298,40 @@ def checkout_success(request, order_number):
     Created as per the Code Institute 'Boutique Ado'
     project.
     """
-    # the saved address information is requested
     save_info = request.session.get('save_info')
-    # the order object is requested from the Order model
     order = get_object_or_404(Order, order_number=order_number)
-    covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='checkout')
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        # Save the user's info
+        if save_info:
+            profile_data = {
+                'default_phone_number': order.phone_number,
+                'default_country': order.country,
+                'default_postcode': order.postcode,
+                'default_town_or_city': order.town_or_city,
+                'default_street_address1': order.street_address1,
+                'default_street_address2': order.street_address2,
+                'default_county': order.county,
+            }
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
+
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
-    # removal of the shopping bag items as the order is now processed
+
     if 'bag' in request.session:
         del request.session['bag']
 
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        'covers': covers,
-        'cover': cover,
-        'save_info': save_info,
     }
 
     return render(request, template, context)

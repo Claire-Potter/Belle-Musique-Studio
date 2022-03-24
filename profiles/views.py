@@ -63,9 +63,7 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
     # fetch the data for the initial page
-    form = UserProfileForm(instance=profile, initial={'default_full_name':
-                                                      request.user.get_full_name(),
-                                                      'default_email': request.user.email,})
+    form = UserProfileForm(instance=profile)
     orders = profile.orders.all()
     subscribed_customers = profile.subscribed_customers
     subscription_items = subscribed_customers.subscription_customer.all()
