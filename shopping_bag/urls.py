@@ -1,6 +1,13 @@
+"""
+Belle Musique Studio shopping bag app URL Configuration
+
+URLs for the shopping bag app setup according to shopping bag/views.py
+"""
 from django.urls import path
+# path is a callable within the django.urls module of the Django project.
 
 from . import views
+# Views imported from views.py
 
 urlpatterns = [
     path('shopping', views.view_bag, name='view_bag'),

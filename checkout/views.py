@@ -21,7 +21,7 @@ The checkout_success view returns a successful
 checkout's order details. The user will receive
 a success message and their order details.
 
-The checkout view renders the checkout template through
+The checkout lesson view renders the checkout template through
 the url. The lesson_bag contains the lesson and subscription
 to be purchased.
 

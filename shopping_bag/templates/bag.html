@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_header %}
+<!--Advert header customisation-->
 {% include "includes/advert_header.html" with advert="Free delivery on orders over £" store="store" %}
 {% endblock %}
 {% block content %}
 {% load bag_tools %}
+<!--Link to Cover-->
 {% include "includes/cover.html" %}
 </div>
+<!--Section includes details on the items in the shopping bag and allows the user to remove or update the items. The user can proceed to checkout.-->
 <section class="bg-white">
    <div class="container mb-3 pb-5 content-height">
       <div class="row pt-3 pb-3 mt-5">
@@ -109,7 +112,6 @@
                            </a>
                         </div>
                      </div>
-                     
                   </div>
                </div>
                <div class="mobile-only">
@@ -138,9 +140,10 @@
          </div>
       </div>
       <div class="row">
+         <!--The lesson advert, student showcase advert and store advert are rendered here-->
          <div class="col-sm-4 col-12 text-center mt-3">
-               <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-               <p class="smaller-text">Not yet finished? Head back to our store.</p>
+            <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+            <p class="smaller-text">Not yet finished? Head back to our store.</p>
             <div class="col mt-5 mt-sm-3 text-center">
                <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
                <span class="icon">
@@ -151,10 +154,10 @@
             </div>
          </div>
          <div class="col-sm-4 col-12">
-           {% include 'includes/lessons_advert_four.html' %}
+            {% include 'includes/lessons_advert_four.html' %}
          </div>
          <div class="col-sm-4 col-12">
-           {% include 'includes/showcase_advert_four.html' %}
+            {% include 'includes/showcase_advert_four.html' %}
          </div>
       </div>
    </div>
@@ -163,6 +166,7 @@
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
+<!--link to scripts-->
 {% include 'includes/quantity_input_script.html' %}
 <script>
    // Update quantity on click

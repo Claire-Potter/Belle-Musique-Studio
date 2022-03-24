@@ -1,15 +1,39 @@
-""" git """
+"""
+Belle Musique Studio contexts configuration
+
+Completed as per Code Institute 'Boutique Ado' Project
+and customised for site.
+
+bag contents context - calculate and define the data for
+the shopping bag as per user's item selection.
+
+lesson bag contents context - Calculate and define t
+he data for the lesson bag as per user's lesson
+and subscription selection.
+
+Definitions from https://www.fullstackpython.com
+unless stated otherwise.
+"""
 from decimal import Decimal
+# The decimal module provides support for fast correctly-rounded decimal floating point arithmetic.
+# https://docs.python.org/3/library/decimal.html
 
 from django.conf import settings
+# The Django settings file contains all of the configuration for a web application
 from django.shortcuts import get_object_or_404
+# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
 
 from djstripe.models import Product
+# Model is imported from djstripe models.py
 from store.models import MusicProduct
+# Model is imported from store models.py
 
 
 def bag_contents(request):
-    """git"""
+    """
+    Calculate and define the data for the shopping bag
+    as per user's item selection.
+    """
 
     bag_items = []
     total = 0
@@ -61,14 +85,17 @@ def bag_contents(request):
 
 
 def lesson_bag_contents(request):
-    """.git/"""
+    """
+    Calculate and define the data for the lesson bag
+    as per user's lesson and subscription selection.
+    """
 
     lesson_bag_items = []
     less_total = 0
     lesson_count = 0
     quantity = 0
     price_only = 0
-    priceId = 0
+    price_id = 0
     name = ''
     price = ''
     url = ''
@@ -79,7 +106,7 @@ def lesson_bag_contents(request):
         if isinstance(lesson_data, int):
             lesson = get_object_or_404(Product, pk=dj_stripe_id)
             price_only = lesson_data[0]
-            priceId = lesson_data[1]
+            price_id = lesson_data[1]
             name = lesson_data[2]
             price = lesson_data[3]
             url = lesson_data[4]
@@ -91,7 +118,7 @@ def lesson_bag_contents(request):
                 'dj_stripe_id': dj_stripe_id,
                 'lesson': lesson,
                 'price_only': price_only,
-                'priceId' : priceId,
+                'priceId' : price_id,
                 'name': name,
                 'price': price,
                 'url': url,
@@ -103,7 +130,7 @@ def lesson_bag_contents(request):
         else:
             lesson = get_object_or_404(Product, pk=dj_stripe_id)
             price_only = lesson_data[0]
-            priceId = lesson_data[1]
+            price_id = lesson_data[1]
             name = lesson_data[2]
             price = lesson_data[3]
             url = lesson_data[4]
@@ -114,7 +141,7 @@ def lesson_bag_contents(request):
             lesson_bag_items.append({
                     'dj_stripe_id': dj_stripe_id,
                     'price_only': price_only,
-                    'priceId': priceId,
+                    'priceId': price_id,
                     'name': name,
                     'price': price,
                     'url': url,
@@ -133,7 +160,7 @@ def lesson_bag_contents(request):
         'lesson_total': lesson_total,
         'quantity': quantity,
         'price_only': price_only,
-        'priceId': priceId,
+        'priceId': price_id,
         'name': name,
         'url': url,
         'caption': caption,
