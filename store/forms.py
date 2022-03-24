@@ -1,14 +1,31 @@
+"""
+Forms created for the Belle Musique Studio
+Store application.
+
+ProductForm set up to enable a staff member to create
+a new product or edit an existing product.
+"""
 from django import forms
+# Forms are imported from Django
 
 from .models import Category, MusicProduct
+# Models are imported from models.py
 from .widgets import CustomClearableFileInput
+# Widget is imported from widget.py
 
 
 class ProductForm(forms.ModelForm):
-    """.flake8"""
+    """
+    ProductForm set up to enable a staff member to create
+    a new product or edit an existing product.
+    """
 
     class Meta:
-        """.flake8"""
+        """
+        Meta added to identify the model utilised by
+        the form and the fields which the form needs
+        to include for the user to edit.
+        """
         model = MusicProduct
         fields = '__all__'
 

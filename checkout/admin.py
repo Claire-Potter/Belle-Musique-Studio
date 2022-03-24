@@ -1,12 +1,12 @@
 """
-Belle Musique Studio home app adminconfiguration
+Belle Musique Studio checkout app admin configuration
 
 Definitions from https://www.fullstackpython.com
 unless stated otherwise
 """
 from django.contrib import admin
-# The Django admin is an automatically-generated user interface 
-# for Django models. The admin interface can be heavily customized 
+# The Django admin is an automatically-generated user interface
+# for Django models. The admin interface can be heavily customized
 
 from .models import (Order, OrderLineItem, SubscribedCustomer,
 SubscriptionLineItem)
@@ -24,7 +24,7 @@ class OrderLineItemAdminInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     """
     The Order admin stores the order details for
-    all orders placed through the music store. The 
+    all orders placed through the music store. The
     OrderLineItem model is included as an inline table.
     """
     inlines = (OrderLineItemAdminInline,)
@@ -67,7 +67,7 @@ class SubscriptionLineItemAdminInline(admin.TabularInline):
 class SubscribedCustomerAdmin(admin.ModelAdmin):
     """
     The SubscribedCustomer admin stores the subscription details for
-    customers who have subscribed to lessons through the lessons app. The 
+    customers who have subscribed to lessons through the lessons app. The
     SubscriptionLineItem model is included as an inline table.
     """
     inlines = (SubscriptionLineItemAdminInline,)

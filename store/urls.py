@@ -1,6 +1,13 @@
+"""
+Belle Musique Studio store app URL Configuration
+
+URLs for the store app setup according to store/views.py
+"""
 from django.urls import path
+# path is a callable within the django.urls module of the Django project.
 
 from . import views
+# Views imported from views.py
 
 urlpatterns = [
     path('all-products/', views.all_products, name='products'),
