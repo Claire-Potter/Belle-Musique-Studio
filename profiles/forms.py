@@ -1,13 +1,30 @@
-""".git/"""
+"""
+Forms created for the Belle Musique Studio
+Profile application.
+
+The UserProfile  form allows the user to add,
+edit and delete the various userprofile fields.
+
+Created as per the Code Institute 'Boutique Ado' project.
+"""
 from django import forms
+# Forms are imported from Django
 
 from .models import UserProfile
+# Model imported from models.py
 
 
 class UserProfileForm(forms.ModelForm):
-    """.git/"""
+    """
+    The UserProfile  form allows the user to add,
+    edit and delete the various userprofile fields.
+    """
     class Meta:
-        """.git/"""
+        """
+        Meta added to identify the model utilised by
+        the form and the fields which the form needs
+        to include for the user to edit.
+        """
         model = UserProfile
         exclude = ('user',)
 

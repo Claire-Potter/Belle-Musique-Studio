@@ -1,19 +1,19 @@
 """
-Belle Musique Studio home app adminconfiguration
+Belle Musique Studio home app admin configuration
 
 Definitions from https://www.fullstackpython.com
 unless stated otherwise
 """
 from django.contrib import admin
-# The Django admin is an automatically-generated user interface for 
-# Django models. The admin interface can be heavily customized 
+# The Django admin is an automatically-generated user interface for
+# Django models. The admin interface can be heavily customized
 from django_summernote.admin import SummernoteModelAdmin
 #Summernote is a simple WYSIWYG editor.
 # django-summernote allows you to embed Summernote into Django
 #  very handy. Support admin mixins and widgets.
 # definition from https://github.com/summernote/django-summernote
 from embed_video.admin import AdminVideoMixin
-# Django app for easy embedding YouTube and Vimeo videos and 
+# Django app for easy embedding YouTube and Vimeo videos and
 # music from SoundCloud.
 # definition from https://pypi.org/project/django-embed-video/
 from .models import Contact, Cover, User, UserSubscription, StudentShowcase
@@ -45,7 +45,7 @@ class CoverAdmin(admin.ModelAdmin):
 class UserSubscriptionAdmin(admin.ModelAdmin):
     """
     The UserSubscription admin set up reads the UserSubscription model.
-    It allows the user to readonly the subscription information linked 
+    It allows the user to readonly the subscription information linked
     to the username. The records within the model are created through the
     djstripe integration.
     """
