@@ -1,7 +1,12 @@
-""".git/"""
-from django.urls import path
+"""
+Belle Musique Studio lessons app URL Configuration
 
+URLs for the lessons app setup according to lessons/views.py
+"""
+from django.urls import path
+# path is a callable within the django.urls module of the Django project.
 from . import views
+# Views imported from views.py
 
 urlpatterns = [
     path('', views.lessons_details, name='lessons'),
