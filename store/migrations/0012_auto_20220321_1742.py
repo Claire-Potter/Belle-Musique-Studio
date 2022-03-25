@@ -10,10 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='musicproduct',
-            name='price_currency',
-        ),
         migrations.AddField(
             model_name='musicproduct',
             name='image_alt',
