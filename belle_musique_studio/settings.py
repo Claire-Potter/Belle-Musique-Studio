@@ -35,7 +35,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['belle-musique-studio.herokuapp.com', 'localhost']
 
@@ -77,14 +77,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'htmlvalidator.middleware.HTMLValidator',
 ]
 
 ROOT_URLCONF = 'belle_musique_studio.urls'
 
-
-HTMLVALIDATOR_ENABLED = False
-HTMLVALIDATOR_FAILFAST = False
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
