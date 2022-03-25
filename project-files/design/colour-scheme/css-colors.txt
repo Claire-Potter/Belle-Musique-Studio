@@ -1,0 +1,10 @@
+/* CSS HEX */
+--deep-cove: #04142f;
+--cream-can: #f3c971;
+--bali-hai: #8ca7b3;
+--sea-buckthorn: #fbac2c;
+--scorpion: #5c5c5c;
+--horizon: #5c8ca1;
+--emperor: #545454;
+--casper: #b2bcd4;
+--casper: #a1c4cc;
