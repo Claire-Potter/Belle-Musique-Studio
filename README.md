@@ -222,7 +222,7 @@ The Super User will have additional access to the Admin section. Certain models 
 Below is an image of the site structure.
 
 
-<a href="">Site Map</a>
+<a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/site-map.pdf">Site Map</a>
 
 
 ### Access
@@ -287,9 +287,9 @@ for the deployed live site.
 Please access the app and database file <a href="" target="_blank">here</a> 
 
 
- <a href="" target="_blank">Database diagram</a>
+ <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/dj_stripe_models.png" target="_blank">Database diagram dj stripe models</a>
 
- <a href="" target="_blank">Database diagram full site</a>
+ <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/belle_musique_studio.png" target="_blank">Database diagram belle musique studio models</a>
 
 # Features
  
