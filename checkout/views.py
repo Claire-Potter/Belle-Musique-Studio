@@ -275,10 +275,13 @@ def checkout(request):
             Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='checkout')
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'cover': cover,
     }
 
     return render(request, template, context)
@@ -328,10 +331,12 @@ def checkout_success(request, order_number):
 
     if 'bag' in request.session:
         del request.session['bag']
-
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='checkout')
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        'cover': cover,
     }
 
     return render(request, template, context)

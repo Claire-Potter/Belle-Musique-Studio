@@ -89,7 +89,7 @@ class Contact(models.Model):
     Model created to render the contact page
     and save the contact request data.
     """
-    username = models.ForeignKey(User, null=False, blank=False,
+    username = models.ForeignKey(User, null=True, blank=True,
                               on_delete=models.CASCADE, related_name='contact')
     name = models.CharField(max_length=80)
     email = models.EmailField()
