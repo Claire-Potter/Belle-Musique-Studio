@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Contact Sent {% endblock %}</title>
 {% block page_header %}
 {% include "includes/advert_header.html" with advert="Thank you for contacting us!" %}
 {% endblock %}

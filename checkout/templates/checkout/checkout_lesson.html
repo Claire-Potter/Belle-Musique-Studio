@@ -5,6 +5,8 @@
 <!--Link to additional CSS-->
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Lesson Checkout {% endblock %}</title>
 {% block page_header %}
 <!--Advert header customisation-->
 {% include "includes/advert_header.html" with advert="Choose between annual, monthly or weekly subscriptions" %}

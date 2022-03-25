@@ -4,6 +4,8 @@
 <!--Link to additional CSS-->
 <link rel="stylesheet" href="{% static 'lessons/css/lessons.css' %}">
 {% endblock %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Edit Lesson {% endblock %}</title>
 {% block content %}
 <!--Link to Cover-->
 {% include "includes/cover.html" %}

@@ -12,6 +12,8 @@
 <!--Link to additional CSS-->
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Subscribe {% endblock %}</title>
 {% block page_header %}
 {% include "includes/advert_header.html" with advert="Receive a free lesson when you pay annually!" %}
 {% endblock %}

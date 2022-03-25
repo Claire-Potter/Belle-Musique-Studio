@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Edit a Product {% endblock %}</title>
 {% block content %}
 <!--Link to Cover-->
 {% include "includes/cover.html" %}

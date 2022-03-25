@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_css %}
+{{ block.super }}
 <!--Link to additional CSS-->
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Checkout {% endblock %}</title>
 {% block page_header %}
 <!--Advert header customisation-->
 {% include "includes/advert_header.html" with advert="Free delivery on orders over £" store="store" %}

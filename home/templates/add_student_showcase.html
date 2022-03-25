@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+<!--Additional page title-->
+<title>{{ block.super }}{% block extra_title %} Showcase a Student {% endblock %}</title>
 {% block content %}
 {% include "includes/cover.html" %}
 </div>
