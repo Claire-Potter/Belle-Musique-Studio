@@ -432,9 +432,17 @@ body {
 @media (max-width: 3000px) {
 
     .shopping-logos {
-        margin-left: 80%;
+        margin-left: 82%;
     }
 }
+
+@media (max-width: 2500px) {
+
+    .shopping-logos {
+        margin-left: 78%;
+    }
+}
+
 
 @media (max-width: 1500px) {
     .navbar-brand {
@@ -475,7 +483,26 @@ body {
     }
 }
 
+@media (max-width: 1200px) {
+
+    .shopping-logos {
+        margin-left: 73%;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .shopping-logos {
+        margin-left: 70%;
+    }
+}
+
 @media (max-width: 800px) {
+
+    .shopping-logos {
+        margin-left: 65%;
+    }
+
     .smaller-font {
         font-size: calc(1rem + .9vw) !important;
     }

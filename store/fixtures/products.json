@@ -9,7 +9,7 @@
             "price": 45.99,
             "category": 1,
             "rating": 4.6,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194102/Belle%20Musique/products/digital-recorder_pcnhx3.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/digital-recorder.jpg",
             "image": "digital-recorder.jpg",
             "image_alt": "A portable sound recording device."
         }
@@ -24,7 +24,7 @@
             "price": 97.99,
             "category": 2,
             "rating": 4.8,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/keyboard_dimqzr.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/keyboard.jpg",
             "image": "keyboard.jpg",
             "image_alt": "A large electric piano keyboard."
         }
@@ -39,7 +39,7 @@
             "price": 18.99,
             "category": 1,
             "rating": 4.7,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/lozenges_nbdfcn.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lozenges.jpg",
             "image": "lozenges.jpg",
             "image_alt": "Orange throat lozenges. "
         }
@@ -54,7 +54,7 @@
             "price": 38.99,
             "category": 2,
             "rating": 4.25,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643195755/Belle%20Musique/products/mini-keyboard_ah1gof.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/mini-keyboard.JPG",
             "image": "mini-keyboard.JPG",
             "image_alt": "A small electric piano keyboard."
         }
@@ -69,7 +69,7 @@
             "price": 25.99,
             "category": 1,
             "rating": 5.0,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/metronome_z9ftrk.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/metronome.jpg",
             "image": "metronome.jpg",
             "image_alt": "A metronome used to keep time."
         }
@@ -84,7 +84,7 @@
             "price": 86.99,
             "category": 2,
             "rating": 5.0,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/microphone_ilvsvn.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/microphone.jpg",
             "image": "microphone.jpg",
             "image_alt": "A microphone to sing into."
         }
@@ -99,7 +99,7 @@
             "price": 4.50,
             "category": 1,
             "rating": 4.4,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-sheets_koklyr.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/music-sheets.jpg",
             "image": "music-sheets.jpg",
             "image_alt": "Plain white music sheets with music bars to write your own music."
         }
@@ -114,7 +114,7 @@
             "price": 14.99,
             "category": 1,
             "rating": 4.5,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-stand_q4fzj5.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/music-stand.jpg",
             "image": "music-stand.jpg",
             "image_alt": "A black metal stand used to hold music sheets."
         }
@@ -129,7 +129,7 @@
             "price": 16.99,
             "category": 1,
             "rating": 4.7,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194103/Belle%20Musique/products/music-theory-book_iclwg6.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/music-theory-book.jpg",
             "image": "music-theory-book.jpg",
             "image_alt": "A book of music theory lessons."
         }
@@ -144,7 +144,7 @@
             "price": 9.99,
             "category": 1,
             "rating": 4.4,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194104/Belle%20Musique/products/piano-music_yvre48.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/piano-music.jpg",
             "image": "piano-music.jpg",
             "image_alt": "A picture of piano sheet music."
         }
@@ -159,7 +159,7 @@
             "price": 109.99,
             "category": 2,
             "rating": 4.0,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643194104/Belle%20Musique/products/sound-equipment_c3in3r.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/sound-equipment.jpg",
             "image": "sound-equipment.jpg",
             "image_alt": "A picture of sound recording equipment"
         }
@@ -175,7 +175,7 @@
             "price": 17.99,
             "category": 1,
             "rating": 4.8,
-            "image_url": "https://res.cloudinary.com/newxperience/image/upload/v1643650396/Belle%20Musique/products/love-music-tshirt_lur22l.jpg",
+            "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/love-music-tshirt.jpg",
             "image": "love-music-tshirt.jpg",
             "image_alt": "A grey t-shirt which states I Love Music."
         }
