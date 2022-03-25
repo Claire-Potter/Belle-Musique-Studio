@@ -3,7 +3,7 @@
    <div class="container-fluid">
       <h2 class="hidden">Belle Musique Studio</h2>
       <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
-      <div class="shopping-logos">
+      <div class="shopping-logos flex">
          <div class="store-logo">
             <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
                <div>

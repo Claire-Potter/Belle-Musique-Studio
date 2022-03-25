@@ -45,7 +45,7 @@ body {
 
 .shopping-logos {
     display: flex;
-    margin-left: 65%;
+    margin-left: 75%;
 }
 
 .store-logo {
@@ -408,6 +408,33 @@ body {
 }
 
 /* Media queries */
+@media (max-width: 6000px) {
+
+    .shopping-logos {
+        margin-left: 95%;
+    }
+}
+
+@media (max-width: 5000px) {
+
+    .shopping-logos {
+        margin-left: 90%;
+    }
+}
+
+@media (max-width: 4000px) {
+
+    .shopping-logos {
+        margin-left: 85%;
+    }
+}
+
+@media (max-width: 3000px) {
+
+    .shopping-logos {
+        margin-left: 80%;
+    }
+}
 
 @media (max-width: 1500px) {
     .navbar-brand {
@@ -416,7 +443,7 @@ body {
     }
 
     .shopping-logos {
-        margin-left: 65%;
+        margin-left: 75%;
     }
 
     .store-logo {
