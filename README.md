@@ -247,7 +247,7 @@ The original wireframes created are saved as wireframes-desktop and wireframes-m
 ### Differences:
 1. .
 
-Please <a href="">click here</a> to view all wireframes
+Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/wireframes">click here</a> to view all wireframes
 
 
 ## Design
@@ -255,9 +255,9 @@ Please <a href="">click here</a> to view all wireframes
 
 The colours for this site are based on the below image and colour palette selected to compliment the image:
 
-![Inspiration Image]("link")
+![Inspiration Image](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/design/home-background.jpg)
 
-![Palette Image]("link")
+![Palette Image](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/design/colour-scheme/color-palette.jpg)
 
 I was looking for a palette that would inspire and motivate.
 The classic black and white photo of a piano player brings sophistication and a sense of tradition to the site. Hopefully this will inspire aspiring musicians to create and celebrate their talent.
@@ -271,11 +271,11 @@ Various sized adverts have been designed to display across the client facing pag
 ### Fonts
 The logo font for the site is 'The Nautigal' with the default font set as sans-serif.
 
-![Nautigal Image]("link")
+![Nautigal Image](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/design/fonts/the-nautigal.JPG)
 
 The main font used across the body is 'Eb-Garamond' with the default font set as sans-serif.
 
-![Eb-Garamond Image]("link")
+![Eb-Garamond Image](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/design/fonts/eb-garamond.JPG)
 
 These fonts were chose to provide some sophistication. They are classical and elegant.
 
