@@ -32,18 +32,25 @@ unless stated otherwise.
 """
 
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application.
+# The Django settings file contains all of the configuration for
+# a web application.
 from django.core.mail import send_mail
-# send_mail is a function in Django that can send an email using the EmailMessage class.
+# send_mail is a function in Django that can send an email using the
+# EmailMessage class.
 from django.contrib import messages
-# Quite commonly in web applications, you need to display a one-time notification
-# message (also known as “flash message”) to the user after processing a form or
+# Quite commonly in web applications, you need to display a one-time
+# notification
+# message (also known as “flash message”) to the user after processing
+# a form or
 #  some other types of user input.
 
-#For this, Django provides full support for cookie- and session-based messaging,
+# For this, Django provides full support for cookie- and session-based
+# messaging,
 # for both anonymous and authenticated users. The messages framework allows you
-# to temporarily store messages in one request and retrieve them for display in a
-# subsequent request (usually the next one). Every message is tagged with a specific level
+# to temporarily store messages in one request and retrieve them for
+# display in a
+# subsequent request (usually the next one). Every message is
+# tagged with a specific level
 # that determines its priority (e.g., info, warning, or error).
 
 from django.contrib.auth.decorators import login_required
@@ -51,9 +58,12 @@ from django.contrib.auth.decorators import login_required
 # in your web applications by forcing the client to
 # authenticate with a valid logged-in User.
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
-# redirect is a callable within the django.shortcuts module of the Django project.
-# render is a callable within the django.shortcuts module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts module
+# of the Django project.
+# redirect is a callable within the django.shortcuts module of the
+# Django project.
+# render is a callable within the django.shortcuts module of the
+# Django project.
 # reverse is a callable within the django.urls module of the Django project.
 from django.views import View
 # View is a class within the django.views.generic module of the Django project.
@@ -61,6 +71,7 @@ from .forms import ContactForm, StudentShowcaseForm
 # Forms are imported from forms.py
 from .models import Cover, User, StudentShowcase
 # Models are imported from models.py
+
 
 def index(request):
     """
@@ -76,7 +87,7 @@ def index(request):
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='home')
     context = {'covers': covers,
-                'cover': cover}
+               'cover': cover}
 
     return render(request, 'index.html', context)
 
@@ -85,7 +96,8 @@ def about(request):
     """
     A view to return the About page.
     This contains the information about who Belle Musique Studio are,
-    who the owner is, high level information about lessons, the student showcase
+    who the owner is, high level information about lessons, the
+    student showcase
     section and links to the various products in the music store.
 
     request: The requests module allows you to send HTTP
@@ -97,10 +109,10 @@ def about(request):
     """
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='about')
-    student_showcased =  StudentShowcase.objects.latest()
+    student_showcased = StudentShowcase.objects.latest()
     context = {'covers': covers,
-                'cover': cover,
-                'student_showcased': student_showcased}
+               'cover': cover,
+               'student_showcased': student_showcased}
 
     return render(request, 'about.html', context)
 
@@ -112,7 +124,6 @@ class Contact(View):
     and form in order to update the fields within
     the model tables
     """
-
 
     def get(self, request):
         """
@@ -131,15 +142,16 @@ class Contact(View):
         address will be derived from their user profile.
         """
         if User.objects.filter(username=self.request.user.username).exists():
-            contact_form = ContactForm(initial={'name': request.user.get_full_name(),
+            contact_form = ContactForm(initial={'name': (request.user
+                                                         .get_full_name()),
                                                 'email': request.user.email})
         else:
             contact_form = ContactForm()
         covers = Cover.objects.all()
         cover = get_object_or_404(covers, page='contact')
         context = {'covers': covers,
-                    'cover': cover,
-                    'contact_form': contact_form,}
+                   'cover': cover,
+                   'contact_form': contact_form, }
         return render(
             request,
             'contact.html', context)
@@ -165,7 +177,8 @@ class Contact(View):
             contact_form = ContactForm(request.POST)
             if contact_form.is_valid():
                 contact = contact_form.save(commit=False)
-                if User.objects.filter(username=self.request.user.username).exists():
+                if (User.objects.filter(username=self.
+                                        request.user.username).exists()):
                     contact.username = request.user
                 contact.save()
                 c_d = contact_form.cleaned_data
@@ -173,14 +186,15 @@ class Contact(View):
                 client_name = c_d['name']
                 client_email = c_d['email']
                 subject = 'A new Request has been submitted'
-                message = f'Contact request {text_content} by {client_name} @ {client_email}'
+                message = f'Contact request {text_content} by {client_name} \
+                @ {client_email}'
                 recipient = 'bellemusiquestudio@gmail.com'
                 email_from = settings.EMAIL_HOST_USER
 
                 # send the email to the recipient
                 send_mail(subject,
                           message,
-                          email_from, [recipient], fail_silently = False)
+                          email_from, [recipient], fail_silently=False)
 
                 return redirect('contact-sent')
 
@@ -189,8 +203,8 @@ class Contact(View):
             covers = Cover.objects.all()
             cover = get_object_or_404(covers, page='contact')
             context = {'covers': covers,
-                        'cover': cover,
-                        'contact_form': contact_form,}
+                       'cover': cover,
+                       'contact_form': contact_form, }
             return render(
                 request,
                 'contact.html', context)
@@ -209,7 +223,7 @@ def contact_sent(request):
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='contact')
     context = {'covers': covers,
-                'cover': cover}
+               'cover': cover}
 
     return render(request, 'contact_sent.html', context)
 
@@ -226,17 +240,20 @@ def add_student_showcase(request):
 
     Definition from https://www.w3schools.com/python/module_requests.asp
 
-    The StudentShowcaseForm is rendered on the page to allow admin to capture
-    student information from the front end. Once saved it is created as a record
-    within the StudentShowcase model. The most recent record is called and displayed
+    The StudentShowcaseForm is rendered on the page to allow admin to
+    capture student information from the front end. Once saved it
+    is created as a record within the StudentShowcase model.
+    The most recent record is called and displayed
     on the About page.
 
     If statement is utilised to determine if the user is a staff member, if not
     they will be denied access.
-    If and else statement utilised to determine whether the request is a post or
-    not, if not, the form without content will be rendered for the user to complete,
+    If and else statement utilised to determine whether the request
+    is a post or not, if not, the form without content
+    will be rendered for the user to complete,
     if it is 'POST' the completed form will be requested and saved.
-    An If and else statement is utilised to check for errors, if successful a success
+    An If and else statement is utilised to check for errors, if
+    successful a success
     message will display, if not an error message will display.
     """
     if not request.user.is_staff:
@@ -247,7 +264,8 @@ def add_student_showcase(request):
         form = StudentShowcaseForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully added new student showcase!')
+            messages.success(request, 'Successfully added '
+                             'new student showcase!')
             return redirect(reverse('home'))
         else:
             messages.error(request,
