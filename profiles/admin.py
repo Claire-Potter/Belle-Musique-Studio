@@ -29,4 +29,5 @@ class UserProfileAdmin(admin.ModelAdmin):
                        'default_country',)
     list_display = ('user', 'default_full_name', 'default_email')
 
+
 admin.site.register(UserProfile, UserProfileAdmin)

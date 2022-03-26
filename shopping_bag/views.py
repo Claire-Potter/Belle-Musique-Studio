@@ -1,5 +1,5 @@
 """
-Belle Musique Studio shopping bag app views configuration
+Belle Musique Studio checkout app views configuration
 
 After correcting any pylint issues, I was still left with the issue
 'class has no objects member', the object is only added when the screen
@@ -153,15 +153,15 @@ def add_to_bag(request, item_id):
             if size in bag[item_id]['items_by_size'].keys():
                 bag[item_id]['items_by_size'][size] += quantity
                 messages.success(request, f'Updated size {size.upper()} {product.name}'
-                                          f'quantity to {bag[item_id] ["items_by_size"][size]}')
+                                 f'quantity to {bag[item_id]["items_by_size"][size]}')
             else:
                 bag[item_id]['items_by_size'][size] = quantity
                 messages.success(request, f'Added size {size.upper()}'
-                                 f'{product.name} to your bag')
+                                          f'{product.name} to your bag')
         else:
             bag[item_id] = {'items_by_size': {size: quantity}}
             messages.success(request, f'Added size {size.upper()}'
-                             f'{product.name} to your bag')
+                                      f'{product.name} to your bag')
     else:
         if item_id in list(bag.keys()):
             bag[item_id] += quantity
@@ -230,8 +230,10 @@ def adjust_bag(request, item_id):
     if size:
         if quantity > 0:
             bag[item_id]['items_by_size'][size] = quantity
-            messages.success(request, f'Updated size {size.upper()}{product.name}'
-                             f'quantity to {bag[item_id]["items_by_size"][size]}')
+            messages.success(request, f'Updated size {size.upper()}'
+                                      f' {product.name}'
+                             f'quantity to '
+                             f'{bag[item_id]["items_by_size"][size]}')
         else:
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:

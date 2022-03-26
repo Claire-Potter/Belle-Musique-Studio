@@ -38,24 +38,37 @@ import stripe
 # A Python library for Stripe’s API.
 # https://pypi.org/project/stripe/
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application.
+# The Django settings file contains all of the configuration for
+# # a web application.
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
-# redirect is a callable within the django.shortcuts module of the Django project.
-# render is a callable within the django.shortcuts module of the Django project.
-# reverse is a callable within the django.urls module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts
+# # module of the Django project.
+# redirect is a callable within the django.shortcuts module of
+# # the Django project.
+# render is a callable within the django.shortcuts module of
+# # the Django project.
+# reverse is a callable within the django.urls module of
+# # the Django project.
 from django.contrib import messages
-# Quite commonly in web applications, you need to display a one-time notification
-# message (also known as “flash message”) to the user after processing a form or
+# Quite commonly in web applications, you need to display
+# # a one-time notification
+# message (also known as “flash message”) to the user after
+# # processing a form or
 #  some other types of user input.
 
-# For this, Django provides full support for cookie- and session-based messaging,
-# for both anonymous and authenticated users. The messages framework allows you
-# to temporarily store messages in one request and retrieve them for display in a
-# subsequent request (usually the next one). Every message is tagged with a specific level
+# For this, Django provides full support for cookie- and
+# # session-based messaging,
+# for both anonymous and authenticated users. The messages
+# # framework allows you
+# to temporarily store messages in one request and retrieve
+# # them for display in a
+# subsequent request (usually the next one). Every message
+# # is tagged with
+# # a specific level
 # that determines its priority (e.g., info, warning, or error).
 from django.contrib.auth.decorators import login_required
-# @login_required: Django's login_required function is used to secure views
+# @login_required: Django's login_required function is
+# # used to secure views
 # in your web applications by forcing the client to
 # authenticate with a valid logged-in User.
 from djstripe.models import Product
@@ -86,8 +99,8 @@ def lessons_details(request):
     cover = get_object_or_404(covers, page='lessons')
     lessons = Product.objects.all()
     context = {'covers': covers,
-                'cover': cover,
-                'lessons': lessons}
+               'cover': cover,
+               'lessons': lessons}
 
     return render(request, 'lessons/lessons.html', context)
 
@@ -117,19 +130,20 @@ def add_lesson(request):
     if request.method == 'POST':
         stripe.api_key = settings.STRIPE_SECRET_KEY
         form = LessonProductAddForm(request.POST, prefix='product')
-        p1_form = LessonPriceAddForm(request.POST, prefix = 'price_one')
-        p2_form = LessonPriceAddForm(request.POST, prefix = 'price_two')
-        p3_form = LessonPriceAddForm(request.POST, prefix = 'price_three')
+        p1_form = LessonPriceAddForm(request.POST, prefix='price_one')
+        p2_form = LessonPriceAddForm(request.POST, prefix='price_two')
+        p3_form = LessonPriceAddForm(request.POST, prefix='price_three')
 
         # if all of the forms are validated create the product in stripe
-        if form.is_valid() and p1_form.is_valid() and p2_form.is_valid() and p3_form.is_valid():
+        if (form.is_valid() and p1_form.is_valid() and
+            p2_form.is_valid() and p3_form.is_valid()):
             stripe_data = stripe.Product.create(name=request.POST['product-name'],
-             description=request.POST['product-description'],
-             statement_descriptor=request.POST['product-statement_descriptor'],
-             unit_label=request.POST['product-unit_label'],
-             images=[request.POST['product-url']],
-             type='service',
-             active='true')
+                                                description=request.POST['product-description'],
+                                                statement_descriptor=request.POST['product-statement_descriptor'],
+                                                unit_label=request.POST['product-unit_label'],
+                                                images=[request.POST['product-url']],
+                                                type='service',
+                                                active='true')
             try:
                 # sync the data from stripe product through djstripe
                 djstripe_obj = djstripe.models.Product.sync_from_stripe_data(stripe_data)
@@ -143,12 +157,10 @@ def add_lesson(request):
                     amount_two = request.POST['price_two-amount']
                     amount_three = request.POST['price_three-amount']
 
-
                     def pound_to_cent(amount, truncate=True):
                         new_amount = float(amount) * 100
                         if truncate:
                             return int(new_amount)
-
 
                     new_amount_one = pound_to_cent(amount_one)
                     new_amount_two = pound_to_cent(amount_two)
@@ -212,12 +224,12 @@ def add_lesson(request):
         # of the subscriptions provided and the annual subscription includes a 7 day trial
         # i.e. 1 free weekly lesson. The fields are read only
         form = LessonProductAddForm(prefix='product')
-        p1_form = LessonPriceAddForm(prefix = 'price_one', initial={'interval': 'week',
-                                                'trial_period_days': 0})
-        p2_form = LessonPriceAddForm(prefix = 'price_two',  initial={'interval': 'month',
-                                                'trial_period_days': 0})
-        p3_form = LessonPriceAddForm(prefix = 'price_three',  initial={'interval': 'year',
-                                                'trial_period_days': 7})
+        p1_form = LessonPriceAddForm(prefix='price_one', initial={'interval': 'week',
+                                                                  'trial_period_days': 0})
+        p2_form = LessonPriceAddForm(prefix='price_two',  initial={'interval': 'month',
+                                                                   'trial_period_days': 0})
+        p3_form = LessonPriceAddForm(prefix='price_three',  initial={'interval': 'year',
+                                                                     'trial_period_days': 7})
     # fetch the page data
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='product_manage')
@@ -266,9 +278,9 @@ def edit_lesson(request, lesson_id):
     if request.method == 'POST':
         stripe.api_key = settings.STRIPE_SECRET_KEY
         form = LessonProductForm(request.POST, instance=product, prefix='product')
-        p1_form = LessonPriceForm(request.POST, instance=price_one, prefix = 'price_one')
-        p2_form = LessonPriceForm(request.POST, instance=price_two, prefix = 'price_two')
-        p3_form = LessonPriceForm(request.POST, instance=price_three, prefix = 'price_three')
+        p1_form = LessonPriceForm(request.POST, instance=price_one, prefix='price_one')
+        p2_form = LessonPriceForm(request.POST, instance=price_two, prefix='price_two')
+        p3_form = LessonPriceForm(request.POST, instance=price_three, prefix='price_three')
         # if all of the forms are validated edit the product and plans in stripe
         if form.is_valid() and p1_form.is_valid() and p2_form.is_valid() and p3_form.is_valid():
             edit_form = form.save(commit=False)
@@ -318,14 +330,14 @@ def edit_lesson(request, lesson_id):
         # error message if the forms cannot be validated
         else:
             messages.error(request,
-                            ('Failed to update lesson. '
+                           ('Failed to update lesson. '
                             'Please ensure the form is valid.'))
     else:
         # initial forms data before the forms have been created.
         form = LessonProductForm(instance=product,  prefix='product')
-        p1_form = LessonPriceForm(instance=price_one, prefix = 'price_one')
-        p2_form = LessonPriceForm(instance=price_two, prefix = 'price_two')
-        p3_form = LessonPriceForm(instance=price_three, prefix = 'price_three')
+        p1_form = LessonPriceForm(instance=price_one, prefix='price_one')
+        p2_form = LessonPriceForm(instance=price_two, prefix='price_two')
+        p3_form = LessonPriceForm(instance=price_three, prefix='price_three')
         messages.info(request, f'You are editing {product.name}')
     # fetch the page data
     covers = Cover.objects.all()

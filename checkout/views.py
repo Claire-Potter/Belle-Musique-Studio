@@ -593,9 +593,12 @@ def subscribe(request):
         while attempt <= 5:
             # determine whether the user has a customer id assigned
             try:
+                s_c_d = subscribed_customer_id
                 user_customer_id = request.user.customer.id
-                customer_subscribed = (SubscribedCustomer.objects
-                                      .get(subscribed_customer_id=user_customer_id))
+                customer_subscribed = (SubscribedCustomer
+                                       .objects
+                                       .get
+                                       (s_c_d=user_customer_id))
                 customer_exists = True
                 break
             except SubscribedCustomer.DoesNotExist:
@@ -604,15 +607,17 @@ def subscribe(request):
         # if the customer exists, set up the instance of
         # the SubscribedCustomerForm to reference the customer id
         if customer_exists:
-            subscription_form = SubscribedCustomerForm(request.POST,
-                                                       instance=(customer_subscribed))
+            subscription_form = (SubscribedCustomerForm
+                                 (request.POST,
+                                  instance=(customer_subscribed)))
             subscription_lineitem_form = (SubscriptionLineItemForm(request.
                                                                    POST))
             current_bag = lesson_bag_contents(request)
             total = current_bag['lesson_total']
             # if the forms are valid save the subscription form and proceed
             # to fetch the subscription id from the user
-            if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
+            if (subscription_form.is_valid() and
+                subscription_lineitem_form.is_valid()):
                 subscription_internal = subscription_form.save(commit=False)
                 subscription_lineitem_internal = (subscription_lineitem_form
                                                   .save(commit=False))
@@ -688,21 +693,24 @@ def subscribe(request):
                 subscription_lineitem_form = (SubscriptionLineItemForm
                                               (form_data_two))
                 user_subscription = (UserSubscription.objects
-                .filter(username=request.user).latest())
+                                     .filter(username=request.user)
+                                     .latest())
                 sub_id = user_subscription.subscription.id
                 profile = UserProfile.objects.get(user=request.user)
                 current_bag = lesson_bag_contents(request)
                 total = current_bag['lesson_total']
                 subscription = user_subscription.subscription_name
                 # the forms are validated and the subscription_form is saved
-                if subscription_form.is_valid() and subscription_lineitem_form.is_valid():
+                if (subscription_form.is_valid() and
+                    subscription_lineitem_form.is_valid()):
                     subscription_internal = (subscription_form
                                              .save(commit=False))
                     (subscription_internal
                      .subscribed_customer_id) = user_customer_id
                     subscription_internal.customer = request.user.customer
                     subscription_internal.user_profile = profile
-                    subscription_lineitem_internal = ((subscription_lineitem_form)
+                    s_l_f = subscription_lineitem_form
+                    subscription_lineitem_internal = ((s_l_f)
                                                       .save(commit=False))
                     subscription_internal.save()
                     user_subscription = (UserSubscription.objects

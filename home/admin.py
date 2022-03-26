@@ -58,6 +58,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
                     'username', 'date')
     search_fields = ('subscription_user_id', 'subscription_name', 'date')
 
+
 admin.site.register(UserSubscription, UserSubscriptionAdmin)
 
 
@@ -69,6 +70,7 @@ class UserAdmin(admin.ModelAdmin):
     record is created.
     """
     model = User
+
 
 admin.site.register(User, UserAdmin)
 

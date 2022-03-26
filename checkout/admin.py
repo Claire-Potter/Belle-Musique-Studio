@@ -48,6 +48,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     ordering = ('-date',)
 
+
 admin.site.register(Order, OrderAdmin)
 
 
@@ -80,5 +81,6 @@ class SubscribedCustomerAdmin(admin.ModelAdmin):
     list_display = ('subscribed_customer_id', 'customer', 'full_name')
 
     ordering = ('-date',)
+
 
 admin.site.register(SubscribedCustomer, SubscribedCustomerAdmin)

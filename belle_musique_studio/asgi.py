@@ -11,6 +11,7 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'belle_musique_studio.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'belle_musique_studio.settings')
 
 application = get_asgi_application()
