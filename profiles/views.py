@@ -22,18 +22,26 @@ unless stated otherwise.
 
 """
 from django.contrib import messages
-# Quite commonly in web applications, you need to display a one-time notification
-# message (also known as “flash message”) to the user after processing a form or
+# Quite commonly in web applications, you need to display a one-time
+# notification
+# message (also known as “flash message”) to the user after processing
+# a form or
 #  some other types of user input.
 
-#For this, Django provides full support for cookie- and session-based messaging,
-# for both anonymous and authenticated users. The messages framework allows you
-# to temporarily store messages in one request and retrieve them for display in a
-# subsequent request (usually the next one). Every message is tagged with a specific level
+# For this, Django provides full support for cookie- and
+# session-based messaging,
+# for both anonymous and authenticated users. The messages
+# framework allows you
+# to temporarily store messages in one request and retrieve them for
+# display in a
+# subsequent request (usually the next one). Every message is tagged with
+# a specific level
 # that determines its priority (e.g., info, warning, or error).
 from django.shortcuts import get_object_or_404, render
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
-# render is a callable within the django.shortcuts module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts module of
+# the Django project.
+# render is a callable within the django.shortcuts module
+# of the Django project.
 from djstripe.models import Invoice, Subscription
 # Models are imported from djstripe models.py
 
@@ -71,12 +79,12 @@ def profile(request):
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='account_profile')
     context = {'covers': covers,
-                'cover': cover,
-                'form': form,
-                'orders': orders,
-                'subscribed_customers': subscribed_customers,
-                'subscription_items': subscription_items,
-                'on_profile_page': True}
+               'cover': cover,
+               'form': form,
+               'orders': orders,
+               'subscribed_customers': subscribed_customers,
+               'subscription_items': subscription_items,
+               'on_profile_page': True}
 
     return render(request, template, context)
 
@@ -113,6 +121,7 @@ def order_history(request, order_number):
 
     return render(request, template, context)
 
+
 def subscription_detail(request, subscribed_id):
     """
     The subscription detail view is set up to display the user's
@@ -125,8 +134,10 @@ def subscription_detail(request, subscribed_id):
     subscribed_id: the unique number generated to identify a subscription.
     """
     profile = get_object_or_404(UserProfile, user=request.user)
-    subscribed_customer = get_object_or_404(SubscribedCustomer, user_profile=profile)
-    subscription_item = get_object_or_404(SubscriptionLineItem, subscribed_id=subscribed_id)
+    subscribed_customer = get_object_or_404(SubscribedCustomer,
+                                            user_profile=profile)
+    subscription_item = get_object_or_404(SubscriptionLineItem,
+                                          subscribed_id=subscribed_id)
     subscription = get_object_or_404(Subscription, id=subscribed_id)
     # the user is able to access the invoice on stripe through the url
     invoice = get_object_or_404(Invoice, id=subscription.latest_invoice.id)
@@ -135,7 +146,8 @@ def subscription_detail(request, subscribed_id):
     cover = get_object_or_404(covers, page='subscriptions')
 
     messages.info(request, (
-        f'This is a past confirmation for subscription {subscription_item.subscribed_id}. '
+        f'This is a past confirmation for subscription '
+        '{subscription_item.subscribed_id}. '
         'A confirmation email was sent on the order date.'
     ))
 
