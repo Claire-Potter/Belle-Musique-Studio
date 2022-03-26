@@ -15,13 +15,16 @@ Definitions from https://www.fullstackpython.com
 unless stated otherwise.
 """
 from decimal import Decimal
-# The decimal module provides support for fast correctly-rounded decimal floating point arithmetic.
+# The decimal module provides support for fast correctly-rounded decimal
+# floating point arithmetic.
 # https://docs.python.org/3/library/decimal.html
 
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application
+# The Django settings file contains all of the configuration for
+# a web application
 from django.shortcuts import get_object_or_404
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts
+# module of the Django project.
 
 from djstripe.models import Product
 # Model is imported from djstripe models.py
@@ -118,7 +121,7 @@ def lesson_bag_contents(request):
                 'dj_stripe_id': dj_stripe_id,
                 'lesson': lesson,
                 'price_only': price_only,
-                'priceId' : price_id,
+                'priceId': price_id,
                 'name': name,
                 'price': price,
                 'url': url,

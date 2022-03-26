@@ -1,5 +1,5 @@
 """
-Belle Musique Studio checkout app views configuration
+Belle Musique Studio shopping bag app views configuration
 
 After correcting any pylint issues, I was still left with the issue
 'class has no objects member', the object is only added when the screen
@@ -40,24 +40,34 @@ Definitions from https://www.fullstackpython.com
 unless stated otherwise.
 """
 from django.contrib import messages
-# Quite commonly in web applications, you need to display a one-time notification
-# message (also known as “flash message”) to the user after processing a form or
+# Quite commonly in web applications, you need to display
+# a one-time notification
+# message (also known as “flash message”) to the
+# user after processing a form or
 #  some other types of user input.
 
-# For this, Django provides full support for cookie- and session-based messaging,
-# for both anonymous and authenticated users. The messages framework allows you
-# to temporarily store messages in one request and retrieve them for display in a
-# subsequent request (usually the next one). Every message is tagged with a specific level
+# For this, Django provides full support for cookie-
+# and session-based messaging,
+# for both anonymous and authenticated users.
+# The messages framework allows you
+# to temporarily store messages in one request and
+# retrieve them for display in a
+# subsequent request (usually the next one).
+# Every message is tagged with a specific level
 # that determines its priority (e.g., info, warning, or error).
 from django.shortcuts import (HttpResponse, get_object_or_404, redirect,
                               render, reverse)
 # HttpResponse (source code) provides an inbound HTTP request to a Django web
 # application with a text response. This class is most frequently used
 # as a return object from a Django view.
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
-# redirect is a callable within the django.shortcuts module of the Django project.
-# render is a callable within the django.shortcuts module of the Django project.
-# reverse is a callable within the django.urls module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts
+# module of the Django project.
+# redirect is a callable within the django.shortcuts
+# module of the Django project.
+# render is a callable within the django.shortcuts
+# module of the Django project.
+# reverse is a callable within the django.urls
+# module of the Django project.
 from home.models import Cover
 # Model imported from home app models.py
 from store.models import MusicProduct
@@ -88,6 +98,7 @@ def view_bag(request):
     }
 
     return render(request, 'bag.html', context)
+
 
 def view_lesson_bag(request):
     """
@@ -142,17 +153,20 @@ def add_to_bag(request, item_id):
             if size in bag[item_id]['items_by_size'].keys():
                 bag[item_id]['items_by_size'][size] += quantity
                 messages.success(request, f'Updated size {size.upper()} {product.name}'
-                                           f'quantity to {bag[item_id]["items_by_size"][size]}')
+                                          f'quantity to {bag[item_id] ["items_by_size"][size]}')
             else:
                 bag[item_id]['items_by_size'][size] = quantity
-                messages.success(request, f'Added size {size.upper()} {product.name} to your bag')
+                messages.success(request, f'Added size {size.upper()}'
+                                 f'{product.name} to your bag')
         else:
             bag[item_id] = {'items_by_size': {size: quantity}}
-            messages.success(request, f'Added size {size.upper()} {product.name} to your bag')
+            messages.success(request, f'Added size {size.upper()}'
+                             f'{product.name} to your bag')
     else:
         if item_id in list(bag.keys()):
             bag[item_id] += quantity
-            messages.success(request, f'Updated {product.name} quantity to {bag[item_id]}')
+            messages.success(request, f'Updated {product.name}'
+                                      f'quantity to {bag[item_id]}')
         else:
             bag[item_id] = quantity
             messages.success(request, f'Added {product.name} to your bag')
@@ -181,7 +195,8 @@ def add_lesson(request):
     dj_stripe_id = request.POST.get('dj_stripe')
     redirect_lesson_url = request.POST.get('redirect_lesson_url')
     lesson_bag = request.session.get('lesson_bag', {})
-    lesson_bag[dj_stripe_id] = price_only, price_id, name, price, url, caption, dj_stripe_id
+    lesson_bag[dj_stripe_id] = (price_only, price_id,
+                                name, price, url, caption, dj_stripe_id)
     messages.success(request, f'Added {name} to your bag')
     request.session['lesson_bag'] = lesson_bag
     return redirect(redirect_lesson_url)
@@ -215,17 +230,20 @@ def adjust_bag(request, item_id):
     if size:
         if quantity > 0:
             bag[item_id]['items_by_size'][size] = quantity
-            messages.success(request, f'Updated size {size.upper()} {product.name}'
-                                      f'quantity to {bag[item_id]["items_by_size"][size]}')
+            messages.success(request, f'Updated size {size.upper()}{product.name}'
+                             f'quantity to {bag[item_id]["items_by_size"][size]}')
         else:
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
-            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
+            messages.success(request,
+                             f'Removed size {size.upper()}'
+                             f' {product.name} from your bag')
     else:
         if quantity > 0:
             bag[item_id] = quantity
-            messages.success(request, f'Updated {product.name} quantity to {bag[item_id]}')
+            messages.success(request, f'Updated {product.name}'
+                             f' quantity to {bag[item_id]}')
         else:
             bag.pop(item_id)
             messages.success(request, f'Removed {product.name} from your bag')
@@ -262,7 +280,8 @@ def remove_from_bag(request, item_id):
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
-            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
+            messages.success(request, f'Removed size {size.upper()}'
+                             f'{product.name} from your bag')
         else:
             bag.pop(item_id)
             messages.success(request, f'Removed {product.name} from your bag')
