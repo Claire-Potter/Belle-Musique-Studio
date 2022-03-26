@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_countries',
     'django_summernote',
+    'django_extensions',
     'djstripe',
     'allauth',
     'allauth.account',
