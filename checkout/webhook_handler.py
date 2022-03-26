@@ -10,23 +10,29 @@ import json
 # JavaScript Object Notation (JSON) is a standardized format commonly used to
 #  transfer data as text that can be sent over a network. It’s used by lots
 #  of APIs and Databases, and it’s easy for both humans and machines to read.
-# https://realpython.com/lessons/what-is-json/#:~:text=import%20json,data%20into%20a%20Python%20list).
+# (https://realpython.com/lessons/what-is-json/#:~:
+# text=import%20json,data%20into%20a%20Python%20list)).
 import time
-# When support for time zones is enabled, Django stores datetime information in UTC in the database,
-# uses time-zone-aware datetime objects internally, and translates them to the end user’s time zone
+# When support for time zones is enabled, Django stores datetime information
+# in UTC in the database,
+# uses time-zone-aware datetime objects internally, and translates them to the
+# end user’s time zone
 # in templates and forms.
 # https://docs.djangoproject.com/en/4.0/topics/i18n/timezones/
 
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application.
+# The Django settings file contains all of the configuration for a
+# web application.
 from django.core.mail import send_mail
-# send_mail is a function in Django that can send an email using the EmailMessage class.
+# send_mail is a function in Django that can send an email using the
+# EmailMessage class.
 from django.http import HttpResponse
 # HttpResponse (source code) provides an inbound HTTP request to a Django web
 # application with a text response. This class is most frequently used
 # as a return object from a Django view.
 from django.template.loader import render_to_string
-# render_to_string is a callable within the django.template.loader module of the Django project.
+# render_to_string is a callable within the django.template.loader
+# module of the Django project.
 
 from profiles.models import UserProfile
 # Model imported from profile app models.py
@@ -95,8 +101,10 @@ class StripeWhHandler:
                 profile.default_country = shipping_details.address.country
                 profile.default_postcode = shipping_details.address.postal_code
                 profile.default_town_or_city = shipping_details.address.city
-                profile.default_street_address1 = shipping_details.address.line1
-                profile.default_street_address2 = shipping_details.address.line2
+                profile.default_street_address1 = (shipping_details
+                                                   .address.line1)
+                profile.default_street_address2 = (shipping_details
+                                                   .address.line2)
                 profile.default_county = shipping_details.address.state
                 profile.save()
 
@@ -168,11 +176,13 @@ class StripeWhHandler:
                 if order:
                     order.delete()
                 return HttpResponse(
-                    content=f'Webhook received: {event["type"]} | ERROR: {e_rr}',
+                    content=f'Webhook received: \
+                            {event["type"]} | ERROR: {e_rr}',
                     status=500)
         self._send_confirmation_email(order)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
+            content=f'Webhook received: {event["type"]} | SUCCESS: Created \
+                     order in webhook',
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):

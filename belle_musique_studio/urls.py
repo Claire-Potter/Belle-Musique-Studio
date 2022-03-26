@@ -24,15 +24,20 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     # favicon paths to successfully render the favicon across devices
-    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage
+                                             .url('img/favicon.ico'))),
     path('favicon-32x32.png',
-         RedirectView.as_view(url=staticfiles_storage.url('img/favicon-32x32.png'))),
+         RedirectView.as_view(url=staticfiles_storage
+                              .url('img/favicon-32x32.png'))),
     path('favicon-16x16.png',
-         RedirectView.as_view(url=staticfiles_storage.url('img/favicon-16x16.png'))),
+         RedirectView.as_view(url=staticfiles_storage
+                              .url('img/favicon-16x16.png'))),
     path('apple-touch-icon.png',
-         RedirectView.as_view(url=staticfiles_storage.url('img/apple-touch-icon.png'))),
+         RedirectView.as_view(url=staticfiles_storage
+                              .url('img/apple-touch-icon.png'))),
     path('safari-pinned-tab.svg',
-         RedirectView.as_view(url=staticfiles_storage.url('img/safari-pinned-tab.svg'))),
+         RedirectView.as_view(url=staticfiles_storage
+                              .url('img/safari-pinned-tab.svg'))),
     path('accounts/', include('allauth.urls')),
     # djstripe set up
     path('stripe/', include('djstripe.urls', namespace='djstripe')),

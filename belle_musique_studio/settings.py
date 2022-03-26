@@ -82,7 +82,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'belle_musique_studio.urls'
 
 
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
@@ -139,7 +138,7 @@ SOCIALACCOUNT_PROVIDERS = {
     'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
     'INIT_PARAMS': {'cookie': True},
     'METHOD': 'oauth2',
-    'VERIFIED_EMAIL': False,},
+    'VERIFIED_EMAIL': False, },
  'google': {
     'SCOPE': [
         'profile',
@@ -149,7 +148,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'access_type': 'online',
     }}
 }
-
 
 
 # Account authentication set up
@@ -270,11 +268,12 @@ STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
-STRIPE_LIVE_MODE = False # Change to True in production
+STRIPE_LIVE_MODE = False
 STRIPE_TEST_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_TEST_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 DJSTRIPE_WEBHOOK_SECRET = os.getenv('DJSTRIPE_WEBHOOK_SECRET', '')
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = 'id'
+DJSTRIPE_WEBHOOK_URL = r"^webhook/$"
 
 
 # Default primary key field type

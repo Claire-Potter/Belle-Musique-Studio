@@ -5,13 +5,17 @@ Definitions from https://www.fullstackpython.com
 unless stated otherwise.
 """
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application.
+# The Django settings file contains all of the configuration for a
+# web application.
 from django.core.mail import send_mail
-# send_mail is a function in Django that can send an email using the EmailMessage class.
+# send_mail is a function in Django that can send an email using the
+# EmailMessage class.
 from django.shortcuts import get_object_or_404
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts module of the
+# Django project.
 from django.template.loader import render_to_string
-# render_to_string is a callable within the django.template.loader module of the Django project.
+# render_to_string is a callable within the django.template.loader
+# module of the Django project.
 from djstripe import webhooks
 # dj-stripe implements all of the Stripe models, for Django.
 # https://pypi.org/project/dj-stripe/2.2.3/
@@ -33,14 +37,14 @@ def customer_created_event_listener(event):
             {'event': event})
     body = render_to_string(
             'lesson_emails/confirmation_emails/confirmation_email_body.txt',
-            {'name': name, 'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+            {'name': name, 'event': event,
+             'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [cust_email],
-            fail_silently=False,
-)
+           body,
+           settings.DEFAULT_FROM_EMAIL,
+           [cust_email],
+           fail_silently=False)
 
 
 @webhooks.handler("customer.subscription.deleted")
@@ -55,10 +59,12 @@ def customer_subscription_deleted_event_listener(event, **kwargs):
     name = user.first_name
     cust_email = user.email
     subject = render_to_string('lesson_emails/cancellation_emails/'
-                               'cancellation_email_subject.txt',{'event': event}),
+                               'cancellation_email_subject.txt',
+                               {'event': event}),
     body = render_to_string(
             'lesson_emails/cancellation_emails/cancellation_email_body.txt',
-            {'name': name, 'event': event, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+            {'name': name, 'event': event,
+             'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
         subject,
         body,

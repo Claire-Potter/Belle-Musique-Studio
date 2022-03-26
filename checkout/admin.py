@@ -9,8 +9,9 @@ from django.contrib import admin
 # for Django models. The admin interface can be heavily customized
 
 from .models import (Order, OrderLineItem, SubscribedCustomer,
-SubscriptionLineItem)
+                     SubscriptionLineItem)
 # Models are imported from models.py
+
 
 class OrderLineItemAdminInline(admin.TabularInline):
     """
@@ -72,8 +73,8 @@ class SubscribedCustomerAdmin(admin.ModelAdmin):
     """
     inlines = (SubscriptionLineItemAdminInline,)
 
-
-    fields = ('subscribed_customer_id', 'customer', 'user_profile', 'full_name',
+    fields = ('subscribed_customer_id', 'customer',
+              'user_profile', 'full_name',
               'email', 'phone_number', )
 
     list_display = ('subscribed_customer_id', 'customer', 'full_name')

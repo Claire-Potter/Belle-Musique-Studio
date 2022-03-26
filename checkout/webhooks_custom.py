@@ -10,7 +10,8 @@ import stripe
 # A Python library for Stripe’s API.
 # https://pypi.org/project/stripe/
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application.
+# The Django settings file contains all of the configuration for a
+# web application.
 from django.http import HttpResponse
 # HttpResponse (source code) provides an inbound HTTP request to a Django web
 # application with a text response. This class is most frequently used
@@ -57,8 +58,8 @@ def webhook(request):
     # Map webhook events to relevant handler functions
     event_map = {
         'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
-        'payment_intent.payment_failed': handler.handle_payment_intent_payment_failed,
-    }
+        'payment_intent.payment_failed': (handler.
+                                          handle_payment_intent_payment_failed), }
 
     # Get the webhook type from Stripe
     event_type = event['type']

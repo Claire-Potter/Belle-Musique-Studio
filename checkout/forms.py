@@ -83,7 +83,7 @@ class SubscribedCustomerForm(forms.ModelForm):
         """
         model = SubscribedCustomer
         fields = ('full_name', 'email', 'phone_number',
-                 'country' )
+                  'country')
 
     def __init__(self, *args, **kwargs):
         """
@@ -128,10 +128,10 @@ class SubscriptionLineItemForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'student': 'Student Full Name',}
+            'student': 'Student Full Name', }
 
         for field in self.fields:
-            if field  == ('student'):
+            if field == ('student'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
