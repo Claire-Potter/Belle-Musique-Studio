@@ -21,6 +21,7 @@ from django import forms
 from djstripe.models import Product, Plan
 # Models are imported from djstripe
 
+
 class LessonProductForm(forms.ModelForm):
     """
     LessonProductForm set up to enable a staff member to
@@ -37,7 +38,6 @@ class LessonProductForm(forms.ModelForm):
         model = Product
         fields = ('id', 'name', 'description', 'url', 'caption',
                   'statement_descriptor', 'unit_label',)
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -67,8 +67,7 @@ class LessonPriceForm(forms.ModelForm):
         """
         model = Plan
         fields = ('id', 'amount', 'currency', 'interval',
-                   'nickname', 'usage_type', 'trial_period_days')
-
+                  'nickname', 'usage_type', 'trial_period_days')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -103,16 +102,17 @@ class LessonProductAddForm(forms.ModelForm):
         fields = ('name', 'description', 'url', 'caption',
                   'statement_descriptor', 'unit_label',)
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         placeholders = {
-            'name': 'The product\'s name, meant to be displayable to the customer.',
+            'name': 'The product\'s name, meant to be displayable '
+                    'to the customer.',
             'description': 'A description of this object.',
             'url': 'A URL of a publicly-accessible image address.',
             'caption': 'The alt text for the image.',
-            'statement_descriptor': 'Appears on your customer\'s credit card statement.',
+            'statement_descriptor': 'Appears on your customer\'s '
+                                    'credit card statement.',
             'unit_label': 'Billed unit title eg: lesson.',
         }
 
@@ -148,20 +148,23 @@ class LessonPriceAddForm(forms.ModelForm):
         """
         model = Plan
         fields = ('amount', 'currency', 'interval', 'nickname',
-        'usage_type', 'active', 'trial_period_days')
-
+                  'usage_type', 'active', 'trial_period_days')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         placeholders = {
-            'amount': 'Amount (as decimal) to be charged on the interval specified.',
+            'amount': 'Amount (as decimal) to be charged on the '
+                      'interval specified.',
             'currency': 'Three letter ISO currency code eg: gbp',
-            'nickname': 'A brief description of the plan, hidden from customers.',
-            'usage_type': 'Configures how the quantity per period should be determined.',
+            'nickname': 'A brief description of the plan, hidden from '
+                        'customers.',
+            'usage_type': 'Configures how the quantity per period should '
+                          'be determined.',
         }
         for field in self.fields:
-            if field not in ('active', 'usage_type', 'trial_period_days', 'interval' ):
+            if field not in ('active', 'usage_type', 'trial_period_days',
+                             'interval'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
