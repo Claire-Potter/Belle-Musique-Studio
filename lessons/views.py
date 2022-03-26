@@ -87,8 +87,7 @@ def lessons_details(request):
     lessons = Product.objects.all()
     context = {'covers': covers,
                 'cover': cover,
-                'lessons': lessons,
-              }
+                'lessons': lessons}
 
     return render(request, 'lessons/lessons.html', context)
 
@@ -125,12 +124,12 @@ def add_lesson(request):
         # if all of the forms are validated create the product in stripe
         if form.is_valid() and p1_form.is_valid() and p2_form.is_valid() and p3_form.is_valid():
             stripe_data = stripe.Product.create(name=request.POST['product-name'],
-            description=request.POST['product-description'],
-            statement_descriptor=request.POST['product-statement_descriptor'],
-            unit_label=request.POST['product-unit_label'],
-            images=[request.POST['product-url']],
-            type='service',
-            active='true')
+             description=request.POST['product-description'],
+             statement_descriptor=request.POST['product-statement_descriptor'],
+             unit_label=request.POST['product-unit_label'],
+             images=[request.POST['product-url']],
+             type='service',
+             active='true')
             try:
                 # sync the data from stripe product through djstripe
                 djstripe_obj = djstripe.models.Product.sync_from_stripe_data(stripe_data)
@@ -157,28 +156,28 @@ def add_lesson(request):
 
                     # once the amounts have been converted the three prices
                     # are created on stripe
-                    price_one_price = stripe.Plan.create(
-                    amount=new_amount_one,
-                    currency=request.POST['price_one-currency'],
-                    interval='week',
-                    nickname=request.POST['price_one-nickname'],
-                    product=djstripe_obj.id, active='true',
-                    usage_type=request.POST['price_one-usage_type'])
-                    price_two_price = stripe.Plan.create(
-                    amount=new_amount_two,
-                    currency=request.POST['price_two-currency'],
-                    interval='month',
-                    product=djstripe_obj.id, active='true',
-                    nickname=request.POST['price_two-nickname'],
-                    usage_type=request.POST['price_two-usage_type'])
-                    price_three_price = stripe.Plan.create(
-                    amount=new_amount_three,
-                    currency=request.POST['price_three-currency'],
-                    interval='year',
-                    product=djstripe_obj.id, active='true',
-                    nickname=request.POST['price_three-nickname'],
-                    usage_type=request.POST['price_three-usage_type'],
-                    trial_period_days=7)
+                    price_one_price = (stripe
+                                       .Plan.create(amount=new_amount_one,
+                                                    currency=request.POST['price_one-currency'],
+                                                    interval='week',
+                                                    nickname=request.POST['price_one-nickname'],
+                                                    product=djstripe_obj.id, active='true',
+                                                    usage_type=request.POST['price_one-usage_type']))
+                    price_two_price = (stripe
+                                       .Plan.create(amount=new_amount_two,
+                                                    currency=request.POST['price_two-currency'],
+                                                    interval='month',
+                                                    product=djstripe_obj.id, active='true',
+                                                    nickname=request.POST['price_two-nickname'],
+                                                    usage_type=request.POST['price_two-usage_type']))
+                    price_three_price = (stripe
+                                         .Plan.create(amount=new_amount_three,
+                                                      currency=request.POST['price_three-currency'],
+                                                      interval='year',
+                                                      product=djstripe_obj.id, active='true',
+                                                      nickname=request.POST['price_three-nickname'],
+                                                      usage_type=request.POST['price_three-usage_type'],
+                                                      trial_period_days=7))
                     try:
                         # sync the data from the Plan model through djstripe
                         djstripe.models.Plan.sync_from_stripe_data(price_one_price)
@@ -186,14 +185,16 @@ def add_lesson(request):
                         djstripe.models.Plan.sync_from_stripe_data(price_three_price)
                     # error message if the new product synced from djstripe doesn't exist
                     except djstripe_obj.DoesNotExist:
-                        messages.error(request, (
-                        'The lesson was not successfully created. Please contact an administrator'))
+                        messages.error(request, ('The lesson was not '
+                                                 'successfully created. '
+                                                 'Please contact an administrator'))
                 except djstripe_obj.DoesNotExist:
-                    messages.error(request, (
-                    'The lesson was not successfully created. Please contact an administrator'))
+                    messages.error(request, ('The lesson was not successfully '
+                                             'created. '
+                                             'Please contact an administrator'))
             except djstripe_obj.DoesNotExist:
-                messages.error(request, (
-                'The lesson was not successfully created. Please contact an administrator'))
+                messages.error(request, ('The lesson was not successfully created. '
+                                         'Please contact an administrator'))
             # save the product
             add_form = new_form.save(commit=False)
             add_form.save()
@@ -277,17 +278,25 @@ def edit_lesson(request, lesson_id):
             price1 = p1_form.save(commit=False)
             price2 = p2_form.save(commit=False)
             price3 = p3_form.save(commit=False)
-            stripe_data = stripe.Product.modify(lesson_id, name=request.POST['product-name'],
-            description=request.POST['product-description'],
-            statement_descriptor=request.POST['product-statement_descriptor'],
-            unit_label=request.POST['product-unit_label'],
-            images=[request.POST['product-url']],)
-            price_one_data = stripe.Plan.modify(price_one.id,
-            nickname=request.POST['price_one-nickname'],)
-            price_two_data = stripe.Plan.modify(price_two.id,
-            nickname=request.POST['price_two-nickname'],)
-            price_three_data = stripe.Plan.modify(price_three.id,
-            nickname=request.POST['price_three-nickname'],)
+            stripe_data = (stripe.
+                           Product.
+                           modify(lesson_id, name=request.POST['product-name'],
+                                  description=request.POST['product-description'],
+                                  statement_descriptor=request.POST['product-statement_descriptor'],
+                                  unit_label=request.POST['product-unit_label'],
+                                  images=[request.POST['product-url']],))
+            price_one_data = (stripe.
+                              Plan.
+                              modify(price_one.id,
+                                     nickname=request.POST['price_one-nickname'],))
+            price_two_data = (stripe.
+                              Plan
+                              .modify(price_two.id,
+                                      nickname=request.POST['price_two-nickname'],))
+            price_three_data = (stripe.
+                                Plan.
+                                modify(price_three.id,
+                                       nickname=request.POST['price_three-nickname'],))
             try:
                 # sync the data with the product and plan models through djstripe
                 djstripe_obj = djstripe.models.Product.sync_from_stripe_data(stripe_data)
@@ -312,7 +321,7 @@ def edit_lesson(request, lesson_id):
                             ('Failed to update lesson. '
                             'Please ensure the form is valid.'))
     else:
-         # initial forms data before the forms have been created.
+        # initial forms data before the forms have been created.
         form = LessonProductForm(instance=product,  prefix='product')
         p1_form = LessonPriceForm(instance=price_one, prefix = 'price_one')
         p2_form = LessonPriceForm(instance=price_two, prefix = 'price_two')

@@ -147,8 +147,8 @@ def subscription_detail(request, subscribed_id):
 
     messages.info(request, (
         f'This is a past confirmation for subscription '
-        '{subscription_item.subscribed_id}. '
-        'A confirmation email was sent on the order date.'
+        f'{subscription_item.subscribed_id}. '
+        f'A confirmation email was sent on the order date.'
     ))
 
     template = 'checkout/checkout_lesson_complete.html'
