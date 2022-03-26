@@ -32,25 +32,35 @@ Definitions from https://www.fullstackpython.com
 unless stated otherwise.
 """
 from django.contrib import messages
-# Quite commonly in web applications, you need to display a one-time notification
-# message (also known as “flash message”) to the user after processing a form or
+# Quite commonly in web applications, you need to display a one-time
+# notification
+# message (also known as “flash message”) to the user after processing
+# a form or
 #  some other types of user input.
 
-# For this, Django provides full support for cookie- and session-based messaging,
-# for both anonymous and authenticated users. The messages framework allows you
-# to temporarily store messages in one request and retrieve them for display in a
-# subsequent request (usually the next one). Every message is tagged with a specific level
+# For this, Django provides full support for cookie- and session-based
+# messaging,
+# for both anonymous and authenticated users. The messages framework
+# allows you
+# to temporarily store messages in one request and retrieve them for
+# display in a
+# subsequent request (usually the next one). Every message is tagged
+# with a specific level
 # that determines its priority (e.g., info, warning, or error).
 from django.contrib.auth.decorators import login_required
 # @login_required: Django's login_required function is used to secure views
 # in your web applications by forcing the client to
 # authenticate with a valid logged-in User.
 from django.db.models.functions import Lower
-# Accepts a single text field or expression and returns the lowercase representation.
+# Accepts a single text field or expression and returns the
+# lowercase representation.
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-# get_object_or_404 is a callable within the django.shortcuts module of the Django project.
-# redirect is a callable within the django.shortcuts module of the Django project.
-# render is a callable within the django.shortcuts module of the Django project.
+# get_object_or_404 is a callable within the django.shortcuts module
+# of the Django project.
+# redirect is a callable within the django.shortcuts module of
+# the Django project.
+# render is a callable within the django.shortcuts module
+# of the Django project.
 # reverse is a callable within the django.urls module of the Django project.
 
 from home.models import Cover
@@ -72,7 +82,7 @@ def music_store(request):
     covers = Cover.objects.all()
     cover = get_object_or_404(covers, page='music_store')
     context = {'covers': covers,
-                'cover': cover}
+               'cover': cover}
 
     return render(request, 'music_store.html', context)
 
@@ -148,7 +158,6 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'product_detail.html', context)
-
 
 
 @login_required

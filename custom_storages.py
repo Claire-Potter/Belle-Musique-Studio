@@ -2,7 +2,8 @@
 Belle Musique Studio custom storages configuration
 """
 from django.conf import settings
-# The Django settings file contains all of the configuration for a web application.
+# The Django settings file contains all of the configuration for
+# # a web application.
 from storages.backends.s3boto3 import S3Boto3Storage
 # Amazon Simple Storage Service (S3)
 
