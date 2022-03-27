@@ -1,1 +1,1 @@
-Belle Musique Studio Confirmation of Subscription Creation Number: {{ event.subscription }}
+Belle Musique Studio Cancellation of Subscription: {{ event }}

@@ -70,9 +70,6 @@ import stripe
 import djstripe
 # dj-stripe implements all of the Stripe models, for Django.
 # https://pypi.org/project/dj-stripe/2.2.3/
-from djstripe import webhooks
-# dj-stripe implements all of the Stripe models, for Django.
-# https://pypi.org/project/dj-stripe/2.2.3/
 from django.conf import settings
 # The Django settings file contains all of the configuration for a
 # web application.
@@ -84,7 +81,6 @@ from django.contrib import messages
 # notification message (also known as “flash message”) to the user after
 # processing a form or
 #  some other types of user input.
-
 # For this, Django provides full support for cookie- and session-based
 # messaging,
 # for both anonymous and authenticated users. The messages framework allows you
@@ -577,29 +573,6 @@ def create_sub(request):
         return HttpResponse('request method not allowed')
 
 
-@webhooks.handler("customer.subscription.created")
-def customer_created_event_listener(event, **kwargs):
-    """.git/"""
-    intent = event.data.object
-    user_name = intent.metadata.username
-    user = get_object_or_404(User, username=user_name)
-    name = user.first_name
-    cust_email = user.email
-    subject = render_to_string(
-            'lesson_emails/confirmation_emails/confirmation_email_subject.txt',
-            {'event': event})
-    body = render_to_string(
-            'lesson_emails/confirmation_emails/confirmation_email_body.txt',
-            {'name': name, 'event': event,
-             'contact_email': settings.DEFAULT_FROM_EMAIL})
-    send_mail(
-           subject,
-           body,
-           settings.DEFAULT_FROM_EMAIL,
-           [cust_email],
-           fail_silently=False)
-
-
 @login_required
 def subscribe(request):
     """
@@ -698,7 +671,25 @@ def subscribe(request):
                     subscription_internal.delete()
                     subscription_lineitem_internal.delete()
                     return redirect(reverse('view_lesson_bag'))
-                # direct the user to the checkout_lesson_complete page
+                # collect data and send confirmation email
+                user = get_object_or_404(User, username=request.user)
+                name = user.first_name
+                cust_email = user.email
+                event = sub_id
+                date = subscription_lineitem_internal.start_date
+                plan = user_subscription.subscription_name
+                student = subscription_lineitem_internal.student
+                subject = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_subject.txt',
+                                           {'event': event})
+                body = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_body.txt',
+                                        {'name': name, 'event': event, 'date': date, 'plan': plan,
+                                         'student': student, 
+                                         'contact_email': settings.DEFAULT_FROM_EMAIL})
+                send_mail(subject,
+                          body,
+                          settings.DEFAULT_FROM_EMAIL,
+                          [cust_email],
+                          fail_silently=False)
                 return redirect(reverse('checkout_lesson_complete',
                                         args=[sub_id]))
             else:
@@ -798,6 +789,25 @@ def subscribe(request):
                         return redirect(reverse('view_lesson_bag'))
                     # customer is saved from the user record
                     customer = user_customer_id
+                    # collect data and send confirmation email
+                    user = get_object_or_404(User, username=request.user)
+                    name = user.first_name
+                    cust_email = user.email
+                    event = sub_id
+                    date = subscription_lineitem_internal.start_date
+                    plan = user_subscription.subscription_name
+                    student = subscription_lineitem_internal.student
+                    subject = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_subject.txt',
+                                               {'event': event})
+                    body = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_body.txt',
+                                            {'name': name, 'event': event, 'date': date, 'plan': plan,
+                                             'student': student, 
+                                             'contact_email': settings.DEFAULT_FROM_EMAIL})
+                    send_mail(subject,
+                              body,
+                              settings.DEFAULT_FROM_EMAIL,
+                              [cust_email],
+                              fail_silently=False)
                     return redirect(reverse('checkout_lesson_complete',
                                             args=[sub_id]))
 
@@ -892,6 +902,20 @@ def cancel(request):
         # lesson bag
         if 'lesson_bag' in request.session:
             del request.session['lesson_bag']
+        user = get_object_or_404(User, username=request.user)
+        name = user.first_name
+        cust_email = user.email
+        event = sub_id
+        subject = render_to_string('checkout/lesson_emails/cancellation_emails/cancellation_email_subject.txt',
+                                    {'event': event})
+        body = render_to_string('checkout/lesson_emails/cancellation_emails/cancellation_email_body.txt',
+                                 {'name': name, 'event': event, 
+                                  'contact_email': settings.DEFAULT_FROM_EMAIL})
+        send_mail(subject,
+                  body,
+                  settings.DEFAULT_FROM_EMAIL,
+                  [cust_email],
+                  fail_silently=False)
         messages.success(request,
                          f'Subscription {sub_id} successfully cancelled!')
     except Exception as e_rr:
@@ -901,33 +925,6 @@ def cancel(request):
     # perspective, that is where
     # the user will view their active subscriptions from
     return redirect('profile')
-
-
-@webhooks.handler("customer.subscription.deleted")
-def customer_subscription_deleted_event_listener(event, **kwargs):
-    """
-    Email to be created and sent when a customer's
-    subscription is cancelled.
-    """
-    intent = event.data.object
-    user_name = intent.metadata.username
-    user = get_object_or_404(User, username=user_name)
-    name = user.first_name
-    cust_email = user.email
-    subject = render_to_string('lesson_emails/cancellation_emails/'
-                               'cancellation_email_subject.txt',
-                               {'event': event}),
-    body = render_to_string(
-            'lesson_emails/cancellation_emails/cancellation_email_body.txt',
-            {'name': name, 'event': event,
-             'contact_email': settings.DEFAULT_FROM_EMAIL})
-    send_mail(
-        subject,
-        body,
-        settings.DEFAULT_FROM_EMAIL,
-        [cust_email],
-        fail_silently=False,
-    )
 
 
 def checkout_lesson_complete(request, sub_id):
