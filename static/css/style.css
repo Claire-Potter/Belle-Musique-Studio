@@ -221,6 +221,16 @@ body {
     font-size: 1.2rem;
 }
 
+.iframe-container {
+    height: 260px;
+}
+
+.iframe {
+    height: 100%;
+    width: 100%;
+    border: 0;
+}
+
 /* Adverts */
 
 .advert-background {

@@ -1,34 +1,31 @@
 <!--The student showcase section - section within the about page to showcase students. Includes image and video-->
-<div class="col-sm-6 col-12">
-   <div class="advert-topper mx-sm-5 mx-2 my-sm-5 my-2 pb-2">
-      <h2 class="cover-heading inline pt-5 text-center">Student Showcase</h2>
-      <div class="d-flex justify-content-center ">
-         <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image" alt="A picture of the student of the week" aria-label="An image of the student of the week" src="{{student_showcased.image_url}}">
-      </div>
-      <div class="about mx-sm-5 mx-2 my-sm-5 my-2">
-         <p class="mx-3 my-3 pt-2 font-weight-bold">
+<div class="advert-topper mx-sm-5 mx-2 my-sm-5 my-2 pb-2">
+    <h2 class="cover-heading inline pt-5 text-center">Student Showcase</h2>
+    <div class="d-flex justify-content-center ">
+        <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image" alt="A picture of the student of the week" aria-label="An image of the student of the week" src="{{student_showcased.image_url}}">
+    </div>
+    <div class="about mx-sm-5 mx-2 my-sm-5 my-2">
+        <p class="mx-3 my-3 pt-2 font-weight-bold">
             {{student_showcased.name}}
-         </p>
-         <p class="mx-3 my-3 pt-2"> {{student_showcased.excerpt}}</p>
-         <p class="mx-3 my-3 pt-2"> {{student_showcased.body}}</p>
-         <!--If no video has been uploaded the below text will be displayed-->
-         {% if 'placeholder' in student_showcased.video_name %}
-         <div>
+        </p>
+        <p class="mx-3 my-3 pt-2"> {{student_showcased.excerpt}}</p>
+        <p class="mx-3 my-3 pt-2"> {{student_showcased.body}}</p>
+        <!--If no video has been uploaded the below text will be displayed-->
+        {% if 'placeholder' in student_showcased.video_name %}
+        <div>
             <p>Watch this space -a video will be added soon.</p>
-         </div>
-         {% else %}
-         <div class="col-12">
+        </div>
+        {% else %}
+        <div class="col-12">
             <div class="card card-with-background mx-auto">
-               <div class="card-body">
-                  <p class="card-title font-weight-bold text-center">{{ student_showcased.video_name }}</p>
-               </div>
-               <div class="iframe-container mx-auto mb-3">
-                  <iframe class="embed-responsive-item iframe" src="{{ student_showcased.video_url }}"
-                     title="YouTube video player" allowfullscreen></iframe>
-               </div>
+                <div class="card-body">
+                    <p class="card-title font-weight-bold text-center">{{ student_showcased.video_name }}</p>
+                </div>
+                <div class="iframe-container-fluid mx-auto mb-3">
+                    <iframe class="embed-responsive-item iframe" src="{{ student_showcased.video_url }}" title="YouTube video player" allowfullscreen></iframe>
+                </div>
             </div>
-         </div>
-         {% endif %}
-      </div>
-   </div>
+        </div>
+        {% endif %}
+    </div>
 </div>

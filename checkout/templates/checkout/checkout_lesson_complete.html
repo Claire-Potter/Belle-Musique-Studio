@@ -18,169 +18,174 @@
 </div>
 <!--Section includes details on the confirmed lesson and subscription-->
 <section class="bg-white">
-   <div class="container mb-3 pb-5 content-height">
-      <div class="row pt-3 pb-3 mt-5">
-         <div class="col-12 text-center mt-3">
-            <hr class="w-50 mx-auto small-width-heading">
-            <h2 class="logo-font mt-5 mb-5">Thank you</h2>
-            <hr class="w-50 mx-auto small-width-heading">
-            <p class="smaller-text">Your subscription information is below.</p>
-            <p class="smaller-text"> A confirmation email will be sent to <strong>{{ subscribed_customer.email }}</strong>.</p>
-         </div>
-         <div class="row mt-5 mb-5">
-            <div class="col-12 col-lg-7 mx-auto smallest-text">
-               <div class="order-confirmation-wrapper p-2 border">
-                  <div class="row">
-                     <div class="col">
-                        <small class="text-muted">Subscription Info:</small>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Subscription No</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscription_item.subscribed_id }}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Subscription Date</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscribed_customer.date |date }}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        <small class="text-muted">Subscription Details:</small>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold"></p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">
-                           {{ subscription_item.subscription_name |truncatewords:7 }}
-                        </p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        <small class="text-muted">Details:</small>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Full Name</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscribed_customer.full_name }}</p>
-                     </div>
-                  </div>
-                  {% if subscribed_customer.country %}
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Country</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscribed_customer.country }}</p>
-                     </div>
-                  </div>
-                  {% endif %}
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Phone Number</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscribed_customer.phone_number }}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Registered Student</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscription_item.student}}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Start Date</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscription_item.start_date|truncatechars:11 }}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Subscription Status</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscription_item.status }}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        <small class="text-muted">Billing Info:</small>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Order Total</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0 small">{{ subscription_item.lineitem_total }}</p>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-12 col-md-4">
-                        <p class="mb-0  font-weight-bold small">Invoice</p>
-                     </div>
-                     <div class="col-12 col-md-8 text-md-right">
-                        <a href="{{ invoice_link }}" target="_blank"
-                           title="{{ subscription_item.subscription_name }}" class="small invoice-link">
-                        {{ subscription_item.latest_invoice }}</a>
-                     </div>
-                  </div>
-                  <div class="row">
-                     {% if from_profile %}
-                     <div class="row">
-                        <div class="col text-right">
-                           <a href="{% url 'profile' %}" class="btn advert-button my-3">
-                           <span class="icon mr-2">
-                           <i class="fas fa-angle-left"></i>
-                           </span>
-                           <span class="text-uppercase">Back to Profile</span>
-                           </a>
+    <div class="container mb-3 pb-5 content-height">
+        <div class="row pt-3 pb-3 mt-5">
+            <div class="col-12 text-center mt-3">
+                <hr class="w-50 mx-auto small-width-heading">
+                <h2 class="logo-font mt-5 mb-5">Thank you</h2>
+                <hr class="w-50 mx-auto small-width-heading">
+                <p class="smaller-text">Your subscription information is below.</p>
+                <p class="smaller-text"> A confirmation email will be sent to <strong>{{ subscribed_customer.email }}</strong>.</p>
+            </div>
+            <div class="row mt-5 mb-5">
+                <div class="col-12 col-lg-7 mx-auto smallest-text">
+                    <div class="order-confirmation-wrapper p-2 border">
+                        <div class="row">
+                            <div class="col">
+                                <small class="text-muted">Subscription Info:</small>
+                            </div>
                         </div>
-                     </div>
-                     {% endif %}
-                  </div>
-               </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Subscription No</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscription_item.subscribed_id }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Subscription Date</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscribed_customer.date |date }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <small class="text-muted">Subscription Details:</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold"></p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">
+                                    {{ subscription_item.subscription_name |truncatewords:7 }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <small class="text-muted">Details:</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Full Name</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscribed_customer.full_name }}</p>
+                            </div>
+                        </div>
+                        {% if subscribed_customer.country %}
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Country</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscribed_customer.country }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Phone Number</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscribed_customer.phone_number }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Registered Student</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscription_item.student}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Start Date</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscription_item.start_date|truncatechars:11 }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Subscription Status</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscription_item.status }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <small class="text-muted">Billing Info:</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Order Total</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0 small">{{ subscription_item.lineitem_total }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0  font-weight-bold small">Invoice</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <a href="{{ invoice_link }}" target="_blank" title="{{ subscription_item.subscription_name }}" class="small invoice-link">
+                                    {{ subscription_item.latest_invoice }}</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% if from_profile %}
+                            <div class="row">
+                                <div class="col text-right">
+                                    <a href="{% url 'profile' %}" class="btn advert-button my-3">
+                                        <span class="icon mr-2">
+                                            <i class="fas fa-angle-left"></i>
+                                        </span>
+                                        <span class="text-uppercase">Back to Profile</span>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-      <div class="row">
-         <!--Music Store Advertisement-->
-         <div class="col text-center mt-3">
-            <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-            <p class="smaller-text">Now check out the latest deals that our Music Store has to offer!</p>
-            <div class="col mt-3 mt-sm-0 text-center">
-               <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-               <span class="icon">
-               <i class="fas fa-chevron-left"></i>
-               </span>
-               <span class="text-uppercase">Shop Now</span>
-               </a>
+        </div>
+        <div class="row">
+            <!--Music Store Advertisement-->
+            <div class="col-12 col-lg-4">
+                <div class="col text-center mt-3">
+                    <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+                    <p class="smaller-text">Now check out the latest deals that our Music Store has to offer!</p>
+                    <div class="col mt-3 mt-sm-0 text-center">
+                        <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="text-uppercase">Shop Now</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-         </div>
-         <!--The lesson advert and student showcase advert are rendered here-->
-         {% include 'includes/lessons_advert_four.html' %}
-         {% include 'includes/showcase_advert_four.html' %}
-      </div>
-   </div>
+            <!--The lesson advert and student showcase advert are rendered here-->
+            <div class="col-12 col-lg-4">
+                {% include 'includes/lessons_advert_four.html' %}
+            </div>
+            <div class="col-12 col-lg-4">
+                {% include 'includes/showcase_advert_four.html' %}
+            </div>
+        </div>
+    </div>
 </section>
 <div class="footer-background-color">
-{% endblock %}
+    {% endblock %}

@@ -85,8 +85,6 @@ class StudentShowcaseAdmin(AdminVideoMixin,
     The StudentShowcase admin set up reads the StudentShowcase model and allows
     the admin user to create a new record by adding the
     required fields. Admin can also edit and delete.
-    Django summernote is included to allow the admin user
-    to style the body field.
     Embed video field is used to save videos and display them
     in the admin pane.
     """

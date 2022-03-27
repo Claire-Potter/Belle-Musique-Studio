@@ -594,11 +594,10 @@ https://www.youtube.com/watch?v=dGF1x14QNGA
 9. The following site was referenced to complete the html-validator testing - 
 https://pypi.org/project/django-html-validator/
 
-10. Django-summernote was referenced to set up Django Summernote - https://github.com/summernote/django-summernote
 
-11. Dj-stripe documentation referenced for additional set up support: https://dj-stripe.readthedocs.io/_/downloads/en/stable-2.2/pdf/
+10. Dj-stripe documentation referenced for additional set up support: https://dj-stripe.readthedocs.io/_/downloads/en/stable-2.2/pdf/
 
-12. Stripe documentation referenced to understand how products and prices work -https://stripe.com/docs/products-prices/how-products-and-prices-work
+11. Stripe documentation referenced to understand how products and prices work -https://stripe.com/docs/products-prices/how-products-and-prices-work
 
 ## Content
 1. The fictional music studio and Jo-Anna Hope are based on my Aunt Jo Hoult and her music studio

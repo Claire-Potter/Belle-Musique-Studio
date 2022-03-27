@@ -48,6 +48,4 @@ urlpatterns = [
     path('lessons/', include('lessons.urls')),
     path('profiles/', include('profiles.urls')),
     path('lessons/', include('lessons.urls')),
-    # summernote for admin
-    path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
