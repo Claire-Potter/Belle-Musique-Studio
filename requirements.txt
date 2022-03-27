@@ -38,7 +38,6 @@ plyer==1.4.3
 psycopg2-binary==2.9.3
 py==1.11.0
 py-moneyed==1.2
-pygraphviz==1.9
 pylint-django==2.5.0
 pylint-plugin-utils==0.7
 PyQt5==5.15.6
