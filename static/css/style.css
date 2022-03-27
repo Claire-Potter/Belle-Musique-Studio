@@ -45,17 +45,15 @@ body {
 
 .shopping-logos {
     display: flex;
-    margin-left: 75%;
+    width: 90%;
 }
 
 .store-logo {
     font-size: 1.5rem;
-    width: 80%
 }
 
 .lesson-logo {
     font-size: 1.5rem;
-    width: 80%
 }
 
 .icon {
@@ -143,7 +141,7 @@ body {
     background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
     background-size: cover;
     height: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
     background-color: #ffffff;
 }
 
@@ -152,7 +150,7 @@ body {
     background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
     background-size: cover;
     height: 100%;
-    margin-top: 138px;
+    margin-top: 153px;
 }
 
 .cover-container-product-man,
@@ -160,7 +158,7 @@ body {
     background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
     background-size: cover;
     height: 100%;
-    margin-top: 130px;
+    margin-top: 150px;
 }
 
 
@@ -192,7 +190,8 @@ body {
     color: #04142f;
 }
 
-.spacer {
+
+.spacer-one {
     height: calc(40vh - 164px)
 }
 
@@ -443,41 +442,6 @@ body {
 }
 
 /* Media queries */
-@media (max-width: 6000px) {
-
-    .shopping-logos {
-        margin-left: 84%;
-    }
-}
-
-@media (max-width: 5000px) {
-
-    .shopping-logos {
-        margin-left: 82%;
-    }
-}
-
-@media (max-width: 4000px) {
-
-    .shopping-logos {
-        margin-left: 80%;
-    }
-}
-
-@media (max-width: 3000px) {
-
-    .shopping-logos {
-        margin-left: 78%;
-    }
-}
-
-@media (max-width: 2500px) {
-
-    .shopping-logos {
-        margin-left: 76%;
-    }
-}
-
 
 @media (max-width: 1500px) {
     .navbar-brand {
@@ -485,9 +449,6 @@ body {
         text-align: center;
     }
 
-    .shopping-logos {
-        margin-left: 75%;
-    }
 
     .store-logo {
         font-size: 1.5rem;
@@ -497,7 +458,8 @@ body {
         font-size: 1.5rem;
     }
 
-    .spacer {
+
+    .spacer-one {
         display: none;
     }
 
@@ -516,19 +478,9 @@ body {
         font-size: 0.8rem;
         max-width: 250px;
     }
-}
 
-@media (max-width: 1200px) {
-
-    .shopping-logos {
-        margin-left: 73%;
-    }
-}
-
-@media (max-width: 1000px) {
-
-    .shopping-logos {
-        margin-left: 70%;
+    .smaller-text-edit {
+        font-size: calc(0.3rem + .9vw) !important;
     }
 }
 
@@ -610,9 +562,6 @@ body {
         right: 5px;
     }
 
-    .shopping-logos {
-        margin-left: 65%;
-    }
 
     .smaller-font {
         font-size: calc(1rem + .9vw) !important;
@@ -665,9 +614,6 @@ body {
         width: 150px;
     }
 
-    .shopping-logos {
-        margin-left: 0%;
-    }
 
     .bag-border {
         border: none;
@@ -688,6 +634,11 @@ body {
     .mobile-only {
         display: unset;
     }
+
+    .spacer-one {
+        display: initial;
+    }
+
 }
 
 @media (max-height: 700px) {
@@ -715,9 +666,18 @@ body {
     }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 450px) {
+
+    .shopping-logos {
+        width: 0;
+    }
+
     .smaller-text {
         font-size: calc(1rem + .9vw) !important;
+    }
+
+    .smaller-text-edit {
+        font-size: calc(0.7rem + .9vw) !important;
     }
 }
 

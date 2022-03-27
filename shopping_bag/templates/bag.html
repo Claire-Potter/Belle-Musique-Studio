@@ -107,28 +107,35 @@
                         </table>
                     </div>
                     {% else %}
-                    <p class="lead mb-5">Your bag is empty.</p>
-                    <a href="{% url 'products' %}" class="btn btn-outline-black btn-lg">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span class="text-uppercase">Keep Shopping</span>
-                    </a>
+                    <div class="col-12 text-center bag-sm-height mt-5 mx-auto">
+                        <div class="col m-0">
+                            <img class="img-fluid mx-3 my-3 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a beautiful sunset" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/michal-ico-NmX8kzk5uNs-unsplash.jpg">
+                            <p class="lead mb-5">Your bag is empty.</p>
+                            <a href="{% url 'products' %}" class="btn btn-outline-black btn-lg">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="text-uppercase">Keep Shopping</span>
+                            </a>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
             <div class="row mt-lg-5 mt-3">
                 <!--The lesson advert, student showcase advert and store advert are rendered here-->
-                <div class="col-sm-4 col-12 text-center mt-lg-5 mt-3">
-                    <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-                    <p class="smaller-text">Not yet finished? Head back to our store to shop.</p>
-                    <div class="col mt-5 mt-sm-3 text-center">
-                        <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-                            <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="text-uppercase">Keep Shopping</span>
-                        </a>
+                <div class="col-sm-4 col-12 text-center">
+                    <div class="col text-center mt-3 advert-text-small">
+                        <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+                        <p class="smaller-text">Not yet finished? Head back to our store to shop.</p>
+                        <div class="col mt-5 mt-sm-3 text-center">
+                            <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="text-uppercase">Keep Shopping</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-12">
