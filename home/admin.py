@@ -7,11 +7,6 @@ unless stated otherwise
 from django.contrib import admin
 # The Django admin is an automatically-generated user interface for
 # Django models. The admin interface can be heavily customized
-from django_summernote.admin import SummernoteModelAdmin
-# Summernote is a simple WYSIWYG editor.
-# django-summernote allows you to embed Summernote into Django
-#  very handy. Support admin mixins and widgets.
-# definition from https://github.com/summernote/django-summernote
 from embed_video.admin import AdminVideoMixin
 # Django app for easy embedding YouTube and Vimeo videos and
 # music from SoundCloud.
@@ -84,7 +79,7 @@ admin.site.register(User, UserAdmin)
 
 
 @admin.register(StudentShowcase)
-class StudentShowcaseAdmin(SummernoteModelAdmin, AdminVideoMixin,
+class StudentShowcaseAdmin(AdminVideoMixin,
                            admin.ModelAdmin):
     """
     The StudentShowcase admin set up reads the StudentShowcase model and allows
@@ -97,4 +92,3 @@ class StudentShowcaseAdmin(SummernoteModelAdmin, AdminVideoMixin,
     """
     list_display = ('date', 'name',)
     search_fields = ['date', 'name', ]
-    summernote_fields = ('body', 'excerpt')
