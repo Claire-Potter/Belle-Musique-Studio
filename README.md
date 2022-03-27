@@ -37,7 +37,7 @@ This is currently a test project.
 		* [Access](#access)
 			* [Site visitors:](#site-visitors)
 			* [Registered users:](#registered-users)
-			* [Site administrators and Superusers:](#site-administrators-and-superusers)
+			* [Site Administrator, Site Owner and Superuser:](#site-administrator-site-owner-and-superuser)
 	* [Wireframes](#wireframes)
 		* [Differences:](#differences)
 	* [Design](#design)
@@ -84,9 +84,11 @@ This is currently a test project.
 6. Contact the site owner
 
 **Site Owner and Site Administrator**
-1. Receive contact forms in site admin and direct email message.
 
-2. Create and Update:
+1. Front End Create Only:
+   * Student Showcase record
+   
+2. Front End Create and Update:
 
     * Products:
    
@@ -100,23 +102,12 @@ This is currently a test project.
         * Monthly payment
         * Annual payment
 
-3. Create Update and Delete:
+3. Front End Create Update and Delete:
     * Product Inventory
-    * Update weekly student showcase
     
-4. View only
+4. Site Admin access as stipulated under the authorisations section
 
-    * User profile information
-
-    
-        
-4. View/Edit/Delete:
-
-        
-5. Maintain user data:
-
-6. Add:
-
+5. Receive contact emails when a contact request is sent from the site
 
 
 **User Stories:**
@@ -205,13 +196,13 @@ Using the trade-off process to rank the importance and feasibility of the opport
 
 For this project, the main aim is to create a transactional platform to assist a user through the subscription purchase process and the product purchase process. Secondary to that is to provide the user with the necessary information required to be able to make their decision around what lessons to enrole in and what subscription type would be best for them. The Music Store will be set up to be able to provide all of the necessary tools to music students for their lessons as well as to increase overall revenue. Every opportunity for internal advertisement will be taken to promote lessons, student showcases and the store. The website will be designed to render successfully across all screen sizes and platforms. Accessibility requirements will be considered and addressed. Apart from the default Django Admin centre, which is best utilised from a laptop/computer, the design has been completed for mobile first.
 
-In order to create a streamline navigation menu,  a My Account section as a dropdown sub-menu. This section will include the options to Register / Login or Logout, Access to the User Profile and for staff access to site admin, product and lesson maintenance and student showcase form.
+In order to create a streamline navigation menu, a My Account section has been added as a dropdown sub-menu. This section will include the options to Register / Login or Logout, Access to the User Profile and for staff access to site admin, product and lesson maintenance and student showcase form.
 
-To provide an overview of the business, including it's purpose and owner information, an About page has been included. A user can easily scroll down the page to read the various information, a useful return to top icon has been included to easily return to the top of the page.
+To provide an overview of the business, including it's purpose and owner information, an About page has been included. A user can easily scroll down the page to read the various information sections, a useful return to top icon has been included to easily return to the top of the page.
 
 Users who have registered for an account will have the additional option of accessing and updating their user profile. It is not necessary to register to purchase an item from the store, however, to take out a subscription, a user is required to register as it will involve setting up recurring payments. Users are able to view all past order details from their profiles as well as their active subscriptions. They can cancel a subscription, just after they have paid for it in case it was done in error or at any later date from their profile.
 
-Site Administrator and the Store Owner will have access to the Admin section which allows them to view and monitor site content and assist where required. They will also have the necessary front end access to add, edit and delete music store products and to add and edit subscriptions. As subscriptions are recurring the ability to delete the options has not been provided, as there would be active subscriptions in place and this would need to be managed.
+Site Administrator and the Store Owner will have access to the Admin section which allows them to view and monitor site content and assist where required. They will also have the necessary front end access to add, edit and delete music store products and to add and edit subscriptions. As subscriptions are recurring the ability to delete the options has not been provided, as there would be active subscriptions in place and this would need to be managed. They will have access from the front end to add student showcase records.
 
 The Super User will have additional access to the Admin section. Certain models will be limited in terms of being able to create, delete or edit content.
 
@@ -231,13 +222,100 @@ This website will allow users to access different parts of the site depending on
 
 
 #### Site visitors: 
-
+ * View Only:
+   * Home Page
+   * About Page
+ * View and Select:
+   * View all Lesson details
+   * Lessons - add a lesson to lesson bag
+   * Lesson bag - view lesson bag
+   * View all Music Store product details
+   * Products - add a product to shopping bag
+   * Shopping bag - view shopping bag
+ * Edit and Delete:
+   * Lesson bag - remove lesson from bag
+   * Shopping bag - update item quantity and size
+   * Shopping bag - remove item from shopping bag
+ * Add only:
+   * Checkout - order form
+   * Checkout - payment information
+   * Contact Us - contact form
+ * Emails:
+   * Receive order via email
+   * Submitting the contact form triggers an email to the site admin
 
 #### Registered users:
+Registered users will have the same access as site visitors as well as the following additional access:
+ * View only:
+    * User profile - order history and detailed information
+    * User profile - subscription order information
+ * Add only:
+   * Checkout - lesson payment information 
+   * Checkout - subscription form
+   * Checkout - Save details to profile
+   * Contact Us - contact form
+ * Add, edit and delete:
+   * User profile - default information
+ * View and cancel:
+   * User profile subscriptions
+ * Emails:
+   * Receive subscription creation via email
+   * Receive subscription cancellation via email
+ * URLs:
+   * Link to stripe to view and download latest invoice
+ 
 
-#### Students:
+#### Site Administrator, Site Owner and Superuser: 
 
-#### Site owner, site administrator and Superusers: 
+Initial access groups have been set up for the first launch of the site. Training would need to be provided to ensure staff know what to do. Access to be evaluated on an ongoing basis to ensure that all staff are able to adequately run the business and support their clients.
+
+Front end access in place as stipulated within the project goals section. Lessons and Subscriptions can only be created and edited from the front end as the necessary integration with stripe has been set up to ensure alignment across both sites. Site Admin access to all related models will be view only to ensure that the functionality remains robust.
+
+1. Site Administrator Group:
+ * View Only:
+   * checkout | subscribed customer
+   * checkout | subscription line item
+   * djstripe | customer
+   * djstripe | payment method
+   * djstripe | invoice
+   * djstripe | invoice item
+   * djstripe | payment intent
+   * djstripe | payment method
+   * djstripe | plan
+   * djstripe | price
+   * djstripe | product
+   * djstripe | subscription
+   * djstripe | subscription item
+   * djstripe | subscription schedule
+   * djstripe | upcoming invoice
+   * home | user
+   * home | user subscription
+   * home | subscription line item
+   * profiles | user profile
+   * store | category
+ * View, Edit and Delete:
+   * checkout | order
+   * checkout | order line item
+   * home | contact
+    
+ * Add, View, Edit and Delete:
+   * account | email address
+   * account | email confirmation
+   * home | cover
+   * home | student showcase
+   * store | music product
+
+2. Site Owner Group:
+ 
+ The site owner will have the same access as the site administrator along with the following additional access:
+  * View and Edit:
+   * profiles | user profile
+  
+  * Add, View, Edit and Delete:
+   * store | category
+   
+3. SuperUser
+The superuser will have full access to the site admin section, apart from any access restrictions added to the code.
 
 
 ## Wireframes
@@ -284,12 +362,10 @@ These fonts were chose to provide some sophistication. They are classical and el
 For development, I used the sqlite3 database that comes with Django. A PostgreSQL database through Heroku is in use 
 for the deployed live site.
 
-Please access the app and database file <a href="" target="_blank">here</a> 
 
+ <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/dj_stripe_models.png" target="_blank">Database diagram - djstripe models</a>
 
- <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/dj_stripe_models.png" target="_blank">Database diagram dj stripe models</a>
-
- <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/belle_musique_studio.png" target="_blank">Database diagram belle musique studio models</a>
+ <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/belle_musique_studio.png" target="_blank">Database diagram - belle musique studio models </a>
 
 # Features
  
@@ -345,7 +421,7 @@ ImageOptimizer used to minify image file sizes
 
 # Testing
 
-Please access the testing pack <a href="https://github.com/Claire-Potter/Xperience-DezignWiz/blob/main/documentation/testing/testing.md" target="_blank">here</a>
+Please access the testing pack <a href="" target="_blank">here</a>
 
 # Deployment
 
