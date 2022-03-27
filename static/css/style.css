@@ -446,35 +446,35 @@ body {
 @media (max-width: 6000px) {
 
     .shopping-logos {
-        margin-left: 90%;
+        margin-left: 84%;
     }
 }
 
 @media (max-width: 5000px) {
 
     .shopping-logos {
-        margin-left: 85%;
+        margin-left: 82%;
     }
 }
 
 @media (max-width: 4000px) {
 
     .shopping-logos {
-        margin-left: 82%;
+        margin-left: 80%;
     }
 }
 
 @media (max-width: 3000px) {
 
     .shopping-logos {
-        margin-left: 80%;
+        margin-left: 78%;
     }
 }
 
 @media (max-width: 2500px) {
 
     .shopping-logos {
-        margin-left: 78%;
+        margin-left: 76%;
     }
 }
 
@@ -557,9 +557,6 @@ body {
         height: calc(100vh - 116px);
     }
 
-    .display-4.logo-font.text-black {
-        font-size: 2rem;
-    }
 
     .nav-link {
         padding: 0.15rem;
@@ -586,13 +583,11 @@ body {
         font-size: .9rem;
     }
 
-    .btn.btn-outline-black,
-    .btn.btn-black {
+    .btn.btn-outline-black {
         padding: .375rem .375rem;
     }
 
     .btn.btn-outline-black.btn-lg,
-    .btn.btn-black.btn-lg,
     .btn.advert-button.text-uppercase.mb-3 {
         padding: .375rem .375rem;
         font-size: .75rem;
