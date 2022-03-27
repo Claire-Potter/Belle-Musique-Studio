@@ -60,10 +60,18 @@ class SubscriptionLineItemAdminInline(admin.TabularInline):
     """
     model = SubscriptionLineItem
 
+    readonly_fields = ('subscribed_id', 'subscription_name', 'subscription',
+                       'customer', 'lineitem_total',
+                       'original_lesson_bag', 'status', 'start_date', 'end_date',
+                       'student', 'latest_invoice', 'price')
+
     fields = ('subscribed_id', 'subscription_name', 'subscription',
               'customer', 'lineitem_total',
               'original_lesson_bag', 'status', 'start_date', 'end_date',
               'student', 'latest_invoice', 'price')
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class SubscribedCustomerAdmin(admin.ModelAdmin):
@@ -74,13 +82,20 @@ class SubscribedCustomerAdmin(admin.ModelAdmin):
     """
     inlines = (SubscriptionLineItemAdminInline,)
 
+    readonly_fields =  ('subscribed_customer_id', 'customer',
+                        'user_profile', 'full_name',
+                        'email', 'phone_number')
+
     fields = ('subscribed_customer_id', 'customer',
               'user_profile', 'full_name',
-              'email', 'phone_number', )
+              'email', 'phone_number')
 
     list_display = ('subscribed_customer_id', 'customer', 'full_name')
 
     ordering = ('-date',)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 admin.site.register(SubscribedCustomer, SubscribedCustomerAdmin)

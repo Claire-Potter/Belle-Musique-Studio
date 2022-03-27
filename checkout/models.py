@@ -163,7 +163,7 @@ class SubscribedCustomer(models.Model):
     """
 
     subscribed_customer_id = models.CharField(max_length=250, null=True,
-                                              blank=True, )
+                                              blank=True)
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE,
                                     null=False,
                                     blank=False)
@@ -204,8 +204,7 @@ class SubscriptionLineItem(models.Model):
                                  on_delete=models.CASCADE,
                                  related_name='subscription_customer')
     quantity = models.IntegerField(null=True, blank=True, default=0)
-    student = models.CharField(max_length=250, null=True, blank=True,
-                               editable=True)
+    student = models.CharField(max_length=250, null=True, blank=True)
     start_date = models.CharField(max_length=250, null=True, blank=True)
     end_date = models.CharField(max_length=250, null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2,

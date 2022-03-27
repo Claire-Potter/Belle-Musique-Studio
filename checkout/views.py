@@ -593,12 +593,11 @@ def subscribe(request):
         while attempt <= 5:
             # determine whether the user has a customer id assigned
             try:
-                s_c_d = subscribed_customer_id
                 user_customer_id = request.user.customer.id
                 customer_subscribed = (SubscribedCustomer
                                        .objects
                                        .get
-                                       (s_c_d=user_customer_id))
+                                       (subscribed_customer_id=user_customer_id))
                 customer_exists = True
                 break
             except SubscribedCustomer.DoesNotExist:
@@ -709,9 +708,7 @@ def subscribe(request):
                      .subscribed_customer_id) = user_customer_id
                     subscription_internal.customer = request.user.customer
                     subscription_internal.user_profile = profile
-                    s_l_f = subscription_lineitem_form
-                    subscription_lineitem_internal = ((s_l_f)
-                                                      .save(commit=False))
+                    subscription_lineitem_internal = (subscription_lineitem_form.save(commit=False))
                     subscription_internal.save()
                     user_subscription = (UserSubscription.objects
                                          .filter(username=request.user)

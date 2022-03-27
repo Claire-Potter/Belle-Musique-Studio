@@ -59,6 +59,10 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
     search_fields = ('subscription_user_id', 'subscription_name', 'date')
 
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 admin.site.register(UserSubscription, UserSubscriptionAdmin)
 
 
@@ -70,6 +74,10 @@ class UserAdmin(admin.ModelAdmin):
     record is created.
     """
     model = User
+    readonly_fields = ('customer',)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 admin.site.register(User, UserAdmin)
@@ -90,6 +98,3 @@ class StudentShowcaseAdmin(SummernoteModelAdmin, AdminVideoMixin,
     list_display = ('date', 'name',)
     search_fields = ['date', 'name', ]
     summernote_fields = ('body', 'excerpt')
-
-    def has_delete_permission(self, request, obj=None):
-        return False
