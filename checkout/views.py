@@ -384,7 +384,7 @@ def checkout_lesson(request):
     current_bag = lesson_bag_contents(request)
     total = current_bag['lesson_total']
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='subscriptions')
+    cover = get_object_or_404(covers, page='lessons')
     template = 'checkout/checkout_lesson.html'
     context = {
         'covers': covers,
@@ -811,7 +811,7 @@ def subscribe(request):
                               'phone_number': phone_number, }))
         subscription_lineitem_form = SubscriptionLineItemForm()
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='subscriptions')
+    cover = get_object_or_404(covers, page='lessons')
 
     context = {'covers': covers,
                'cover': cover,
@@ -896,7 +896,7 @@ def checkout_lesson_complete(request, sub_id):
     invoice = get_object_or_404(Invoice, id=subscription.latest_invoice.id)
     invoice_link = invoice.hosted_invoice_url
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='subscriptions')
+    cover = get_object_or_404(covers, page='lessons')
     messages.success(request, f'Subscription successfully processed! \
         Your subscription number is {sub_id}. A confirmation \
         email will be sent to {subscribed_customer.email}.')

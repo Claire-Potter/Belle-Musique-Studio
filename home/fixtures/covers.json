@@ -26,28 +26,12 @@
     "pk": 4,
     "model": "home.cover",
     "fields": {
-        "name": "Music Store",
-        "quote": "Products",
-        "page": "product"
-    }
-}, {
-    "pk": 5,
-    "model": "home.cover",
-    "fields": {
-        "name": "Music Store",
-        "quote": "Product Detail",
-        "page": "product_detail"
-    }
-}, {
-    "pk": 6,
-    "model": "home.cover",
-    "fields": {
         "name": "Product Management",
         "quote": "A passionate activity is one you’re doing without regard for time",
         "page": "product_manage"
     }
 }, {
-    "pk": 7,
+    "pk": 5,
     "model": "home.cover",
     "fields": {
         "name": "Get in touch",
@@ -55,7 +39,7 @@
         "page": "contact"
     }
 }, {
-    "pk": 8,
+    "pk": 6,
     "model": "home.cover",
     "fields": {
         "name": "Music Store",
@@ -63,7 +47,7 @@
         "page": "bag"
     }
 }, {
-    "pk": 9,
+    "pk": 7,
     "model": "home.cover",
     "fields": {
         "name": "Checkout",
@@ -71,7 +55,7 @@
         "page": "checkout"
     }
 }, {
-    "pk": 10,
+    "pk": 8,
     "model": "home.cover",
     "fields": {
         "name": "Lessons",
@@ -79,7 +63,7 @@
         "page": "lessons"
     }
 }, {
-    "pk": 11,
+    "pk": 9,
     "model": "home.cover",
     "fields": {
         "name": "My Profile",
@@ -87,19 +71,11 @@
         "page": "account_profile"
     }
 }, {
-    "pk": 12,
+    "pk": 10,
     "model": "home.cover",
     "fields": {
         "name": "Student Showcase",
         "quote": "It's not only music. It's not only art. It's a community. A place to belong.",
         "page": "student_comm"
-    }
-}, {
-    "pk": 13,
-    "model": "home.cover",
-    "fields": {
-        "name": "Subscriptions",
-        "quote": "Some people have lives... Some people have music...",
-        "page": "subscriptions"
     }
 }]

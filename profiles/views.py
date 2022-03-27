@@ -143,7 +143,7 @@ def subscription_detail(request, subscribed_id):
     invoice = get_object_or_404(Invoice, id=subscription.latest_invoice.id)
     invoice_link = invoice.hosted_invoice_url
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='subscriptions')
+    cover = get_object_or_404(covers, page='lessons')
 
     messages.info(request, (
         f'This is a past confirmation for subscription '

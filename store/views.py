@@ -124,7 +124,7 @@ def all_products(request):
 
     current_sorting = f'{sort}_{direction}'
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='product')
+    cover = get_object_or_404(covers, page='music_store')
 
     context = {
         'products': products,
@@ -149,7 +149,7 @@ def product_detail(request, product_id):
 
     product = get_object_or_404(MusicProduct, pk=product_id)
     covers = Cover.objects.all()
-    cover = get_object_or_404(covers, page='product_detail')
+    cover = get_object_or_404(covers, page='music_store')
     context = {
         'product': product,
         'covers': covers,
