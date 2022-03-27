@@ -13,135 +13,169 @@
 </div>
 <!--Section includes details on the lesson in the lesson bag and allows the user to remove the lesson. The user can proceed to checkout.-->
 <section class="bg-white">
-   <div class="container mb-3 pb-5 content-height mx-auto">
-      <div class="row pt-3 pb-3 mt-5">
-         <div class="col text-center mt-3">
-            <hr class="w-50 mx-auto small-width-heading">
-            <h2 class="logo-font mt-5 mb-5">Bag</h2>
-            <p class="mx-auto pt-2 text-center text-muted w-50 smaller-fon">
-               Please note that you can only purchase one lesson subscription per checkout
-            </p>
-            <hr class="w-50 mx-auto small-width-heading">
-         </div>
-         <div class="row">
-            <div class="col ml-3 ml-sm-0 mt-3">
-               {% if lesson_bag_items %}
-               <div class="table-responsive rounded">
-                  <table class="table table-sm table-borderless">
-                     <thead>
-                        <tr>
-                           <th scope="col"></th>
-                           <th scope="col">Info</th>
-                           <th scope="col">Qty</th>
-                           <th scope="col">Price</th>
-                           <th scope="col"></th>
-                           <th scope="col"></th>
-                        </tr>
-                     </thead>
-                     <tbody>
+    <div class="container mb-3 pb-5 content-height mx-auto">
+        <div class="row pt-3 pb-3 mt-5">
+            <div class="col text-center mt-3">
+                <hr class="w-50 mx-auto small-width-heading">
+                <h2 class="logo-font mt-5 mb-5">Bag</h2>
+                <p class="mx-auto pt-2 text-center text-muted w-50 smaller-fon">
+                    Please note that you can only purchase one lesson subscription per checkout
+                </p>
+                <hr class="w-50 mx-auto small-width-heading">
+            </div>
+            <div class="row mx-auto">
+                <div class="col ml-3 ml-sm-0 mt-3">
+                    {% if lesson_bag_items %}
+                    <div class="d-block d-md-none">
+                        <div class="row">
+                            <div class="col">
+                                {% include "lesson-bag-total.html" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {% include "lesson-checkout-buttons.html" %}
+                                <p class="text-muted mb-5">A summary of your bag contents is below</p>
+                            </div>
+                        </div>
                         {% for item in lesson_bag_items %}
-                        <tr class="table-font">
-                           <td class="p-3 p-sm-5 w-25">
-                              <img class="img-fluid rounded" src="{{ item.url }}" alt="{{ item.caption }}">
-                           </td>
-                           <td class="py-3 py-sm-5">
-                              <p class="my-0" id="lesson_name"><strong>{{ item.name }}</strong></p>
-                              <p class="my-0 small text-muted">Plan: </p>
-                              <ul>
-                                 <li class="my-0 small text-muted"> {{ item.name }} </li>
-                                 <li class="my-0 small text-muted"> {{ item.price }} </li>
-                                 <li class="my-0 small text-muted"> {{ item.priceId }} </li>
-                              </ul>
-                           </td>
-                           <td class="py-3 py-sm-5 w-25">
-                              <p class="my-0 mx-3">{{ item.quantity }}</p>
-                           </td>
-                           <td class="py-3 py-sm-5 w-25">
-                              <p class="my-0 mx-3">£{{ item.price_only |floatformat:2 }}</p>
-                           </td>
-                           <td class="py-3 py-sm-5 w-25">               
-                              <a class="remove-item text-danger float-sm-right" id="remove_{{ item.lesson_id }}"><small>Remove</small></a>
-                           </td>
-                           <td class="py-3">
-                           </td>
-                        </tr>
+                        <div class="row">
+                            <div class="col-12 col-sm-6 mb-2">
+                                {% include "lesson-image.html" %}
+                            </div>
+                            <div class="col-12 col-sm-6 mb-2">
+                                {% include "lesson-info.html" %}
+                                <ul>
+                                    <li class="my-0 small text-muted lesson-smallest"> {{ item.name }} </li>
+                                    <li class="my-0 small text-muted lesson-smallest"> {{ item.price }} </li>
+                                    <li class="my-0 small text-muted lesson-smallest"> {{ item.priceId }} </li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <p class="my-0 small">Qty: {{ item.quantity }}</p>
+                                <p class="my-0 small">Price: £{{ item.price_only |floatformat:2 }}</p>
+                                <a class="remove-item text-danger float-sm-right" id="remove_{{ item.lesson_id }}"><small>Remove</small></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
                         {% endfor %}
-                     </tbody>
-                  </table>
-               </div>
-               <div class="row">
-                  <div class="col-12 mt-5">
-                     <div class="col mb-2 mr-sm-5 text-center text-sm-right">
-                        <h4 class="my-3"><strong>Bag Total: £{{ lesson_total |floatformat:2 }}</strong></h4>
-                     </div>
-                     <div class="col text-sm-right text-center">
-                        <a href="{% url 'checkout_lesson' %}" class="btn advert-button">
-                        <span class="text-uppercase">Secure Checkout</span>
-                        <span class="icon">
-                        <i class="fas fa-lock"></i>
-                        </span>
-                        </a>
-                     </div>
-                  </div>
-               </div>
+                        <div class="btt-button shadow-sm border border-black">
+                            <a class="btt-link d-flex h-100">
+                                <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive rounded d-none d-md-block">
+                        <table class="table table-sm table-borderless">
+                            <thead class="text-black">
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Info</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+
+                            {% for item in lesson_bag_items %}
+                            <tr class="table-font">
+                                <td class="p-3 p-sm-5 w-25">
+                                    <img class="img-fluid rounded" src="{{ item.url }}" alt="{{ item.caption }}">
+                                </td>
+                                <td class="py-3 py-sm-5">
+                                    <p class="my-0" id="lesson_name"><strong>{{ item.name }}</strong></p>
+                                    <p class="my-0 small text-muted">Plan: </p>
+                                    <ul>
+                                        <li class="my-0 small text-muted"> {{ item.name }} </li>
+                                        <li class="my-0 small text-muted"> {{ item.price }} </li>
+                                        <li class="my-0 small text-muted"> {{ item.priceId }} </li>
+                                    </ul>
+                                </td>
+                                <td class="py-3 py-sm-5 w-25">
+                                    <p class="my-0 mx-3">{{ item.quantity }}</p>
+                                </td>
+                                <td class="py-3 py-sm-5 w-25">
+                                    <p class="my-0 mx-3">£{{ item.price_only |floatformat:2 }}</p>
+                                </td>
+                                <td class="py-3 py-sm-5 w-25">
+                                    <a class="remove-item text-danger float-sm-right" id="remove_{{ item.lesson_id }}"><small>Remove</small></a>
+                                </td>
+                                <td class="py-3">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="5" class="pt-5 text-right">
+                                    {% include "lesson-bag-total.html" %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">
+                                    {% include "lesson-checkout-buttons.html" %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="col-12 text-center bag-sm-height mt-5 mx-auto">
+                        <div class="col m-0">
+                            <img class="img-fluid mx-3 my-3 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a beautiful sunset" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/michal-ico-NmX8kzk5uNs-unsplash.jpg">
+                            <p class="smaller-text mb-5">Your bag is empty.</p>
+                        </div>
+                        <div class="mobile-only">
+                            <hr>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row mt-lg-5 mt-3">
+                    <!--The lesson advert, student showcase advert and store advert are rendered here-->
+                    <div class="col-sm-4 col-12 text-center mt-3">
+                        <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+                        <p class="smaller-text">Why not visit our Music Store and browse our products?</p>
+                        <div class="col mt-5 mt-sm-3 text-center">
+                            <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="text-uppercase">Click Here</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        {% include 'includes/lessons_advert_four.html' %}
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        {% include 'includes/showcase_advert_four.html' %}
+                    </div>
+                </div>
             </div>
-            <div class="mobile-only">
-               <hr>
-            </div>
-            {% else %}
-            <div class="col-12 text-center bag-sm-height mt-5 mx-auto">
-               <div class="col m-0">
-                  <img class="img-fluid mx-3 my-3 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a beautiful sunset" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/michal-ico-NmX8kzk5uNs-unsplash.jpg">
-                  <p class="smaller-text mb-5">Your bag is empty.</p>
-               </div>
-               <div class="mobile-only">
-                  <hr>
-               </div>
-            </div>
-         </div>
-         {% endif %}
-      </div>
-      <div class="row">
-         <!--The lesson advert, student showcase advert and store advert are rendered here-->
-         <div class="col-sm-4 col-12 text-center mt-3">
-            <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-            <p class="smaller-text">Why not visit our Music Store and browse our products?</p>
-            <div class="col mt-5 mt-sm-3 text-center">
-               <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-               <span class="icon">
-               <i class="fas fa-chevron-left"></i>
-               </span>
-               <span class="text-uppercase">Click Here</span>
-               </a>
-            </div>
-         </div>
-         <div class="col-sm-4 col-12">
-            {% include 'includes/lessons_advert_four.html' %}
-         </div>
-         <div class="col-sm-4 col-12">
-            {% include 'includes/showcase_advert_four.html' %}
-         </div>
-      </div>
-   </div>
-   </div>
+        </div>
 </section>
 <div class="footer-background-color">
-{% endblock %}
-{% block postloadjs %}
-{{ block.super }}
-<!--JS-->
-<script> 
-   // Remove item and reload on click
-   $('.remove-item').click(function(e) {
-       var csrfToken = "{{ csrf_token }}";
-       var itemId = $(this).attr('id').split('remove_')[1];
-       var url = `lesson/remove/${itemId}/`;
-       var data = {'csrfmiddlewaretoken': csrfToken};
-   
-       $.post(url, data)
-        .done(function() {
-            location.reload();
-        });
-   })
-</script>
-{% endblock %}
+    {% endblock %}
+    {% block postloadjs %}
+    {{ block.super }}
+    <!--JS-->
+    <script>
+        // Remove item and reload on click
+        $('.remove-item').click(function(e) {
+            var csrfToken = "{{ csrf_token }}";
+            var itemId = $(this).attr('id').split('remove_')[1];
+            var url = `lesson/remove/${itemId}/`;
+            var data = {
+                'csrfmiddlewaretoken': csrfToken
+            };
+
+            $.post(url, data)
+                .done(function() {
+                    location.reload();
+                });
+        })
+    </script>
+    {% endblock %}

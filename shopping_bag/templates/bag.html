@@ -23,142 +23,122 @@
             <div class="row">
                 <div class="col ml-3 ml-sm-0 mt-3">
                     {% if bag_items %}
-                    <div class="table-responsive rounded">
+                    <div class="d-block d-md-none">
+                        <div class="row">
+                            <div class="col">
+                                {% include "bag-total.html" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {% include "checkout-buttons.html" %}
+                                <p class="text-muted mb-5">A summary of your bag contents is below</p>
+                            </div>
+                        </div>
+                        {% for item in bag_items %}
+                        <div class="row">
+                            <div class="col-12 col-sm-6 mb-2">
+                                {% include "product-image.html" %}
+                            </div>
+                            <div class="col-12 col-sm-6 mb-2">
+                                {% include "product-info.html" %}
+                            </div>
+                            <div class="col-12 col-sm-6 order-sm-last">
+                                <p class="my-0">Price Each: ${{ item.product.price }}</p>
+                                <p><strong>Subtotal: </strong>${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                {% include "quantity-form.html" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="btt-button shadow-sm border border-black">
+                            <a class="btt-link d-flex h-100">
+                                <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive rounded d-none d-md-block">
                         <table class="table table-sm table-borderless">
-                            <thead>
+                            <thead class="text-black">
                                 <tr>
+                                    <th scope="col">Product Info</th>
                                     <th scope="col"></th>
-                                    <th scope="col">Product</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Qty</th>
-                                    <th scope="col">Adjust</th>
                                     <th scope="col">Subtotal</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for item in bag_items %}
-                                <tr class="table-font">
-                                    <td class="p-3 p-sm-5 w-25">
-                                        <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.image_alt }}">
-                                    </td>
-                                    <td class="py-3 py-sm-5">
-                                        <p class="my-0 font-weight-bold">{{ item.product.name }}</p>
-                                        <p class="my-0">Size: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
-                                        <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
-                                    </td>
-                                    <td class="py-3 py-sm-5">
-                                        <p class="my-0 font-weight-bold">£{{ item.product.price }}</p>
-                                    </td>
-                                    <td class="py-3 py-sm-5 w-25">
-                                        <p class="my-0 mx-3">{{ item.quantity }}</p>
-                                    </td>
-                                    <td class="py-3 py-sm-5 w-25">
-                                        <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
-                                            {% csrf_token %}
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <button class="decrement-qty btn btn-sm btn-black rounded-0" data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
-                                                            <span>
-                                                                <i class="fas fa-minus fa-sm"></i>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                    <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
-                                                    <div class="input-group-append">
-                                                        <button class="increment-qty btn btn-sm btn-black rounded-0" data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
-                                                            <span>
-                                                                <i class="fas fa-plus fa-sm"></i>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                    {% if item.product.has_sizes %}
-                                                    <input type="hidden" name="product_size" value="{{ item.size }}">
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <a class="update-link text-info"><small>Update</small></a>
-                                        <a class="remove-item text-danger float-sm-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
-                                    </td>
-                                    <td class="py-3">
-                                        <p class="my-0">£{{ item.product.price | calc_subtotal:item.quantity }}</p>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
+
+                            {% for item in bag_items %}
+                            <tr>
+                                <td class="p-3 w-25">
+                                    {% include "product-image.html" %}
+                                </td>
+                                <td class="py-3">
+                                    {% include "product-info.html" %}
+                                </td>
+                                <td class="py-3">
+                                    <p class="my-0">${{ item.product.price }}</p>
+                                </td>
+                                <td class="py-3 w-25">
+                                    {% include "quantity-form.html" %}
+                                </td>
+                                <td class="py-3">
+                                    <p class="my-0">${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="5" class="pt-5 text-right">
+                                    {% include "bag-total.html" %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">
+                                    {% include "checkout-buttons.html" %}
+                                </td>
+                            </tr>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-12 mt-5">
-                            <div class="col mb-5 mr-sm-5 text-center text-sm-right">
-                                <h6 class="my-3 font-weight-bold">Bag Total: £{{ total|floatformat:2 }}</h6>
-                                <h6 class="my-3 font-weight-bold">Delivery: £{{ delivery|floatformat:2 }}</h6>
-                                <h4 class="my-4 font-weight-bold">Grand Total: £{{ grand_total|floatformat:2 }}</h4>
-                                {% if free_delivery_delta > 0 %}
-                                <p class="my-3 text-danger">
-                                    You could get free delivery by spending just £{{ free_delivery_delta }} more!
-                                </p>
-                                {% endif %}
-                                <div class="col text-sm-right text-center">
-                                    <a href="{% url 'checkout' %}" class="btn advert-button my-5">
-                                        <span class="text-uppercase">Secure Checkout</span>
-                                        <span class="icon">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mobile-only">
-                        <hr>
-                    </div>
+                    {% else %}
+                    <p class="lead mb-5">Your bag is empty.</p>
+                    <a href="{% url 'products' %}" class="btn btn-outline-black btn-lg">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="text-uppercase">Keep Shopping</span>
+                    </a>
+                    {% endif %}
                 </div>
-                {% else %}
-                <div class="col-12 text-center bag-sm-height mt-5">
-                    <div class="col m-0">
-                        <p class="smaller-text">Your bag is empty.</p>
-                        <img class="img-fluid mx-3 my-3 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-                    </div>
-                    <div class="col mt-3 mt-sm-2">
-                        <a href="{% url 'products' %}" class="btn advert-button my-5">
+            </div>
+            <div class="row mt-lg-5 mt-3">
+                <!--The lesson advert, student showcase advert and store advert are rendered here-->
+                <div class="col-sm-4 col-12 text-center mt-lg-5 mt-3">
+                    <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
+                    <p class="smaller-text">Not yet finished? Head back to our store to shop.</p>
+                    <div class="col mt-5 mt-sm-3 text-center">
+                        <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
                             <span class="icon">
                                 <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="text-uppercase">Keep Shopping</span>
                         </a>
                     </div>
-                    <div class="mobile-only">
-                        <hr>
-                    </div>
+                </div>
+                <div class="col-sm-4 col-12">
+                    {% include 'includes/lessons_advert_four.html' %}
+                </div>
+                <div class="col-sm-4 col-12">
+                    {% include 'includes/showcase_advert_four.html' %}
                 </div>
             </div>
-            {% endif %}
         </div>
-    </div>
-    <div class="row">
-        <!--The lesson advert, student showcase advert and store advert are rendered here-->
-        <div class="col-sm-4 col-12 text-center mt-3">
-            <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-            <p class="smaller-text">Not yet finished? Head back to our store to shop.</p>
-            <div class="col mt-5 mt-sm-3 text-center">
-                <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="text-uppercase">Keep Shopping</span>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm-4 col-12">
-            {% include 'includes/lessons_advert_four.html' %}
-        </div>
-        <div class="col-sm-4 col-12">
-            {% include 'includes/showcase_advert_four.html' %}
-        </div>
-    </div>
-    </div>
 </section>
 <div class="footer-background-color">
     {% endblock %}

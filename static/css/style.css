@@ -678,6 +678,18 @@ body {
         border: none;
     }
 
+    .bag-image {
+        max-width: 60%;
+    }
+
+    .lesson-image-small {
+        max-width: 60%;
+    }
+
+    .lesson-smallest {
+        font-size: calc(0.7rem + .9vw) !important;
+    }
+
     .mobile-only {
         display: unset;
     }
