@@ -40,8 +40,8 @@ def customer_created_event_listener(event):
             {'name': name, 'event': event,
              'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
-           subject,
-           body,
+           'testing',
+           'sending email',
            settings.DEFAULT_FROM_EMAIL,
            [cust_email],
            fail_silently=False)
@@ -66,8 +66,8 @@ def customer_subscription_deleted_event_listener(event, **kwargs):
             {'name': name, 'event': event,
              'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
-        subject,
-        body,
+        'testing',
+        'sending an email',
         settings.DEFAULT_FROM_EMAIL,
         [cust_email],
         fail_silently=False,
