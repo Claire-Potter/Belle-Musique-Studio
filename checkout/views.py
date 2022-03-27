@@ -133,6 +133,7 @@ from .forms import (OrderForm, SubscribedCustomerForm,
 from .models import (Order, OrderLineItem, SubscribedCustomer,
                      SubscriptionLineItem)
 # Models are imported from models.py
+from .webhooks import customer_created_event_listener, customer_subscription_deleted_event_listener
 
 
 @require_POST

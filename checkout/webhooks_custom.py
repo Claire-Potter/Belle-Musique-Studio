@@ -24,6 +24,7 @@ from django.views.decorators.http import require_POST
 # module of the Django project.
 from checkout.webhook_handler import StripeWhHandler
 # webhook handler imported from checkout app webhook_handler.py
+from .webhooks import customer_created_event_listener, customer_subscription_deleted_event_listener
 
 
 @require_POST
@@ -58,7 +59,10 @@ def webhook(request):
     # Map webhook events to relevant handler functions
     event_map = {
         'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
-        'payment_intent.payment_failed': (handler.handle_payment_intent_payment_failed), }
+        'payment_intent.payment_failed': (handler.handle_payment_intent_payment_failed),
+        'payment_intent.payment_failed': (handler.handle_payment_intent_payment_failed), 
+        'customer.subscription.created': (handler.handle_customer_subscription_created),
+        'customer.subscription.deleted': (handler.handle_customer_subscription_deleted)}
 
     # Get the webhook type from Stripe
     event_type = event['type']

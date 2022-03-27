@@ -24,9 +24,15 @@ from home.models import User
 # Model imported from home app models.py
 
 
-@webhooks.handler("customer.subscription.created")
-def customer_created_event_listener(event):
+def __init__(self, request):
+        self.request = request
+
+
+@webhooks.handler('customer.subscription.created')
+def customer_created_event_listener(event, **kwargs):
     """.git/"""
+    print("We should probably notify the user at this point")
+
     intent = event.data.object
     user_name = intent.metadata.username
     user = get_object_or_404(User, username=user_name)
@@ -53,6 +59,8 @@ def customer_subscription_deleted_event_listener(event, **kwargs):
     Email to be created and sent when a customer's
     subscription is cancelled.
     """
+    print("We should probably notify the user at this point")
+    
     intent = event.data.object
     user_name = intent.metadata.username
     user = get_object_or_404(User, username=user_name)
