@@ -70,9 +70,15 @@ import stripe
 import djstripe
 # dj-stripe implements all of the Stripe models, for Django.
 # https://pypi.org/project/dj-stripe/2.2.3/
+from djstripe import webhooks
+# dj-stripe implements all of the Stripe models, for Django.
+# https://pypi.org/project/dj-stripe/2.2.3/
 from django.conf import settings
 # The Django settings file contains all of the configuration for a
 # web application.
+from django.core.mail import send_mail
+# send_mail is a function in Django that can send an email using the
+# EmailMessage class.
 from django.contrib import messages
 # Quite commonly in web applications, you need to display a one-time
 # notification message (also known as “flash message”) to the user after
@@ -110,6 +116,9 @@ from django.contrib.auth.decorators import login_required
 # @login_required: Django's login_required function is used to secure views
 # in your web applications by forcing the client to
 # authenticate with a valid logged-in User.
+from django.template.loader import render_to_string
+# render_to_string is a callable within the django.template.loader
+# module of the Django project.
 from django.views.decorators.csrf import csrf_exempt
 # csrf_exempt is a callable within the django.views.decorators.csrf
 # module of the Django project.
@@ -568,6 +577,29 @@ def create_sub(request):
         return HttpResponse('request method not allowed')
 
 
+@webhooks.handler("customer.subscription.created")
+def customer_created_event_listener(event, **kwargs):
+    """.git/"""
+    intent = event.data.object
+    user_name = intent.metadata.username
+    user = get_object_or_404(User, username=user_name)
+    name = user.first_name
+    cust_email = user.email
+    subject = render_to_string(
+            'lesson_emails/confirmation_emails/confirmation_email_subject.txt',
+            {'event': event})
+    body = render_to_string(
+            'lesson_emails/confirmation_emails/confirmation_email_body.txt',
+            {'name': name, 'event': event,
+             'contact_email': settings.DEFAULT_FROM_EMAIL})
+    send_mail(
+           subject,
+           body,
+           settings.DEFAULT_FROM_EMAIL,
+           [cust_email],
+           fail_silently=False)
+
+
 @login_required
 def subscribe(request):
     """
@@ -869,6 +901,33 @@ def cancel(request):
     # perspective, that is where
     # the user will view their active subscriptions from
     return redirect('profile')
+
+
+@webhooks.handler("customer.subscription.deleted")
+def customer_subscription_deleted_event_listener(event, **kwargs):
+    """
+    Email to be created and sent when a customer's
+    subscription is cancelled.
+    """
+    intent = event.data.object
+    user_name = intent.metadata.username
+    user = get_object_or_404(User, username=user_name)
+    name = user.first_name
+    cust_email = user.email
+    subject = render_to_string('lesson_emails/cancellation_emails/'
+                               'cancellation_email_subject.txt',
+                               {'event': event}),
+    body = render_to_string(
+            'lesson_emails/cancellation_emails/cancellation_email_body.txt',
+            {'name': name, 'event': event,
+             'contact_email': settings.DEFAULT_FROM_EMAIL})
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email],
+        fail_silently=False,
+    )
 
 
 def checkout_lesson_complete(request, sub_id):
