@@ -24,7 +24,6 @@ from django.views.decorators.http import require_POST
 # module of the Django project.
 from checkout.webhook_handler import StripeWhHandler
 # webhook handler imported from checkout app webhook_handler.py
-from .webhooks import customer_created_event_listener, customer_subscription_deleted_event_listener
 
 
 @require_POST

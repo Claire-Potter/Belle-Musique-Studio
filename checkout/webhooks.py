@@ -31,26 +31,14 @@ def __init__(self, request):
 @webhooks.handler('customer.subscription.created')
 def customer_created_event_listener(event, **kwargs):
     """.git/"""
-    print("We should probably notify the user at this point")
 
-    intent = event.data.object
-    user_name = intent.metadata.username
-    user = get_object_or_404(User, username=user_name)
-    name = user.first_name
-    cust_email = user.email
-    subject = render_to_string(
-            'lesson_emails/confirmation_emails/confirmation_email_subject.txt',
-            {'event': event})
-    body = render_to_string(
-            'lesson_emails/confirmation_emails/confirmation_email_body.txt',
-            {'name': name, 'event': event,
-             'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
            'testing',
            'sending email',
-           settings.DEFAULT_FROM_EMAIL,
-           [cust_email],
-           fail_silently=False)
+           'bellemusiquestudio@gmail.com',
+           ['clairepotter019@gmail.com'],
+           fail_silently=False,)
+
 
 
 @webhooks.handler("customer.subscription.deleted")
@@ -59,24 +47,10 @@ def customer_subscription_deleted_event_listener(event, **kwargs):
     Email to be created and sent when a customer's
     subscription is cancelled.
     """
-    print("We should probably notify the user at this point")
     
-    intent = event.data.object
-    user_name = intent.metadata.username
-    user = get_object_or_404(User, username=user_name)
-    name = user.first_name
-    cust_email = user.email
-    subject = render_to_string('lesson_emails/cancellation_emails/'
-                               'cancellation_email_subject.txt',
-                               {'event': event}),
-    body = render_to_string(
-            'lesson_emails/cancellation_emails/cancellation_email_body.txt',
-            {'name': name, 'event': event,
-             'contact_email': settings.DEFAULT_FROM_EMAIL})
     send_mail(
-        'testing',
-        'sending an email',
-        settings.DEFAULT_FROM_EMAIL,
-        [cust_email],
-        fail_silently=False,
-    )
+           'testing',
+           'sending email',
+           'bellemusiquestudio@gmail.com',
+           ['clairepotter019@gmail.com'],
+           fail_silently=False)
