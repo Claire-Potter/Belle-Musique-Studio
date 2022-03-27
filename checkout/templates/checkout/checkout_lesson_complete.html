@@ -48,7 +48,7 @@
                                 <p class="mb-0  font-weight-bold small">Subscription Date</p>
                             </div>
                             <div class="col-12 col-md-8 text-md-right">
-                                <p class="mb-0 small">{{ subscribed_customer.date |date }}</p>
+                                <p class="mb-0 small">{{ subscription_item.start_date|truncatechars:11 }}</p>
                             </div>
                         </div>
                         <div class="row">
