@@ -1,81 +1,78 @@
 <!-- Navigation created as per Code Institute "Boutique Ado" and fully customised for site -->
 <nav class="navbar navbar-light sticky-top w-100">
-   <div class="container-fluid">
-      <h2 class="hidden">Belle Musique Studio</h2>
-      <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
-      <div class="shopping-logos flex">
-         <div class="store-logo">
-            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
-               <div>
-                  <div class="icon"><i class="fas fa-shopping-bag fa-lg"></i></div>
-                  <p class="my-0 icon">
-                     {% if grand_total %}
-                     £{{ grand_total|floatformat:2 }}
-                     {% else %}
-                     £0.00
-                     {% endif %}
-                  </p>
-               </div>
-            </a>
-         </div>
-         <div class="lesson-logo">
-            <a class="{% if lesson_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_lesson_bag' %}">
-               <div>
-                  <div class="icon"><i class="fa-solid fa-handshake"></i></div>
-                  <div class="my-0 icon">
-                     £<span id="lesson-bag-total">{% if lesson_total %}{{ lesson_total|floatformat:2 }}{% else %}0.00{% endif %}</span>
-                  </div>
-               </div>
-            </a>
-         </div>
-      </div>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text" aria-controls="navbar-text" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse text-sm-right mr-3" id="navbar-text">
-         <h2 class="hidden">Belle Musique Studio</h2>
-         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="{% url 'lessons' %}">Lessons</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="{% url 'music_store' %}">Music Store</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact Us</a>
-            </li>
-            <!--https://www.w3schools.com/bootstrap/bootstrap_ref_js_dropdown.asp
+    <div class="container-fluid">
+        <h2 class="hidden">Belle Musique Studio</h2>
+        <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
+        <div class="shopping-logos flex">
+            <div class="store-logo">
+                <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
+                    <div>
+                        <div class="icon"><i class="fas fa-shopping-bag fa-lg"></i></div>
+                        <p class="my-0 icon">
+                            {% if grand_total %}
+                            £{{ grand_total|floatformat:2 }}
+                            {% else %}
+                            £0.00
+                            {% endif %}
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="lesson-logo">
+                <a class="{% if lesson_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_lesson_bag' %}">
+                    <div>
+                        <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div class="my-0 icon">
+                            £<span id="lesson-bag-total">{% if lesson_total %}{{ lesson_total|floatformat:2 }}{% else %}0.00{% endif %}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text" aria-controls="navbar-text" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-sm-right mr-3" id="navbar-text">
+            <h2 class="hidden">Belle Musique Studio</h2>
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'lessons' %}">Lessons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'music_store' %}">Music Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact Us</a>
+                </li>
+                <!--https://www.w3schools.com/bootstrap/bootstrap_ref_js_dropdown.asp
                referenced and edited for dropdownMenu -->
-            <li class="nav-item ">
-               <a class="nav-link active" id="dropdown-menu-link" aria-haspopup="true"
-                  aria-expanded="false" role="menu">
-               My Account <i class="fas fa-caret-down"></i>
-               </a>
-               <div class="dropdown-menu nav-item text-sm-right" aria-labelledby="dropdown-menu-link" id="my-dropdown">
-                  {% if request.user.is_authenticated %}
-                  {% if request.user.is_superuser %}
-                  <a class="dropdown-item nav-link" href="{% url 'admin:index' %}">Site Admin</a>
-                  {% endif %}
-                  {% if user.is_staff %}
-                  <a class="dropdown-item nav-link" href="{% url 'add_product' %}">Manage Shop Products</a>
-                  <a class="dropdown-item nav-link" href=" {% url 'add_new_lesson' %}">Manage Lesson Products</a>
-                  <a class="dropdown-item nav-link" href=" {% url 'add_student_showcase' %}">Showcase a Student</a>
-                  {% endif %}
-                  <a class="dropdown-item nav-link" href="{% url 'profile' %}">My Profile</a>
-                  <a class="dropdown-item nav-link" href="{% url 'account_logout' %}">Logout</a>
-                  {% else %}
-                  <a href="{% url 'account_signup' %}" class="dropdown-item nav-link">Register</a>
-                  <a href="{% url 'account_login' %}" class="dropdown-item nav-link">Login</a>
-                  {% endif %}
-               </div>
-            </li>
-         </ul>
-      </div>
-   </div>
+                <li class="nav-item ">
+                    <a class="nav-link active" id="dropdown-menu-link" aria-haspopup="true" aria-expanded="false" role="menu">
+                        My Account <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-menu nav-item text-sm-right" aria-labelledby="dropdown-menu-link" id="my-dropdown">
+                        {% if request.user.is_authenticated %}
+                        {% if user.is_staff %}
+                        <a class="dropdown-item nav-link" href="{% url 'admin:index' %}">Site Admin</a>
+                        <a class="dropdown-item nav-link" href="{% url 'add_product' %}">Manage Shop Products</a>
+                        <a class="dropdown-item nav-link" href=" {% url 'add_new_lesson' %}">Manage Lesson Products</a>
+                        <a class="dropdown-item nav-link" href=" {% url 'add_student_showcase' %}">Showcase a Student</a>
+                        {% endif %}
+                        <a class="dropdown-item nav-link" href="{% url 'profile' %}">My Profile</a>
+                        <a class="dropdown-item nav-link" href="{% url 'account_logout' %}">Logout</a>
+                        {% else %}
+                        <a href="{% url 'account_signup' %}" class="dropdown-item nav-link">Register</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item nav-link">Login</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
