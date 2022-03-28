@@ -12,7 +12,7 @@
                 <div class="row spacer-one"></div>
                 <div class="row spacer"></div>
                 <div class="width-define">
-                    <div class="row background-overlay {% if 'product_manage' in cover.page %} mx-auto ml-sm-0 mx-sm-3 my-sm-3{% else %} mx-auto ml-5 mr-0 mx-sm-3 my-sm-3  {% endif %}">
+                    <div class="{% if 'home' in cover.page %}row background-overlay  mx-auto ml-5 mr-0 mx-sm-3 my-sm-3 mb-3{% endif %}{% if 'product_manage' in cover.page %} row background-overlay mx-auto ml-sm-0 mx-sm-3 my-sm-3{% else %} row background-overlay mx-auto ml-5 mr-0 mx-sm-3 my-sm-3{% endif %}">
                         <!--Slightly different code utilised for the product manage cover-->
                         <h1 class="cover-heading inline  {% if 'product_manage' in cover.page %} mx-auto  mt-sm-5 mr-sm-5 text-sm-right text-center{% else %} mt-5 mr-5 text-sm-right text-center {% endif %}">
                             <!--If statement to determine if there is a cover in the Cover model or not. If not the default details below will be used.-->

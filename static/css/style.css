@@ -3,7 +3,6 @@
 /* Styling used across the site */
 
 html {
-    height: 100%;
     width: 100%;
 }
 
@@ -11,9 +10,14 @@ body {
     background-color: #ffffff;
     color: #04142f;
     font-family: "EB Garamond", sans-serif;
-    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-top: 0;
     border: 0;
     padding: 0;
+
+
 }
 
 .hidden {
@@ -217,10 +221,11 @@ body {
 .footer-background {
     color: #ffffff;
     font-family: "The Nautigal", sans-serif;
-    position: fixed;
-    left: 0;
     bottom: 0;
     background-color: #04142f;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -234,6 +239,7 @@ body {
 
 .footer-font {
     font-family: "EB Garamond", sans-serif;
+    font-size: calc(0.7rem + .9vw) !important;
 }
 
 /* Advert Banner */

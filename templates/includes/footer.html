@@ -1,14 +1,14 @@
 <!-- Footer -->
-<footer class="footer mt-auto py-3 footer-background w-100">
+<footer class="{% if 'home' in cover.page %}footer  py-3 footer-background w-50 mx-auto {% else %} footer  py-3 footer-background w-100 {% endif %} ">
     <!-- Social Media Links -->
-    <p class="m-0 text-center footer-font small">Follow us:
+    <p class="m-0 text-center footer-font">Follow us:
         <a class="social-links" href="https://www.facebook.com/bellemusiquestudio" target="_blank" aria-label="Link to Facebook"><i class="fab fa-facebook-square ms-3"></i></a>
         <a class="social-links" href="https://www.twitter.com" target="_blank" aria-label="Link to Twitter" rel="noopener"><i class="fab fa-twitter-square ms-3"></i></a>
         <a class="social-links" href="https://www.instagram.com" target="_blank" aria-label="Link to Instagram" rel="noopener"><i class="fab fa-instagram-square ms-3"></i></a>
     </p>
 
     <!-- Social Media Links -->
-    <p class="m-0 text-center footer-font small"><a class="social-links" href="{% url 'privacy' %}" target="_blank">Privacy Policy</a>
+    <p class="m-0 text-center footer-font"><a class="social-links" href="{% url 'privacy' %}" target="_blank">Privacy Policy</a>
     </p>
-    <h3 class="m-0 text-center design-logo">DesignedBy@ClairePotter2022</h3>
+    <h3 class="m-0 text-center design-logo smaller-text">ClairePotter 2022</h3>
 </footer>
