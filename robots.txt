@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /accounts/
+Sitemap: https://belle-musique-studio.herokuapp.com/sitemap.xml

@@ -1,0 +1,1 @@
+Belle Musique Studio Weekly Student Showcase: {{ event }}

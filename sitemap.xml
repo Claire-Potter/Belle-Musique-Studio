@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/bag/shopping</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/bag/lesson</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/about/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/lessons/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/music-store/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/contact/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/all-products/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/all-products/?sort=category&amp;direction=asc</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/all-products/?category=musical_tools</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/all-products/?category=instruments_equipment</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=/lessons/edit/prod_L7p5xVUyokOOcf/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=/lessons/edit/prod_L7p6IGv9v9k0Kr/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=/lessons/edit/prod_L7p8fC0UMC3BjO/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=/lessons/edit/prod_L7p8UfZIDi7Y9e/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=/lessons/edit/prod_L7pAclVBK5ANkl/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=/lessons/edit/prod_L7pBxILWuD0Nyb/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/1</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/2</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/3</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/4</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/5</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/6</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/7</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/8</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/9</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/10</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/11</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/products/12</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/?next=%2Flessons%2Fedit%2Fprod_L7p5xVUyokOOcf%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/?next=%2Flessons%2Fedit%2Fprod_L7p6IGv9v9k0Kr%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/?next=%2Flessons%2Fedit%2Fprod_L7p8fC0UMC3BjO%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/?next=%2Flessons%2Fedit%2Fprod_L7p8UfZIDi7Y9e%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/?next=%2Flessons%2Fedit%2Fprod_L7pAclVBK5ANkl%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/signup/?next=%2Flessons%2Fedit%2Fprod_L7pBxILWuD0Nyb%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=%2Flessons%2Fedit%2Fprod_L7p5xVUyokOOcf%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=%2Flessons%2Fedit%2Fprod_L7p6IGv9v9k0Kr%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=%2Flessons%2Fedit%2Fprod_L7p8fC0UMC3BjO%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=%2Flessons%2Fedit%2Fprod_L7p8UfZIDi7Y9e%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=%2Flessons%2Fedit%2Fprod_L7pAclVBK5ANkl%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://belle-musique-studio.herokuapp.com/accounts/login/?next=%2Flessons%2Fedit%2Fprod_L7pBxILWuD0Nyb%2F</loc>
+  <lastmod>2022-03-28T13:01:03+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
+</urlset>

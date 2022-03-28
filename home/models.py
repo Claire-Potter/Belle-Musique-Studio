@@ -63,6 +63,7 @@ class User(AbstractUser):
     """
     customer = models.OneToOneField(Customer, null=True, blank=True,
                                     on_delete=models.CASCADE)
+    marketing_opt_in = models.BooleanField(default=False)
 
 
 class UserSubscription(models.Model):

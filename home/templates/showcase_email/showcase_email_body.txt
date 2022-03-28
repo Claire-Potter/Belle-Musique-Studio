@@ -1,0 +1,22 @@
+Dear {{ first_name }},
+
+This week Belle Musique Studio is showcasing {{ event }}!
+
+We are proud of all of our talented students, why not make your
+way to our site to checkout our students: https://belle-musique-studio.herokuapp.com/
+
+Don't forget to review all of our incredible music lessons that you could subscribe to:
+https://belle-musique-studio.herokuapp.com/lessons/
+
+We are always getting fantastic new instruments in our store -why not take a look:
+https://belle-musique-studio.herokuapp.com/products/music-store/
+
+
+If you have any questions, feel free to contact us at bellemusiquestudio@gmail.com.
+
+Thank you for your support!
+
+Sincerely,
+
+Jo-Anna Hope
+Belle Musique Studio

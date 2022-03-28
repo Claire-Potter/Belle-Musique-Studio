@@ -37,6 +37,13 @@ from django.conf import settings
 from django.core.mail import send_mail
 # send_mail is a function in Django that can send an email using the
 # EmailMessage class.
+from django.core import mail
+from django.core.mail.message import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
+from django.template.loader import render_to_string
+# render_to_string is a callable within the django.template.loader
+# module of the Django project.
 from django.contrib import messages
 # Quite commonly in web applications, you need to display a one-time
 # notification
@@ -264,6 +271,26 @@ def add_student_showcase(request):
         form = StudentShowcaseForm(request.POST)
         if form.is_valid():
             form.save()
+            connection = mail.get_connection()
+            connection.open()
+            email_messages = list()
+            users = User.objects.all()
+            marketing_users = users.filter(marketing_opt_in='True')
+            for u in marketing_users:
+                first_name =  u.first_name
+                events = StudentShowcase.objects.latest()
+                event = events.name
+                subject =  render_to_string('showcase_email/showcase_email_subject.txt',
+                                            {'event': event})
+                from_email = settings.DEFAULT_FROM_EMAIL
+                to = u.email
+                body = render_to_string('showcase_email/showcase_email_body.txt',
+                                 {'event': event, 
+                                  'contact_email': settings.DEFAULT_FROM_EMAIL, 'first_name': first_name})
+                msg = EmailMultiAlternatives(subject, body, from_email, [to])
+                email_messages.append(msg)
+            connection.send_messages(email_messages)
+            connection.close()
             messages.success(request, 'Successfully added '
                              'new student showcase!')
             return redirect(reverse('home'))
