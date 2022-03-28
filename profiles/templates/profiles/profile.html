@@ -110,10 +110,9 @@
         </div>
     </div>
 </section>
-<div class="footer-background-color">
-    {% endblock %}
-    {% block postloadjs %}
-    {{ block.super }}
-    <!--Link to JS-->
-    <script src="{% static 'profiles/js/countryfield.js' %}"></script>
-    {% endblock %}
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+<!--Link to JS-->
+<script src="{% static 'profiles/js/countryfield.js' %}"></script>
+{% endblock %}

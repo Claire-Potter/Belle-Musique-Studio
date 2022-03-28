@@ -128,10 +128,9 @@
         </a>
     </div>
 </section>
-<div class="footer-background-color">
-    {% endblock %}
-    {% block postloadjs %}
-    {{ block.super }}
-    <!--Link to JS-->
-    <script src="{% static 'lessons/js/checkbox.js' %}"></script>
-    {% endblock %}
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+<!--Link to JS-->
+<script src="{% static 'lessons/js/checkbox.js' %}"></script>
+{% endblock %}

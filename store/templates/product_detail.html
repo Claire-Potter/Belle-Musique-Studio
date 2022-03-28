@@ -100,10 +100,9 @@
         </div>
     </div>
 </section>
-<div class="footer-background-color w-100">
-    {% endblock %}
-    <!--JS-->
-    {% block postloadjs %}
-    {{ block.super }}
-    {% include 'includes/quantity_input_script.html' %}
-    {% endblock %}
+{% endblock %}
+<!--JS-->
+{% block postloadjs %}
+{{ block.super }}
+{% include 'includes/quantity_input_script.html' %}
+{% endblock %}

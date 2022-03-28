@@ -20,6 +20,11 @@ body {
     display: none;
 }
 
+.make-space {
+    height: 250px;
+    width: 100%
+}
+
 /* Navbar*/
 
 .logo {
@@ -212,11 +217,12 @@ body {
 .footer-background {
     color: #ffffff;
     font-family: "The Nautigal", sans-serif;
-}
-
-.footer-background-color {
+    position: fixed;
+    left: 0;
+    bottom: 0;
     background-color: #04142f;
 }
+
 
 .social-links {
     color: #ffffff;
@@ -514,6 +520,7 @@ body {
     }
 
 
+
     .nav-link {
         padding: 0.15rem;
     }
@@ -667,6 +674,10 @@ body {
     .btn-outline-black {
         font-size: calc(0.5rem + .9vw) !important;
         padding: 3px;
+    }
+
+    .make-space {
+        display: none;
     }
 }
 

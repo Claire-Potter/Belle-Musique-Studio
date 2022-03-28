@@ -131,10 +131,9 @@
         </div>
     </div>
 </section>
-<div class="footer-background-color w-100">
-    {% endblock %}
-    <!--link to script to submit payment to stripe and create customer and subscription through djstripe-->
-    {% block postloadjs %}
-    {{ block.super }}
-    <script src="{% static 'checkout/js/stripe_subscriptions.js' %}"></script>
-    {% endblock %}
+{% endblock %}
+<!--link to script to submit payment to stripe and create customer and subscription through djstripe-->
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'checkout/js/stripe_subscriptions.js' %}"></script>
+{% endblock %}
