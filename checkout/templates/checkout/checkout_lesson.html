@@ -18,123 +18,123 @@
 </div>
 <!--Section includes details on the item in the lesson bag and allows the user to enter card details to pay for the subscription-->
 <section class="bg-white">
-   <div class="container mb-3 pb-5 content-height">
-      <div class="row pt-3 pb-3 mt-5 w-100">
-         <div class="col-12 col-lg-9 text-center mx-auto mt-3">
-            <hr class="mx-auto small-width-heading">
-            <h2 class="logo-font mt-5 mb-5">Checkout</h2>
-            <hr class="mx-auto small-width-heading">
-         </div>
-      </div>
-      <div class="row mt-5 mb-5 w-100">
-         <div class="col-lg-9 col-12 mx-auto">
-            <p class="text-center">Subscription Summary</p>
-            <div class="row w-100">
-               <div class="col-7 offset-2">
-                  <p class="mb-1 mt-0 small text-muted">Item</p>
-               </div>
-               <div class="col-3 text-right">
-                  <p class="mb-1 mt-0 small text-muted">Subtotal</p>
-               </div>
+    <div class="container mb-3 pb-5 content-height">
+        <div class="row pt-3 pb-3 mt-5 w-100">
+            <div class="col-12 col-lg-9 text-center mx-auto mt-3">
+                <hr class="mx-auto small-width-heading">
+                <h3 class="logo-font mt-5 mb-5">Checkout</h3>
+                <hr class="mx-auto small-width-heading">
             </div>
-            {% for item in lesson_bag_items %}
-            <div class="row w-100">
-               <div class="col-2 mb-1">
-                  <a href="{% url 'lessons' %}">
-                  {% if item.url %}
-                  <img class="w-100" src="{{ item.url }}" alt="{{ item.caption }}">
-                  {% else %}
-                  <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.name}}">
-                  {% endif %}
-                  </a>
-               </div>
-               <div class="col-7">
-                  <p class="my-0"><strong>{{ item.name }}</strong></p>
-                  <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
-               </div>
-               <div class="col-3 text-right">
-                  <p class="my-0 small text-muted">£{{ item.price_only |floatformat:2 }}</p>
-               </div>
+        </div>
+        <div class="row mt-5 mb-5 w-100">
+            <div class="col-lg-9 col-12 mx-auto">
+                <p class="text-center">Subscription Summary</p>
+                <div class="row w-100">
+                    <div class="col-7 offset-2">
+                        <p class="mb-1 mt-0 small text-muted">Item</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
+                    </div>
+                </div>
+                {% for item in lesson_bag_items %}
+                <div class="row w-100">
+                    <div class="col-2 mb-1">
+                        <a href="{% url 'lessons' %}">
+                            {% if item.url %}
+                            <img class="w-100" src="{{ item.url }}" alt="{{ item.caption }}">
+                            {% else %}
+                            <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.name}}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="col-7">
+                        <p class="my-0"><strong>{{ item.name }}</strong></p>
+                        <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <p class="my-0 small text-muted">£{{ item.price_only |floatformat:2 }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <hr class="my-0">
+                <div class="row  text-right w-100">
+                    <div class="col-7 offset-2">
+                        <p class="my-0">Order Total:</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="my-0"><strong>£{{ total |floatformat:2 }}</strong></p>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
-            <hr class="my-0">
-            <div class="row  text-right w-100">
-               <div class="col-7 offset-2">
-                  <p class="my-0">Order Total:</p>
-               </div>
-               <div class="col-3">
-                  <p class="my-0"><strong>£{{ total |floatformat:2 }}</strong></p>
-               </div>
+            <div class="col-6 text-right hidden">
+                <p id="plan">{{ name }}</p>
+                <p id="price">{{ price }}</p>
+                <p id="priceId">{{ priceId }}</p>
             </div>
-         </div>
-         <div class="col-6 text-right hidden">
-            <p id="plan">{{ name }}</p>
-            <p id="price">{{ price }}</p>
-            <p id="priceId">{{ priceId }}</p>
-         </div>
-      </div>
-      <div class="row w-100">
-         <div class="col-12 col-lg-9 mx-auto">
-            <p class="text-center">Payment</p>
-            <p class="text-muted text-center small">Please complete your payment information to subscribe</p>
-            <form id="subscription-form" >
-               {% csrf_token %}
-               <fieldset class="px-3">
-                  <p class="text-muted text-center small ">Enter card details.  Your subscription will start immediately</p>
-                  <div id="card-element" class="MyCardElement mb-3">
-                     <!-- Elements will create input elements here -->
-                  </div>
-                  <!-- Used to display form errors -->
-                  <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                  <div class="submit-button mt-5 mb-2 text-right">
-                     <a href="{% url 'lessons' %}" class="btn btn-outline-black text-uppercase">
-                     <span class="icon">
-                     <i class="fas fa-chevron-left"></i>
-                     </span>
-                     <span class="font-weight-bold">Change Subscription</span>
-                     </a>
-                     <button id="submit" type="submit" class="btn advert-button text-uppercase">
-                     <span id="button-text" class="font-weight-bold">Subscribe</span>
-                     <span class="icon">
-                     <i class="fas fa-lock"></i>
-                     </span>
-                     </button>
-                     <p class="small text-danger my-0">
-                        <span class="icon">
-                        <i class="fas fa-exclamation-circle"></i>
-                        </span>
-                        <span>Your card will be charged <strong>£{{ lesson_total|floatformat:2 }}</strong></span>
-                     </p>
-                  </div>
-               </fieldset>
-            </form>
-         </div>
-      </div>
-      <div id="loading-overlay">
-         <h1 class="text-light logo-font loading-spinner">
-            ...<span class="icon">
-            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-            </span>...
-         </h1>
-      </div>
-   </div>
-   <!--The lesson advert, student showcase advert and store advert are rendered here-->
-   <div class="row w-100 mx-auto">
-      <div class="col-lg-4 col-12 mt-5 mx-auto">
-         {% include 'includes/lessons_advert_four.html' %}
-      </div>
-      <div class="col-lg-4 col-12 mt-5 mx-auto">
-         {% include 'includes/showcase_advert_four.html' %}
-      </div>
-      <div class="col-lg-4 col-12 mt-5 mx-auto">
-         {% include 'includes/store_advert_small.html' %}
-      </div>
-   </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-12 col-lg-9 mx-auto">
+                <p class="text-center">Payment</p>
+                <p class="text-muted text-center small">Please complete your payment information to subscribe</p>
+                <form id="subscription-form">
+                    {% csrf_token %}
+                    <fieldset class="px-3">
+                        <p class="text-muted text-center small ">Enter card details. Your subscription will start immediately</p>
+                        <div id="card-element" class="MyCardElement mb-3">
+                            <!-- Elements will create input elements here -->
+                        </div>
+                        <!-- Used to display form errors -->
+                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                        <div class="submit-button mt-5 mb-2 text-right">
+                            <a href="{% url 'lessons' %}" class="btn btn-outline-black text-uppercase">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="font-weight-bold">Change Subscription</span>
+                            </a>
+                            <button id="submit" type="submit" class="btn advert-button text-uppercase">
+                                <span id="button-text" class="font-weight-bold">Subscribe</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                            <p class="small text-danger my-0">
+                                <span class="icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
+                                <span>Your card will be charged <strong>£{{ lesson_total|floatformat:2 }}</strong></span>
+                            </p>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div id="loading-overlay">
+            <h1 class="text-light logo-font loading-spinner">
+                ...<span class="icon">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </span>...
+            </h1>
+        </div>
+    </div>
+    <!--The lesson advert, student showcase advert and store advert are rendered here-->
+    <div class="row w-100 mx-auto">
+        <div class="col-lg-4 col-12 mt-5 mx-auto">
+            {% include 'includes/lessons_advert_four.html' %}
+        </div>
+        <div class="col-lg-4 col-12 mt-5 mx-auto">
+            {% include 'includes/showcase_advert_four.html' %}
+        </div>
+        <div class="col-lg-4 col-12 mt-5 mx-auto">
+            {% include 'includes/store_advert_small.html' %}
+        </div>
+    </div>
 </section>
 <div class="footer-background-color w-100">
-{% endblock %}
-<!--link to script to submit payment to stripe and create customer and subscription through djstripe-->
-{% block postloadjs %}
-{{ block.super }}
-<script src="{% static 'checkout/js/stripe_subscriptions.js' %}"></script>
-{% endblock %}
+    {% endblock %}
+    <!--link to script to submit payment to stripe and create customer and subscription through djstripe-->
+    {% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'checkout/js/stripe_subscriptions.js' %}"></script>
+    {% endblock %}

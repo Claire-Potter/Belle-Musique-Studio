@@ -1,17 +1,19 @@
 <!--The lessons advert - renders a small advert to encourage users to subscribe for lessons-->
-<div class="col-sm-3 col-12 pt-5 advert-text-small">
-    <div class="d-flex justify-content-center ">
-        <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image-two" alt="An image of a girl playing the piano" aria-label="An image of a girl playing the piano" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lessons-advert.jpg">
+<article>
+    <div class="col-sm-3 col-12 pt-5 advert-text-small">
+        <div class="d-flex justify-content-center ">
+            <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image-two" alt="An image of a girl playing the piano" aria-label="An image of a girl playing the piano" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lessons-advert.jpg">
+        </div>
     </div>
-</div>
-<div class="col-sm-3 col-12">
-    <h2 class="cover-heading inline pt-5 text-center smaller-text">Still Learning?</h2>
-    <p class="mx-3 my-3 pt-3 smaller-text text-center">
-        Why not subscribe for lessons?
-    </p>
-    <div class="lead mx-3 mt-5 mb-5 text-center">
-        <a href="{% url 'lessons' %}" class="btn advert-button text-uppercase">
-            <span>Learn More</span>
-        </a>
+    <div class="col-sm-3 col-12">
+        <h3 class="cover-heading inline pt-5 text-center smaller-text">Music Student?</h3>
+        <p class="mx-3 my-3 pt-3 smaller-text text-center">
+            Why not subscribe for <strong>online singing lessons</strong>?
+        </p>
+        <div class="lead mx-3 mt-5 mb-5 text-center">
+            <a href="{% url 'lessons' %}" class="btn advert-button text-uppercase">
+                <span>Learn More</span>
+            </a>
+        </div>
     </div>
-</div>
+</article>

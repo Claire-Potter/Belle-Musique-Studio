@@ -7,46 +7,46 @@
 {% include "includes/cover.html" %}
 </div>
 <section>
-   <!--The section includes the link which allows staff to edit products-->
-   <div class="container-fluid bg-white w-100">
-      <div class="row mx-auto">
-         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
-            <div class="col-12 col-md-6 text-center mx-auto">
-               <hr>
-               <h2 class="font-weight-bold text-center mt-4 mb-4">Edit a Product</h2>
-               <hr>
+    <!--The section includes the link which allows staff to edit products-->
+    <div class="container-fluid bg-white w-100">
+        <div class="row mx-auto">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+                <div class="col-12 col-md-6 text-center mx-auto">
+                    <hr>
+                    <h3 class="font-weight-bold text-center mt-4 mb-4">Edit a Product</h3>
+                    <hr>
+                </div>
             </div>
-         </div>
-      </div>
-      <div class="row mx-auto">
-         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
-            <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data">
-               {% csrf_token %}
-               {% for field in form %}
-               {% if field.name != 'image' %}
-               {{ field | as_crispy_field }}
-               {% else %}
-               {{ field }}
-               {% endif %}
-               {% endfor %}
-               <div class="text-right">
-                  <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'products' %}">Cancel</a>
-                  <button class="btn advert-button mb-3 text-uppercase" type="submit">Update Product</button>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+                <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {% if field.name != 'image' %}
+                    {{ field | as_crispy_field }}
+                    {% else %}
+                    {{ field }}
+                    {% endif %}
+                    {% endfor %}
+                    <div class="text-right">
+                        <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'products' %}">Cancel</a>
+                        <button class="btn advert-button mb-3 text-uppercase" type="submit">Update Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 <div class="footer-background-color w-100">
-{% endblock %}
-{% block postloadjs %}
-{{ block.super }}
-<!--JS-->
-<script>
-   $('#new-image').change(function() {
-       var file = $('#new-image')[0].files[0];
-       $('#filename').text(`Image will be set to: ${file.name}`);
-   });
-</script>
-{% endblock %}
+    {% endblock %}
+    {% block postloadjs %}
+    {{ block.super }}
+    <!--JS-->
+    <script>
+        $('#new-image').change(function() {
+            var file = $('#new-image')[0].files[0];
+            $('#filename').text(`Image will be set to: ${file.name}`);
+        });
+    </script>
+    {% endblock %}

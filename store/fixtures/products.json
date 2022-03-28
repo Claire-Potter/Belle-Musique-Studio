@@ -18,15 +18,15 @@
         "model": "store.musicproduct",
         "fields": {
             "sku": "pp5001600425",
-            "name": "RockJam Electronic Keyboard",
-            "description": "The RockJam 661 keyboard piano super kit includes an electronic keyboard with 61 full-size keys that provides you with a traditional piano feel whilst maintaining a portable and compact design that can be powered by either mains power (power supply included) or batteries.",
+            "name": "Yamaha Electronic Keyboard",
+            "description": "The Yamaha 661 keyboard piano super kit includes an electronic keyboard with 61 full-size keys that provides you with a traditional piano feel whilst maintaining a portable and compact design that can be powered by either mains power (power supply included) or batteries.",
             "has_sizes": "False",
             "price": 97.99,
             "category": 2,
             "rating": 4.8,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/keyboard.jpg",
             "image": "keyboard.jpg",
-            "image_alt": "A large electric piano keyboard."
+            "image_alt": "A large Yamaha electric <strong> piano keyboard </strong>."
         }
     }, {
         "pk": 3,

@@ -22,7 +22,7 @@
         <div class="row pt-3 pb-3 mt-5">
             <div class="col-12 text-center mt-3">
                 <hr class="w-50 mx-auto small-width-heading">
-                <h2 class="logo-font mt-5 mb-5">Thank you</h2>
+                <h3 class="logo-font mt-5 mb-5">Thank you</h3>
                 <hr class="w-50 mx-auto small-width-heading">
                 <p class="smaller-text">Your subscription information is below.</p>
                 <p class="smaller-text"> A confirmation email will be sent to <strong>{{ subscribed_customer.email }}</strong>.</p>
@@ -139,7 +139,7 @@
                                 <p class="mb-0  font-weight-bold small">Invoice</p>
                             </div>
                             <div class="col-12 col-md-8 text-md-right">
-                                <a href="{{ invoice_link }}" target="_blank" title="{{ subscription_item.subscription_name }}" class="small invoice-link">
+                                <a href="{{ invoice_link }}" target="_blank" title="{{ subscription_item.subscription_name }}" rel="noopener" class="small invoice-link">
                                     {{ subscription_item.latest_invoice }}</a>
                             </div>
                         </div>

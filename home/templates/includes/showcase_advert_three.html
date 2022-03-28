@@ -1,17 +1,19 @@
 <!--The showcase advert - renders a small advert to encourage users to view the showcased students-->
-<div class="col-sm-3 col-12 order-sm-12 pt-5 advert-text-small">
-    <div class="d-flex justify-content-center ">
-        <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image-two" alt="An image of a girl singing on stage" aria-label="An image of a girl singing on stage" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/worship-advert.jpg">
+<article>
+    <div class="col-sm-3 col-12 order-sm-12 pt-5 advert-text-small">
+        <div class="d-flex justify-content-center ">
+            <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image-two" alt="An image of a girl singing on stage" aria-label="An image of a girl singing on stage" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/worship-advert.jpg">
+        </div>
     </div>
-</div>
-<div class="col-sm-3 col-12 order-sm-1 advert-text-small">
-    <h2 class="cover-heading inline pt-5 text-center smaller-text">Student of the Week</h2>
-    <ul class="mx-3 my-3 pt-3 pl-2 smaller-text text-center">
-        <li>Check out our Students!</li>
-    </ul>
-    <div class="lead mx-3 mt-5 mb-5 text-center">
-        <a href="{% url 'about' %}" class="btn advert-button text-uppercase">
-            <span>Look Now</span>
-        </a>
+    <div class="col-sm-3 col-12 order-sm-1 advert-text-small">
+        <h3 class="cover-heading inline pt-5 text-center smaller-text">Student of the Week</h3>
+        <ul class="mx-3 my-3 pt-3 pl-2 smaller-text text-center">
+            <li>Check out our Students!</li>
+        </ul>
+        <div class="lead mx-3 mt-5 mb-5 text-center">
+            <a href="{% url 'about' %}" class="btn advert-button text-uppercase">
+                <span>Look Now</span>
+            </a>
+        </div>
     </div>
-</div>
+</article>

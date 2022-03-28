@@ -3,7 +3,7 @@
     "model": "home.cover",
     "fields": {
         "name": "Belle Musique Studio",
-        "quote": "Everyone Deserves Music",
+        "quote": "Online piano lessons, singing lessons and songwriting courses",
         "page": "home"
     }
 }, {
@@ -19,7 +19,7 @@
     "model": "home.cover",
     "fields": {
         "name": "Music Store",
-        "quote": "Keep calm and make music",
+        "quote": "Keyboards and other instruments for sale",
         "page": "music_store"
     }
 }, {
@@ -35,7 +35,7 @@
     "model": "home.cover",
     "fields": {
         "name": "Get in touch",
-        "quote": "Keep in touch, consistently, personally, and systematically. ~ Timothy L. Templeton",
+        "quote": "Keep in touch, consistently, personally, and systematically",
         "page": "contact"
     }
 }, {
@@ -43,23 +43,23 @@
     "model": "home.cover",
     "fields": {
         "name": "Music Store",
-        "quote": "It's really one stop shopping for the music fan",
+        "quote": "Online Music Shop",
         "page": "bag"
     }
 }, {
     "pk": 7,
     "model": "home.cover",
     "fields": {
-        "name": "Checkout",
-        "quote": "Whoever said laughter is the best medicine, obviously never tried shopping",
+        "name": "Music Store ",
+        "quote": "Online Music Shop",
         "page": "checkout"
     }
 }, {
     "pk": 8,
     "model": "home.cover",
     "fields": {
-        "name": "Lessons",
-        "quote": "The slower you go, the faster you'll get there...",
+        "name": "Music Lessons",
+        "quote": "Online piano lessons, singing lessons and songwriting courses",
         "page": "lessons"
     }
 }, {

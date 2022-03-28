@@ -5,55 +5,55 @@
 <link rel="stylesheet" href="{% static 'lessons/css/lessons.css' %}">
 {% endblock %}
 <!--Additional page title-->
-<title>{{ block.super }}{% block extra_title %} Edit Lesson {% endblock %}</title>
+<title>{{ block.super }}{% block extra_title %} Edit a Music Lesson {% endblock %}</title>
 {% block content %}
 <!--Link to Cover-->
 {% include "includes/cover.html" %}
 </div>
 <section>
-   <!--Section includes the form for an administrator to edit a lesson (product) and subscriptions (plans)-->
-   <div class="container-fluid bg-white w-100">
-      <div class="row mx-auto">
-         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
-            <div class="col-12 col-md-6 text-center mx-auto">
-               <hr>
-               <h2 class="font-weight-bold text-center mt-4 mb-4">Edit a Lesson</h2>
-               <hr>
+    <!--Section includes the form for an administrator to edit a lesson (product) and subscriptions (plans)-->
+    <div class="container-fluid bg-white w-100">
+        <div class="row mx-auto">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+                <div class="col-12 col-md-6 text-center mx-auto">
+                    <hr>
+                    <h3 class="font-weight-bold text-center mt-4 mb-4">Edit a Music Lesson</h3>
+                    <hr>
+                </div>
+                <div>
+                    <p class="small text-muted font-italic mt-3 mb-3 text-center">Please save the image url in the url field. Please save the image alt text under caption.</p>
+                </div>
             </div>
-            <div>
-               <p class="small text-muted font-italic mt-3 mb-3 text-center">Please save the image url in the url field. Please save the image alt text under caption.</p>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
+                <form method="POST" action="{% url 'edit_lesson' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data" id="edit-form">
+                    {% csrf_token %}
+                    <p class="font-weight-bold">Lesson Details:</p>
+                    {% for field in form %}
+                    {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <p class="font-weight-bold">Pricing Details:</p>
+                    <p class="font-weight-bold">Price:</p>
+                    {% for field in p1_form %}
+                    {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <p class="font-weight-bold">Price:</p>
+                    {% for field in p2_form %}
+                    {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <p class="font-weight-bold">Price:</p>
+                    {% for field in p3_form %}
+                    {{ field | as_crispy_field }}
+                    {% endfor %}
+                    <div class="text-right">
+                        <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'lessons' %}">Cancel</a>
+                        <button class="btn advert-button mb-3 text-uppercase" type="submit" id="submit-button">Update Lesson</button>
+                    </div>
+                </form>
             </div>
-         </div>
-      </div>
-      <div class="row mx-auto">
-         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 mx-auto">
-            <form method="POST" action="{% url 'edit_lesson' product.id %}" class="form mb-2 text-form" enctype="multipart/form-data" id="edit-form">
-               {% csrf_token %}
-               <p class="font-weight-bold">Lesson Details:</p>
-               {% for field in form %}
-               {{ field | as_crispy_field }}
-               {% endfor %}
-               <p  class="font-weight-bold">Pricing Details:</p>
-               <p  class="font-weight-bold">Price:</p>
-               {% for field in p1_form %}
-               {{ field | as_crispy_field }}
-               {% endfor %}
-               <p  class="font-weight-bold">Price:</p>
-               {% for field in p2_form %}
-               {{ field | as_crispy_field }}
-               {% endfor %}
-               <p  class="font-weight-bold">Price:</p>
-               {% for field in p3_form %}
-               {{ field | as_crispy_field }}
-               {% endfor %}
-               <div class="text-right">
-                  <a class="btn btn-outline-black mb-3 text-uppercase" href="{% url 'lessons' %}">Cancel</a>
-                  <button class="btn advert-button mb-3 text-uppercase" type="submit" id="submit-button">Update Lesson</button>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </section>
 <div class="footer-background-color w-100">
-{% endblock %}
+    {% endblock %}

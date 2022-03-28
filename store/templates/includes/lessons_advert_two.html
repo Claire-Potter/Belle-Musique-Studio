@@ -1,18 +1,20 @@
 <!--The lesson advert-->
-<div class="row bg-white d-flex w-100 mx-auto advert-text-small">
-    <div class="col-sm-6 col-12">
-        <div class="d-flex justify-content-center ">
-            <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image-two" alt="An image of a girl playing the piano" aria-label="An image of a girl playing the piano" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lessons-advert.jpg">
+<article>
+    <div class="row bg-white d-flex w-100 mx-auto advert-text-small">
+        <div class="col-sm-6 col-12">
+            <div class="d-flex justify-content-center ">
+                <img class="img-fluid mx-sm-5 mx-2 my-sm-5 my-2 p-2 advert-image-two" alt="An image of a girl playing the piano" aria-label="An image of a girl playing the piano" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lessons-advert.jpg">
+            </div>
         </div>
-    </div>
-    <div class="col-sm-6 col-12">
-        <h2 class="cover-heading inline pt-5 text-center">Still Learning?</h2>
-        <p class="mx-3 my-3 pt-3 text-center">
-            Why not subscribe for individual lessons?
-        </p>
-        <div class="lead mx-3 my-3 p-3 text-center">
-            <a href="{% url 'lessons' %}" class="btn advert-button text-uppercase">
-                <span>Learn More</span>
-            </a>
+        <div class="col-sm-6 col-12">
+            <h3 class="cover-heading inline pt-5 text-center">Music Student?</h3>
+            <p class="mx-3 my-3 pt-3 text-center">
+                Why not subscribe for <strong>individual piano lessons</strong>?
+            </p>
+            <div class="lead mx-3 my-3 p-3 text-center">
+                <a href="{% url 'lessons' %}" class="btn advert-button text-uppercase">
+                    <span>Learn More</span>
+                </a>
+            </div>
         </div>
-    </div>
+</article>

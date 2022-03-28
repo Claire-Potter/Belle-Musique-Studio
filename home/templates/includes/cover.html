@@ -17,7 +17,7 @@
                             <!--If statement to determine if there is a cover in the Cover model or not. If not the default details below will be used.-->
                             {% if 'placeholder' in name %}Belle Musique Studio {% else %} {{ cover.name }} {% endif %}
                         </h1>
-                        <p class="lead mr-5 text-sm-right text-center"> {% if 'placeholder' in quote %}Everyone deserves music{% else %} {{ cover.quote}} {% endif %}</p>
+                        <h2 class="lead mr-5 text-sm-right text-center"> {% if 'placeholder' in quote %}Online lessons and music store{% else %} {{ cover.quote}} {% endif %}</h2>
                         {% if "home" in cover.page %}
                         <!--The below menu will only render on the home page-->
                         <div class="lead mr-5 text-sm-right text-center">
