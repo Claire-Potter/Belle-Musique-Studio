@@ -26,7 +26,7 @@
             "rating": 4.8,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/keyboard.jpg",
             "image": "keyboard.jpg",
-            "image_alt": "A large Yamaha electric <strong> piano keyboard </strong>."
+            "image_alt": "A large Yamaha electric piano keyboard ."
         }
     }, {
         "pk": 3,
@@ -41,7 +41,7 @@
             "rating": 4.7,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/lozenges.jpg",
             "image": "lozenges.jpg",
-            "image_alt": "Orange throat lozenges. "
+            "image_alt": "Orange throat lozenges for singing lessons . "
         }
     }, {
         "pk": 4,
@@ -56,7 +56,7 @@
             "rating": 4.25,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/mini-keyboard.JPG",
             "image": "mini-keyboard.JPG",
-            "image_alt": "A small electric piano keyboard."
+            "image_alt": "A small electric piano keyboard for piano lessons ."
         }
     }, {
         "pk": 5,
@@ -71,7 +71,7 @@
             "rating": 5.0,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/metronome.jpg",
             "image": "metronome.jpg",
-            "image_alt": "A metronome used to keep time."
+            "image_alt": "A metronome used to keep time in piano lessons ."
         }
     }, {
         "pk": 6,
@@ -86,7 +86,7 @@
             "rating": 5.0,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/microphone.jpg",
             "image": "microphone.jpg",
-            "image_alt": "A microphone to sing into."
+            "image_alt": "A microphone to use for singing lessons ."
         }
     }, {
         "pk": 7,
@@ -101,7 +101,7 @@
             "rating": 4.4,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/music-sheets.jpg",
             "image": "music-sheets.jpg",
-            "image_alt": "Plain white music sheets with music bars to write your own music."
+            "image_alt": "Plain white music sheets with music bars for songwriting courses ."
         }
     }, {
         "pk": 8,
@@ -116,7 +116,7 @@
             "rating": 4.5,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/music-stand.jpg",
             "image": "music-stand.jpg",
-            "image_alt": "A black metal stand used to hold music sheets."
+            "image_alt": "A black metal stand used to hold music sheets for piano music ."
         }
     }, {
         "pk": 9,
@@ -131,7 +131,7 @@
             "rating": 4.7,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/music-theory-book.jpg",
             "image": "music-theory-book.jpg",
-            "image_alt": "A book of music theory lessons."
+            "image_alt": "A book of music theory lessons ."
         }
     }, {
         "pk": 10,
@@ -146,7 +146,7 @@
             "rating": 4.4,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/piano-music.jpg",
             "image": "piano-music.jpg",
-            "image_alt": "A picture of piano sheet music."
+            "image_alt": "A picture of piano sheet music for piano lessons ."
         }
     }, {
         "pk": 11,
@@ -161,7 +161,7 @@
             "rating": 4.0,
             "image_url": "https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/sound-equipment.jpg",
             "image": "sound-equipment.jpg",
-            "image_alt": "A picture of sound recording equipment"
+            "image_alt": "A picture of sound recording equipment."
         }
     },
     {

@@ -138,7 +138,7 @@ body {
 .cover-container-bag,
 .cover-container-checkout,
 .cover-container-music-store {
-    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
+    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/piano-player-music-lesson.jpg") no-repeat;
     background-size: cover;
     height: 100%;
     margin-top: 120px;
@@ -147,7 +147,7 @@ body {
 
 
 .cover-container-home {
-    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
+    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/piano-player-music-lesson.jpg") no-repeat;
     background-size: cover;
     height: 100%;
     margin-top: 153px;
@@ -155,7 +155,7 @@ body {
 
 .cover-container-product-man,
 .cover-container-student-comm {
-    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/home-background.jpg") no-repeat;
+    background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/piano-player-music-lesson.jpg") no-repeat;
     background-size: cover;
     height: 100%;
     margin-top: 150px;

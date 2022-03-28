@@ -135,17 +135,8 @@
                 </div>
                 <div class="row mt-lg-5 mt-3">
                     <!--The lesson advert, student showcase advert and store advert are rendered here-->
-                    <div class="col-sm-4 col-12 text-center mt-3">
-                        <img class="img-fluid mx-2 my-2 p-2 advert-image-small-round" alt="a selection of instruments adn recording equipment in a home" aria-label="a selection of instruments adn recording equipment in a home" src="https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/all-products.jpg">
-                        <p class="smaller-text">Why not visit our Music Store and browse our products?</p>
-                        <div class="col mt-5 mt-sm-3 text-center">
-                            <a href="{% url 'products' %}" class="btn advert-button mb-5 mt-2">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">Click Here</span>
-                            </a>
-                        </div>
+                    <div class="col-sm-4 col-12 text-center">
+                        {% include 'includes/store_advert_four.html' %}
                     </div>
                     <div class="col-sm-4 col-12">
                         {% include 'includes/lessons_advert_four.html' %}
