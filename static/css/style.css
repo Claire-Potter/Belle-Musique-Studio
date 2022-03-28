@@ -226,6 +226,10 @@ body {
     color: #fbac2c;
 }
 
+.footer-font {
+    font-family: "EB Garamond", sans-serif;
+}
+
 /* Advert Banner */
 
 .advert-banner-background {

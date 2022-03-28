@@ -11,6 +11,8 @@ prevent this error from displaying.
 
 the index view is set up to display the homepage.
 
+the privacy view is a view to return the privacy policy.
+
 the About view is set up to display the about page.
 
 Contact View created to render the Contact page.
@@ -97,6 +99,21 @@ def index(request):
                'cover': cover}
 
     return render(request, 'index.html', context)
+
+
+def privacy(request):
+    """
+    A view to return the privacy policy
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+    """
+
+    return render(request, 'privacy_policy.html')
 
 
 def about(request):
