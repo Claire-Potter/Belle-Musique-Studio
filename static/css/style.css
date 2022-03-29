@@ -520,10 +520,8 @@ body {
 
     #delivery-banner {
         position: relative;
-        top: 200px;
-        right: 0;
-        left: 0;
-        z-index: 1031;
+        top: 170px;
+        z-index: 1029;
     }
 
     .header-container {
