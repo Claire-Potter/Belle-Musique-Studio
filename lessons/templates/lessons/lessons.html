@@ -72,9 +72,13 @@
                                         <input type="button" class="btn advert-button mb-3 select-buttons" value="SELECT" onclick="planSelect('{{lesson.name}}', '{{plan.human_readable_price}}', '{{plan.id}}', '{{lesson.url}}', '{{lesson.caption}}', '{{plan.amount}}', '{{lesson.djstripe_id}}',)">
                                     </div>
                                     {% endfor %}
+                                    {% if request.user.is_authenticated %}
+                                    {% if user.is_staff %}
                                     <div class="text-right mb-3">
                                         <a href="{% url 'edit_lesson' lesson.id %}">Edit</a>
                                     </div>
+                                    {% endif %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

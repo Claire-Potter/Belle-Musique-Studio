@@ -354,6 +354,11 @@ body {
     border-radius: 5%;
 }
 
+.smaller-text-edit {
+    font-size: calc(0.3rem + .9vw) !important;
+}
+}
+
 #new-image {
     background: white;
     color: black !important;
@@ -495,10 +500,6 @@ body {
         max-width: 250px;
     }
 
-    .smaller-text-edit {
-        font-size: calc(0.3rem + .9vw) !important;
-    }
-}
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {

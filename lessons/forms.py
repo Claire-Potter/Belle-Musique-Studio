@@ -76,6 +76,7 @@ class LessonPriceForm(forms.ModelForm):
         self.fields['currency'].widget.attrs['readonly'] = True
         self.fields['interval'].widget.attrs['readonly'] = True
         self.fields['usage_type'].widget.attrs['readonly'] = True
+        self.fields['trial_period_days'].widget.attrs['readonly'] = True
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black'
 
@@ -117,6 +118,7 @@ class LessonProductAddForm(forms.ModelForm):
         }
 
         for field in self.fields:
+            self.fields['url'].required = True
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
             else:
