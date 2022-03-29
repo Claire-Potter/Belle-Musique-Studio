@@ -58,3 +58,23 @@ class UserProfileForm(forms.ModelForm):
             (self.fields[field]
              .widget.attrs['class']) = 'profile-form-input smallest-text'
             self.fields[field].label = False
+            (self.fields['default_full_name']
+             .widget.attrs['aria-label']) = 'Full Name'
+            (self.fields['default_email']
+             .widget.attrs['aria-label']) = 'Email'
+            (self.fields['default_additional_email']
+             .widget.attrs['aria-label']) = 'Additional Email'
+            (self.fields['default_country']
+             .widget.attrs['aria-label']) = 'Country'
+            (self.fields['default_phone_number']
+             .widget.attrs['aria-label']) = 'Phone Number'
+            (self.fields['default_postcode']
+             .widget.attrs['aria-label']) = 'Postcode'
+            (self.fields['default_town_or_city']
+             .widget.attrs['aria-label']) = 'Town or City'
+            (self.fields['default_street_address1']
+             .widget.attrs['aria-label']) = 'Street Address 1'
+            (self.fields['default_street_address2']
+             .widget.attrs['aria-label']) = 'Street Address 2'
+            (self.fields['default_county']
+             .widget.attrs['aria-label']) = 'County'

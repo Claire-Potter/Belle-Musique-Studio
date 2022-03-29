@@ -67,6 +67,24 @@ class OrderForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
+            (self.fields['full_name']
+             .widget.attrs['aria-label']) = 'Full Name'
+            (self.fields['email']
+             .widget.attrs['aria-label']) = 'Email'
+            (self.fields['country']
+             .widget.attrs['aria-label']) = 'Country'
+            (self.fields['phone_number']
+             .widget.attrs['aria-label']) = 'Phone Number'
+            (self.fields['postcode']
+             .widget.attrs['aria-label']) = 'Postcode'
+            (self.fields['town_or_city']
+             .widget.attrs['aria-label']) = 'Town or City'
+            (self.fields['street_address1']
+             .widget.attrs['aria-label']) = 'Street Address 1'
+            (self.fields['street_address2']
+             .widget.attrs['aria-label']) = 'Street Address 2'
+            (self.fields['county']
+             .widget.attrs['aria-label']) = 'County'
 
 
 class SubscribedCustomerForm(forms.ModelForm):
@@ -104,7 +122,10 @@ class SubscribedCustomerForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
-
+            self.fields['full_name'].widget.attrs['aria-label'] = 'Full Name'
+            self.fields['email'].widget.attrs['aria-label'] = 'Email'
+            self.fields['country'].widget.attrs['aria-label'] = 'Country'
+            self.fields['phone_number'].widget.attrs['aria-label'] = 'Phone Number'
 
 class SubscriptionLineItemForm(forms.ModelForm):
     """
@@ -139,3 +160,5 @@ class SubscriptionLineItemForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
+            self.fields['student'].widget.attrs['aria-label'] = 'Student Name'
+                 
