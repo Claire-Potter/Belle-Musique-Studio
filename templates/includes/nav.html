@@ -1,5 +1,5 @@
 <!-- Navigation created as per Code Institute "Boutique Ado" and fully customised for site -->
-<nav class="navbar navbar-light w-100 fixed-top mb-5">
+<nav class="navbar navbar-light w-100 fixed-top-desktop-only header-child">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}"><span class="music-note"><i class="fas fa-music"></i></span><span class="logo">Belle Musique</span></a>
         <div class="shopping-logos">
@@ -57,12 +57,6 @@
                     </a>
                     <div class="dropdown-menu nav-item text-sm-right" aria-labelledby="dropdown-menu-link" id="my-dropdown">
                         {% if request.user.is_authenticated %}
-                        {% if user.is_staff %}
-                        <a class="dropdown-item nav-link" href="{% url 'admin:index' %}">Site Admin</a>
-                        <a class="dropdown-item nav-link" href="{% url 'add_product' %}">Manage Shop Products</a>
-                        <a class="dropdown-item nav-link" href=" {% url 'add_new_lesson' %}">Manage Lesson Products</a>
-                        <a class="dropdown-item nav-link" href=" {% url 'add_student_showcase' %}">Showcase a Student</a>
-                        {% endif %}
                         <a class="dropdown-item nav-link" href="{% url 'profile' %}">My Profile</a>
                         <a class="dropdown-item nav-link" href="{% url 'account_logout' %}">Logout</a>
                         {% else %}
@@ -71,6 +65,19 @@
                         {% endif %}
                     </div>
                 </li>
+                {% if user.is_staff %}
+                <li class="nav-item" id="nav-dropdown">
+                    <a class="nav-link active" id="dropdown-menu-link-two" aria-haspopup="true" aria-expanded="false" role="menuitem">
+                        Admin <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-menu nav-item text-sm-right" aria-labelledby="dropdown-menu-link-two" id="my-dropdown-two">
+                        <a class="dropdown-item nav-link" href="{% url 'admin:index' %}">Site Admin</a>
+                        <a class="dropdown-item nav-link" href="{% url 'add_product' %}">Manage Shop Products</a>
+                        <a class="dropdown-item nav-link" href=" {% url 'add_new_lesson' %}">Manage Lesson Products</a>
+                        <a class="dropdown-item nav-link" href=" {% url 'add_student_showcase' %}">Showcase a Student</a>
+                    </div>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>

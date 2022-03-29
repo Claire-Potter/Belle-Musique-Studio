@@ -16,8 +16,6 @@ body {
     margin-top: 0;
     border: 0;
     padding: 0;
-
-
 }
 
 .hidden {
@@ -357,7 +355,6 @@ body {
 .smaller-text-edit {
     font-size: calc(0.3rem + .9vw) !important;
 }
-}
 
 #new-image {
     background: white;
@@ -463,6 +460,15 @@ body {
 }
 
 /* Media queries */
+@media (min-width: 2000px) {
+
+    body,
+    .header-child {
+        max-width: 2000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 
 @media (max-width: 1500px) {
     .navbar-brand {
@@ -499,6 +505,7 @@ body {
         font-size: 0.8rem;
         max-width: 250px;
     }
+}
 
 
 /* fixed top navbar only on medium and up */
@@ -511,6 +518,14 @@ body {
         z-index: 1030;
     }
 
+    #delivery-banner {
+        position: relative;
+        top: 200px;
+        right: 0;
+        left: 0;
+        z-index: 1031;
+    }
+
     .header-container {
         padding-top: 164px;
     }
@@ -519,8 +534,34 @@ body {
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
     .header-container {
-        padding-top: 116px;
+        padding-top: 0;
     }
+
+    .cover-container-music-store,
+    .cover-container-bag,
+    .cover-container-checkout {
+        margin-top: 0;
+    }
+
+
+
+    .cover-container,
+    .cover-container-about,
+    .cover-container-contact,
+    .cover-container-profile {
+        margin-top: 0;
+    }
+
+
+    .cover-container-product-man {
+        margin-top: 0;
+    }
+
+    .cover-container-student-comm,
+    .cover-container-home {
+        margin-top: 0;
+    }
+
 
     body {
         height: calc(100vh - 116px);
@@ -596,30 +637,6 @@ body {
 
     .smaller-text {
         font-size: calc(1rem + .9vw) !important;
-    }
-
-    .cover-container-music-store,
-    .cover-container-bag,
-    .cover-container-checkout {
-        margin-top: 112px;
-    }
-
-
-    .cover-container,
-    .cover-container-about,
-    .cover-container-contact,
-    .cover-container-profile {
-        margin-top: 95px;
-    }
-
-
-    .cover-container-product-man {
-        margin-top: 130px;
-    }
-
-    .cover-container-student-comm,
-    .cover-container-home {
-        margin-top: 136px;
     }
 
 

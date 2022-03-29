@@ -31,9 +31,12 @@ $('#sort-selector').change(function() {
 
 // Create constants for html input.
 const dropButton = document.getElementById('dropdown-menu-link');
+const dropButtonTwo = document.getElementById('dropdown-menu-link-two');
 const dropDown = document.getElementById('my-dropdown');
+const dropDownTwo = document.getElementById('my-dropdown-two');
 const dropdowns = document.getElementsByClassName('dropdown-menu');
 const navBar = document.getElementsByClassName('navbar');
+const navDrop = document.getElementsByClassName('nav-dropdown');
 var i;
 const openDropdown = dropdowns[i];
 
@@ -49,9 +52,23 @@ function dropdownMenu() {
     dropDown.classList.toggle('show');
 }
 
+function dropdownMenuTwo() {
+    dropDownTwo.classList.toggle('show');
+}
+
 // Close the dropdown menu if the user clicks outside of it
 navBar.onclick = function(event) {
-    if (!event.target.matches('.steps-button')) {
+    if (!event.target.matches('#my-dropdown')) {
+        for (i = 0; i < dropdowns.length; i++) {
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+};
+
+navDrop.onclick = function(event) {
+    if (!event.target.matches('#my-dropdown-two')) {
         for (i = 0; i < dropdowns.length; i++) {
             if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
@@ -61,3 +78,4 @@ navBar.onclick = function(event) {
 };
 
 dropButton.addEventListener('click', dropdownMenu);
+dropButtonTwo.addEventListener('click', dropdownMenuTwo);
