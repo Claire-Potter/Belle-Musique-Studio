@@ -65,6 +65,7 @@ This is currently a test project.
 	* [Libraries and Frameworks](#libraries-and-frameworks)
 	* [Development tools](#development-tools)
 	* [Deployment/Hosting](#deploymenthosting)
+	* [Payment](#payment)
 	* [Static and media file storage](#static-and-media-file-storage)
 	* [Email](#email)
 * [Testing](#testing)
@@ -211,7 +212,7 @@ Using the trade-off process to rank the importance and feasibility of the opport
 
 For this project, the main aim is to create a transactional platform to assist a user through the subscription purchase process and the product purchase process. Secondary to that is to provide the user with the necessary information required to be able to make their decision around what lessons to enroll in and what subscription type would be best for them. The Music Store will be set up to be able to provide all of the necessary tools to music students for their lessons as well as to increase overall revenue. Every opportunity for internal advertisement will be taken to promote lessons, student showcases and the store. The website will be designed to render successfully across all screen sizes and platforms. Accessibility requirements will be considered and addressed. Apart from the default Django Admin centre, which is best utilised from a laptop/computer, the design has been completed for mobile first.
 
-In order to create a streamline navigation menu, a My Account section has been added as a dropdown sub-menu. This section will include the options to Register / Login or Logout, Access to the User Profile and for staff access to site admin, product and lesson maintenance and student showcase form.
+In order to create a streamline navigation menu, a My Account section has been added as a dropdown sub-menu. This section will include the options to Register / Login or Logout and access to the User Profile. An Admin dropdown has been added for staff access to site admin, product and lesson maintenance and student showcase form.
 
 To provide an overview of the business, including it's purpose and owner information, an About page has been included. A user can easily scroll down the page to read the various information sections, a useful return to top icon has been included to easily return to the top of the page.
 
@@ -240,6 +241,7 @@ This website will allow users to access different parts of the site depending on
  * View Only:
    * Home Page
    * About Page
+   * Privacy Information
  * View and Select:
    * View all Lesson details
    * Lessons - add a lesson to lesson bag
@@ -255,6 +257,7 @@ This website will allow users to access different parts of the site depending on
    * Checkout - order form
    * Checkout - payment information
    * Contact Us - contact form
+   * Newsletter Sign Up form
  * Emails:
    * Receive order via email
    * Submitting the contact form triggers an email to the site admin
@@ -317,6 +320,7 @@ Front end access in place as stipulated within the project goals section. Lesson
    * account | email confirmation
    * home | cover
    * home | student showcase
+   * home | marketing sign up
    * store | music product
 
 2. Site Owner Group
@@ -329,7 +333,7 @@ Front end access in place as stipulated within the project goals section. Lesson
    * store | category
    
 3. SuperUser
-The superuser will have full access to the site admin section, apart from any access restrictions added to the code.
+ The Super User will have additional access to the Admin section. Certain models will be limited in terms of being able to create, delete or edit content in alignment with the management of subscriptions.
 
 
 ## Wireframes
@@ -435,6 +439,7 @@ The Student Showcase feature is used as an email marketing tool. It is a weekly 
 
 A privacy policy was generated through https://www.privacypolicygenerator.info/ and a link to the policy is available in the page footer.
 
+
 ## Business Model
 
 ### B2C – Business-to-consumer.
@@ -536,8 +541,47 @@ ImageOptimizer used to minify image file sizes
 * Heroku is used to deploy and host the live site content
 
 
+## Payment
+
+The project uses stripe to handle all subscriptions and payments. A free stripe account was created. Products, plans and prices were set up and through DJStripe the models were synced with the project database. Two webhooks were set up one for the product payments and the other for subscriptions. The following configuration was added to settings.py:
+
+    FREE_DELIVERY_THRESHOLD = 40
+    STANDARD_DELIVERY_PERCENTAGE = 10
+    STRIPE_CURRENCY = 'gbp'
+    STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+    STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+    STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+    STRIPE_LIVE_MODE = False
+    STRIPE_TEST_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+    STRIPE_TEST_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+    DJSTRIPE_WEBHOOK_SECRET = os.getenv('DJSTRIPE_WEBHOOK_SECRET', '')
+    DJSTRIPE_FOREIGN_KEY_TO_FIELD = 'id'
+
+
 ## Static and media file storage
 * Amazon web services is used for static and media storage
+* Create a user, user group, and policy by IAN 
+* Then create a new bucket by S3
+* Save all media files to AWS bucket
+* Add the following configuration to settings.py:
+    
+
+         AWS_S3_OBJECT_PARAMETERS = {
+              'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+              'CacheControl': 'max-age=94608000', }
+              
+      AWS_STORAGE_BUCKET_NAME = 'belle-musique-studio'
+      AWS_S3_REGION_NAME = 'eu-west-2'
+      AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+      AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+      AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+      STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+      STATICFILES_LOCATION = 'static'
+      DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+      MEDIAFILES_LOCATION = 'media'
+      STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+      MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
 
 ## Email
 * Django.core.mail is used to integrate,  and send emails via gmail.smtp
@@ -630,6 +674,8 @@ The website was deployed from GitHub to Heroku using the following steps:
 
 5. Set environment variables:
     * Click on the Settings tab and then click reveal Config Vars.
+    * Login to  AWS account,  .
+Copy the access key id and its secret key and save into Heroku's config var as 'AWS_ACCESS_KEY_ID' and 'AWS_SECRET_ACCESS_KEY', and create a 'USE_AWS' variable and set it to 'True'
     * Variables added:
 
 
@@ -676,6 +722,7 @@ The website was deployed from GitHub to Heroku using the following steps:
 8. Follow the steps in the Maintaining Code section above to make and save changes to your own repository
 9. Remember you will need to create your own version of the env.py file for the credentials
 10. Payments will not work unless you set up your own account with Stripe and integrate.
+11. An AWS account will be required for static and media files.
 
 # References
 
