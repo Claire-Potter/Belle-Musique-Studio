@@ -442,7 +442,7 @@ A privacy policy was generated through https://www.privacypolicygenerator.info/ 
 
 ## Business Model
 
-### B2C – Business-to-consumer.
+### B2C – Business-to-consumer
 
 B2C businesses sell to their end-user. This is the business model selected and utilised for Belle Musique Studio. 
 
@@ -739,7 +739,7 @@ https://docs.djangoproject.com/en/3.2/releases/3.2/
 
 ### Code Adaptations
 
-1. The base code for this project is from the Code Institute 'Boutique Ado' project
+1. The code for this project was completed according to the Code Institute 'Boutique Ado' project and adjusted for site purpose.
 
 2. Contact form is based on the Contact Form from the Code Institute Resume Project
 
