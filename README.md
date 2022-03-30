@@ -408,6 +408,13 @@ A robots.txt file has been included.
 
 A DNS certificate is not included as the site is a student test site only.
 
+All links have been provided with either one of the following relationships:
+
+* “nofollow” for any paid links and distrusted content.
+* “sponsored” for any sponsored or compensated links.
+   * A sponsored relationship was added for the link to the Facebook Business Page as it is the associated page for Belle Musique Studio
+   * All internal adverts for lessons, the store or promotion of students were provided with a sponsored relationship as they are advertising Belle Musique Studio products and services and promoting their students.
+
 ## Web Marketing
 
 ### Content Marketing
@@ -417,6 +424,8 @@ Relevant internal advert sections with links have been included across user-faci
 ### Social Media Marketing
 
 A Facebook business page for the studio has been set up to ensure organic growth of the business. The site is linked to the business account through the facebook social media link. The Facebook page includes a link back to the site.
+
+<a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/facebook-business-page" target="_blank">Click here</a> to access images of the Facebook page.
 
 ### Email Marketing
 
