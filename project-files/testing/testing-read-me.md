@@ -314,6 +314,8 @@ As **a User** I can **easily Navigate across all site pages** so that **I can vi
     * Pass
 * The Privacy Policy opens the privacy policy document for the site on a new blank page
     * Pass
+* The Newsletter link opens the form to sign up for the weekly newsletter
+    * Pass
 
 
 #### Desktop Site
@@ -372,7 +374,7 @@ As a **Site User** I can **understand the site purpose** so that **my expectatio
     * Pass
 * The video and image resize according to screen size
     * Pass
-* A marketing email is triggered and successfully delivers to all users who have opted in to receive marketing.
+* A marketing email is triggered and successfully delivers to all customers who have signed up to receive the newsletter.
     * Pass
     
 
@@ -401,6 +403,10 @@ As the **Site Owner / Site Admin** I can **showcase a student on the about page*
 #### Student Showcase Form
 
 ![Student Showcase Form](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/features/05.student-showcase-form.JPG)
+
+#### Newsletter Signup
+
+![Newsletter Signup](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/features/05.newsletter.JPG)
 
 #### Student Showcase Email
 
