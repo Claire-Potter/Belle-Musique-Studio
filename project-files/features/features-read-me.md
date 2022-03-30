@@ -24,11 +24,12 @@ The Navigation Menu falls within the Header. This is created on the template nav
     * Login - if logged out
     * Logout - if logged in
 * Admin -dropdown menu
- * Staff Only:
-        * Site Admin - Django Admin centre
-        * Manage Shop Products - Add a product
-        * Manage Lesson Products - Add a lesson
-        * Showcase a Student - add a student showcase record
+     * Staff Only:
+           
+          *  Site Admin - Django Admin centre
+          *  Manage Shop Products - Add a product
+          *  Manage Lesson Products - Add a lesson
+          *  Showcase a Student - add a student showcase record
 
 
 ### Dropdown Menus
