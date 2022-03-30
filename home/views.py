@@ -78,7 +78,7 @@ from django.views import View
 # View is a class within the django.views.generic module of the Django project.
 from .forms import ContactForm, StudentShowcaseForm, NewsLetterForm
 # Forms are imported from forms.py
-from .models import Cover, User, StudentShowcase
+from .models import Cover, User, StudentShowcase, MarketingSignUp
 # Models are imported from models.py
 
 
