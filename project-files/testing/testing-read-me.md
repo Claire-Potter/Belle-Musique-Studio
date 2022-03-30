@@ -9,7 +9,7 @@
     * Edge
     * Opera
     * The site is compatible and accessible across all browsers.
-    * Please click here to view browser testing screenshots.
+    * Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/lambda" target="_blank">click here</a> to view browser testing screenshots.
     
 2. Devices and Screen Sizes
 
@@ -146,9 +146,11 @@ Nine errors were corrected by adding aria-labels to the form.
 
 ## Performance:
 
-Google lighthouse utilised to test performance of site and mobile. Please see reports attached here.
+Google lighthouse utilised to test performance of site and mobile. Please see reports attached <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/lighthouse" target="_blank">here</a>.
 
 I used the tool ImageOptimizer to resize all images to improve performance.
+
+Most of the performance tests passed without issue. There are four of the mobile views which received below 50 for performance which is not optimal. However, these issues are caused by using third party javascript, jquery and bootstrap scripts. The scripts have been added to the pages as per course training. I unfortunately did not have time to unpack this further to try to optimise performance. This is however something I would like to do.
 
 
 ## Automated Tests
@@ -170,17 +172,18 @@ I used the tool ImageOptimizer to resize all images to improve performance.
 7. Check for any version issues - for example I could not upgrade from urllib3 1.25.7 as that specific version was required
 8. Change the version back to the required version through pip
 
-Please see Snyk screenshots here
+Please see Snyk screenshots <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/snyk-validation" target="_blank">here</a>
 
 ## Django Extensions
 
 ### Validate-template
 
-The validate-template test was created in home - tests.py and run for all templates.
+The validate-template test was created and run for all templates.
 
 Before:
-
+![Validate before](https://github.com/claire-potter/belle-musique-studio/blob/main/project-files/testing/validate-templates/validate-templates-before.JPG)
 After corrections:
+![Validate after](https://github.com/claire-potter/belle-musique-studio/blob/main/project-files/testing/validate-templates/validate-templates.JPG)
 
 
 ## HTML-Validator 
@@ -197,16 +200,14 @@ It was installed as follows:
 6. Enable and open each site page for validation file to be generated.
 7. Only if a template contains an error will the txt file be created and displayed in the console, therefore there are no screenshots for templates once errors were corrected.
 
-Please click here to view the results.
+Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/django-html-validator" target="_blank">click here</a> to view the results.
 
 ## Spell Checker
 
 Code Spell Check was installed as an extension and used continuously
 to check spelling when coding.
-About:
 
-Example:
-
+Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/spelling" target="_blank">click here</a> for further information.
 
 ## Bugs and Issues
 
