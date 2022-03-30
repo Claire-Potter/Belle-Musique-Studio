@@ -85,7 +85,8 @@ The dropdown action is completed through the JavaScript script.js
 * The Social Media link icons are displayed in the footer
 * Each of these icons will open the respective social media site on a new blank page ensuring the user has easy access to the Xperience DezignWiz social accounts
 * The Facebook link opens the actual business page of Belle Musique Studio
-* The Privacy Policy opens the privacy policy document for the site on a new blank page
+* The Privacy Info opens the privacy policy document for the site on a new blank page
+* The Newsletter link opens the newsletter form for a user to sign up for the weekly student showcase newsletter.
 
 
 ## The About Us page
@@ -116,7 +117,7 @@ The dropdown action is completed through the JavaScript script.js
 
 The Student Showcase section is updated weekly by the site owner or site administrator via the front end add student showcase form. It includes an image, excerpt, body, and video. It is an important section within the site as it allows the owner to showcase the skills of her students, which also provides an excellent form of advertisement to site browsers as they can see first hand what the lessons deliver. It is also an important section for existing customers, as it allows them to show off their own talent and creates something to work towards - to be selected as the student of the week. When a new record is added, the latest record will pull through to the about page.
 
-When a new student showcase record is captured, a marketing email will be sent out to all users who have opted in to receive marketing from the site. This will provide them with an overview of the showcased student as well as an opportunity to advertise the lessons and music store products.
+When a new student showcase record is captured, a marketing email will be sent out to all users who have signed up to receive marketing newsletters from the site. This will provide them with an overview of the showcased student as well as an opportunity to advertise the lessons and music store products.
 
 No approval from the subscribed customer is currently required on the site for the site owner to post about them - this is a future enhancement to be completed and if it were a live site, approval would need to be asked for before posting about any individual.
 
@@ -130,6 +131,9 @@ No approval from the subscribed customer is currently required on the site for t
 
 ### Add Student Showcase
 ![Student Showcase Form](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/features/05.student-showcase-form.JPG)
+
+### Newsletter Sign Up
+![Newsletter Sign Up](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/features/05.newsletter.JPG)
 
 ### Marketing Email
 ![Student Showcase Email](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/features/05.student-showcase-email.JPG)
