@@ -95,7 +95,7 @@
    Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/pep-8%20validation" target="_blank">click here</a> to view the screenshots.
  
 5. Flake8 ran within the console returned no errors:
-   ![Flake 8 test result](https://github.com/claire-potter/belle-musique-studio/blob/main/project-files/testing/pep-8%20validation/flake8%20validation.jpg)
+   ![Flake 8 test result](https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/testing/pep-8%20validation/flake8%20validation.JPG)
 
 6. Pycodestyle ran within the console returned no serious errors:
    Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/testing/pycodestyle-validation" target="_blank">click</a> here to view the screenshots.
