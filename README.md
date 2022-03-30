@@ -54,6 +54,8 @@ This is currently a test project.
 		* [Social Media Marketing](#social-media-marketing)
 		* [Email Marketing](#email-marketing)
 	* [GDPR](#gdpr)
+	* [Business Model](#business-model)
+		* [B2C – Business-to-consumer.](#b2c--business-to-consumer)
 * [Database](#database)
 * [Features](#features)
 * [Technologies used](#technologies-used)
@@ -346,10 +348,6 @@ Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/
 7. I had wanted to complete dropdowns for the lessons, workshops and music store section from within the navigation. However it made sense to include a link to the first page only in the process. Two dropdowns were included in the navigation - one for the My Account section and another for Admin.
 
 
-
-
-
-
 ## Design
 ### Colours
 
@@ -427,6 +425,52 @@ The Student Showcase feature is used as an email marketing tool. It is a weekly 
 ## GDPR
 
 A privacy policy was generated through https://www.privacypolicygenerator.info/ and a link to the policy is available in the page footer.
+
+## Business Model
+
+### B2C – Business-to-consumer.
+
+B2C businesses sell to their end-user. This is the business model selected and utilised for Belle Musique Studio. 
+
+![e-commerce business model](https://github.com/claire-potter/belle-musique-studio/blob/main/project-files/design/e-commerce-model.jpg)
+
+* Who is the customer? 
+    * The customer is the consumer, the individual by whom the purchased good or service will be used.
+* What will they buy?
+    * Belle Musique studio supplies music lesson subscriptions and music products. A customer would purchase a recurring subscription for a weekly music lesson or make a once off purchase from the store.
+* And how will they pay?
+    * All payments will be processed online through stripe.com.
+    * They will be secure.
+    * Products would require a once off payment to be made.
+    * Subscriptions would require a recurring payment set up. The customer will have the choice to set up a weekly, monthly or annual subscription and would be billed accordingly.
+* What data would need to be collected and stored?
+    * The required data to purchase a product would be:
+        * Full Name
+        * Email Address
+        * Credit Card Details
+        * Delivery Address Details
+        * Phone Number
+    * The required data to take out a recurring subscription:
+        * Full Name
+        * Email Address
+        * Credit Card Details
+        * Phone Number
+* Would the customer need to be authenticated?
+    * For a once off purchase from the store, the customer would not need an account. However, if they wish to store any of their information within the database they would need to register for an account with Belle Musique Studio.
+    * To take out a subscription for a weekly music lesson, as recurring payments are required, the customer will need to register and create an account in order to manage the subscription going forward.
+* Roles within the e-commerce process:
+    * Customer:
+        * Subscribes to a lesson or
+        * Orders a product
+    * Belle Musique Studio Site:
+       * Creates the customer and subscription record on Stripe and the database
+       * Processes payment with stripe and sets up recurring payments
+       * Creates the order and processes the payment through Stripe
+       * Collects address details for delivery
+    * Site Owner / Administrator:
+        * Schedules the weekly online lesson with the customer
+        * Provides the service
+        * Arranges delivery of the product to the customer
 
 # Database
 
