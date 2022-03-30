@@ -1,6 +1,11 @@
 # Belle Musique Studio
 ## About this project:
 
+![Belle Musique Studio Mockup](https://github.com/claire-potter/belle-musique-studio/blob/main/project-files/design/all-devices-white.png)
+
+
+<a href="https://belle-musique-studio.herokuapp.com/" target="_blank">Click here</a> to access the live site.
+
 Belle Musique Studio is the business of singing and piano teacher Jo-Anna Hope. Jo-Anna runs her own small business and requires her own website through which users can subscribe to singing lessons, piano lessons, songwriting lessons and make product purchases. 
 
 This project is based on the project example idea one for Code Institute project five, however, it has been modified to align with the needs of the music studio.
@@ -11,7 +16,7 @@ Jo-Anna and admin staff are able to showcase students by adding content to the S
 
 A subscription-based payment model as well as an individual item purchase capability is in place.
 
-An authentication and authorisation mechanism for students, shoppers as well as site owner,nsite administrator and super user has been set up.
+An authentication and authorisation mechanism for students, shoppers as well as site owner, site administrator and super user has been set up.
 
 SEO, Social Media and Email strategies have been employed to market the studio.
 
@@ -24,7 +29,7 @@ This is currently a test project.
 
 <!-- Start Document Outline -->
 
-* [Ux Design](#ux-design)
+* [UX Design](#ux-design)
 	* [User Stories](#user-stories)
 	* [Strategy](#strategy)
 		* [High-level Business Goals](#high-level-business-goals)
@@ -35,14 +40,20 @@ This is currently a test project.
 	* [Structure](#structure)
 		* [Skeleton](#skeleton)
 		* [Access](#access)
-			* [Site visitors:](#site-visitors)
-			* [Registered users:](#registered-users)
-			* [Site Administrator, Site Owner and Superuser:](#site-administrator-site-owner-and-superuser)
+			* [Site visitors](#site-visitors)
+			* [Registered users](#registered-users)
+			* [Site Administrator, Site Owner and Superuser](#site-administrator-site-owner-and-superuser)
 	* [Wireframes](#wireframes)
-		* [Differences:](#differences)
+		* [Differences](#differences)
 	* [Design](#design)
 		* [Colours](#colours)
 		* [Fonts](#fonts)
+	* [Search Engine Optimisation](#search-engine-optimisation)
+	* [Web Marketing](#web-marketing)
+		* [Content Marketing](#content-marketing)
+		* [Social Media Marketing](#social-media-marketing)
+		* [Email Marketing](#email-marketing)
+	* [GDPR](#gdpr)
 * [Database](#database)
 * [Features](#features)
 * [Technologies used](#technologies-used)
@@ -65,23 +76,23 @@ This is currently a test project.
 		* [General Queries](#general-queries)
 		* [Code Adaptations](#code-adaptations)
 	* [Content](#content)
-	* [Acknowledgements](#acknowledgements)
+	* [Acknowledgments](#acknowledgments)
 
 <!-- End Document Outline -->
 
-# Ux Design
+# UX Design
 
 ## User Stories
 
-**Project Goals:**
+**Project Goals**
 
 **Site Users**
 1. Register to create  an account 
 2. Subscribe to  singing/piano or songwriting lessons
 3. Choose to pay weekly, monthly or annually
 4. Make individual purchases within the online music store
-5. Complete functionality / access all features as created within the User Stories for the role: Site User
-6. Contact the site owner
+5. Contact the site owner
+6. Complete functionality / access all features as created within the User Stories for the role: Site User
 
 **Site Owner and Site Administrator**
 
@@ -109,8 +120,10 @@ This is currently a test project.
 
 5. Receive contact emails when a contact request is sent from the site
 
+6. Complete functionality / access all features as created within the User Stories for the roles: Site Administrator/ Site Owner
 
-**User Stories:**
+
+**User Stories**
 
 You can view an organised board with all user stories here:
 
@@ -189,12 +202,12 @@ What makes this site special:
 Using the trade-off process to rank the importance and feasibility of the opportunities I have decided:
 
 1. To go ahead with 25/27 of the opportunities.
-2. Given the timeframe and my current skill as a developer, I have to narrow down the scope of the deliverable and focus on the core functionality.
-3. The worship programme and interactive sutdent profiles will not be included.
+2. Given the time-frame and my current skill as a developer, I have to narrow down the scope of the deliverable and focus on the core functionality.
+3. The worship programme and interactive student profiles will not be included.
 
 ## Scope
 
-For this project, the main aim is to create a transactional platform to assist a user through the subscription purchase process and the product purchase process. Secondary to that is to provide the user with the necessary information required to be able to make their decision around what lessons to enrole in and what subscription type would be best for them. The Music Store will be set up to be able to provide all of the necessary tools to music students for their lessons as well as to increase overall revenue. Every opportunity for internal advertisement will be taken to promote lessons, student showcases and the store. The website will be designed to render successfully across all screen sizes and platforms. Accessibility requirements will be considered and addressed. Apart from the default Django Admin centre, which is best utilised from a laptop/computer, the design has been completed for mobile first.
+For this project, the main aim is to create a transactional platform to assist a user through the subscription purchase process and the product purchase process. Secondary to that is to provide the user with the necessary information required to be able to make their decision around what lessons to enroll in and what subscription type would be best for them. The Music Store will be set up to be able to provide all of the necessary tools to music students for their lessons as well as to increase overall revenue. Every opportunity for internal advertisement will be taken to promote lessons, student showcases and the store. The website will be designed to render successfully across all screen sizes and platforms. Accessibility requirements will be considered and addressed. Apart from the default Django Admin centre, which is best utilised from a laptop/computer, the design has been completed for mobile first.
 
 In order to create a streamline navigation menu, a My Account section has been added as a dropdown sub-menu. This section will include the options to Register / Login or Logout, Access to the User Profile and for staff access to site admin, product and lesson maintenance and student showcase form.
 
@@ -221,7 +234,7 @@ Below is an image of the site structure.
 This website will allow users to access different parts of the site depending on whether they're logged in/have an account. 
 
 
-#### Site visitors: 
+#### Site visitors
  * View Only:
    * Home Page
    * About Page
@@ -244,7 +257,7 @@ This website will allow users to access different parts of the site depending on
    * Receive order via email
    * Submitting the contact form triggers an email to the site admin
 
-#### Registered users:
+#### Registered users
 Registered users will have the same access as site visitors as well as the following additional access:
  * View only:
     * User profile - order history and detailed information
@@ -265,13 +278,13 @@ Registered users will have the same access as site visitors as well as the follo
    * Link to stripe to view and download latest invoice
  
 
-#### Site Administrator, Site Owner and Superuser: 
+#### Site Administrator, Site Owner and Superuser
 
 Initial access groups have been set up for the first launch of the site. Training would need to be provided to ensure staff know what to do. Access to be evaluated on an ongoing basis to ensure that all staff are able to adequately run the business and support their clients.
 
 Front end access in place as stipulated within the project goals section. Lessons and Subscriptions can only be created and edited from the front end as the necessary integration with stripe has been set up to ensure alignment across both sites. Site Admin access to all related models will be view only to ensure that the functionality remains robust.
 
-1. Site Administrator Group:
+1. Site Administrator Group
  * View Only:
    * checkout | subscribed customer
    * checkout | subscription line item
@@ -281,7 +294,6 @@ Front end access in place as stipulated within the project goals section. Lesson
    * djstripe | invoice item
    * djstripe | payment intent
    * djstripe | payment method
-   * djstripe | plan
    * djstripe | price
    * djstripe | product
    * djstripe | subscription
@@ -305,8 +317,8 @@ Front end access in place as stipulated within the project goals section. Lesson
    * home | student showcase
    * store | music product
 
-2. Site Owner Group:
- 
+2. Site Owner Group
+
  The site owner will have the same access as the site administrator along with the following additional access:
   * View and Edit:
    * profiles | user profile
@@ -322,10 +334,20 @@ The superuser will have full access to the site admin section, apart from any ac
 
 The original wireframes created are saved as wireframes-desktop and wireframes-mobile.
 
-### Differences:
-1. .
-
 Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/tree/main/project-files/wireframes">click here</a> to view all wireframes
+
+### Differences
+1. I ended up separating the original home page design into a homepage which showed the cover as a full screen over-layed by the simple menu and the about page with the necessary information added separately. I really wanted an impactful home page and this was the best way to achieve that.
+2. I added songwriting lessons to the original singing and piano lessons. I followed a djstripe tutorial to complete the subscription set up. For the lessons page I ended up creating each lesson individually instead of having them together per lesson type. Each lesson then had the three different subscription options that a user could choose between. As the page was already long I did not include the store section at the end of the page.
+3. Two separate shopping bag icons were added -one for the store and one for subscriptions as the two features had to be kept separate. Two separate checkout processes were created and followed instead of one integrated process. This includes two separate shopping cart sections in the success message. I had also wanted to confirm billing address details in the success messages but it was already so busy I left it out.
+4. The workshop feature was removed from scope.
+5. I wanted to add the ability to add a product to the shopping bag from the products page, and have the product detail as a pop up, however I stuck to the 'Boutique Ado' tutorial and added the product from the product detail page.
+6. My original idea was to have a social media section which would be a student community in which students could post and interact. The original user profile would have been similar to a social media profile. When looking at the detail, it was definitely beyond my ability to create something so complex. A simplified user profile was included, which has all active descriptions displayed and includes the ability to cancel a subscription.
+7. I had wanted to complete dropdowns for the lessons, workshops and music store section from within the navigation. However it made sense to include a link to the first page only in the process. Two dropdowns were included in the navigation - one for the My Account section and another for Admin.
+
+
+
+
 
 
 ## Design
@@ -357,6 +379,55 @@ The main font used across the body is 'Eb-Garamond' with the default font set as
 
 These fonts were chose to provide some sophistication. They are classical and elegant.
 
+## Search Engine Optimisation
+
+A description which is relevant and informative has been included in the meta of base.html: 
+
+"The music studio of Jo-Anna Hope offers online piano lessons, singing lessons and songwriting courses. Includes an online music store to purchase keyboards and other musical instruments and tools."
+
+Utilising Google Search, short keywords and long keyword phases were identified to include across the site to optimise search engine results for the site. These keyword were then run through wordtracker.com to check volume for the search with Google in the UK region.
+
+The list of keywords for the site were narrowed down to:
+
+1. Online piano lessons
+2. Online singing lessons
+3. Online songwriting course
+4. piano lessons
+5. singing lessons
+6. songwriting course
+7. learn to play the piano
+8. music shops
+9. music store
+10. private piano lessons
+11. keyboard
+12. music
+
+Two site features were used to ensure keywords were included logically within the site pages - the Covers feature - which includes the heading and sub-heading for each page, as well as the adverts sections which are added as articles. I reviewed all html semantics to make sure keywords were placed inside them. Additionally, wherever possible across the pages the key words were included in context. All images and image alt text were re-written to optimise search engine hits. An external link to Yamaha UK was included from the music store, as a reliable external link likely to improve traffic. The Facebook link was left as included for search engine reference, as it opens the actual Facebook business page.
+
+A sitemap.xml file has been included to assist google search to find all page links that do not require logging in. 
+
+A robots.txt file has been included.
+
+A DNS certificate is not included as the site is a student test site only.
+
+## Web Marketing
+
+### Content Marketing
+
+Relevant internal advert sections with links have been included across user-facing pages to promote the music lessons and store products available. The aim of the adverts is to direct the attention of the user to the relevant pages and convert them to customers.
+
+### Social Media Marketing
+
+A Facebook business page for the studio has been set up to ensure organic growth of the business. The site is linked to the business account through the facebook social media link. The Facebook page includes a link back to the site.
+
+### Email Marketing
+
+The Student Showcase feature is used as an email marketing tool. It is a weekly update from the studio and includes a link to view the featured student of the week. It includes music lessons and music store advertisements, ensuring that users who have signed up for emails are directed to access our lessons and products. Users will opt-in to receive emails when they register for an account.
+
+## GDPR
+
+A privacy policy was generated through https://www.privacypolicygenerator.info/ and a link to the policy is available in the page footer.
+
 # Database
 
 For development, I used the sqlite3 database that comes with Django. A PostgreSQL database through Heroku is in use 
@@ -369,7 +440,7 @@ for the deployed live site.
 
 # Features
  
-Please access the features file <a href="" target="_blank">here</a>
+Please access the features file <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/features/features-read-me.md" target="_blank">here</a>
 
 # Technologies used 
 
@@ -421,7 +492,7 @@ ImageOptimizer used to minify image file sizes
 
 # Testing
 
-Please access the testing pack <a href="" target="_blank">here</a>
+Please access the testing pack <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/testing/testing-read-me.md" target="_blank">here</a>
 
 # Deployment
 
@@ -594,10 +665,12 @@ https://www.youtube.com/watch?v=dGF1x14QNGA
 9. The following site was referenced to complete the html-validator testing - 
 https://pypi.org/project/django-html-validator/
 
-
 10. Dj-stripe documentation referenced for additional set up support: https://dj-stripe.readthedocs.io/_/downloads/en/stable-2.2/pdf/
 
 11. Stripe documentation referenced to understand how products and prices work -https://stripe.com/docs/products-prices/how-products-and-prices-work
+
+12. The Student Showcase Marketing email was set up as per:
+https://stackoverflow.com/questions/7583801/send-mass-emails-with-emailmultialternatives
 
 ## Content
 1. The fictional music studio and Jo-Anna Hope are based on my Aunt Jo Hoult and her music studio
@@ -609,7 +682,7 @@ https://www.youtube.com/watch?v=kIN3MX1sYBs
 6. The descriptions used for the models were sourced from the following site:
 https://www.geeksforgeeks.org/django-model-data-types-and-fields-list/
 
-## Acknowledgements
+## Acknowledgments
 A huge thank you to my mentor Brian Macharia. The guidance and advice that you have provided has been invaluable.
 
 Thank you to Code Institute for providing such well-thought out and put together course material and for the constant guidance and advice provided through Slack.
