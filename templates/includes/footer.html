@@ -7,8 +7,15 @@
         <a class="social-links" href="https://www.instagram.com" target="_blank" aria-label="Link to Instagram" rel="nofollow"><i class="fab fa-instagram-square ms-3"></i></a>
     </p>
 
-    <!-- Social Media Links -->
-    <p class="m-0 text-center footer-font"><a class="social-links" href="{% url 'privacy' %}" target="_blank" rel="nofollow">Privacy Policy</a>
-    </p>
-    <h3 class="m-0 text-center design-logo smaller-text">ClairePotter 2022</h3>
+    <!-- Privacy Notice and News Letter -->
+    <div class="row">
+        <div class="col-6 m-0 footer-font">
+            <a class="social-links pl-3" href=" {% url 'newsletter' %}" rel="ugc">SignUp4News</a>
+        </div>
+
+        <div class="col-6 m-0 footer-font text-right">
+            <a class="social-links pr-3 " href="{% url 'privacy' %}" target="_blank" rel="ugc">PrivacyPol.</a>
+        </div>
+    </div>
+    <h3 class="m-0 text-center design-logo footer-logo">ClairePotter@2022</h3>
 </footer>

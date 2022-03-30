@@ -63,7 +63,6 @@ class User(AbstractUser):
     """
     customer = models.OneToOneField(Customer, null=True, blank=True,
                                     on_delete=models.CASCADE)
-    marketing_opt_in = models.BooleanField(default=False)
 
 
 class UserSubscription(models.Model):
@@ -185,3 +184,43 @@ class StudentShowcase(models.Model):
     #  else a blank string
     def __str__(self):
         return '%s' % (self.name) if self.name else ' '
+
+
+class MarketingSignUp(models.Model):
+    """
+    Utilised to store the data of users who have
+    signed up to receive a marketing letter from 
+    Belle Musique Studio.
+    """
+
+
+    first_name = models.CharField(max_length=80,
+                            default='first name', null=False,
+                                blank=False)
+    last_name = models.CharField(max_length=80,
+                            default='last name', null=False,
+                                blank=False)
+    email = models.EmailField(max_length=150,
+                            default='email address', null=False,
+                                blank=False)
+    marketing_opt_in = models.BooleanField(null=False,
+                                blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        """
+        Meta created to order the Student Showcase Model according
+        to date, to return the latest record according to date and
+        to set the admin model name to Student Showcase.
+        """
+        ordering = ['date']
+        verbose_name_plural = 'Marketing Sign Up Customers'
+        get_latest_by = ['date']
+
+    # The string is set to return the name field if it exists
+    #  else a blank string
+    def __str__(self):
+        return '%s' % (self.first_name) if self.first_name else ' '
+
+  

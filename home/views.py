@@ -76,7 +76,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 # reverse is a callable within the django.urls module of the Django project.
 from django.views import View
 # View is a class within the django.views.generic module of the Django project.
-from .forms import ContactForm, StudentShowcaseForm
+from .forms import ContactForm, StudentShowcaseForm, NewsLetterForm
 # Forms are imported from forms.py
 from .models import Cover, User, StudentShowcase
 # Models are imported from models.py
@@ -291,8 +291,7 @@ def add_student_showcase(request):
             connection = mail.get_connection()
             connection.open()
             email_messages = list()
-            users = User.objects.all()
-            marketing_users = users.filter(marketing_opt_in='True')
+            marketing_users = MarketingSignUp.objects.all()
             for u in marketing_users:
                 first_name =  u.first_name
                 events = StudentShowcase.objects.latest()
@@ -327,3 +326,48 @@ def add_student_showcase(request):
     }
 
     return render(request, template, context)
+
+
+def marketing_newsletter_sign_up(request):
+    """
+    Allows site users to sign up to receive a marketing newsletter
+
+    request: The requests module allows you to send HTTP
+    requests using Python.
+    The HTTP request returns a Response
+    Object with all the response data (content, encoding, status, etc).
+
+    Definition from https://www.w3schools.com/python/module_requests.asp
+
+   """
+    if request.method == 'POST':
+        form = NewsLetterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added '
+                             'you to our newsletter recipient list!')
+            return redirect(reverse('home'))
+        else:
+            messages.error(request,
+                           ('Failed to add you to our newsletter list. '
+                            'Please ensure the form is valid.'))
+    else:
+        if User.objects.filter(username=request.user.username).exists():
+            form = NewsLetterForm(initial={'first_name': (request.user
+                                                    .first_name),
+                                           'last_name': (request.user
+                                                    .last_name),
+                                           'email': request.user.email})
+        else:
+            form = NewsLetterForm()
+    covers = Cover.objects.all()
+    cover = get_object_or_404(covers, page='about')
+    template = 'marketing_sign_up.html'
+    context = {
+        'form': form,
+        'covers': covers,
+        'cover': cover,
+    }
+
+    return render(request, template, context)
+

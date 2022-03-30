@@ -240,6 +240,10 @@ body {
     font-size: calc(0.7rem + .9vw) !important;
 }
 
+.footer-logo {
+    font-size: calc(0.7rem + .9vw) !important;
+}
+
 /* Advert Banner */
 
 .advert-banner-background {
@@ -533,6 +537,14 @@ body {
 @media (max-width: 991px) {
     .header-container {
         padding-top: 0;
+    }
+
+    .footer-font {
+        font-size: calc(0.4rem + .9vw) !important;
+    }
+
+    .footer-logo {
+        font-size: calc(0.4rem + .9vw) !important;
     }
 
     .cover-container-music-store,

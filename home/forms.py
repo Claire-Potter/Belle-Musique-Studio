@@ -14,7 +14,7 @@ to the StudentShowcase model.
 """
 from django import forms
 # Forms are imported from Django
-from .models import Contact, StudentShowcase
+from .models import Contact, StudentShowcase, MarketingSignUp
 # Models are imported from models.py
 
 
@@ -53,3 +53,18 @@ class StudentShowcaseForm(forms.ModelForm):
         """
         model = StudentShowcase
         fields = '__all__'
+
+
+class NewsLetterForm(forms.ModelForm):
+    """
+    The NewsLetterForm ensures that a user completes
+    their personal details to sign up to receive marketing from the site.
+    """
+    class Meta:
+        """
+        Meta added to identify the model utilised by
+        the form and the fields which the form needs
+        to include for the user to edit.
+        """
+        model = MarketingSignUp
+        fields = ('first_name', 'last_name', 'email', 'marketing_opt_in')

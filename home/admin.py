@@ -11,7 +11,8 @@ from embed_video.admin import AdminVideoMixin
 # Django app for easy embedding YouTube and Vimeo videos and
 # music from SoundCloud.
 # definition from https://pypi.org/project/django-embed-video/
-from .models import Contact, Cover, User, UserSubscription, StudentShowcase
+from .models import (Contact, Cover, User, UserSubscription, StudentShowcase,
+                     MarketingSignUp)
 # Models are imported from models.py
 
 
@@ -90,3 +91,14 @@ class StudentShowcaseAdmin(AdminVideoMixin,
     """
     list_display = ('date', 'name',)
     search_fields = ['date', 'name', ]
+
+
+@admin.register(MarketingSignUp)
+class MarketingSignUpAdmin(admin.ModelAdmin):
+    """
+    The MarketingSignUp admin set up reads the MarketingSignUp model and allows
+    the admin user to view all site users who have opted in to receive the
+    newsletter
+    """
+    list_display = ('date', 'email',)
+    search_fields = ['date', 'email', ]
