@@ -220,7 +220,7 @@ Users who have registered for an account will have the additional option of acce
 
 Site Administrator and the Store Owner will have access to the Admin section which allows them to view and monitor site content and assist where required. They will also have the necessary front end access to add, edit and delete music store products and to add and edit subscriptions. As subscriptions are recurring the ability to delete the options has not been provided, as there would be active subscriptions in place and this would need to be managed. They will have access from the front end to add student showcase records.
 
-The Super User will have additional access to the Admin section. Certain models will be limited in terms of being able to create, delete or edit content.
+The Super User will have additional access to the Admin section.
 
 ## Structure
 
@@ -333,7 +333,7 @@ Front end access in place as stipulated within the project goals section. Lesson
    * store | category
    
 3. SuperUser
- The Super User will have additional access to the Admin section. Certain models will be limited in terms of being able to create, delete or edit content in alignment with the management of subscriptions.
+ The Super User will have additional access to the Admin section. Certain models from djstripe have been excluded as they are irrelevant.
 
 
 ## Wireframes
@@ -491,6 +491,7 @@ B2C businesses sell to their end-user. This is the business model selected and u
 For development, I used the sqlite3 database that comes with Django. A PostgreSQL database through Heroku is in use 
 for the deployed live site.
 
+Please <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/apps-and-models.md" target="_blank">click here </a> to view the Apps and Models document.
 
  <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/dj_stripe_models.png" target="_blank">Database diagram - djstripe models</a>
 
@@ -588,6 +589,18 @@ The project uses stripe to handle all subscriptions and payments. A free stripe 
 * Stripe webhooks is used to trigger event related mails
 
 # Testing
+
+## Stripe Testing
+
+Use these test cards to test payment with Stripe:
+
+* Successful payment: 4242424242424242
+* Failed payment: 4000000000009995
+* Requires authentication: 4000002500003155
+* For additional information on testing please refer to the following document: https://stripe.com/docs/testing
+
+
+## Testing Pack
 
 Please access the testing pack <a href="https://github.com/Claire-Potter/Belle-Musique-Studio/blob/main/project-files/testing/testing-read-me.md" target="_blank">here</a>
 
