@@ -1098,7 +1098,7 @@ As  a **Site User** I can **easily view any subscriptions special offers, and de
 
 As  a **Site User** I can **view success, info, error and alert messages** so that **I am alerted of the impact of my actions**
   
-# Acceptance Criteria
+#### Acceptance Criteria
   
 * When a user adds items to the shopping bag, a success message displays and previews the items in the bag
     * Pass
@@ -1317,7 +1317,7 @@ As a **Site User** I can **create multiple subscriptions and add student details
 
 As a **Site Owner / Site Admin / Super User** I can **access the Admin facility as well as maintain items on the front end** so that **I can actively support customers and manage my business**
   
-# Acceptance Criteria
+#### Acceptance Criteria
   
 * Site Owner has specific access assigned.
     * Pass
