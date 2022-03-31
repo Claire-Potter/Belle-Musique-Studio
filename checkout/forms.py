@@ -161,4 +161,3 @@ class SubscriptionLineItemForm(forms.ModelForm):
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
             self.fields['student'].widget.attrs['aria-label'] = 'Student Name'
-                 

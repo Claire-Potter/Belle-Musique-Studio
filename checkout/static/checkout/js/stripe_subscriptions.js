@@ -7,6 +7,9 @@ and customised for site purpose */
 stripeElements();
 
 function stripeElements() {
+    // The stripe public key: 
+    // On the client-side. Can be publicly-accessible in your web or mobile app’s client-side code 
+    // to tokenize payment information such as with Stripe Elements. By default, Stripe Checkout tokenizes payment information.
     stripe = Stripe('pk_test_51KP3luCfV7tzQZJ8llt1RmpeC4OJwDyoEWAQjqZ34aR5oJDUdabnEw4xqcVKNt7May8kIXdYyEBEjVraLZ1hPQQa00LFEFSrWL');
 
     if (document.getElementById('card-element')) {

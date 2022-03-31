@@ -41,8 +41,6 @@ from django.core.mail import send_mail
 # EmailMessage class.
 from django.core import mail
 from django.core.mail.message import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template import Context
 from django.template.loader import render_to_string
 # render_to_string is a callable within the django.template.loader
 # module of the Django project.
@@ -292,18 +290,19 @@ def add_student_showcase(request):
             connection.open()
             email_messages = list()
             marketing_users = MarketingSignUp.objects.all()
-            for u in marketing_users:
-                first_name =  u.first_name
+            for u_m in marketing_users:
+                first_name =  u_m.first_name
                 events = StudentShowcase.objects.latest()
                 event = events.name
                 subject =  render_to_string('showcase_email/showcase_email_subject.txt',
                                             {'event': event})
                 from_email = settings.DEFAULT_FROM_EMAIL
-                to = u.email
+                send_to = u_m.email
                 body = render_to_string('showcase_email/showcase_email_body.txt',
-                                 {'event': event, 
-                                  'contact_email': settings.DEFAULT_FROM_EMAIL, 'first_name': first_name})
-                msg = EmailMultiAlternatives(subject, body, from_email, [to])
+                                        {'event': event,
+                                         'contact_email': settings.DEFAULT_FROM_EMAIL,
+                                         'first_name': first_name})
+                msg = EmailMultiAlternatives(subject, body, from_email, [send_to])
                 email_messages.append(msg)
             connection.send_messages(email_messages)
             connection.close()
@@ -370,4 +369,3 @@ def marketing_newsletter_sign_up(request):
     }
 
     return render(request, template, context)
-

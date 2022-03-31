@@ -19,6 +19,4 @@ urlpatterns = [
     path('contact-sent/', views.contact_sent, name='contact-sent'),
     path('add/', views.add_student_showcase, name='add_student_showcase'),
     path('add-newsletter/', views.marketing_newsletter_sign_up, name='newsletter'),
-    
-
 ]

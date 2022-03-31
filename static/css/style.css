@@ -152,7 +152,6 @@ body {
     background-color: #ffffff;
 }
 
-
 .cover-container-home {
     background: url("https://belle-musique-studio.s3.eu-west-2.amazonaws.com/media/piano-player-music-lesson.jpg") no-repeat;
     background-size: cover;
@@ -167,7 +166,6 @@ body {
     height: 100%;
     margin-top: 150px;
 }
-
 
 .cover-heading {
     font-weight: 900;
@@ -197,7 +195,6 @@ body {
     color: #04142f;
 }
 
-
 .spacer-one {
     height: calc(40vh - 164px)
 }
@@ -225,7 +222,6 @@ body {
     padding: 0;
     margin: 0;
 }
-
 
 .social-links {
     color: #ffffff;
@@ -489,7 +485,6 @@ body {
         font-size: 1.5rem;
     }
 
-
     .spacer-one {
         display: none;
     }
@@ -553,15 +548,12 @@ body {
         margin-top: 0;
     }
 
-
-
     .cover-container,
     .cover-container-about,
     .cover-container-contact,
     .cover-container-profile {
         margin-top: 0;
     }
-
 
     .cover-container-product-man {
         margin-top: 0;
@@ -572,12 +564,9 @@ body {
         margin-top: 0;
     }
 
-
     body {
         height: calc(100vh - 116px);
     }
-
-
 
     .nav-link {
         padding: 0.15rem;
@@ -627,10 +616,8 @@ body {
 @media (max-width: 800px) {
 
     .message-container {
-
         right: 5px;
     }
-
 
     .smaller-font {
         font-size: calc(1rem + .9vw) !important;
@@ -649,7 +636,6 @@ body {
         font-size: calc(1rem + .9vw) !important;
     }
 
-
     .small-width-heading {
         width: 100% !important;
     }
@@ -658,7 +644,6 @@ body {
         height: 150px;
         width: 150px;
     }
-
 
     .bag-border {
         border: none;
@@ -683,7 +668,6 @@ body {
     .spacer-one {
         display: initial;
     }
-
 }
 
 @media (max-height: 700px) {

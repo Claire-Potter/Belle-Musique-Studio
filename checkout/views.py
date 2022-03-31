@@ -679,11 +679,13 @@ def subscribe(request):
                 date = subscription_lineitem_internal.start_date
                 plan = user_subscription.subscription_name
                 student = subscription_lineitem_internal.student
-                subject = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_subject.txt',
+                subject = render_to_string('checkout/lesson_emails/confirmation_emails'
+                                           '/confirmation_email_subject.txt',
                                            {'event': event})
-                body = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_body.txt',
+                body = render_to_string('checkout/lesson_emails/confirmation_emails/'
+                                        'confirmation_email_body.txt',
                                         {'name': name, 'event': event, 'date': date, 'plan': plan,
-                                         'student': student, 
+                                         'student': student,
                                          'contact_email': settings.DEFAULT_FROM_EMAIL})
                 send_mail(subject,
                           body,
@@ -797,11 +799,14 @@ def subscribe(request):
                     date = subscription_lineitem_internal.start_date
                     plan = user_subscription.subscription_name
                     student = subscription_lineitem_internal.student
-                    subject = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_subject.txt',
+                    subject = render_to_string('checkout/lesson_emails/confirmation_emails/'
+                                               'confirmation_email_subject.txt',
                                                {'event': event})
-                    body = render_to_string('checkout/lesson_emails/confirmation_emails/confirmation_email_body.txt',
-                                            {'name': name, 'event': event, 'date': date, 'plan': plan,
-                                             'student': student, 
+                    body = render_to_string('checkout/lesson_emails/confirmation_emails/'
+                                            'confirmation_email_body.txt',
+                                            {'name': name, 'event': event,
+                                             'date': date, 'plan': plan,
+                                             'student': student,
                                              'contact_email': settings.DEFAULT_FROM_EMAIL})
                     send_mail(subject,
                               body,
@@ -906,10 +911,12 @@ def cancel(request):
         name = user.first_name
         cust_email = user.email
         event = sub_id
-        subject = render_to_string('checkout/lesson_emails/cancellation_emails/cancellation_email_subject.txt',
+        subject = render_to_string('checkout/lesson_emails/cancellation_emails/'
+                                   'cancellation_email_subject.txt',
                                     {'event': event})
-        body = render_to_string('checkout/lesson_emails/cancellation_emails/cancellation_email_body.txt',
-                                 {'name': name, 'event': event, 
+        body = render_to_string('checkout/lesson_emails/cancellation_emails/'
+                                'cancellation_email_body.txt',
+                                 {'name': name, 'event': event,
                                   'contact_email': settings.DEFAULT_FROM_EMAIL})
         send_mail(subject,
                   body,

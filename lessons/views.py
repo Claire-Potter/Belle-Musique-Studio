@@ -139,7 +139,8 @@ def add_lesson(request):
             p2_form.is_valid() and p3_form.is_valid()):
             stripe_data = stripe.Product.create(name=request.POST['product-name'],
                                                 description=request.POST['product-description'],
-                                                statement_descriptor=request.POST['product-statement_descriptor'],
+                                                statement_descriptor=(request.
+                                                                      POST['product-statement_descriptor']),
                                                 unit_label=request.POST['product-unit_label'],
                                                 images=[request.POST['product-url']],
                                                 type='service',
@@ -174,21 +175,27 @@ def add_lesson(request):
                                                     interval='week',
                                                     nickname=request.POST['price_one-nickname'],
                                                     product=djstripe_obj.id, active='true',
-                                                    usage_type=request.POST['price_one-usage_type']))
+                                                    usage_type=(request.
+                                                                POST['price_one-usage_type'])))
                     price_two_price = (stripe
                                        .Plan.create(amount=new_amount_two,
                                                     currency=request.POST['price_two-currency'],
                                                     interval='month',
                                                     product=djstripe_obj.id, active='true',
-                                                    nickname=request.POST['price_two-nickname'],
-                                                    usage_type=request.POST['price_two-usage_type']))
+                                                    nickname=(request.
+                                                              POST['price_two-nickname']),
+                                                    usage_type=(request.
+                                                                POST['price_two-usage_type'])))
                     price_three_price = (stripe
                                          .Plan.create(amount=new_amount_three,
                                                       currency=request.POST['price_three-currency'],
                                                       interval='year',
-                                                      product=djstripe_obj.id, active='true',
-                                                      nickname=request.POST['price_three-nickname'],
-                                                      usage_type=request.POST['price_three-usage_type'],
+                                                      product=djstripe_obj.id,
+                                                      active='true',
+                                                      nickname=(request.
+                                                                POST['price_three-nickname']),
+                                                      usage_type=(request.
+                                                                  POST['price_three-usage_type']),
                                                       trial_period_days=7))
                     try:
                         # sync the data from the Plan model through djstripe

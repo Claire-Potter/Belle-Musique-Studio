@@ -189,7 +189,7 @@ class StudentShowcase(models.Model):
 class MarketingSignUp(models.Model):
     """
     Utilised to store the data of users who have
-    signed up to receive a marketing letter from 
+    signed up to receive a marketing letter from
     Belle Musique Studio.
     """
 
@@ -222,5 +222,3 @@ class MarketingSignUp(models.Model):
     #  else a blank string
     def __str__(self):
         return '%s' % (self.first_name) if self.first_name else ' '
-
-  
